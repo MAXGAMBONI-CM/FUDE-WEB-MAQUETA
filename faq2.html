@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educativo Net | Propuesta de Diseño</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /* Aquí puedes agregar CSS personalizado si quieres forzar cosas que no salgan con Tailwind */
+        .custom-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold text-blue-600">FUDE by Educativo</div>
+        <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-600">
+            <a href="#areas" class="hover:text-blue-600">Áreas de Formación</a>
+            <a href="#metodologia" class="hover:text-blue-600">Metodología</a>
+            <a href="#certificacion" class="hover:text-blue-600">Certificación</a>
+            <a href="#opiniones" class="hover:text-blue-600">Opiniones</a>
+            <a href="#faq" class="hover:text-blue-600 font-semibold text-blue-600">Preguntas Frecuentes</a>
+        </nav>
+        <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm font-medium transition">
+            Ingresar al Campus
+        </button>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 py-12 lg:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Formación profesional</span>
+            <h1 class="text-4xl lg:text-5xl font-black text-gray-900 mt-4 leading-tight">
+                Más de 300 cursos a distancia en 17 áreas temáticas.
+            </h1>
+            <p class="text-gray-600 text-lg mt-4">
+                Aprendé a tu ritmo con acompañamiento docente real y tu propio tutor de inteligencia artificial disponible las 24 hs.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 items-center">
+                <a href="#areas" class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-200 transition">
+                    Inscribirme Ahora
+                </a>
+                <span class="text-gray-500 font-medium">+ 12 Cuotas Fijas</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12 pt-8 border-t border-gray-200">
+                <div><p class="text-2xl font-bold text-gray-900">+85k</p><p class="text-xs text-gray-500">Alumnos Formados</p></div>
+                <div><p class="text-2xl font-bold text-gray-900">18</p><p class="text-xs text-gray-500">Áreas temáticas</p></div>
+                <div><p class="text-2xl font-bold text-gray-900">19 Años</p><p class="text-xs text-gray-500">De Experiencia</p></div>
+                <div><p class="text-2xl font-bold text-gray-900">24/7</p><p class="text-xs text-gray-500">Tutor de IA</p></div>
+            </div>
+        </div>
+        <div class="relative flex justify-center">
+            <div class="w-full h-80 bg-blue-200 rounded-2xl overflow-hidden flex items-center justify-center text-blue-700 font-medium">
+                [Imagen: Estudiante aprendiendo online]
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="bg-white border-t border-b border-gray-200 py-16 px-6">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-blue-600 font-semibold tracking-wide uppercase text-sm">Soporte y Ayuda</p>
+                <h2 class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">Preguntas Frecuentes</h2>
+                <p class="mt-4 text-gray-500">Todo lo que necesitas saber antes de empezar a estudiar.</p>
+            </div>
+
+            <div class="space-y-4">
+                <details class="group bg-gray-50 rounded-lg border border-gray-200 p-6 transition-all duration-300 open:bg-white open:shadow-md" open>
+                    <summary class="flex items-center justify-between cursor-pointer focus:outline-none list-none">
+                        <h3 class="text-lg font-medium text-gray-900">¿Cómo funciona la tutoría de Inteligencia Artificial 24/7?</h3>
+                        <span class="text-xl font-bold text-gray-400 group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        Nuestro tutor de IA está disponible en tu campus las 24 horas del día. Puedes hacerle preguntas sobre el contenido de las clases, pedirle que te explique conceptos complejos de forma sencilla o solicitarle feedback instantáneo sobre tus actividades prácticas.
+                    </p>
+                </details>
+
+                <details class="group bg-gray-50 rounded-lg border border-gray-200 p-6 transition-all duration-300 open:bg-white open:shadow-md">
+                    <summary class="flex items-center justify-between cursor-pointer focus:outline-none list-none">
+                        <h3 class="text-lg font-medium text-gray-900">¿Los certificados tienen validez universitaria?</h3>
+                        <span class="text-xl font-bold text-gray-400 group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        Sí, todos nuestros cursos aprobados cuentan con certificación digital que posee respaldo académico y estándares de excelencia en convenio con la UAI.
+                    </p>
+                </details>
+
+                <details class="group bg-gray-50 rounded-lg border border-gray-200 p-6 transition-all duration-300 open:bg-white open:shadow-md">
+                    <summary class="flex items-center justify-between cursor-pointer focus:outline-none list-none">
+                        <h3 class="text-lg font-medium text-gray-900">¿Puedo estudiar a mi propio ritmo?</h3>
+                        <span class="text-xl font-bold text-gray-400 group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        ¡Por supuesto! La modalidad es 100% a distancia. Tendrás acceso ilimitado a la plataforma, clases grabadas y contenido interactivo las 24 horas del día.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <section id="areas" class="max-w-7xl mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-extrabold text-gray-900">17 áreas temáticas · más de 300 cursos</h2>
+            <p class="text-gray-500 mt-2">Selecciona tu área de interés para ver los cursos disponibles.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                <h3 class="text-xl font-bold text-gray-900">Salud</h3>
+                <p class="text-sm text-gray-500 mt-1">18 cursos online</p>
+                <a href="/cursos/salud" class="inline-block mt-4 text-blue-600 font-semibold hover:underline text-sm">Ver cursos &rarr;</a>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                <h3 class="text-xl font-bold text-gray-900">Administración</h3>
+                <p class="text-sm text-gray-500 mt-1">24 cursos online</p>
+                <a href="/cursos/administracion" class="inline-block mt-4 text-blue-600 font-semibold hover:underline text-sm">Ver cursos &rarr;</a>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+                <h3 class="text-xl font-bold text-gray-900">Estética</h3>
+                <p class="text-sm text-gray-500 mt-1">9 cursos online</p>
+                <a href="/cursos/estetica" class="inline-block mt-4 text-blue-600 font-semibold hover:underline text-sm">Ver cursos &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-400 text-sm py-12 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h4 class="text-white font-bold mb-4">FUDE by Educativo</h4>
+                <p class="text-xs">Propuesta de cambio de interfaz de usuario realizada para presentación de maquetación.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Contacto</h4>
+                <p>Email: info@educativo.net</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Legal</h4>
+                <a href="#" class="hover:underline block text-xs">Términos y condiciones</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

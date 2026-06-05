@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soporte y Ayuda - FUDE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#c6253d;
+  --red-dark:#a01e32;
+  --red-light:#e8304a;
+  --red-bg:#fff5f6;
+  --red-bg2:#ffe8eb;
+  --bg:#ffffff;
+  --bg2:#f8f8f8;
+  --bg3:#f2f2f2;
+  --border:#e8e8e8;
+  --border2:#ddd;
+  --text:#1a1a1a;
+  --muted:#777;
+  --muted2:#aaa;
+  --blue:#1d5fb5;
+  --blue-light:#2563eb;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+
+/* ─── HEADER ─── */
+header{background:var(--red);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(198,37,61,0.2)}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;height:64px;gap:8px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:16px;flex-shrink:0}
+.logo-mark{background:#fff;color:var(--red);font-weight:800;font-size:17px;padding:5px 10px;border-radius:6px;letter-spacing:-0.5px}
+.logo-text{color:rgba(255,255,255,0.9);font-weight:600;font-size:15px}
+nav{display:flex;align-items:center;gap:2px;flex:1}
+.nav-item{position:relative}
+.nav-link{color:rgba(255,255,255,0.9);font-size:14px;font-weight:500;padding:8px 14px;border-radius:8px;text-decoration:none;display:flex;align-items:center;gap:5px;cursor:pointer;border:none;background:none;font-family:'DM Sans',sans-serif;transition:background 0.15s;white-space:nowrap}
+.nav-link:hover{background:rgba(0,0,0,0.12);color:#fff}
+.nav-link svg{transition:transform 0.2s}
+.nav-item:hover .nav-link svg{transform:rotate(180deg)}
+.dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px;min-width:540px;box-shadow:0 20px 60px rgba(0,0,0,0.1);z-index:200}
+.nav-item:hover .dropdown{display:block}
+.dropdown-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.drop-area{padding:10px 12px;border-radius:10px;cursor:pointer;transition:background 0.15s;text-decoration:none;display:block}
+.drop-area:hover{background:var(--red-bg)}
+.drop-area-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px}
+.drop-area-course{display:block;color:var(--muted);font-size:12px;padding:1px 0;transition:color 0.15s}
+.drop-area:hover .drop-area-course{color:#555}
+.header-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
+.btn-alumno{background:#fff;color:var(--red);font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;border:2px solid rgba(255,255,255,0.3);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.btn-alumno:hover{background:#ffe8ec;transform:scale(1.02)}
+
+/* ─── HERO ─── */
+.hero{background:linear-gradient(160deg,#fff 0%,var(--red-bg) 100%);padding:80px 24px 64px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-80px;top:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(198,37,61,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:860px;margin:0 auto;text-align:center;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(198,37,61,0.08);border:1px solid rgba(198,37,61,0.2);color:var(--red);font-size:12px;font-weight:700;padding:5px 14px;border-radius:100px;margin-bottom:24px;letter-spacing:0.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(30px,5vw,54px);font-weight:800;color:var(--text);letter-spacing:-1px;line-height:1.1;margin-bottom:20px}
+.hero h1 span{color:var(--red)}
+.hero p{font-size:17px;color:var(--muted);max-width:640px;margin:0 auto 40px;line-height:1.7}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--red);color:#fff;font-weight:700;font-size:14px;padding:13px 30px;border-radius:10px;text-decoration:none;transition:all 0.15s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 4px 16px rgba(198,37,61,0.3)}
+.btn-primary:hover{background:var(--red-light);transform:translateY(-1px);box-shadow:0 6px 20px rgba(198,37,61,0.35)}
+.btn-ghost{background:#fff;color:var(--text);font-weight:600;font-size:14px;padding:13px 30px;border-radius:10px;text-decoration:none;border:1.5px solid var(--border2);transition:all 0.15s}
+.btn-ghost:hover{border-color:var(--red);color:var(--red)}
+
+/* ─── STATS ─── */
+.stats-bar{background:var(--red);padding:32px 24px}
+.stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat{text-align:center;padding:12px}
+.stat-num{font-size:30px;font-weight:800;color:#fff;letter-spacing:-1px;display:block}
+.stat-label{font-size:13px;color:rgba(255,255,255,0.72);margin-top:3px;display:block}
+
+/* ─── FAQ ─── */
+.faq-section{padding:80px 24px;max-width:860px;margin:0 auto}
+.section-label{font-size:12px;font-weight:700;color:var(--red);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+.section-title{font-size:clamp(26px,4vw,38px);font-weight:800;color:var(--text);letter-spacing:-0.5px;margin-bottom:8px}
+.section-sub{font-size:16px;color:var(--muted);margin-bottom:40px}
+.faq-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.faq-tab{background:#fff;border:1.5px solid var(--border2);color:var(--muted);font-size:13px;font-weight:600;padding:8px 20px;border-radius:100px;cursor:pointer;transition:all 0.18s;font-family:'DM Sans',sans-serif}
+.faq-tab:hover{border-color:var(--red);color:var(--red)}
+.faq-tab.active{background:var(--red);border-color:var(--red);color:#fff}
+.faq-item{border:1.5px solid var(--border);border-radius:12px;margin-bottom:10px;background:#fff;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s}
+.faq-item:hover{border-color:#ddd;box-shadow:0 2px 12px rgba(0,0,0,0.05)}
+.faq-item.open{border-color:var(--red);box-shadow:0 4px 20px rgba(198,37,61,0.1)}
+.faq-question{width:100%;background:none;border:none;display:flex;align-items:center;justify-content:space-between;padding:18px 22px;cursor:pointer;gap:16px;font-family:'DM Sans',sans-serif}
+.faq-q-text{font-size:15px;font-weight:600;color:var(--text);text-align:left;line-height:1.4}
+.faq-item.open .faq-q-text{color:var(--red)}
+.chevron{width:26px;height:26px;border:1.5px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.25s,border-color 0.2s,background 0.2s}
+.faq-item.open .chevron{transform:rotate(180deg);border-color:var(--red);background:var(--red-bg)}
+.chevron svg path{transition:stroke 0.2s}
+.faq-item.open .chevron svg path{stroke:var(--red)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height 0.3s ease}
+.faq-answer-inner{padding:0 22px 20px;font-size:14.5px;line-height:1.8;color:#555;border-top:1px solid var(--border);padding-top:16px}
+.faq-answer-inner a{color:var(--blue-light);text-decoration:none}
+.faq-answer-inner a:hover{text-decoration:underline}
+.pill{display:inline-block;background:var(--red-bg);color:var(--red);font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;margin:3px 3px 3px 0;border:1px solid rgba(198,37,61,0.15)}
+.note{background:var(--red-bg);border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:12px 16px;margin-top:14px;font-size:13px;color:var(--red-dark)}
+.faq-empty{text-align:center;color:var(--muted2);padding:48px 0;font-size:14px;display:none}
+
+/* ─── REVIEWS ─── */
+.reviews-section{padding:80px 24px;background:var(--bg2);border-top:1px solid var(--border)}
+.reviews-inner{max-width:1200px;margin:0 auto}
+.reviews-header{margin-bottom:40px}
+.stars{display:flex;gap:3px;margin-bottom:8px}
+.star{color:var(--red);font-size:18px}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.review-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:24px;transition:border-color 0.2s,box-shadow 0.2s}
+.review-card:hover{border-color:rgba(198,37,61,0.25);box-shadow:0 4px 20px rgba(198,37,61,0.07)}
+.review-stars{display:flex;gap:2px;margin-bottom:12px}
+.review-star{color:var(--red);font-size:14px}
+.review-text{font-size:14px;color:#555;line-height:1.7;margin-bottom:18px;font-style:italic}
+.review-author{display:flex;align-items:center;gap:10px}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#fff;flex-shrink:0}
+.author-name{font-size:13px;font-weight:700;color:var(--text)}
+.author-meta{font-size:12px;color:var(--muted)}
+
+/* ─── FOOTER ─── */
+footer{background:var(--text);color:#ccc;padding:56px 24px 32px;border-top:4px solid var(--red)}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.footer-brand .logo{margin-bottom:14px;display:inline-flex}
+.footer-brand .logo-mark{background:var(--red);color:#fff}
+.footer-brand .logo-text{color:rgba(255,255,255,0.7)}
+.footer-brand p{font-size:13px;color:#888;line-height:1.7;max-width:220px;margin-bottom:18px}
+.social-links{display:flex;gap:10px}
+.social-link{width:36px;height:36px;border:1px solid #333;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#888;text-decoration:none;font-size:12px;font-weight:700;transition:all 0.15s}
+.social-link:hover{border-color:var(--red);color:#fff;background:var(--red)}
+.footer-col h4{font-size:11px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.footer-col a{display:block;font-size:13px;color:#888;text-decoration:none;margin-bottom:8px;transition:color 0.15s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{border-top:1px solid #2a2a2a;padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:12px;color:#555}
+.payment-pills{display:flex;gap:6px;flex-wrap:wrap}
+.payment-pill{background:#1e1e1e;border:1px solid #2e2e2e;border-radius:6px;padding:4px 10px;font-size:11px;color:#666;font-weight:600;letter-spacing:0.3px}
+
+@media(max-width:768px){
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .header-inner nav{display:none}
+  .reviews-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="header-inner">
+<a href="#" class="logo">
+  <img src="logofide.png"FUDE" style="height: 100px; width: auto;">
+</a>
+    <nav>
+      <div class="nav-item">
+        <button class="nav-link">
+          Cursos
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5l5 5 5-5" stroke="rgba(255,255,255,0.85)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown">
+          <div class="dropdown-grid">
+            <a class="drop-area" href="#"><div class="drop-area-title">💻 Tecnología</div><span class="drop-area-course">Programación Web</span><span class="drop-area-course">Data Science</span><span class="drop-area-course">Ciberseguridad</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">🏥 Salud</div><span class="drop-area-course">Primeros Auxilios</span><span class="drop-area-course">Enfermería General</span><span class="drop-area-course">Nutrición</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">📊 Negocios</div><span class="drop-area-course">Marketing Digital</span><span class="drop-area-course">Gestión Empresarial</span><span class="drop-area-course">Recursos Humanos</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">🎨 Diseño</div><span class="drop-area-course">Diseño Gráfico</span><span class="drop-area-course">UX/UI Design</span><span class="drop-area-course">Fotografía</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">⚖️ Derecho</div><span class="drop-area-course">Derecho Laboral</span><span class="drop-area-course">Derecho Penal</span><span class="drop-area-course">Mediación</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">🌍 Idiomas</div><span class="drop-area-course">Inglés Técnico</span><span class="drop-area-course">Portugués</span><span class="drop-area-course">Ver todas las áreas →</span></a>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="nav-link">Gratis</a>
+      <a href="#" class="nav-link">Carreras Cortas</a>
+      <a href="#" class="nav-link">Empresas</a>
+      <a href="#" class="nav-link">Blog</a>
+    </nav>
+    <div class="header-right">
+      <a href="#" class="btn-alumno">Acceso Alumnos</a>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#c6253d" stroke-width="1.5"/><path d="M4 6l1.5 1.5L8 4" stroke="#c6253d" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Formación profesional certificada
+    </div>
+    <h1>Cursos online con<br><span>Certificación Universitaria</span></h1>
+    <p>Más de 300 cursos a distancia en 17 áreas temáticas. Aprendé a tu ritmo con acompañamiento docente real y tu propio tutor de inteligencia artificial disponible las 24 hs.</p>
+    <div class="hero-cta">
+      <a href="#" class="btn-primary">Ver todos los cursos</a>
+      <a href="#faq" class="btn-ghost">Preguntas frecuentes</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><span class="stat-num">+85k</span><span class="stat-label">Alumnos formados</span></div>
+    <div class="stat"><span class="stat-num">18</span><span class="stat-label">Áreas temáticas</span></div>
+    <div class="stat"><span class="stat-num">19 años</span><span class="stat-label">De experiencia</span></div>
+    <div class="stat"><span class="stat-num">24/7</span><span class="stat-label">Tutor IA disponible</span></div>
+  </div>
+</div>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq-section" id="faq">
+  <div class="section-label">Soporte y Ayuda</div>
+  <h2 class="section-title">Preguntas Frecuentes</h2>
+  <p class="section-sub">Todo lo que necesitás saber antes de empezar a formarte</p>
+
+  <div class="faq-tabs">
+    <button class="faq-tab active" data-cat="all">Todas</button>
+    <button class="faq-tab" data-cat="inscripcion">Inscripción</button>
+    <button class="faq-tab" data-cat="pagos">Pagos</button>
+    <button class="faq-tab" data-cat="cursado">Cursado</button>
+    <button class="faq-tab" data-cat="certificados">Certificados</button>
+  </div>
+
+  <div id="faqList">
+    <div class="faq-item" data-cat="inscripcion">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">¿Cómo me inscribo a un curso pago?</span>
+        <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Ingresá a <a href="http://www.educativo.net/inscripcion.html" target="_blank">educativo.net/inscripcion</a>, completá el formulario con tus datos, elegí tu curso y seleccioná la forma de pago. Tu inscripción se confirma al completar el pago de la primera cuota.
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-cat="inscripcion">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">¿Cómo me inscribo a un curso gratuito?</span>
+        <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Elegí el curso en <a href="http://www.educativo.net/cursos-gratis/" target="_blank">educativo.net/cursos-gratis</a> y presioná "Inscribite Ahora".<br><br>
+        Si sos nuevo: completá el formulario creando usuario y contraseña.<br>
+        Si ya tenés cuenta: hacé clic en "Si ya sos alumno" e ingresá con tus datos anteriores.
+        <div class="note">Podés hacer todos los cursos gratuitos que quieras. Al terminar uno, debés esperar 180 días antes de comenzar el siguiente.</div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-cat="pagos">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">¿Cuáles son las formas y medios de pago?</span>
+        <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <strong style="color:#333;font-size:13px">Argentina:</strong><br>
+        <span class="pill">Rapipago / CobroExpress</span><span class="pill">Tarjeta crédito / débito</span><span class="pill">Transferencia bancaria</span><br><br>
+        <strong style="color:#333;font-size:13px">Exterior:</strong><br>
+        <span class="pill">PayPal</span><span class="pill">Western Union</span><br><br>
+        <strong style="color:#333;font-size:13px">Modalidades:</strong><br>
+        <b style="color:#222">Mes a mes</b> — 1 cuota mensual con cualquier medio<br>
+        <b style="color:#222">Financiado</b> — hasta 12 cuotas fijas con tarjeta de crédito<br>
+        <b style="color:#222">Con descuento</b> — 20% pagando el total por transferencia · 15% en 1 pago con tarjeta
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-cat="pagos">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">¿Cómo informo un pago y cuánto demora en acreditarse?</span>
+        <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Ingresá a <a href="http://www.educativo.net/pagos.html" target="_blank">educativo.net/pagos</a>, completá el formulario "Informar Pago" y adjuntá el comprobante en formato <strong style="color:#222">JPG o PDF</strong>.<br><br>
+        La acreditación demora entre <strong style="color:#222">24 y 48 horas hábiles</strong> según el medio de pago.
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-cat="pagos">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">¿Pueden cambiar las cuotas?</span>
+        <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Si elegís el pago mes a mes, las cuotas se ajustan por inflación. Esto aplica solo en Argentina; en el resto de los países la cuota es fija.
+        <div class="note">Si el precio de tu cuota difiere del publicado, usá el cupón que llega a tu email el día 7 de cada mes, o realizá una transferencia por el monto original.</div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-cat="cursado">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">¿Cómo accedo al campus y al material del curso?</span>
+        <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Tras tu primer pago, recibís por email tu usuario, contraseña e instructivo para acceder al campus: <a href="https://educativovirtual.net/campus/moodle/" target="_blank">educativovirtual.net/campus/moodle</a>.<br><br>
+        Desde allí podés ver apuntes, videos y material interactivo cuando quieras. Solo necesitás una PC con conexión a internet.
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-cat="cursado">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">¿Cómo hago consultas al profesor?</span>
+        <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        A través del <strong style="color:#222">foro del campus</strong> de cada curso. Podés enviar preguntas y mensajes directamente a los docentes en cualquier momento.
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-cat="cursado">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">¿Cuánto tiempo tengo para terminar el curso?</span>
+        <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Tenés <strong style="color:#222">12 meses</strong> desde que se activa tu acceso para completar el curso.
+        <div class="note">Si querés retomar el curso luego del vencimiento, deberás reinscribirte desde cero.</div>
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-cat="certificados">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">¿Cómo se rinden los exámenes?</span>
+        <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Los exámenes se rinden desde el campus virtual. El cronograma figura allí mismo. Cada examen tiene <strong style="color:#222">dos fechas disponibles</strong>; si no aprobás, podés rendir un recuperatorio.
+      </div></div>
+    </div>
+
+    <div class="faq-item" data-cat="certificados">
+      <button class="faq-question" onclick="toggle(this)">
+        <span class="faq-q-text">¿Cómo obtengo el certificado y qué validez tiene?</span>
+        <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Una vez aprobado el curso, podés descargarlo desde el campus. Incluye un <strong style="color:#222">ID único verificable</strong> por cualquier empresa o persona.<br><br>
+        Los certificados tienen <strong style="color:#222">validez nacional</strong> y están avalados por la <strong style="color:#222">Universidad Abierta Interamericana</strong>.
+        <div class="note">Los cursos gratuitos no incluyen certificado por defecto, pero podés obtenerlo abonando un arancel mínimo.</div>
+      </div></div>
+    </div>
+
+    <div class="faq-empty" id="faqEmpty">No hay preguntas en esta categoría.</div>
+  </div>
+</section>
+
+<!-- ═══ REVIEWS ═══ -->
+<section class="reviews-section">
+  <div class="reviews-inner">
+    <div class="reviews-header">
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <div class="section-label">Lo que dicen nuestros alumnos</div>
+      <h2 class="section-title">Más de 90.000 alumnos formados<br>en Argentina y Latam</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars"><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span></div>
+        <p class="review-text">"El tutor me contestaba a las 2 de la mañana cuando estudiaba. Nunca me sentí sola en el proceso."</p>
+        <div class="review-author"><div class="avatar">MG</div><div><div class="author-name">María González</div><div class="author-meta">Análisis en enfermería · Bs As</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span></div>
+        <p class="review-text">"En 4 meses conseguí trabajo. El certificado le dio peso real a mi CV frente a los empleadores."</p>
+        <div class="review-author"><div class="avatar">CR</div><div><div class="author-name">Carlos Ruiz</div><div class="author-meta">ESIHH · Córdoba</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span></div>
+        <p class="review-text">"Estudio con tres hijos. La modalidad a distancia y el feedback de la IA hicieron que sea posible lograrlo."</p>
+        <div class="review-author"><div class="avatar">LP</div><div><div class="author-name">Laura Pérez</div><div class="author-meta">Diseño digital · Rosario</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span></div>
+        <p class="review-text">"Los proyectos prácticos me prepararon para el mundo laboral. Recomiendo 100%."</p>
+        <div class="review-author"><div class="avatar">JL</div><div><div class="author-name">Javier López</div><div class="author-meta">Desarrollo Web · Mendoza</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span></div>
+        <p class="review-text">"Excelente relación precio-calidad. Los tutores son muy atentos y el contenido actualizado."</p>
+        <div class="review-author"><div class="avatar">CF</div><div><div class="author-name">Camila Fernández</div><div class="author-meta">Marketing Digital · Santa Fe</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span></div>
+        <p class="review-text">"Aprendí desde cero y ahora trabajo como analista de datos. El mejor curso que hice."</p>
+        <div class="review-author"><div class="avatar">DS</div><div><div class="author-name">Diego Sosa</div><div class="author-meta">Data Science · CABA</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark">FUDE</div>
+          <span class="logo-text">by Educativo</span>
+        </a>
+        <p>Formación profesional online con certificación universitaria. 19 años acompañando el aprendizaje en Argentina y Latinoamérica.</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/FundacionFUDE" target="_blank" class="social-link">f</a>
+          <a href="https://www.instagram.com/fude.educativo/" target="_blank" class="social-link">ig</a>
+          <a href="https://www.youtube.com/c/EducativoNet" target="_blank" class="social-link">yt</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="https://www.educativo.net/terminos-de-uso.pdf" target="_blank">Términos y condiciones</a>
+        <a href="mailto:info@educativo.net">info@educativo.net</a>
+      </div>
+      <div class="footer-col">
+        <h4>Estudiá</h4>
+        <a href="https://www.educativo.net/estudiar-distancia.html">Estudiar a Distancia</a>
+        <a href="https://www.educativo.net/carreras-distancia.html">Carreras a Distancia</a>
+      </div>
+      <div class="footer-col">
+        <h4>Destacados</h4>
+        <a href="https://www.educativo.net/curso-del-mes.html">Curso del Mes</a>
+        <a href="https://www.educativo.net/cursos-destacados.html">Cursos Destacados</a>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <a href="https://www.educativo.net/cursos-a-distancia/">Cursos a Distancia</a>
+        <a href="http://issuu.com/fudeeducativo/docs/catalogo">Catálogo de cursos</a>
+        <a href="http://issuu.com/fudeeducativo/docs/cat__logo_de_p__ldoras">Catálogo de Píldoras</a>
+        <a href="https://www.educativo.net/metodo-inteligente.html">Método Inteligente</a>
+        <a href="https://www.educativo.net/suscribir-revista.html">Revista Digital</a>
+        <a href="https://www.educativo.net/articulos/">Blog</a>
+        <a href="https://www.educativo.net/afiliados.html">Programa Afiliados</a>
+        <a href="https://www.educativo.net/empresas/">Empresas</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 FUDE by Educativo. Todos los derechos reservados.</p>
+      <div class="payment-pills">
+        <span class="payment-pill">VISA</span>
+        <span class="payment-pill">MASTERCARD</span>
+        <span class="payment-pill">AMEX</span>
+        <span class="payment-pill">NARANJA X</span>
+        <span class="payment-pill">MERCADO PAGO</span>
+        <span class="payment-pill">TRANSFERENCIA</span>
+        <span class="payment-pill">RAPIPAGO</span>
+        <span class="payment-pill">PAYPAL</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggle(btn){
+  const item=btn.closest('.faq-item');
+  const answer=item.querySelector('.faq-answer');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el=>{
+    el.classList.remove('open');
+    el.querySelector('.faq-answer').style.maxHeight='0';
+  });
+  if(!isOpen){
+    item.classList.add('open');
+    answer.style.maxHeight=answer.scrollHeight+'px';
+  }
+}
+document.querySelectorAll('.faq-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.faq-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const cat=tab.dataset.cat;
+    let visible=0;
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      const show=cat==='all'||item.dataset.cat===cat;
+      item.style.display=show?'block':'none';
+      if(show)visible++;
+    });
+    document.getElementById('faqEmpty').style.display=visible===0?'block':'none';
+    document.querySelectorAll('.faq-item.open').forEach(el=>{
+      el.classList.remove('open');
+      el.querySelector('.faq-answer').style.maxHeight='0';
+    });
+  });
+});
+</script>
+</body>
+</html>

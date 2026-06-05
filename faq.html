@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educativo Net | Preguntas Frecuentes</title>
+    <!-- Cargamos Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /* Estilo para ocultar las secciones que no están activas */
+        .faq-section {
+            display: none;
+        }
+        .faq-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- SECCIÓN DE PREGUNTAS FRECUENTES -->
+    <section id="faq" class="py-16 px-6 max-w-4xl mx-auto">
+        
+        <!-- Encabezado principal basado en tu PDF -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Preguntas Frecuentes</h1>
+            <p class="mt-3 text-lg text-gray-500">Todo lo que necesitas saber sobre nuestros cursos online.</p>
+        </div>
+
+        <!-- BOTONES DE CATEGORÍAS (Pestañas) -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10">
+            <button onclick="switchTab('inscripcion')" id="btn-inscripcion" class="tab-btn bg-blue-600 text-white font-medium px-5 py-3 rounded-xl shadow-sm transition-all">
+                📥 Inscripción
+            </button>
+            <button onclick="switchTab('pagos')" id="btn-pagos" class="tab-btn bg-white hover:bg-gray-100 text-gray-700 font-medium px-5 py-3 rounded-xl border border-gray-200 shadow-sm transition-all">
+                💳 Pagos
+            </button>
+            <button onclick="switchTab('cursado')" id="btn-cursado" class="tab-btn bg-white hover:bg-gray-100 text-gray-700 font-medium px-5 py-3 rounded-xl border border-gray-200 shadow-sm transition-all">
+                💻 Cursado y Campus
+            </button>
+            <button onclick="switchTab('certificados')" id="btn-certificados" class="tab-btn bg-white hover:bg-gray-100 text-gray-700 font-medium px-5 py-3 rounded-xl border border-gray-200 shadow-sm transition-all">
+                📜 Exámenes y Certificados
+            </button>
+        </div>
+
+        <!-- CONTENEDOR DE LAS PREGUNTAS -->
+        <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 shadow-sm">
+
+            <!-- CATEGORÍA 1: INSCRIPCIÓN (Activa por defecto) -->
+            <div id="sec-inscripcion" class="faq-section active space-y-4">
+                <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2 text-blue-600">📥 Todo sobre Inscripción</h2>
+                
+                <details class="group border-b border-gray-100 pb-4">
+                    <summary class="flex justify-between items-center font-medium text-gray-900 cursor-pointer list-none focus:outline-none">
+                        <span>¿Cómo me inscribo a un curso pago?</span>
+                        <span class="transition group-open:rotate-180 text-gray-400">▼</span>
+                    </summary>
+                    <p class="mt-3 text-gray-600 text-sm leading-relaxed">
+                        Ingresá a <a href="https://educativo.net/inscripcion" class="text-blue-600 underline">educativo.net/inscripcion</a>, completá el formulario con tus datos, elegí tu curso y seleccioná la forma de pago. Tu inscripción se confirma al completar el pago de la primera cuota.
+                    </p>
+                </details>
+
+                <details class="group border-b border-gray-100 pb-4">
+                    <summary class="flex justify-between items-center font-medium text-gray-900 cursor-pointer list-none focus:outline-none">
+                        <span>¿Cómo me inscribo a un curso gratuito?</span>
+                        <span class="transition group-open:rotate-180 text-gray-400">▼</span>
+                    </summary>
+                    <p class="mt-3 text-gray-600 text-sm leading-relaxed">
+                        Elegí el curso y presioná "Inscribite Ahora". Si sos nuevo, completá el formulario creando usuario y contraseña. Si ya tenés cuenta, hacé clic en "Si ya sos alumno" e ingresá con tus datos anteriores.
+                    </p>
+                </details>
+
+                <details class="group">
+                    <summary class="flex justify-between items-center font-medium text-gray-900 cursor-pointer list-none focus:outline-none">
+                        <span>¿Cuántos cursos gratuitos puedo hacer?</span>
+                        <span class="transition group-open:rotate-180 text-gray-400">▼</span>
+                    </summary>
+                    <div class="mt-3 text-gray-600 text-sm leading-relaxed space-y-2">
+                        <p>Podés hacer todos los que quieras. Al terminar uno, debés esperar 180 días para comenzar otro. Tenemos más de 20 cursos gratuitos disponibles en <a href="https://educativo.net/cursos-gratis" class="text-blue-600 underline">educativo.net/cursos-gratis</a>.</p>
+                        <p class="font-semibold text-amber-600">⚠ Los cursos gratuitos no incluyen certificado, pero podés obtenerlo abonando un arancel mínimo.</p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- CATEGORÍA 2: PAGOS -->
+            <div id="sec-pagos" class="faq-section space-y-4">
+                <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2 text-blue-600">💳 Todo sobre Pagos</h2>
+                
+                <details class="group border-b border-gray-100 pb-4">
+                    <summary class="flex justify-between items-center font-medium text-gray-900 cursor-pointer list-none focus:outline-none">
+                        <span>¿Cuáles son las formas y medios de pago?</span>
+                        <span class="transition group-open:rotate-180 text-gray-400">▼</span>
+                    </summary>
+                    <div class="mt-3 text-gray-600 text-sm leading-relaxed space-y-3">
+                        <p><strong>Argentina:</strong> Rapipago / CobroExpress, Tarjeta de crédito o débito, Transferencia bancaria.</p>
+                        <p><strong>Exterior:</strong> PayPal, Western Union.</p>
+                        <p>Según la duración del curso podés elegir:</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li><strong>Mes a mes:</strong> 1 cuota mensual con cualquier medio.</li>
+                            <li><strong>Financiado:</strong> Hasta 12 cuotas fijas con tarjeta de crédito.</li>
+                            <li><strong>Con descuento:</strong> 20% pagando el total por transferencia o 15% en 1 pago con tarjeta.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="group border-b border-gray-100 pb-4">
+                    <summary class="flex justify-between items-center font-medium text-gray-900 cursor-pointer list-none focus:outline-none">
+                        <span>¿Cómo informo un pago y cuánto tarda en acreditarse?</span>
+                        <span class="transition group-open:rotate-180 text-gray-400">▼</span>
+                    </summary>
+                    <p class="mt-3 text-gray-600 text-sm leading-relaxed">
+                        Ingresá a <a href="https://educativo.net/pagos" class="text-blue-600 underline">educativo.net/pagos</a>, completá el formulario "Informar Pago" y adjuntá el comprobante en formato JPG o PDF. La acreditación demora entre 24 y 48 horas hábiles.
+                    </p>
+                </details>
+
+                <details class="group">
+                    <summary class="flex justify-between items-center font-medium text-gray-900 cursor-pointer list-none focus:outline-none">
+                        <span>¿Pueden cambiar las cuotas?</span>
+                        <span class="transition group-open:rotate-180 text-gray-400">▼</span>
+                    </summary>
+                    <p class="mt-3 text-gray-600 text-sm leading-relaxed">
+                        Si elegís el pago mes a mes, las cuotas se ajustan por inflación (solo aplica en Argentina). En el resto de los países la cuota mensual es fija. <br><br>
+                        Si el precio de tu cuota difiere del publicado, usá el cupón que llega a tu email el día 7 de cada mes, o realizá una transferencia por el monto original.
+                    </p>
+                </details>
+            </div>
+
+            <!-- CATEGORÍA 3: CURSADO Y CAMPUS -->
+            <div id="sec-cursado" class="faq-section space-y-4">
+                <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2 text-blue-600">💻 Cursado y Campus Virtual</h2>
+                
+                <details class="group border-b border-gray-100 pb-4">
+                    <summary class="flex justify-between items-center font-medium text-gray-900 cursor-pointer list-none focus:outline-none">
+                        <span>¿Cómo accedo al material y las clases?</span>
+                        <span class="transition group-open:rotate-180 text-gray-400">▼</span>
+                    </summary>
+                    <p class="mt-3 text-gray-600 text-sm leading-relaxed">
+                        Tras tu primer pago, recibís por email el usuario, contraseña e instructivo de acceso al campus: 
+                        <a href="https://educativovirtual.net/campus/moodle" class="text-blue-600 underline">educativovirtual.net/campus/moodle</a>. <br>
+                        Desde allí podés ver apuntes, videos y material interactivo cuando quieras, solo necesitás una PC con internet.
+                    </p>
+                </details>
+
+                <details class="group border-b border-gray-100 pb-4">
+                    <summary class="flex justify-between items-center font-medium text-gray-900 cursor-pointer list-none focus:outline-none">
+                        <span>¿Cómo hago consultas al profesor?</span>
+                        <span class="transition group-open:rotate-180 text-gray-400">▼</span>
+                    </summary>
+                    <p class="mt-3 text-gray-600 text-sm leading-relaxed">
+                        A través del foro del campus de cada curso. Allí podés enviar preguntas y mensajes directamente a los docentes.
+                    </p>
+                </details>
+
+                <details class="group">
+                    <summary class="flex justify-between items-center font-medium text-gray-900 cursor-pointer list-none focus:outline-none">
+                        <span>¿Cuánto tiempo tengo para terminar el curso?</span>
+                        <span class="transition group-open:rotate-180 text-gray-400">▼</span>
+                    </summary>
+                    <p class="mt-3 text-gray-600 text-sm leading-relaxed text-red-600 font-medium">
+                        Tenás 12 meses desde que se activa tu acceso. Vencido ese plazo perdés el acceso al campus. Si querés retomar, deberás reinscribirte desde cero.
+                    </p>
+                </details>
+            </div>
+
+            <!-- CATEGORÍA 4: EXÁMENES Y CERTIFICADOS -->
+            <div id="sec-certificados" class="faq-section space-y-4">
+                <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2 text-blue-600">📜 Exámenes y Certificados</h2>
+                
+                <details class="group border-b border-gray-100 pb-4">
+                    <summary class="flex justify-between items-center font-medium text-gray-900 cursor-pointer list-none focus:outline-none">
+                        <span>¿Cómo se rinden los exámenes?</span>
+                        <span class="transition group-open:rotate-180 text-gray-400">▼</span>
+                    </summary>
+                    <p class="mt-3 text-gray-600 text-sm leading-relaxed">
+                        Los exámenes se rinden desde el campus virtual. El cronograma figura allí mismo. Cada examen tiene dos fechas disponibles; si no aprobás, podés rendir un recuperatorio.
+                    </p>
+                </details>
+
+                <details class="group">
+                    <summary class="flex justify-between items-center font-medium text-gray-900 cursor-pointer list-none focus:outline-none">
+                        <span>¿Cómo obtengo mi certificado y qué validez tiene?</span>
+                        <span class="transition group-open:rotate-180 text-gray-400">▼</span>
+                    </summary>
+                    <p class="mt-3 text-gray-600 text-sm leading-relaxed">
+                        Una vez aprobado el curso, podés descargar el certificado directamente desde el campus. Incluye un ID único verificable por cualquier empresa o persona. <br><br>
+                        Los certificados tienen <strong>validez nacional</strong> y están avalados por la <strong>Universidad Abierta Interamericana (UAI)</strong>.
+                    </p>
+                </details>
+            </div>
+
+        </div>
+
+        <!-- Pie de soporte rápido -->
+        <div class="mt-8 text-center text-xs text-gray-400">
+            ¿Aún con dudas? Escribinos a: <a href="mailto:tecnica@educativo.net" class="text-blue-500 font-medium underline">tecnica@educativo.net</a>
+        </div>
+    </section>
+
+    <!-- SCRIPT INTERACTIVO PARA CAMBIAR ENTRE CATEGORÍAS -->
+    <script>
+        function switchTab(category) {
+            // Ocultar todas las secciones de preguntas
+            const sections = document.querySelectorAll('.faq-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // Mostrar la sección seleccionada
+            document.getElementById('sec-' + category).classList.add('active');
+
+            // Resetear el diseño de todos los botones
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-white', 'text-gray-700', 'border-gray-200');
+            });
+
+            // Resaltar el botón que fue clickeado
+            const activeBtn = document.getElementById('btn-' + category);
+            activeBtn.classList.remove('bg-white', 'text-gray-700', 'border-gray-200');
+            activeBtn.classList.add('bg-blue-600', 'text-white');
+        }
+    </script>
+</body>
+</html>
