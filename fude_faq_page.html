@@ -95,6 +95,56 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
 .note{background:#161f2e;border-left:3px solid var(--blue);border-radius:0 6px 6px 0;padding:10px 14px;margin-top:12px;font-size:13px;color:#7aabf0}
 .faq-empty{text-align:center;color:#555;padding:40px 0;font-size:14px;display:none}
 
+/* Efecto hover sutil para las imágenes clickeables */
+.faq-img:hover {
+  opacity: 0.85;
+}
+
+/* ─── ESTILOS DEL VISOR (LIGHTBOX) ─── */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(5, 5, 5, 0.92);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.lightbox.show {
+  display: flex;
+  opacity: 1;
+}
+.lightbox-content {
+  max-width: 90%;
+  max-height: 85%;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+.lightbox.show .lightbox-content {
+  transform: scale(1);
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  color: #fff;
+  font-size: 35px;
+  font-weight: 300;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+.lightbox-close:hover {
+  color: var(--red-light);
+}
+
 /* ─── TESTIMONIOS ─── */
 .reviews-section{padding:72px 24px;background:var(--bg2);border-top:1px solid var(--border)}
 .reviews-inner{max-width:1200px;margin:0 auto}
@@ -137,15 +187,13 @@ footer{background:#080808;border-top:1px solid var(--border);padding:56px 24px 3
 </head>
 <body>
 
-<!-- ═══ HEADER ═══ -->
 <header>
   <div class="header-inner">
-<a href="#" class="logo">
-  <img src="logofide.png"FUDE" style="height: 100px; width: auto;">
-</a>
+    <a href="#" class="logo">
+      <img src="logofide.png" alt="FUDE" style="height: 100px; width: auto;">
+    </a>
 
     <nav>
-      <!-- CURSOS -->
       <div class="nav-item">
         <button class="nav-link">
           Cursos
@@ -205,7 +253,6 @@ footer{background:#080808;border-top:1px solid var(--border);padding:56px 24px 3
   </div>
 </header>
 
-<!-- ═══ HERO ═══ -->
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-badge">
@@ -220,7 +267,6 @@ footer{background:#080808;border-top:1px solid var(--border);padding:56px 24px 3
   </div>
 </section>
 
-<!-- ═══ FAQ ═══ -->
 <section class="faq-section" id="faq">
   <div class="section-label">Soporte y Ayuda</div>
   <h2 class="section-title">Preguntas Frecuentes</h2>
@@ -242,7 +288,18 @@ footer{background:#080808;border-top:1px solid var(--border);padding:56px 24px 3
       </button>
       <div class="faq-answer">
         <div class="faq-answer-inner">
-          Elegí el área de tu interés, buscá el curso que querés realizar y en la página del curso hacé clic en Inscribirme ahora. Se abrirá un formulario donde completás tus datos y confirmá tu inscripción seleccionando la forma de pago.
+          <p style="margin-bottom: 16px;">Elegí el área de tu interés, buscá el curso que querés realizar y en la página del curso hacé clic en <strong>Inscribirme ahora</strong>. Se abrirá un formulario donde completás tus datos y confirmás tu inscripción seleccionando la forma de pago.</p>
+          
+          <div style="display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 280px;">
+              <p style="font-size: 12px; color: var(--muted); margin-bottom: 6px;">1. Selección del curso</p>
+              <img src="3.png" alt="Captura de selección de curso" class="faq-img" onclick="openLightbox(this)" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border2); display: block; cursor: zoom-in; transition: opacity 0.2s;">
+            </div>
+            <div style="flex: 1; min-width: 280px;">
+              <p style="font-size: 12px; color: var(--muted); margin-bottom: 6px;">2. Formulario de inscripción</p>
+              <img src="4.png" alt="Captura del formulario" class="faq-img" onclick="openLightbox(this)" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border2); display: block; cursor: zoom-in; transition: opacity 0.2s;">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -346,10 +403,8 @@ footer{background:#080808;border-top:1px solid var(--border);padding:56px 24px 3
     </div>
 
     <div class="faq-empty" id="faqEmpty">No hay preguntas en esta categoría.</div>
-  </div>
 </section>
 
-<!-- ═══ TESTIMONIOS ═══ -->
 <section class="reviews-section">
   <div class="reviews-inner">
     <div class="reviews-header">
@@ -394,7 +449,6 @@ footer{background:#080808;border-top:1px solid var(--border);padding:56px 24px 3
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -458,6 +512,11 @@ footer{background:#080808;border-top:1px solid var(--border);padding:56px 24px 3
   </div>
 </footer>
 
+<div id="imageLightbox" class="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <img class="lightbox-content" id="lightboxImg">
+</div>
+
 <script>
 function toggle(btn){
   const item=btn.closest('.faq-item');
@@ -472,6 +531,7 @@ function toggle(btn){
     answer.style.maxHeight=answer.scrollHeight+'px';
   }
 }
+
 document.querySelectorAll('.faq-tab').forEach(tab=>{
   tab.addEventListener('click',()=>{
     document.querySelectorAll('.faq-tab').forEach(t=>t.classList.remove('active'));
@@ -489,6 +549,29 @@ document.querySelectorAll('.faq-tab').forEach(tab=>{
       el.querySelector('.faq-answer').style.maxHeight='0';
     });
   });
+});
+
+/* ─── FUNCIONES PARA EL VISOR DE IMÁGENES ─── */
+function openLightbox(imgElement) {
+  const lightbox = document.getElementById('imageLightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  
+  lightboxImg.src = imgElement.src;
+  lightboxImg.alt = imgElement.alt;
+  
+  lightbox.classList.add('show');
+}
+
+function closeLightbox() {
+  const lightbox = document.getElementById('imageLightbox');
+  lightbox.classList.remove('show');
+}
+
+// Cerrar también presionando la tecla Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeLightbox();
+  }
 });
 </script>
 </body>
