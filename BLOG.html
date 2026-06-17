@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soporte y Ayuda - FUDE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#b83232;
+  --red-dark:#a01e32;
+  --red-light:#e8304a;
+  --red-bg:#fff5f6;
+  --red-bg2:#ffe8eb;
+  --bg:#ffffff;
+  --bg2:#f8f8f8;
+  --bg3:#f2f2f2;
+  --border:#e8e8e8;
+  --border2:#ddd;
+  --text:#1a1a1a;
+  --muted:#777;
+  --muted2:#aaa;
+  --blue:#1d5fb5;
+  --blue-light:#2563eb;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+
+/* ─── HEADER ─── */
+header{background:var(--red);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(198,37,61,0.2)}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;height:64px;gap:8px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:16px;flex-shrink:0}
+.logo-mark{background:#fff;color:var(--red);font-weight:800;font-size:17px;padding:5px 10px;border-radius:6px;letter-spacing:-0.5px}
+.logo-text{color:rgba(255,255,255,0.9);font-weight:600;font-size:15px}
+nav{display:flex;align-items:center;gap:2px;flex:1}
+.nav-item{position:relative}
+.nav-link{color:rgba(255,255,255,0.9);font-size:14px;font-weight:500;padding:8px 14px;border-radius:8px;text-decoration:none;display:flex;align-items:center;gap:5px;cursor:pointer;border:none;background:none;font-family:'DM Sans',sans-serif;transition:background 0.15s;white-space:nowrap}
+.nav-link:hover{background:rgba(0,0,0,0.12);color:#fff}
+.nav-link svg{transition:transform 0.2s}
+.nav-item:hover .nav-link svg{transform:rotate(180deg)}
+.dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px;min-width:540px;box-shadow:0 20px 60px rgba(0,0,0,0.1);z-index:200}
+.nav-item:hover .dropdown{display:block}
+.dropdown-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.drop-area{padding:10px 12px;border-radius:10px;cursor:pointer;transition:background 0.15s;text-decoration:none;display:block}
+.drop-area:hover{background:var(--red-bg)}
+.drop-area-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px}
+.drop-area-course{display:block;color:var(--muted);font-size:12px;padding:1px 0;transition:color 0.15s}
+.drop-area:hover .drop-area-course{color:#555}
+.header-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
+.btn-alumno{background:#fff;color:var(--red);font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;border:2px solid rgba(255,255,255,0.3);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.btn-alumno:hover{background:#ffe8ec;transform:scale(1.02)}
+
+/* ─── HERO ─── */
+.hero{background:linear-gradient(135deg,#0d0d0d 0%,#1a0608 50%,#0d0d0d 100%);padding:80px 24px 60px;position:relative;overflow:hidden;border-bottom:1px solid #1e1e1e}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(198,37,61,0.12) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:900px;margin:0 auto;text-align:center;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(198,37,61,0.15);border:1px solid rgba(198,37,61,0.3);color:#e8304a;font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;margin-bottom:24px;letter-spacing:0.5px;text-transform:uppercase}
+.hero h1{font-size:clamp(32px,5vw,56px);font-weight:800;color:#fff;letter-spacing:-1px;line-height:1.1;margin-bottom:20px}
+.hero h1 span{color:var(--red)}
+.hero p{font-size:17px;color:#999;max-width:640px;margin:0 auto 40px;line-height:1.7}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--red);color:#fff;font-weight:700;font-size:14px;padding:12px 28px;border-radius:10px;text-decoration:none;transition:background 0.15s,transform 0.1s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-primary:hover{background:var(--red-light);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:#ccc;font-weight:600;font-size:14px;padding:12px 28px;border-radius:10px;text-decoration:none;border:1px solid #333;transition:border-color 0.15s,color 0.15s}
+.btn-ghost:hover{border-color:#555;color:#fff}
+
+/* ─── blog ─── */
+.blog-section { padding: 60px 24px; }
+  .blog-section-inner { max-width: 1200px; margin: 0 auto; }
+  .blog-section-header { margin-bottom: 1.5rem; }
+  .blog-section-header h2 { font-size: 27px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .blog-section-header p { font-size: 20px; color: var(--muted); }
+
+  /* Filtro desplegable */
+  .blog-filter-wrap { margin-bottom: 1.5rem; position: relative; display: inline-block; }
+  .blog-filter-btn {
+    font-size: 13px; font-weight: 600; padding: 8px 18px;
+    border-radius: 8px; border: 1.5px solid var(--border);
+    background: var(--bg); color: var(--text);
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .blog-filter-btn:hover { border-color: var(--red); color: var(--red); }
+  .blog-filter-btn svg { transition: transform 0.2s; }
+  .blog-filter-wrap.open .blog-filter-btn svg { transform: rotate(180deg); }
+  .blog-filter-dropdown {
+    display: none; position: absolute; top: calc(100% + 6px); left: 0;
+    background: var(--bg); border: 1.5px solid var(--border);
+    border-radius: 10px; padding: 6px; min-width: 200px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08); z-index: 50;
+  }
+  .blog-filter-wrap.open .blog-filter-dropdown { display: block; }
+  .blog-filter-option {
+    display: block; width: 100%; text-align: left;
+    padding: 8px 12px; border-radius: 6px; border: none;
+    background: none; font-size: 13px; font-weight: 500;
+    color: var(--text); cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: background 0.15s;
+  }
+  .blog-filter-option:hover { background: var(--red-bg); color: var(--red); }
+  .blog-filter-option.active { background: var(--red-bg2); color: var(--red); font-weight: 700; }
+
+  /* Grid */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 2rem;
+  }
+  .blog-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.15s;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+  }
+  .blog-card:hover { border-color: rgba(184,50,50,0.35); box-shadow: 0 4px 16px rgba(184,50,50,0.08); }
+  .blog-card-thumb { height: 160px; overflow: hidden; background: var(--bg3); }
+  .blog-card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .blog-card-body { padding: 14px; }
+  .blog-card-title { font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--text); }
+
+  /* Paginación */
+  .blog-pagination { display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .page-btn {
+    width: 36px; height: 36px; border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg); color: var(--muted);
+    font-size: 13px; font-weight: 500;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Sans', sans-serif; transition: all 0.15s; text-decoration: none;
+  }
+  .page-btn:hover { border-color: var(--red); color: var(--red); }
+  .page-btn.active { background: var(--red); border-color: var(--red); color: #fff; }
+
+  @media(max-width: 768px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(max-width: 480px) { .blog-grid { grid-template-columns: 1fr; } }
+
+/* ─── STATS ─── */
+.stats-bar{background:var(--red);padding:32px 24px}
+.stats-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat{text-align:center;padding:12px}
+.stat-num{font-size:30px;font-weight:800;color:#fff;letter-spacing:-1px;display:block}
+.stat-label{font-size:13px;color:rgba(255,255,255,0.72);margin-top:3px;display:block}
+
+/* ─── REVIEWS ─── */
+.reviews-section{padding:80px 24px;background:var(--bg2);border-top:1px solid var(--border)}
+.reviews-inner{max-width:1200px;margin:0 auto}
+.reviews-header{margin-bottom:40px}
+.stars{display:flex;gap:3px;margin-bottom:8px}
+.star{color:var(--red);font-size:18px}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.review-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:24px;transition:border-color 0.2s,box-shadow 0.2s}
+.review-card:hover{border-color:rgba(198,37,61,0.25);box-shadow:0 4px 20px rgba(198,37,61,0.07)}
+.review-stars{display:flex;gap:2px;margin-bottom:12px}
+.review-star{color:var(--red);font-size:14px}
+.review-text{font-size:14px;color:#555;line-height:1.7;margin-bottom:18px;font-style:italic}
+.review-author{display:flex;align-items:center;gap:10px}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#fff;flex-shrink:0}
+.author-name{font-size:13px;font-weight:700;color:var(--text)}
+.author-meta{font-size:12px;color:var(--muted)}
+
+/* ─── FOOTER ─── */
+footer{background:var(--text);color:#ccc;padding:56px 24px 32px;border-top:4px solid var(--red)}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.footer-brand .logo{margin-bottom:14px;display:inline-flex}
+.footer-brand .logo-mark{background:var(--red);color:#fff}
+.footer-brand .logo-text{color:rgba(255,255,255,0.7)}
+.footer-brand p{font-size:13px;color:#888;line-height:1.7;max-width:220px;margin-bottom:18px}
+.social-links{display:flex;gap:10px}
+.social-link{width:36px;height:36px;border:1px solid #333;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#888;text-decoration:none;font-size:12px;font-weight:700;transition:all 0.15s}
+.social-link:hover{border-color:var(--red);color:#fff;background:var(--red)}
+.footer-col h4{font-size:11px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.footer-col a{display:block;font-size:13px;color:#888;text-decoration:none;margin-bottom:8px;transition:color 0.15s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{border-top:1px solid #2a2a2a;padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:12px;color:#555}
+.payment-pills{display:flex;gap:6px;flex-wrap:wrap}
+.payment-pill{background:#1e1e1e;border:1px solid #2e2e2e;border-radius:6px;padding:4px 10px;font-size:11px;color:#666;font-weight:600;letter-spacing:0.3px}
+
+@media(max-width:768px){
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .header-inner nav{display:none}
+  .reviews-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+<a href="#" class="logo">
+  <img src="logofide.png" style="height: 100px; width: auto;">
+</a>
+    <nav>
+      <div class="nav-item">
+        <button class="nav-link">
+          Cursos
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5l5 5 5-5" stroke="rgba(255,255,255,0.85)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown">
+          <div class="dropdown-grid">
+            <a class="drop-area" href="#"><div class="drop-area-title">💻 Tecnología</div><span class="drop-area-course">Programación Web</span><span class="drop-area-course">Data Science</span><span class="drop-area-course">Ciberseguridad</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">🏥 Salud</div><span class="drop-area-course">Primeros Auxilios</span><span class="drop-area-course">Enfermería General</span><span class="drop-area-course">Nutrición</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">📊 Negocios</div><span class="drop-area-course">Marketing Digital</span><span class="drop-area-course">Gestión Empresarial</span><span class="drop-area-course">Recursos Humanos</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">🎨 Diseño</div><span class="drop-area-course">Diseño Gráfico</span><span class="drop-area-course">UX/UI Design</span><span class="drop-area-course">Fotografía</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">⚖️ Derecho</div><span class="drop-area-course">Derecho Laboral</span><span class="drop-area-course">Derecho Penal</span><span class="drop-area-course">Mediación</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">🌍 Idiomas</div><span class="drop-area-course">Inglés Técnico</span><span class="drop-area-course">Portugués</span><span class="drop-area-course">Ver todas las áreas →</span></a>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="nav-link">Gratis</a>
+      <a href="#" class="nav-link">Carreras Cortas</a>
+      <a href="#" class="nav-link">Empresas</a>
+      <a href="#" class="nav-link">Blog</a>
+    </nav>
+    <div class="header-right">
+      <a href="#" class="btn-alumno">Acceso Alumnos</a>
+    </div>
+  </div>
+</header>
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-inner">
+
+    <h1>El Blog de Fude<br><span> by Educativo</span></h1>
+    <div class="hero-badge">
+      Mantenete al día con el mercado laboral, descubrí oficios con futuro y aprende habilidades.
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ BLOG GRID ═══ -->
+<section class="blog-section">
+  <div class="blog-section-inner">
+
+    <div class="blog-section-header">
+      <h2>Últimos artículos</h2>
+      <p>Guías, consejos y novedades sobre oficios, habilidades y el mercado laboral</p>
+    </div>
+
+    <!-- Filtro desplegable -->
+    <div class="blog-filter-wrap" id="blogFilterWrap">
+      <button class="blog-filter-btn" onclick="document.getElementById('blogFilterWrap').classList.toggle('open')">
+        Filtrar por área
+        <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="blog-filter-dropdown">
+        <button class="blog-filter-option active">Todos</button>
+        <button class="blog-filter-option">Tecnología</button>
+        <button class="blog-filter-option">Oficios</button>
+        <button class="blog-filter-option">Mercado laboral</button>
+        <button class="blog-filter-option">Inteligencia artificial</button>
+        <button class="blog-filter-option">Negocios</button>
+        <button class="blog-filter-option">Diseño</button>
+      </div>
+    </div>
+
+    <!-- 16 tarjetas -->
+    <div class="blog-grid">
+
+      <a href="blog-1.html" class="blog-card" data-page="1">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="Cómo usar la IA de forma optimizada"></div>
+        <div class="blog-card-body"><div class="blog-card-title">Busco empleo ¿Cuál es la mejor manera de hacerlo?</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="1">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="Los oficios con más salida laboral"></div>
+        <div class="blog-card-body"><div class="blog-card-title">Los oficios con más salida laboral en 2025</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="1">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="Primeros pasos en programación web"></div>
+        <div class="blog-card-body"><div class="blog-card-title">Primeros pasos en programación web: guía para principiantes</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="1">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="Electricidad domiciliaria"></div>
+        <div class="blog-card-body"><div class="blog-card-title">Electricidad domiciliaria: lo que podés aprender en 3 meses</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="1">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="Emprendimiento con un oficio"></div>
+        <div class="blog-card-body"><div class="blog-card-title">Cómo armar tu propio emprendimiento con un oficio</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="1">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="ChatGPT vs otras IAs"></div>
+        <div class="blog-card-body"><div class="blog-card-title">ChatGPT vs otras IAs: cuál usar según tu trabajo</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="1">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="Diseño gráfico freelance"></div>
+        <div class="blog-card-body"><div class="blog-card-title">Diseño gráfico: cómo empezar a trabajar de manera freelance</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="1">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="Trabajo remoto en Argentina"></div>
+        <div class="blog-card-body"><div class="blog-card-title">Trabajo remoto en Argentina: qué sectores lo ofrecen más</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="2">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="Ciberseguridad para principiantes"></div>
+        <div class="blog-card-body"><div class="blog-card-title">Ciberseguridad para principiantes: qué es y por qué importa</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="2">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="Plomería salida laboral"></div>
+        <div class="blog-card-body"><div class="blog-card-title">Plomería: salida laboral, sueldos y cómo formarse</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="2">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="Marketing digital desde cero"></div>
+        <div class="blog-card-body"><div class="blog-card-title">Marketing digital desde cero: qué herramientas aprender primero</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="2">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="Automatizaciones con IA"></div>
+        <div class="blog-card-body"><div class="blog-card-title">Automatizaciones con IA: tareas que podés delegar ya mismo</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="2">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="Actualizar el CV"></div>
+        <div class="blog-card-body"><div class="blog-card-title">Cómo actualizar tu CV para el mercado digital actual</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="2">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="UX UI 2025"></div>
+        <div class="blog-card-body"><div class="blog-card-title">UX/UI en 2025: habilidades clave y tu primer trabajo</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="2">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="Soldadura demanda laboral"></div>
+        <div class="blog-card-body"><div class="blog-card-title">Soldadura: qué tipos existen y cuál tiene más demanda laboral</div></div>
+      </a>
+
+      <a href="#" class="blog-card" data-page="2">
+        <div class="blog-card-thumb"><img src="articulo-01.png" alt="Data Science sin programar"></div>
+        <div class="blog-card-body"><div class="blog-card-title">Data Science para no programadores: ¿es posible?</div></div>
+      </a>
+
+    </div>
+
+    <!-- Paginación -->
+<div class="blog-pagination">
+  <a href="#" class="page-btn" id="pgPrev">&#8592;</a>
+  <a href="#" class="page-btn" data-page="1">1</a>
+  <a href="#" class="page-btn" data-page="2">2</a>
+  <a href="#" class="page-btn" id="pgNext">&#8594;</a>
+</div>
+
+  </div>
+</section>
+
+<!-- ═══ REVIEWS ═══ -->
+<section class="reviews-section">
+  <div class="reviews-inner">
+    <div class="reviews-header">
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <div class="section-label">Lo que dicen nuestros alumnos</div>
+      <h2 class="section-title">Más de 90.000 alumnos formados<br>en Argentina y Latam</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars"><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span></div>
+        <p class="review-text">"El tutor me contestaba a las 2 de la mañana cuando estudiaba. Nunca me sentí sola en el proceso."</p>
+        <div class="review-author"><div class="avatar">MG</div><div><div class="author-name">María González</div><div class="author-meta">Análisis en enfermería · Bs As</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span></div>
+        <p class="review-text">"En 4 meses conseguí trabajo. El certificado le dio peso real a mi CV frente a los empleadores."</p>
+        <div class="review-author"><div class="avatar">CR</div><div><div class="author-name">Carlos Ruiz</div><div class="author-meta">ESIHH · Córdoba</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span></div>
+        <p class="review-text">"Estudio con tres hijos. La modalidad a distancia y el feedback de la IA hicieron que sea posible lograrlo."</p>
+        <div class="review-author"><div class="avatar">LP</div><div><div class="author-name">Laura Pérez</div><div class="author-meta">Diseño digital · Rosario</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span></div>
+        <p class="review-text">"Los proyectos prácticos me prepararon para el mundo laboral. Recomiendo 100%."</p>
+        <div class="review-author"><div class="avatar">JL</div><div><div class="author-name">Javier López</div><div class="author-meta">Desarrollo Web · Mendoza</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span></div>
+        <p class="review-text">"Excelente relación precio-calidad. Los tutores son muy atentos y el contenido actualizado."</p>
+        <div class="review-author"><div class="avatar">CF</div><div><div class="author-name">Camila Fernández</div><div class="author-meta">Marketing Digital · Santa Fe</div></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span></div>
+        <p class="review-text">"Aprendí desde cero y ahora trabajo como analista de datos. El mejor curso que hice."</p>
+        <div class="review-author"><div class="avatar">DS</div><div><div class="author-name">Diego Sosa</div><div class="author-meta">Data Science · CABA</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark">FUDE</div>
+          <span class="logo-text">by Educativo</span>
+        </a>
+        <p>Formación profesional online con certificación universitaria. 19 años acompañando el aprendizaje en Argentina y Latinoamérica.</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/FundacionFUDE" target="_blank" class="social-link">f</a>
+          <a href="https://www.instagram.com/fude.educativo/" target="_blank" class="social-link">ig</a>
+          <a href="https://www.youtube.com/c/EducativoNet" target="_blank" class="social-link">yt</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="https://www.educativo.net/terminos-de-uso.pdf" target="_blank">Términos y condiciones</a>
+        <a href="mailto:info@educativo.net">info@educativo.net</a>
+      </div>
+      <div class="footer-col">
+        <h4>Estudiá</h4>
+        <a href="https://www.educativo.net/estudiar-distancia.html">Estudiar a Distancia</a>
+        <a href="https://www.educativo.net/carreras-distancia.html">Carreras a Distancia</a>
+      </div>
+      <div class="footer-col">
+        <h4>Destacados</h4>
+        <a href="https://www.educativo.net/curso-del-mes.html">Curso del Mes</a>
+        <a href="https://www.educativo.net/cursos-destacados.html">Cursos Destacados</a>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <a href="https://www.educativo.net/cursos-a-distancia/">Cursos a Distancia</a>
+        <a href="http://issuu.com/fudeeducativo/docs/catalogo">Catálogo de cursos</a>
+        <a href="http://issuu.com/fudeeducativo/docs/cat__logo_de_p__ldoras">Catálogo de Píldoras</a>
+        <a href="https://www.educativo.net/metodo-inteligente.html">Método Inteligente</a>
+        <a href="https://www.educativo.net/suscribir-revista.html">Revista Digital</a>
+        <a href="https://www.educativo.net/articulos/">Blog</a>
+        <a href="https://www.educativo.net/afiliados.html">Programa Afiliados</a>
+        <a href="https://www.educativo.net/empresas/">Empresas</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 FUDE by Educativo. Todos los derechos reservados.</p>
+      <div class="payment-pills">
+        <span class="payment-pill">VISA</span>
+        <span class="payment-pill">MASTERCARD</span>
+        <span class="payment-pill">AMEX</span>
+        <span class="payment-pill">NARANJA X</span>
+        <span class="payment-pill">MERCADO PAGO</span>
+        <span class="payment-pill">TRANSFERENCIA</span>
+        <span class="payment-pill">RAPIPAGO</span>
+        <span class="payment-pill">PAYPAL</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggle(btn){
+  const item=btn.closest('.faq-item');
+  const answer=item.querySelector('.faq-answer');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el=>{
+    el.classList.remove('open');
+    el.querySelector('.faq-answer').style.maxHeight='0';
+  });
+  if(!isOpen){
+    item.classList.add('open');
+    answer.style.maxHeight=answer.scrollHeight+'px';
+  }
+}
+document.querySelectorAll('.faq-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.faq-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const cat=tab.dataset.cat;
+    let visible=0;
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      const show=cat==='all'||item.dataset.cat===cat;
+      item.style.display=show?'block':'none';
+      if(show)visible++;
+    });
+    document.getElementById('faqEmpty').style.display=visible===0?'block':'none';
+    document.querySelectorAll('.faq-item.open').forEach(el=>{
+      el.classList.remove('open');
+      el.querySelector('.faq-answer').style.maxHeight='0';
+    });
+  });
+});
+  /* Cierra el dropdown al hacer click afuera */
+  document.addEventListener('click', function(e) {
+    const wrap = document.getElementById('blogFilterWrap');
+    if (!wrap.contains(e.target)) wrap.classList.remove('open');
+  });
+  /* Dropdown */
+  document.addEventListener('click', function(e) {
+    const wrap = document.getElementById('blogFilterWrap');
+    if (!wrap.contains(e.target)) wrap.classList.remove('open');
+  });
+
+  /* Paginación */
+  let paginaActual = 1;
+
+  function mostrarPagina(n) {
+    paginaActual = n;
+    document.querySelectorAll('.blog-card').forEach(function(card) {
+      card.style.display = card.dataset.page == n ? 'block' : 'none';
+    });
+    document.querySelectorAll('.page-btn[data-page]').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.page == n);
+    });
+  }
+
+  document.querySelectorAll('.page-btn[data-page]').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      mostrarPagina(btn.dataset.page);
+    });
+  });
+
+  /* Flechas */
+  document.getElementById('pgPrev').addEventListener('click', function(e) {
+    e.preventDefault();
+    if (paginaActual > 1) mostrarPagina(paginaActual - 1);
+  });
+  document.getElementById('pgNext').addEventListener('click', function(e) {
+    e.preventDefault();
+    if (paginaActual < 2) mostrarPagina(paginaActual + 1);
+  });
+
+  mostrarPagina(1);
+</script>
+</body>
+</html>

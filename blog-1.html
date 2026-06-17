@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cómo buscar empleo - El Blog de Educativo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#b83232;--red-dark:#a01e32;--red-light:#e8304a;
+  --red-bg:#fff5f6;--red-bg2:#ffe8eb;
+  --bg:#ffffff;--bg2:#f8f8f8;--bg3:#f2f2f2;
+  --border:#e8e8e8;--border2:#ddd;
+  --text:#1a1a1a;--muted:#777;--muted2:#aaa;
+  --blue:#1d5fb5;--blue-light:#2563eb;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+
+/* ─── HEADER (igual al tuyo) ─── */
+header{background:var(--red);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(198,37,61,0.2)}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;height:64px;gap:8px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:16px;flex-shrink:0}
+.logo-mark{background:#fff;color:var(--red);font-weight:800;font-size:17px;padding:5px 10px;border-radius:6px;letter-spacing:-0.5px}
+.logo-text{color:rgba(255,255,255,0.9);font-weight:600;font-size:15px}
+nav{display:flex;align-items:center;gap:2px;flex:1}
+.nav-item{position:relative}
+.nav-link{color:rgba(255,255,255,0.9);font-size:14px;font-weight:500;padding:8px 14px;border-radius:8px;text-decoration:none;display:flex;align-items:center;gap:5px;cursor:pointer;border:none;background:none;font-family:'DM Sans',sans-serif;transition:background 0.15s;white-space:nowrap}
+.nav-link:hover{background:rgba(0,0,0,0.12);color:#fff}
+.nav-link svg{transition:transform 0.2s}
+.nav-item:hover .nav-link svg{transform:rotate(180deg)}
+.dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px;min-width:540px;box-shadow:0 20px 60px rgba(0,0,0,0.1);z-index:200}
+.nav-item:hover .dropdown{display:block}
+.dropdown-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.drop-area{padding:10px 12px;border-radius:10px;cursor:pointer;transition:background 0.15s;text-decoration:none;display:block}
+.drop-area:hover{background:var(--red-bg)}
+.drop-area-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px}
+.drop-area-course{display:block;color:var(--muted);font-size:12px;padding:1px 0;transition:color 0.15s}
+.drop-area:hover .drop-area-course{color:#555}
+.header-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
+.btn-alumno{background:#fff;color:var(--red);font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;border:2px solid rgba(255,255,255,0.3);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.btn-alumno:hover{background:#ffe8ec;transform:scale(1.02)}
+
+/* ─── BREADCRUMB ─── */
+.breadcrumb{background:var(--bg2);border-bottom:1px solid var(--border);padding:12px 24px}
+.breadcrumb-inner{max-width:780px;margin:0 auto;display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+.breadcrumb a{color:var(--muted);text-decoration:none;transition:color 0.15s}
+.breadcrumb a:hover{color:var(--red)}
+.breadcrumb span{color:var(--muted2)}
+
+/* ─── ARTÍCULO ─── */
+.article-wrap{max-width:780px;margin:0 auto;padding:56px 24px 80px}
+
+.article-meta{display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.article-tag{background:var(--red-bg2);color:var(--red);font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:0.4px}
+.article-date{font-size:13px;color:var(--muted)}
+.article-readtime{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:4px}
+
+.article-title{font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1.2;letter-spacing:-0.5px;color:var(--text);margin-bottom:20px}
+
+.article-lead{font-size:18px;color:#444;line-height:1.75;margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+
+.article-cover{width:100%;border-radius:16px;overflow:hidden;margin-bottom:40px;background:var(--bg3);aspect-ratio:16/7}
+.article-cover img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* ─── CONTENIDO ─── */
+.article-body{font-size:16px;line-height:1.85;color:#333}
+.article-body p{margin-bottom:24px}
+.article-body h2{font-size:22px;font-weight:700;color:var(--text);margin:40px 0 16px;line-height:1.3}
+.article-body h3{font-size:18px;font-weight:700;color:var(--text);margin:32px 0 12px}
+
+.article-body a{color:var(--red);text-decoration:underline;text-underline-offset:3px}
+.article-body a:hover{color:var(--red-dark)}
+
+/* Bullet items estilizados */
+.article-bullets{list-style:none;margin:0 0 28px;padding:0;display:flex;flex-direction:column;gap:20px}
+.article-bullet{background:var(--bg2);border-left:4px solid var(--red);border-radius:0 10px 10px 0;padding:20px 24px}
+.article-bullet-q{font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px}
+.article-bullet-a{font-size:14px;color:#555;line-height:1.7}
+
+/* Highlight inline */
+.highlight{background:var(--red-bg);border:1px solid var(--red-bg2);border-radius:10px;padding:20px 24px;margin:32px 0;font-size:15px;color:#444;line-height:1.75}
+.highlight strong{color:var(--red)}
+
+/* ─── CURSOS RECOMENDADOS ─── */
+.cursos-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px 24px;margin:56px 0 0}
+.cursos-inner{max-width:780px;margin:0 auto}
+.cursos-eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin-bottom:8px}
+.cursos-title{font-size:22px;font-weight:800;color:var(--text);margin-bottom:28px}
+.cursos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.curso-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;text-decoration:none;display:block;transition:border-color 0.2s,box-shadow 0.15s}
+.curso-card:hover{border-color:rgba(184,50,50,0.35);box-shadow:0 4px 16px rgba(184,50,50,0.08)}
+.curso-thumb{height:110px;background:var(--bg3);overflow:hidden}
+.curso-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.curso-body{padding:14px}
+.curso-emoji{font-size:20px;margin-bottom:6px;display:block}
+.curso-name{font-size:13px;font-weight:700;color:var(--text);line-height:1.35;margin-bottom:6px}
+.curso-cta{font-size:12px;font-weight:700;color:var(--red);display:flex;align-items:center;gap:4px}
+.curso-cta svg{transition:transform 0.15s}
+.curso-card:hover .curso-cta svg{transform:translateX(3px)}
+
+/* ─── FOOTER (igual al tuyo) ─── */
+footer{background:var(--text);color:#ccc;padding:56px 24px 32px;border-top:4px solid var(--red)}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.footer-brand .logo{margin-bottom:14px;display:inline-flex}
+.footer-brand .logo-mark{background:var(--red);color:#fff}
+.footer-brand .logo-text{color:rgba(255,255,255,0.7)}
+.footer-brand p{font-size:13px;color:#888;line-height:1.7;max-width:220px;margin-bottom:18px}
+.social-links{display:flex;gap:10px}
+.social-link{width:36px;height:36px;border:1px solid #333;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#888;text-decoration:none;font-size:12px;font-weight:700;transition:all 0.15s}
+.social-link:hover{border-color:var(--red);color:#fff;background:var(--red)}
+.footer-col h4{font-size:11px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.footer-col a{display:block;font-size:13px;color:#888;text-decoration:none;margin-bottom:8px;transition:color 0.15s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{border-top:1px solid #2a2a2a;padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:12px;color:#555}
+.payment-pills{display:flex;gap:6px;flex-wrap:wrap}
+.payment-pill{background:#1e1e1e;border:1px solid #2e2e2e;border-radius:6px;padding:4px 10px;font-size:11px;color:#666;font-weight:600;letter-spacing:0.3px}
+
+@media(max-width:768px){
+  .cursos-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .header-inner nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <img src="logofide.png" style="height:100px;width:auto;">
+    </a>
+    <nav>
+      <div class="nav-item">
+        <button class="nav-link">
+          Cursos
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5l5 5 5-5" stroke="rgba(255,255,255,0.85)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown">
+          <div class="dropdown-grid">
+            <a class="drop-area" href="#"><div class="drop-area-title">💻 Tecnología</div><span class="drop-area-course">Programación Web</span><span class="drop-area-course">Data Science</span><span class="drop-area-course">Ciberseguridad</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">🏥 Salud</div><span class="drop-area-course">Primeros Auxilios</span><span class="drop-area-course">Enfermería General</span><span class="drop-area-course">Nutrición</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">📊 Negocios</div><span class="drop-area-course">Marketing Digital</span><span class="drop-area-course">Gestión Empresarial</span><span class="drop-area-course">Recursos Humanos</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">🎨 Diseño</div><span class="drop-area-course">Diseño Gráfico</span><span class="drop-area-course">UX/UI Design</span><span class="drop-area-course">Fotografía</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">⚖️ Derecho</div><span class="drop-area-course">Derecho Laboral</span><span class="drop-area-course">Derecho Penal</span><span class="drop-area-course">Mediación</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">🌍 Idiomas</div><span class="drop-area-course">Inglés Técnico</span><span class="drop-area-course">Portugués</span><span class="drop-area-course">Ver todas las áreas →</span></a>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="nav-link">Gratis</a>
+      <a href="#" class="nav-link">Carreras Cortas</a>
+      <a href="#" class="nav-link">Empresas</a>
+      <a href="#" class="nav-link">Blog</a>
+    </nav>
+    <div class="header-right">
+      <a href="#" class="btn-alumno">Acceso Alumnos</a>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ BREADCRUMB ═══ -->
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="#">Inicio</a>
+    <span>›</span>
+    <a href="fude_faq_page-2.html">Blog</a>
+    <span>›</span>
+    <span style="color:var(--text)">Cómo buscar empleo</span>
+  </div>
+</div>
+
+<!-- ═══ ARTÍCULO ═══ -->
+<div class="article-wrap">
+
+  <div class="article-meta">
+    <span class="article-tag">📊 Mercado laboral</span>
+    <span class="article-date">17 de junio de 2026</span>
+  </div>
+
+  <h1 class="article-title">Busco empleo pero no sé por dónde empezar: claves para el éxito</h1>
+
+  <p class="article-lead">
+    Si te encontrás con la interrogante de <strong>"busco empleo pero no sé por dónde empezar"</strong>, es importante que estés consciente de los retos y exigencias a los que te vas a enfrentar. El mercado laboral se vuelve cada vez más exigente y las empresas buscan perfiles completos e integrales.
+  </p>
+
+  <div class="article-cover">
+    <img src="articulo-01.png" alt="Persona buscando empleo">
+  </div>
+
+  <div class="article-body">
+
+    <p>
+      Esto hace que conseguir un empleo se vuelva cada vez más cuesta arriba, tanto para quienes quieren ingresar en el mercado laboral por primera vez, como para quienes buscan un cambio de carrera. Para ayudarte a responder esa duda y tener éxito en el proceso, te dejamos algunas preguntas clave que debés formularte antes de empezar. 🎯
+    </p>
+
+    <h2>¿Cómo busco empleo? Claves para el éxito</h2>
+
+    <ul class="article-bullets">
+
+      <li class="article-bullet">
+        <div class="article-bullet-q">🧠 ¿Cuáles son mis habilidades y conocimientos más importantes?</div>
+        <div class="article-bullet-a">Lo primero es tener claro en qué áreas te destacás profesionalmente y hacer énfasis en ellas en tu curriculum vitae. Pensá también qué conocimientos adicionales te hacen falta. Una vez que tengas claro qué aspectos mejorar, podés formarte a través de cursos y talleres que te ayuden a tener un perfil más completo.</div>
+      </li>
+
+      <li class="article-bullet">
+        <div class="article-bullet-q">🎯 ¿Cómo busco el empleo ideal para mí?</div>
+        <div class="article-bullet-a">Si ya conocés bien tus fortalezas y te estás formando para complementar tu perfil, es importante que tengas claros tus intereses y ambiciones. Identificá qué áreas te llaman la atención y en cuáles podés destacarte. Si aplicás para un empleo acorde a tus afinidades, tus esfuerzos estarán más enfocados y será más fácil que seas seleccionado.</div>
+      </li>
+
+      <li class="article-bullet">
+        <div class="article-bullet-q">🌐 ¿Qué medios puedo usar para buscar empleo?</div>
+        <div class="article-bullet-a">La era digital facilitó enormemente el proceso. Ya no estás limitado a los anuncios en periódicos: existe un gran número de portales de empleo que te permiten contactar muchas empresas a la vez. Redes como LinkedIn te permiten mostrar tu perfil profesional y aumentar tu exposición a empleadores que podrían estar interesados en alguien con tus características.</div>
+      </li>
+
+    </ul>
+
+    <div class="highlight">
+      💡 <strong>Recordá:</strong> en tu misión "busco empleo" no te intimidés frente a las exigencias del mercado laboral. Por el contrario, preparate profesional y personalmente para buscar el empleo ideal según tus destrezas y afinidades. Cada paso que das hacia tu formación es un paso más cerca de la oportunidad correcta.
+    </div>
+
+    <p>
+      Tenemos un curso especialmente pensado para personas que están buscando empleo: <a href="https://www.educativo.net/cursos-cortos/curso-como-superar-entrevistas-laborales.html" target="_blank">Cómo superar entrevistas laborales con éxito</a>. Si estás en esta etapa, seguramente es justo lo que necesitás. 🚀
+    </p>
+
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark">FUDE</div>
+          <span class="logo-text">by Educativo</span>
+        </a>
+        <p>Formación profesional online con certificación universitaria. 19 años acompañando el aprendizaje en Argentina y Latinoamérica.</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/FundacionFUDE" target="_blank" class="social-link">f</a>
+          <a href="https://www.instagram.com/fude.educativo/" target="_blank" class="social-link">ig</a>
+          <a href="https://www.youtube.com/c/EducativoNet" target="_blank" class="social-link">yt</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="https://www.educativo.net/terminos-de-uso.pdf" target="_blank">Términos y condiciones</a>
+        <a href="mailto:info@educativo.net">info@educativo.net</a>
+      </div>
+      <div class="footer-col">
+        <h4>Estudiá</h4>
+        <a href="https://www.educativo.net/estudiar-distancia.html">Estudiar a Distancia</a>
+        <a href="https://www.educativo.net/carreras-distancia.html">Carreras a Distancia</a>
+      </div>
+      <div class="footer-col">
+        <h4>Destacados</h4>
+        <a href="https://www.educativo.net/curso-del-mes.html">Curso del Mes</a>
+        <a href="https://www.educativo.net/cursos-destacados.html">Cursos Destacados</a>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <a href="https://www.educativo.net/cursos-a-distancia/">Cursos a Distancia</a>
+        <a href="http://issuu.com/fudeeducativo/docs/catalogo">Catálogo de cursos</a>
+        <a href="https://www.educativo.net/articulos/">Blog</a>
+        <a href="https://www.educativo.net/afiliados.html">Programa Afiliados</a>
+        <a href="https://www.educativo.net/empresas/">Empresas</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 FUDE by Educativo. Todos los derechos reservados.</p>
+      <div class="payment-pills">
+        <span class="payment-pill">VISA</span>
+        <span class="payment-pill">MASTERCARD</span>
+        <span class="payment-pill">AMEX</span>
+        <span class="payment-pill">NARANJA X</span>
+        <span class="payment-pill">MERCADO PAGO</span>
+        <span class="payment-pill">TRANSFERENCIA</span>
+        <span class="payment-pill">RAPIPAGO</span>
+        <span class="payment-pill">PAYPAL</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
