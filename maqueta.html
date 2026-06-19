@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maqueta — Itinerarios de capacitación (Educativo.net)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#b83232;
+    --primary-dark:#8f2424;
+    --primary-50:#fbeeee;
+    --primary-100:#f3d9d9;
+    --primary-300:#d98f8f;
+    --primary-600:#b83232;
+    --ink:#1b1717;
+    --gray-700:#4a4444;
+    --gray-500:#7a7373;
+    --gray-300:#cfc7c7;
+    --gray-150:#ece7e7;
+    --gray-100:#f6f3f3;
+    --white:#ffffff;
+    --radius-lg:20px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --shadow:0 2px 14px rgba(40,20,20,.06);
+    --shadow-hover:0 10px 28px rgba(40,20,20,.10);
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+
+  *{box-sizing:border-box;}
+  body{margin:0;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; scroll-behavior:auto !important; animation:none !important;}
+  }
+
+  /* =========================================================
+     NOTA PARA EL DESARROLLADOR — esto NO forma parte del sitio.
+     Borrar este bloque <div class="dev-note"> al integrar.
+     ========================================================= */
+  .dev-note{
+    font-family:'Inter',system-ui,sans-serif;
+    max-width:900px;
+    margin:24px auto;
+    padding:18px 22px;
+    background:#fff8e6;
+    border:2px dashed #d9a32b;
+    border-radius:12px;
+    color:#5c4400;
+    font-size:14.5px;
+    line-height:1.55;
+  }
+  .dev-note strong{color:#3d2e00;}
+  .dev-note h4{margin:0 0 8px;font-size:15px;color:#3d2e00;}
+  .dev-note code{background:#f1e2b8;padding:1px 5px;border-radius:4px;font-size:13px;}
+
+  /* =========================================================
+     SECCIÓN — Itinerarios de capacitación por rol y objetivo
+     ========================================================= */
+  .rutas-section{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:var(--white);
+    color:var(--ink);
+    padding:72px 24px 96px;
+  }
+  .rutas-container{max-width:1140px;margin:0 auto;}
+
+  .rutas-head{text-align:center;max-width:720px;margin:0 auto 40px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--primary-50);
+    color:var(--primary);
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    padding:7px 16px;
+    border-radius:999px;
+    margin-bottom:18px;
+  }
+  .rutas-head h2{
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:clamp(28px,3.6vw,38px);
+    line-height:1.2;
+    margin:0 0 14px;
+    color:var(--ink);
+  }
+  .rutas-head p{
+    color:var(--gray-500);
+    font-size:16px;
+    line-height:1.6;
+    margin:0;
+  }
+
+  /* filtros por categoría */
+  .category-filters{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:10px;
+    margin:36px 0 40px;
+  }
+  .filter-pill{
+    display:inline-flex;align-items:center;gap:7px;
+    font-family:inherit;font-size:14px;font-weight:500;
+    color:var(--gray-700);
+    background:var(--white);
+    border:1px solid var(--gray-150);
+    padding:9px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:border-color .2s var(--ease), color .2s var(--ease), background .2s var(--ease);
+  }
+  .filter-pill svg{width:15px;height:15px;flex-shrink:0;}
+  .filter-pill:hover{border-color:var(--primary-300);color:var(--primary);}
+  .filter-pill.active{background:var(--primary);border-color:var(--primary);color:#fff;}
+
+  /* lista de tarjetas */
+  .packs-list{display:flex;flex-direction:column;gap:18px;}
+
+  .pack-card{
+    position:relative;
+    background:var(--white);
+    border:1px solid var(--gray-150);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow);
+    scroll-margin-top:24px;
+    transition:box-shadow .25s var(--ease), border-color .25s var(--ease);
+  }
+  .pack-card:hover{box-shadow:var(--shadow-hover);}
+  .pack-card.is-open{border-color:var(--primary-300);}
+
+  .pack-summary{
+    padding:28px 76px 26px 28px;
+    cursor:pointer;
+  }
+  .pack-eyebrow{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:12.5px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;
+    color:var(--primary);
+    margin-bottom:12px;
+  }
+  .pack-eyebrow svg{width:16px;height:16px;}
+  .pack-summary h3{
+    font-family:'Poppins',sans-serif;
+    font-size:21px;font-weight:600;
+    margin:0 0 8px;color:var(--ink);
+  }
+  .pack-desc{
+    margin:0 0 16px;
+    color:var(--gray-500);
+    font-size:15px;line-height:1.55;
+    max-width:680px;
+  }
+  .pack-meta{display:flex;flex-wrap:wrap;gap:18px;}
+  .pack-meta span{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:13px;font-weight:500;color:var(--gray-700);
+  }
+  .pack-meta svg{width:15px;height:15px;color:var(--primary);flex-shrink:0;}
+
+  /* botón "+" desplegar */
+  .pack-toggle{
+    position:absolute;top:24px;right:24px;
+    width:40px;height:40px;
+    border-radius:50%;
+    border:1px solid var(--gray-150);
+    background:var(--white);
+    color:var(--primary);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    transition:background .25s var(--ease), border-color .25s var(--ease), transform .35s var(--ease);
+  }
+  .pack-toggle:hover{border-color:var(--primary);background:var(--primary-50);}
+  .pack-toggle svg{width:18px;height:18px;transition:transform .35s var(--ease);}
+  .pack-card.is-open .pack-toggle{background:var(--primary);border-color:var(--primary);color:#fff;}
+  .pack-card.is-open .pack-toggle svg{transform:rotate(45deg);}
+
+  /* contenido desplegable — técnica grid sin JS de alturas */
+  .pack-details{
+    display:grid;
+    grid-template-rows:0fr;
+    transition:grid-template-rows .45s var(--ease);
+  }
+  .pack-card.is-open .pack-details{grid-template-rows:1fr;}
+  .pack-details-inner{overflow:hidden;min-height:0;}
+  .pack-details-pad{padding:0 28px 32px;}
+
+  /* camino de niveles */
+  .level-path{
+    display:flex;
+    border-radius:var(--radius-sm);
+    overflow:hidden;
+    margin-bottom:30px;
+    border:1px solid var(--gray-150);
+  }
+  .level-step{
+    flex:1;
+    font-family:inherit;font-weight:600;font-size:13.5px;
+    padding:12px 10px;
+    text-align:center;
+    border:none;
+    cursor:pointer;
+    color:var(--ink);
+    background:var(--primary-100);
+    transition:filter .2s var(--ease);
+  }
+  .level-step + .level-step{border-left:1px solid rgba(255,255,255,.55);}
+  .level-step:hover{filter:brightness(.96);}
+  .level-step.tint-2{background:var(--primary-300);color:#fff;}
+  .level-step.tint-3{background:var(--primary-600);color:#fff;}
+  .level-step.active-step{box-shadow:inset 0 -3px 0 var(--ink);}
+
+  /* bloques de nivel */
+  .levels{display:flex;flex-direction:column;}
+  .level-block{display:flex;gap:18px;}
+  .level-marker{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+  .level-circle{
+    width:32px;height:32px;border-radius:50%;
+    background:var(--primary);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:14px;
+    flex-shrink:0;
+  }
+  .level-line{flex:1;width:2px;background:var(--gray-150);margin:4px 0;}
+  .level-block:last-child .level-line{display:none;}
+
+  .level-content{padding-bottom:30px;flex:1;min-width:0;}
+  .level-content h4{
+    font-family:'Poppins',sans-serif;
+    font-size:16.5px;font-weight:600;
+    margin:2px 0 4px;color:var(--ink);
+  }
+  .level-tag{
+    display:inline-block;
+    font-size:12px;font-weight:600;color:var(--gray-500);
+    text-transform:uppercase;letter-spacing:.03em;
+    margin-bottom:16px;
+  }
+
+  .courses-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
+  .course-card{
+    background:var(--gray-100);
+    border:1px solid var(--gray-150);
+    border-radius:var(--radius-md);
+    padding:16px 18px;
+    transition:border-color .2s var(--ease), background .2s var(--ease);
+  }
+  .course-card:hover{border-color:var(--primary-300);background:var(--white);}
+  .course-card h5{
+    font-size:14.5px;font-weight:600;margin:0 0 6px;color:var(--ink);
+  }
+  .course-card p{
+    font-size:13.5px;line-height:1.5;color:var(--gray-500);margin:0 0 14px;
+  }
+  .course-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .badge{
+    font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;
+    padding:4px 10px;border-radius:999px;
+  }
+  .badge-inicial{background:var(--primary-50);color:var(--primary);}
+  .badge-intermedio{background:var(--primary-100);color:var(--primary-dark);}
+  .badge-avanzado{background:var(--primary);color:#fff;}
+  .ver-curso{
+    font-size:13px;font-weight:600;color:var(--primary);
+    text-decoration:none;white-space:nowrap;
+  }
+  .ver-curso:hover{text-decoration:underline;}
+
+  /* pie de la tarjeta expandida */
+  .pack-footer{
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+    gap:16px;
+    margin-top:8px;
+    padding-top:24px;
+    border-top:1px solid var(--gray-150);
+  }
+  .pack-stats{display:flex;flex-wrap:wrap;gap:22px;align-items:center;}
+  .pack-stats span{font-size:13.5px;color:var(--gray-700);}
+  .pack-stats strong{
+    display:block;font-family:'Poppins',sans-serif;font-size:19px;color:var(--ink);
+  }
+  .pack-stats .aval{display:flex;align-items:center;gap:6px;color:var(--gray-700);}
+  .pack-stats .aval svg{width:16px;height:16px;color:var(--primary);}
+  .cta-btn{
+    font-family:inherit;font-weight:600;font-size:14.5px;
+    color:#fff;background:var(--primary);
+    border:none;padding:13px 24px;border-radius:999px;
+    cursor:pointer;
+    transition:background .2s var(--ease), transform .2s var(--ease);
+  }
+  .cta-btn:hover{background:var(--primary-dark);}
+
+  button:focus-visible, a:focus-visible{
+    outline:2px solid var(--primary);outline-offset:2px;
+  }
+
+  /* ===== responsive ===== */
+  @media (max-width:720px){
+    .rutas-section{padding:56px 16px 72px;}
+    .pack-summary{padding:24px 64px 22px 20px;}
+    .pack-toggle{top:20px;right:18px;width:36px;height:36px;}
+    .pack-details-pad{padding:0 20px 26px;}
+    .courses-grid{grid-template-columns:1fr;}
+    .level-block{gap:12px;}
+    .pack-footer{flex-direction:column;align-items:flex-start;}
+    .cta-btn{width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     NOTA PARA EL DESARROLLADOR (eliminar este bloque, no va al sitio)
+     ========================================================= -->
+<div class="dev-note">
+  <h4>📌 Nota para el equipo de desarrollo</h4>
+  <p>
+    De toda la página que ya está construida, lo <strong>único</strong> que hay que corregir
+    es la sección que sigue: <strong>"Itinerarios de capacitación por rol y objetivo"</strong>
+    (marcada abajo entre los comentarios <code>SECCIÓN A INTEGRAR</code>). El resto del sitio
+    está aprobado y no se modifica.
+  </p>
+  <p>
+    Esta sección reemplaza la versión actual de "Itinerarios de capacitación". No incluye
+    header ni footer a propósito, son ajenos a este pedido.
+  </p>
+  <p>
+    Las <strong>duraciones</strong> de cada pack (ícono de reloj) son valores estimados de
+    referencia para maquetar — hay que confirmarlas con el equipo de contenidos antes de publicar.
+    Los enlaces "Ver curso" y "Solicitar cotización" están como placeholders (<code>href="#"</code>),
+    falta conectarlos a sus URLs reales.
+  </p>
+</div>
+
+<!-- ===== SECCIÓN A INTEGRAR: INICIO ===== -->
+<section class="rutas-section" id="itinerarios">
+  <div class="rutas-container">
+
+    <div class="rutas-head">
+      <span class="eyebrow">Rutas formativas</span>
+      <h2>Itinerarios de capacitación por rol y objetivo</h2>
+      <p>Cada pack combina cursos en secuencia lógica para construir competencias reales. Tu equipo avanza fase a fase, con certificación universitaria en cada etapa.</p>
+    </div>
+
+    <nav class="category-filters" aria-label="Filtrar rutas por categoría">
+      <button class="filter-pill" type="button" data-target="pack-administracion">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="3" y1="12" x2="21" y2="12"/></svg>
+        Administración
+      </button>
+      <button class="filter-pill" type="button" data-target="pack-salud">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4.4-2-8-5.4-8-10V6l8-3.5L20 6v5c0 4.6-3.6 8-8 10z"/><line x1="12" y1="9" x2="12" y2="15"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+        Salud y seguridad
+      </button>
+      <button class="filter-pill" type="button" data-target="pack-ventas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>
+        Ventas y negocios
+      </button>
+      <button class="filter-pill" type="button" data-target="pack-liderazgo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.3 2.5-6 5.5-6s5.5 2.7 5.5 6"/><circle cx="17.5" cy="9" r="2.4"/><path d="M15 14.2c2.2.4 4 2.4 4 5.8"/></svg>
+        Liderazgo y RRHH
+      </button>
+      <button class="filter-pill" type="button" data-target="pack-ia">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10" y="10" width="4" height="4"/><line x1="12" y1="2" x2="12" y2="7"/><line x1="12" y1="17" x2="12" y2="22"/><line x1="2" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="22" y2="12"/></svg>
+        Inteligencia artificial
+      </button>
+    </nav>
+
+    <div class="packs-list">
+
+      <!-- ============== PACK 1: ADMINISTRACIÓN ============== -->
+      <article class="pack-card" id="pack-administracion" data-category="administracion">
+        <button class="pack-toggle" type="button" aria-expanded="false" aria-controls="det-administracion" aria-label="Mostrar ruta completa de Pack Administración">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="pack-summary">
+          <span class="pack-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="3" y1="12" x2="21" y2="12"/></svg>
+            Administración
+          </span>
+          <h3>Pack Administración</h3>
+          <p class="pack-desc">Ideal para estructurar la gestión operativa, comercial y de capital humano desde la base hasta la toma de decisiones estratégicas.</p>
+          <div class="pack-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>7 cursos</span>
+            <span title="Duración estimada — confirmar con contenidos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>16 meses*</span>
+          </div>
+        </div>
+
+        <div class="pack-details" id="det-administracion">
+          <div class="pack-details-inner">
+            <div class="pack-details-pad">
+
+              <div class="level-path">
+                <button class="level-step tint-1" type="button" data-level="1">Nivel 1</button>
+                <button class="level-step tint-2" type="button" data-level="2">Nivel 2</button>
+                <button class="level-step tint-3" type="button" data-level="3">Nivel 3</button>
+              </div>
+
+              <div class="levels">
+                <div class="level-block" data-level="1">
+                  <div class="level-marker"><span class="level-circle">1</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Fundamentos operativos y atención</h4>
+                    <span class="level-tag">Nivel inicial</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Recepcionista</h5>
+                        <p>Comunicación corporativa, recepción de clientes y organización de la agenda de oficina.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Cajero Comercial</h5>
+                        <p>Manejo de flujos de caja, herramientas de facturación, arqueo y nociones básicas de administración comercial.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="2">
+                  <div class="level-marker"><span class="level-circle">2</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Gestión interna y control</h4>
+                    <span class="level-tag">Nivel intermedio</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Excel</h5>
+                        <p>La herramienta clave y transversal para analizar datos, automatizar reportes y gestionar planillas administrativas.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Gestión de Cobranzas</h5>
+                        <p>Técnicas de seguimiento de cuentas a cobrar, negociación con clientes morosos y optimización del flujo de caja.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Asistente en RRHH</h5>
+                        <p>Gestión de legajos, soporte en nóminas, inducción de personal y administración de las necesidades internas del equipo.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="3">
+                  <div class="level-marker"><span class="level-circle">3</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Liderazgo de procesos</h4>
+                    <span class="level-tag">Nivel avanzado</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Jefe de Compras</h5>
+                        <p>Gestión estratégica de proveedores, negociación de contratos, control de stock y optimización del presupuesto corporativo.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Product Manager</h5>
+                        <p>Visión global del negocio para el ciclo de vida del producto, coordinación entre áreas y alineación con los objetivos del mercado.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pack-footer">
+                <div class="pack-stats">
+                  <span><strong>7</strong>Cursos</span>
+                  <span><strong>3</strong>Niveles</span>
+                  <span class="aval"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4.5-9 4.5-9-4.5L12 2z"/><path d="M5 9.5V15c0 2.5 3 4.5 7 4.5s7-2 7-4.5V9.5"/></svg>Aval univ. · Certificación</span>
+                </div>
+                <button class="cta-btn" type="button">Solicitar cotización</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============== PACK 2: SALUD Y SEGURIDAD ============== -->
+      <article class="pack-card" id="pack-salud" data-category="salud">
+        <button class="pack-toggle" type="button" aria-expanded="false" aria-controls="det-salud" aria-label="Mostrar ruta completa de Pack Salud y Seguridad">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="pack-summary">
+          <span class="pack-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4.4-2-8-5.4-8-10V6l8-3.5L20 6v5c0 4.6-3.6 8-8 10z"/><line x1="12" y1="9" x2="12" y2="15"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+            Salud y seguridad
+          </span>
+          <h3>Pack Salud y Seguridad</h3>
+          <p class="pack-desc">Diseñado para construir una cultura de prevención, cumplimiento normativo y respuesta ante emergencias.</p>
+          <div class="pack-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>4 cursos</span>
+            <span title="Duración estimada — confirmar con contenidos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>8 meses*</span>
+          </div>
+        </div>
+
+        <div class="pack-details" id="det-salud">
+          <div class="pack-details-inner">
+            <div class="pack-details-pad">
+
+              <div class="level-path">
+                <button class="level-step tint-1" type="button" data-level="1">Nivel 1</button>
+                <button class="level-step tint-2" type="button" data-level="2">Nivel 2</button>
+                <button class="level-step tint-3" type="button" data-level="3">Nivel 3</button>
+              </div>
+
+              <div class="levels">
+                <div class="level-block" data-level="1">
+                  <div class="level-marker"><span class="level-circle">1</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Concientización y ergonomía</h4>
+                    <span class="level-tag">Nivel inicial</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Ergonomía y Prevención de Accidentes</h5>
+                        <p>Adaptación del puesto de trabajo (físico o remoto) para mitigar riesgos musculoesqueléticos y fatiga.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="2">
+                  <div class="level-marker"><span class="level-circle">2</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Higiene y normativa</h4>
+                    <span class="level-tag">Nivel intermedio</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Higiene y Seguridad</h5>
+                        <p>Comprensión del marco legal, identificación de riesgos laborales y buenas prácticas ambientales dentro de la empresa.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="3">
+                  <div class="level-marker"><span class="level-circle">3</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Respuesta y gestión médica</h4>
+                    <span class="level-tag">Nivel avanzado / especializado</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Primeros Auxilios</h5>
+                        <p>Capacitación práctica fundamental para saber actuar ante emergencias y salvar vidas en el entorno de trabajo.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Medicina Laboral</h5>
+                        <p>Gestión de la salud ocupacional, control de ausentismo médico, exámenes periódicos y bienestar integral del trabajador.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pack-footer">
+                <div class="pack-stats">
+                  <span><strong>4</strong>Cursos</span>
+                  <span><strong>3</strong>Niveles</span>
+                  <span class="aval"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4.5-9 4.5-9-4.5L12 2z"/><path d="M5 9.5V15c0 2.5 3 4.5 7 4.5s7-2 7-4.5V9.5"/></svg>Aval univ. · Certificación</span>
+                </div>
+                <button class="cta-btn" type="button">Solicitar cotización</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============== PACK 3: VENTAS Y NEGOCIOS ============== -->
+      <article class="pack-card" id="pack-ventas" data-category="ventas">
+        <button class="pack-toggle" type="button" aria-expanded="false" aria-controls="det-ventas" aria-label="Mostrar ruta completa de Pack Ventas y Negocios">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="pack-summary">
+          <span class="pack-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>
+            Ventas y negocios
+          </span>
+          <h3>Pack Ventas y Negocios</h3>
+          <p class="pack-desc">Una ruta comercial completa que va desde el contacto telefónico inicial hasta el marketing digital impulsado por Inteligencia Artificial.</p>
+          <div class="pack-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>6 cursos</span>
+            <span title="Duración estimada — confirmar con contenidos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>12 meses*</span>
+          </div>
+        </div>
+
+        <div class="pack-details" id="det-ventas">
+          <div class="pack-details-inner">
+            <div class="pack-details-pad">
+
+              <div class="level-path">
+                <button class="level-step tint-1" type="button" data-level="1">Nivel 1</button>
+                <button class="level-step tint-2" type="button" data-level="2">Nivel 2</button>
+                <button class="level-step tint-3" type="button" data-level="3">Nivel 3</button>
+              </div>
+
+              <div class="levels">
+                <div class="level-block" data-level="1">
+                  <div class="level-marker"><span class="level-circle">1</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Conexión y atención al cliente</h4>
+                    <span class="level-tag">Nivel inicial</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Atención al Cliente</h5>
+                        <p>Desarrollo de la empatía, resolución de reclamos y construcción de la experiencia del consumidor como base del negocio.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Telemarketing</h5>
+                        <p>Técnicas de prospección en frío, manejo de guiones telefónicos y conversión de llamadas en oportunidades.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="2">
+                  <div class="level-marker"><span class="level-circle">2</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Venta profesional</h4>
+                    <span class="level-tag">Nivel intermedio</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Vendedor Profesional</h5>
+                        <p>Metodologías de venta consultiva, detección de necesidades del cliente, manejo de objeciones y técnicas de cierre.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="3">
+                  <div class="level-marker"><span class="level-circle">3</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Marketing y ecosistema digital</h4>
+                    <span class="level-tag">Nivel avanzado</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Marketing Digital</h5>
+                        <p>Planificación de embudos de venta (funnels), posicionamiento de marca y pauta publicitaria en entornos digitales.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>CM (Community Manager) con IA</h5>
+                        <p>Gestión avanzada de redes sociales potenciada con herramientas de IA para crear contenido y automatizar respuestas.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pack-footer">
+                <div class="pack-stats">
+                  <span><strong>6</strong>Cursos</span>
+                  <span><strong>3</strong>Niveles</span>
+                  <span class="aval"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4.5-9 4.5-9-4.5L12 2z"/><path d="M5 9.5V15c0 2.5 3 4.5 7 4.5s7-2 7-4.5V9.5"/></svg>Aval univ. · Certificación</span>
+                </div>
+                <button class="cta-btn" type="button">Solicitar cotización</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============== PACK 4: LIDERAZGO Y RRHH ============== -->
+      <article class="pack-card" id="pack-liderazgo" data-category="liderazgo">
+        <button class="pack-toggle" type="button" aria-expanded="false" aria-controls="det-liderazgo" aria-label="Mostrar ruta completa de Pack Liderazgo y RRHH">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="pack-summary">
+          <span class="pack-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.3 2.5-6 5.5-6s5.5 2.7 5.5 6"/><circle cx="17.5" cy="9" r="2.4"/><path d="M15 14.2c2.2.4 4 2.4 4 5.8"/></svg>
+            Liderazgo y RRHH
+          </span>
+          <h3>Pack Liderazgo y RRHH</h3>
+          <p class="pack-desc">La ruta de habilidades blandas (soft skills) y de gestión para transformar mandos medios y directivos en líderes de alto rendimiento.</p>
+          <div class="pack-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>8 cursos</span>
+            <span title="Duración estimada — confirmar con contenidos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>18 meses*</span>
+          </div>
+        </div>
+
+        <div class="pack-details" id="det-liderazgo">
+          <div class="pack-details-inner">
+            <div class="pack-details-pad">
+
+              <div class="level-path">
+                <button class="level-step tint-1" type="button" data-level="1">Nivel 1</button>
+                <button class="level-step tint-2" type="button" data-level="2">Nivel 2</button>
+                <button class="level-step tint-3" type="button" data-level="3">Nivel 3</button>
+              </div>
+
+              <div class="levels">
+                <div class="level-block" data-level="1">
+                  <div class="level-marker"><span class="level-circle">1</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Eficiencia personal y adaptabilidad</h4>
+                    <span class="level-tag">Habilidades base</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Comunicación Efectiva y Persuasiva en el Trabajo</h5>
+                        <p>Clave para transmitir ideas con claridad, influir positivamente y alinear expectativas en el equipo.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Adaptabilidad y Resiliencia en Entornos Cambiantes</h5>
+                        <p>Preparación psicológica y metodológica para afrontar la incertidumbre y liderar transformaciones corporativas.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="2">
+                  <div class="level-marker"><span class="level-circle">2</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Gestión del talento y colaboración</h4>
+                    <span class="level-tag">Habilidades de conducción</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Inteligencia Emocional para Líderes y Equipos</h5>
+                        <p>Control del estrés, empatía laboral y automotivación como pilares del clima organizacional.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Trabajo Colaborativo y Gestión de Equipos Multidisciplinarios</h5>
+                        <p>Romper silos organizacionales y potenciar la sinergia entre profesionales de distintas áreas.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Coaching y Gestión de Equipos</h5>
+                        <p>Herramientas formativas para delegar con éxito, dar feedback constructivo y desarrollar el potencial de los colaboradores.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="3">
+                  <div class="level-marker"><span class="level-circle">3</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Estrategia, auditoría y resolución</h4>
+                    <span class="level-tag">Alta dirección</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Resolución de Conflictos y Negociación Constructiva</h5>
+                        <p>Mediación interna y externa para transformar los problemas en acuerdos beneficiosos para la organización.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Pensamiento Crítico y Toma de Decisiones Estratégicas</h5>
+                        <p>Análisis objetivo de escenarios complejos para mitigar riesgos y elegir el mejor rumbo de acción.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Auditoría Interna</h5>
+                        <p>El proceso de control, cumplimiento de estándares de calidad y mejora continua para blindar los procesos de la empresa.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pack-footer">
+                <div class="pack-stats">
+                  <span><strong>8</strong>Cursos</span>
+                  <span><strong>3</strong>Niveles</span>
+                  <span class="aval"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4.5-9 4.5-9-4.5L12 2z"/><path d="M5 9.5V15c0 2.5 3 4.5 7 4.5s7-2 7-4.5V9.5"/></svg>Aval univ. · Certificación</span>
+                </div>
+                <button class="cta-btn" type="button">Solicitar cotización</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============== PACK 5: INTELIGENCIA ARTIFICIAL ============== -->
+      <article class="pack-card" id="pack-ia" data-category="ia">
+        <button class="pack-toggle" type="button" aria-expanded="false" aria-controls="det-ia" aria-label="Mostrar ruta completa de Pack IA">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="pack-summary">
+          <span class="pack-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10" y="10" width="4" height="4"/><line x1="12" y1="2" x2="12" y2="7"/><line x1="12" y1="17" x2="12" y2="22"/><line x1="2" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="22" y2="12"/></svg>
+            Inteligencia artificial
+          </span>
+          <h3>Pack IA</h3>
+          <p class="pack-desc">Alfabetización digital y aplicación práctica de la Inteligencia Artificial en las tareas diarias de administración, comercial, marketing y gerencia.</p>
+          <div class="pack-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>5 cursos</span>
+            <span title="Duración estimada — confirmar con contenidos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>10 meses*</span>
+          </div>
+        </div>
+
+        <div class="pack-details" id="det-ia">
+          <div class="pack-details-inner">
+            <div class="pack-details-pad">
+
+              <div class="level-path">
+                <button class="level-step tint-1" type="button" data-level="1">Nivel 1</button>
+                <button class="level-step tint-3" type="button" data-level="2">Nivel 2</button>
+              </div>
+
+              <div class="levels">
+                <div class="level-block" data-level="1">
+                  <div class="level-marker"><span class="level-circle">1</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Beginner — alfabetización y adopción digital</h4>
+                    <span class="level-tag">Nivel inicial</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Inteligencia Artificial desde Cero</h5>
+                        <p>Conceptos y mentalidad digital: qué es la IA generativa, qué herramientas existen y cómo cambia el rol del trabajador.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>El Arte del "Prompting"</h5>
+                        <p>Cómo redactar instrucciones efectivas para ChatGPT o Gemini y obtener resultados útiles en lugar de respuestas genéricas.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="2">
+                  <div class="level-marker"><span class="level-circle">2</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Intermedio — productividad y aplicación práctica</h4>
+                    <span class="level-tag">Nivel intermedio</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>IA para la Gestión Administrativa y Operativa Diaria</h5>
+                        <p>Uso de la IA integrada en Office, Workspace y WhatsApp para minutar reuniones, transcribir audios y redactar documentos.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Marketing, Redes Sociales y Contenido Comercial con IA</h5>
+                        <p>Herramientas de diseño, video y texto automatizado para crear publicaciones y propuestas comerciales con presupuesto de pyme.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Análisis de Datos y Reportes Inteligentes (IA sin código)</h5>
+                        <p>Subir planillas de Excel a herramientas de IA para identificar tendencias, detectar problemas y generar gráficos automáticamente.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pack-footer">
+                <div class="pack-stats">
+                  <span><strong>5</strong>Cursos</span>
+                  <span><strong>2</strong>Niveles</span>
+                  <span class="aval"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4.5-9 4.5-9-4.5L12 2z"/><path d="M5 9.5V15c0 2.5 3 4.5 7 4.5s7-2 7-4.5V9.5"/></svg>Aval univ. · Certificación</span>
+                </div>
+                <button class="cta-btn" type="button">Solicitar cotización</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+<!-- ===== SECCIÓN A INTEGRAR: FIN ===== -->
+
+<script>
+  (function(){
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Abrir/cerrar cada tarjeta de pack
+    document.querySelectorAll('.pack-toggle').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var card = btn.closest('.pack-card');
+        var open = card.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open);
+      });
+    });
+
+    // El resumen también abre la tarjeta (excepto si se hace click en un link interno)
+    document.querySelectorAll('.pack-summary').forEach(function(summary){
+      summary.addEventListener('click', function(e){
+        if (e.target.closest('a')) return;
+        var card = summary.closest('.pack-card');
+        var btn = card.querySelector('.pack-toggle');
+        var open = card.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open);
+      });
+    });
+
+    // Botones del "camino" de niveles: marcan activo y desplazan al bloque correspondiente
+    document.querySelectorAll('.level-step').forEach(function(step){
+      step.addEventListener('click', function(e){
+        e.stopPropagation();
+        var card = step.closest('.pack-card');
+        var lvl = step.getAttribute('data-level');
+        var block = card.querySelector('.level-block[data-level="' + lvl + '"]');
+        card.querySelectorAll('.level-step').forEach(function(s){ s.classList.remove('active-step'); });
+        step.classList.add('active-step');
+        if (block) {
+          block.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Filtros por categoría: abren y enfocan la ruta correspondiente
+    document.querySelectorAll('.filter-pill').forEach(function(pill){
+      pill.addEventListener('click', function(){
+        document.querySelectorAll('.filter-pill').forEach(function(p){ p.classList.remove('active'); });
+        pill.classList.add('active');
+        var target = document.getElementById(pill.getAttribute('data-target'));
+        if (target) {
+          target.classList.add('is-open');
+          target.querySelector('.pack-toggle').setAttribute('aria-expanded', 'true');
+          target.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+        }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
