@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bolsa de Trabajo — FUDE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#b83232;
+    --primary-dark:#8f2424;
+    --primary-50:#fbeeee;
+    --primary-100:#f3d9d9;
+    --primary-300:#d98f8f;
+    --ink:#1b1717;
+    --gray-700:#4a4444;
+    --gray-500:#7a7373;
+    --gray-300:#cfc7c7;
+    --gray-150:#ece7e7;
+    --gray-100:#f6f3f3;
+    --white:#ffffff;
+    --dark:#181011;
+    --dark-2:#241516;
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --shadow:0 2px 14px rgba(40,20,20,.06);
+    --shadow-hover:0 10px 28px rgba(40,20,20,.10);
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--white);}
+  img,svg{display:block;}
+
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--primary-50);color:var(--primary);
+    font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;
+    padding:7px 16px;border-radius:999px;margin-bottom:18px;
+  }
+  .eyebrow.on-dark{background:rgba(255,255,255,.08);color:#ff9c9c;}
+  .eyebrow svg{width:14px;height:14px;}
+  h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
+  .highlight{color:var(--primary);}
+
+  .btn{
+    font-family:inherit;font-weight:600;font-size:15px;
+    border:none;border-radius:999px;padding:14px 28px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:8px;
+    text-decoration:none;
+    transition:background .2s var(--ease), transform .15s var(--ease);
+  }
+  .btn-primary{background:var(--primary);color:#fff;}
+  .btn-primary:hover{background:var(--primary-dark);}
+  .btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45);}
+  .btn-outline:hover{border-color:#fff;}
+  .btn:active{transform:scale(.98);}
+
+  /* HERO */
+  .bolsa-hero{
+    position:relative;overflow:hidden;
+    background:var(--dark);color:#fff;
+    padding:88px 0 96px;
+  }
+  .bolsa-hero::before,.bolsa-hero::after{
+    content:"";position:absolute;border-radius:50%;
+    background:radial-gradient(circle,rgba(184,50,50,.55),transparent 70%);
+    filter:blur(10px);pointer-events:none;
+  }
+  .bolsa-hero::before{width:520px;height:520px;top:-220px;right:-160px;}
+  .bolsa-hero::after{width:380px;height:380px;bottom:-200px;left:-120px;opacity:.7;}
+  .hero-inner{position:relative;z-index:1;max-width:760px;}
+  .bolsa-hero h1{font-size:clamp(30px,4vw,44px);font-weight:700;line-height:1.18;margin-bottom:22px;}
+  .bolsa-hero p{font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);margin:0 0 28px;max-width:620px;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;}
+
+  /* TYPING SECTION — rediseñada */
+  .bolsa-typing{
+    padding:96px 0;
+    background:var(--white);
+  }
+  .typing-layout{
+    display:grid;
+    grid-template-columns:1fr 1.1fr;
+    gap:80px;
+    align-items:center;
+  }
+  .typing-text{
+    display:flex;flex-direction:column;align-items:flex-start;
+  }
+  .typing-text h2{
+    font-size:clamp(26px,3vw,34px);
+    font-weight:700;
+    line-height:1.22;
+    margin-bottom:16px;
+    letter-spacing:-.01em;
+  }
+  .typing-text p{
+    font-size:16px;
+    color:var(--gray-500);
+    line-height:1.7;
+    margin:0;
+    max-width:380px;
+  }
+
+  /* Demo panel */
+  .typing-demo{
+    background:var(--gray-100);
+    border:1px solid var(--gray-150);
+    border-radius:20px;
+    padding:32px 28px 36px;
+    position:relative;
+  }
+  .typing-demo-label{
+    font-size:11px;
+    font-weight:700;
+    color:var(--gray-500);
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .typing-demo-label::after{
+    content:"";flex:1;height:1px;background:var(--gray-300);
+  }
+
+  .jobs-list{
+    list-style:none;
+    padding:0;
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .job-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    background:var(--white);
+    border:1px solid var(--gray-150);
+    border-radius:12px;
+    padding:13px 18px;
+    font-size:14.5px;
+    font-weight:500;
+    color:var(--ink);
+    opacity:0;
+    transform:translateX(-8px);
+    transition:opacity .45s var(--ease), transform .45s var(--ease), box-shadow .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+    width:100%;
+    cursor:pointer;
+    text-decoration:none;
+  }
+  .job-pill.visible{
+    opacity:1;
+    transform:translateX(0);
+  }
+  .job-pill:hover{
+    box-shadow:0 4px 16px rgba(40,20,20,.08);
+    border-color:var(--primary-300);
+    background:var(--primary-50);
+  }
+  .job-pill:hover .job-pill-arrow{opacity:1;transform:translateX(0);}
+  .job-pill-arrow{
+    margin-left:auto;
+    flex-shrink:0;
+    opacity:0;
+    transform:translateX(-4px);
+    transition:opacity .2s var(--ease), transform .2s var(--ease);
+    color:var(--primary);
+  }
+  .job-pill-arrow svg{width:15px;height:15px;stroke:var(--primary);}
+
+  .job-pill-icon{
+    width:32px;height:32px;
+    border-radius:8px;
+    background:var(--primary-50);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .job-pill-icon svg{
+    width:15px;height:15px;
+    color:var(--primary);
+    stroke:var(--primary);
+  }
+
+  .job-pill-info{
+    display:flex;flex-direction:column;gap:2px;flex:1;
+  }
+  .job-pill-title{
+    font-size:14px;font-weight:600;color:var(--ink);line-height:1.2;
+  }
+  .job-pill-sub{
+    font-size:12px;color:var(--gray-500);font-weight:400;
+  }
+
+  .job-pill-badge{
+    font-size:11px;font-weight:600;
+    color:var(--primary);
+    background:var(--primary-50);
+    border-radius:999px;
+    padding:3px 10px;
+    flex-shrink:0;
+    white-space:nowrap;
+  }
+
+  .cursor{
+    display:inline-block;width:2px;height:14px;
+    background:var(--primary);vertical-align:middle;
+    margin-left:2px;animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+  /* MENSAJE */
+  .bolsa-mensaje{padding:80px 0;background:var(--gray-100);}
+  .mensaje-card{
+    max-width:760px;margin:0 auto;
+    background:var(--white);border:1px solid var(--gray-150);
+    border-radius:var(--radius-lg);padding:40px 44px;
+    box-shadow:var(--shadow);
+    border-left:4px solid var(--primary);
+  }
+  .mensaje-card p{font-size:16.5px;line-height:1.75;color:var(--gray-700);margin:0 0 16px;}
+  .mensaje-card p:last-child{margin:0;}
+
+  /* CTA FINAL */
+  .bolsa-cta{
+    background:linear-gradient(135deg,var(--dark) 0%,var(--dark-2) 100%);
+    color:#fff;padding:72px 0;text-align:center;
+  }
+  .bolsa-cta h2{font-size:clamp(22px,3vw,30px);font-weight:700;margin-bottom:12px;}
+  .bolsa-cta p{font-size:16px;color:rgba(255,255,255,.75);margin:0 0 28px;}
+  .cta-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+
+  @media(max-width:820px){
+    .typing-layout{grid-template-columns:1fr;gap:40px;}
+    .mensaje-card{padding:28px 24px;}
+    .hero-actions,.cta-actions{flex-direction:column;align-items:stretch;}
+    .typing-demo{padding:24px 20px 28px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="bolsa-hero">
+  <div class="wrap hero-inner">
+    <span class="eyebrow on-dark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+      Bolsa de trabajo
+    </span>
+    <h1>Oportunidades <span class="highlight">laborales</span></h1>
+    <p>A través de un convenio con Jooble, te ofrecemos oportunidades laborales en toda Argentina, para que puedas ver en un solo lugar avisos de búsquedas de personal de cientos de puestos de trabajo de las más variadas ramas laborales.</p>
+    <div class="hero-actions">
+      <a href="https://ar.jooble.org" target="_blank" class="btn btn-primary">
+        Oportunidades de Trabajo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TYPING DEMO -->
+<section class="bolsa-typing">
+  <div class="wrap">
+    <div class="typing-layout">
+
+      <div class="typing-text">
+        <span class="eyebrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Encontrá tu próximo rol
+        </span>
+        <h2>Descubrí empleos que <span class="highlight">se ajusten a tu perfil</span></h2>
+        <p>Cientos de posiciones disponibles en Argentina, en todas las ramas laborales. Desde roles administrativos hasta oficios especializados.</p>
+      </div>
+
+      <div class="typing-demo">
+        <div class="typing-demo-label">Búsquedas activas</div>
+        <ul class="jobs-list" id="jobsList">
+
+          <li><a class="job-pill" id="jp0" href="https://ar.jooble.org/SearchResult?ukw=vendedor" target="_blank" rel="noopener">
+            <div class="job-pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="2"/></svg>
+            </div>
+            <div class="job-pill-info">
+              <span class="job-pill-title">Vendedor/a</span>
+              <span class="job-pill-sub">Comercial · Atención al cliente</span>
+            </div>
+            <span class="job-pill-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a></li>
+
+          <li><a class="job-pill" id="jp1" href="https://ar.jooble.org/SearchResult?ukw=community%20manager" target="_blank" rel="noopener">
+            <div class="job-pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <div class="job-pill-info">
+              <span class="job-pill-title">Community Manager</span>
+              <span class="job-pill-sub">Marketing · Redes sociales</span>
+            </div>
+            <span class="job-pill-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a></li>
+
+          <li><a class="job-pill" id="jp2" href="https://ar.jooble.org/SearchResult?ukw=administraci%C3%B3n%20de%20empresas" target="_blank" rel="noopener">
+            <div class="job-pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <div class="job-pill-info">
+              <span class="job-pill-title">Administrador/a de Empresas</span>
+              <span class="job-pill-sub">Gestión · Finanzas</span>
+            </div>
+            <span class="job-pill-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a></li>
+
+          <li><a class="job-pill" id="jp3" href="https://ar.jooble.org/SearchResult?ukw=secretaria%20administrativa" target="_blank" rel="noopener">
+            <div class="job-pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="job-pill-info">
+              <span class="job-pill-title">Secretaria Ejecutiva</span>
+              <span class="job-pill-sub">Administración · Organización</span>
+            </div>
+            <span class="job-pill-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a></li>
+
+          <li><a class="job-pill" id="jp4" href="https://ar.jooble.org/SearchResult?ukw=guia%20turistico" target="_blank" rel="noopener">
+            <div class="job-pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+            </div>
+            <div class="job-pill-info">
+              <span class="job-pill-title">Guía de Turismo</span>
+              <span class="job-pill-sub">Turismo · Hotelería</span>
+            </div>
+            <span class="job-pill-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a></li>
+
+          <li><a class="job-pill" id="jp5" href="https://ar.jooble.org/SearchResult?ukw=desarrollador%20web" target="_blank" rel="noopener">
+            <div class="job-pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div class="job-pill-info">
+              <span class="job-pill-title">Desarrolador/a Web</span>
+              <span class="job-pill-sub">Tecnología · Diseño</span>
+            </div>
+            <span class="job-pill-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a></li>
+
+          <li><a class="job-pill" id="jp6" href="https://ar.jooble.org/SearchResult?ukw=oficios" target="_blank" rel="noopener">
+            <div class="job-pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="job-pill-info">
+              <span class="job-pill-title">Oficios<span class="cursor"></span></span>
+            </div>
+            <span class="job-pill-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </a></li>
+
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MENSAJE INSTITUCIONAL -->
+<section class="bolsa-mensaje">
+  <div class="wrap">
+    <div class="mensaje-card">
+      <p>El compromiso de quienes hacemos FUDE es favorecer el progreso de nuestros alumnos, generando oportunidades de crecimiento tanto personal como profesional.</p>
+      <p>Por eso creamos la Bolsa de Trabajo, un servicio totalmente gratuito que actúa como nexo entre tus capacidades y aprendizajes y las necesidades de las empresas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="bolsa-cta">
+  <div class="wrap">
+    <h2>Encontrá las últimas ofertas laborales aquí:</h2>
+    <p>Accedé a cientos de búsquedas activas en toda Argentina.</p>
+    <div class="cta-actions">
+      <a href="https://ar.jooble.org" target="_blank" class="btn btn-primary">
+        Oportunidades de Trabajo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function(){
+    var pills = document.querySelectorAll('.job-pill');
+    var delay = 200;
+    pills.forEach(function(pill, i){
+      setTimeout(function(){
+        pill.classList.add('visible');
+      }, delay + i * 180);
+    });
+    var cursor = document.querySelector('.cursor');
+    setTimeout(function(){
+      if(cursor) cursor.style.display = 'none';
+    }, delay + 7 * 180 + 1400);
+  })();
+</script>
+</body>
+</html>
