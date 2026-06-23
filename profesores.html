@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maqueta — Página de Profesores (Educativo.net / FUDE)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#b83232;
+    --primary-dark:#8f2424;
+    --primary-50:#fbeeee;
+    --primary-100:#f3d9d9;
+    --primary-300:#d98f8f;
+    --ink:#1b1717;
+    --gray-700:#4a4444;
+    --gray-500:#7a7373;
+    --gray-300:#cfc7c7;
+    --gray-150:#ece7e7;
+    --gray-100:#f6f3f3;
+    --white:#ffffff;
+    --dark:#181011;
+    --dark-2:#241516;
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --shadow:0 2px 14px rgba(40,20,20,.06);
+    --shadow-hover:0 10px 28px rgba(40,20,20,.10);
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--white);}
+  img,svg{display:block;}
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; scroll-behavior:auto !important; animation:none !important;}
+  }
+
+  /* =========================================================
+     NOTA PARA EL DESARROLLADOR — no forma parte del sitio
+     ========================================================= */
+  .dev-note{
+    max-width:900px;margin:24px auto;padding:18px 22px;
+    background:#fff8e6;border:2px dashed #d9a32b;border-radius:12px;
+    color:#5c4400;font-size:14.5px;line-height:1.55;
+  }
+  .dev-note h4{margin:0 0 8px;font-size:15px;color:#3d2e00;}
+  .dev-note strong{color:#3d2e00;}
+  .dev-note code{background:#f1e2b8;padding:1px 5px;border-radius:4px;font-size:13px;}
+
+  /* =========================================================
+     Utilidades compartidas (mismo sistema que la maqueta de
+     Itinerarios, para mantener consistencia visual)
+     ========================================================= */
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--primary-50);color:var(--primary);
+    font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;
+    padding:7px 16px;border-radius:999px;margin-bottom:18px;
+  }
+  .eyebrow.on-dark{background:rgba(255,255,255,.08);color:#ff9c9c;}
+  .eyebrow svg{width:14px;height:14px;}
+  h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
+  .highlight{color:var(--primary);}
+  .on-dark .highlight{color:#ff8f8f;}
+
+  .btn{
+    font-family:inherit;font-weight:600;font-size:15px;
+    border:none;border-radius:999px;padding:14px 28px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:8px;
+    transition:background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease), transform .15s var(--ease);
+  }
+  .btn-primary{background:var(--primary);color:#fff;}
+  .btn-primary:hover{background:var(--primary-dark);}
+  .btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45);}
+  .btn-outline:hover{border-color:#fff;}
+  .btn-ghost{background:transparent;color:var(--primary);border:1.5px solid var(--primary-300);}
+  .btn-ghost:hover{background:var(--primary-50);}
+  .btn:active{transform:scale(.98);}
+  button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, label.chip:focus-within{
+    outline:2px solid var(--primary);outline-offset:2px;
+  }
+
+  /* =========================================================
+     HERO
+     ========================================================= */
+  .profe-hero{
+    position:relative;overflow:hidden;
+    background:var(--dark);color:#fff;
+    padding:88px 0 96px;
+  }
+  .profe-hero::before, .profe-hero::after{
+    content:"";position:absolute;border-radius:50%;
+    background:radial-gradient(circle, rgba(184,50,50,.55), transparent 70%);
+    filter:blur(10px);pointer-events:none;
+  }
+  .profe-hero::before{width:520px;height:520px;top:-220px;right:-160px;}
+  .profe-hero::after{width:380px;height:380px;bottom:-200px;left:-120px;opacity:.7;}
+  .hero-inner{position:relative;z-index:1;max-width:760px;}
+  .profe-hero h1{font-size:clamp(32px,4.2vw,46px);font-weight:700;line-height:1.18;margin-bottom:22px;}
+  .profe-hero p{font-size:17px;line-height:1.65;color:rgba(255,255,255,.78);margin:0 0 16px;max-width:640px;}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 32px;}
+  .hero-chip{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    color:#fff;font-size:13.5px;font-weight:500;
+    padding:9px 16px;border-radius:999px;
+  }
+  .hero-chip svg{width:15px;height:15px;color:#ff8f8f;flex-shrink:0;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;}
+
+  /* =========================================================
+     BENEFICIOS
+     ========================================================= */
+  .profe-beneficios{padding:88px 0;background:var(--white);}
+  .section-head{max-width:680px;margin:0 auto 44px;text-align:center;}
+  .section-head.left{margin:0 0 44px;text-align:left;}
+  .section-head h2{font-size:clamp(26px,3.4vw,34px);font-weight:700;line-height:1.25;margin-bottom:12px;}
+  .section-head p{font-size:16px;color:var(--gray-500);line-height:1.6;margin:0;}
+
+  .beneficios-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  }
+  .beneficio-card{
+    background:var(--white);border:1px solid var(--gray-150);border-radius:var(--radius-md);
+    padding:26px 24px;box-shadow:var(--shadow);
+    transition:box-shadow .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
+  }
+  .beneficio-card:hover{box-shadow:var(--shadow-hover);border-color:var(--primary-300);transform:translateY(-2px);}
+  .beneficio-icon{
+    width:44px;height:44px;border-radius:12px;background:var(--primary-50);
+    display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+  }
+  .beneficio-icon svg{width:22px;height:22px;color:var(--primary);}
+  .beneficio-card h3{font-size:16.5px;font-weight:600;margin-bottom:8px;}
+  .beneficio-card p{font-size:14px;line-height:1.55;color:var(--gray-500);margin:0;}
+
+  /* =========================================================
+     FAQ
+     ========================================================= */
+  .profe-faq{padding:88px 0;background:var(--gray-100);}
+  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+  .faq-item{
+    background:var(--white);border:1px solid var(--gray-150);border-radius:var(--radius-md);
+    overflow:hidden;
+  }
+  .faq-question{
+    width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;
+    background:none;border:none;cursor:pointer;text-align:left;
+    padding:20px 22px;font-family:inherit;font-size:16px;font-weight:600;color:var(--ink);
+  }
+  .faq-toggle-icon{
+    width:30px;height:30px;border-radius:50%;border:1px solid var(--gray-150);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--primary);
+    transition:transform .3s var(--ease), background .25s var(--ease), border-color .25s var(--ease);
+  }
+  .faq-toggle-icon svg{width:14px;height:14px;}
+  .faq-item.is-open .faq-toggle-icon{background:var(--primary);border-color:var(--primary);color:#fff;transform:rotate(45deg);}
+  .faq-answer{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--ease);}
+  .faq-item.is-open .faq-answer{grid-template-rows:1fr;}
+  .faq-answer-inner{overflow:hidden;min-height:0;}
+  .faq-answer-pad{padding:0 22px 22px;font-size:14.5px;line-height:1.65;color:var(--gray-500);}
+
+  /* =========================================================
+     CTA FINAL
+     ========================================================= */
+  .profe-cta{
+    background:linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 100%);
+    color:#fff;padding:72px 0;text-align:center;
+  }
+  .profe-cta h2{font-size:clamp(24px,3.2vw,32px);font-weight:700;margin-bottom:12px;}
+  .profe-cta p{font-size:16px;color:rgba(255,255,255,.75);margin:0 0 28px;}
+  .cta-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+
+  /* =========================================================
+     MODAL — Formulario "Convertite en profesor"
+     ========================================================= */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(20,12,12,.62);
+    display:flex;align-items:center;justify-content:center;
+    padding:20px;z-index:1000;opacity:0;visibility:hidden;
+    transition:opacity .25s var(--ease);
+  }
+  .modal-overlay.is-open{opacity:1;visibility:visible;}
+  body.modal-locked{overflow:hidden;}
+
+  .modal-card{
+    background:var(--white);border-radius:var(--radius-lg);
+    width:100%;max-width:560px;max-height:88vh;overflow-y:auto;
+    box-shadow:0 24px 60px rgba(20,10,10,.3);
+    transform:translateY(14px) scale(.98);transition:transform .3s var(--ease);
+  }
+  .modal-overlay.is-open .modal-card{transform:translateY(0) scale(1);}
+
+  .modal-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 24px 0;
+  }
+  .modal-step-label{font-size:13px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.03em;}
+  .modal-close{
+    width:34px;height:34px;border-radius:50%;border:1px solid var(--gray-150);
+    background:none;color:var(--gray-500);display:flex;align-items:center;justify-content:center;cursor:pointer;
+    transition:background .2s var(--ease), color .2s var(--ease);
+  }
+  .modal-close svg{width:15px;height:15px;}
+  .modal-close:hover{background:var(--gray-100);color:var(--primary);}
+
+  .modal-progress{height:4px;background:var(--gray-150);border-radius:999px;margin:14px 24px 0;overflow:hidden;}
+  .modal-progress-fill{height:100%;background:var(--primary);border-radius:999px;transition:width .35s var(--ease);width:20%;}
+
+  .modal-body{padding:26px 28px 28px;}
+  .form-step{display:none;}
+  .form-step.is-active{display:block;}
+  .form-step h3{font-size:21px;font-weight:600;margin-bottom:8px;}
+  .form-step > p{font-size:14.5px;color:var(--gray-500);line-height:1.55;margin:0 0 22px;}
+
+  .chip-grid{display:flex;flex-wrap:wrap;gap:10px;}
+  .visually-hidden{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none;}
+  label.chip{
+    display:inline-flex;align-items:center;
+    font-size:14px;font-weight:500;color:var(--gray-700);
+    background:var(--gray-100);border:1.5px solid var(--gray-150);
+    padding:9px 16px;border-radius:999px;cursor:pointer;
+    transition:background .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease);
+  }
+  label.chip:hover{border-color:var(--primary-300);}
+  input.chip-input:checked + label.chip{background:var(--primary);border-color:var(--primary);color:#fff;}
+
+  .field{margin-bottom:16px;}
+  .field label.field-label{display:block;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:7px;}
+  .field input[type="text"], .field input[type="email"], .field input[type="tel"], .field input[type="url"], .field textarea{
+    width:100%;font-family:inherit;font-size:15px;color:var(--ink);
+    border:1.5px solid var(--gray-150);border-radius:var(--radius-sm);
+    padding:12px 14px;background:var(--white);
+    transition:border-color .2s var(--ease);
+  }
+  .field textarea{resize:vertical;min-height:110px;line-height:1.5;}
+  .field input:focus, .field textarea:focus{border-color:var(--primary);outline:none;}
+  .field-hint{font-size:12.5px;color:var(--gray-300);margin-top:5px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+  .modal-actions{display:flex;justify-content:space-between;gap:12px;margin-top:6px;}
+  .modal-actions .btn{padding:12px 22px;font-size:14.5px;}
+  .step-spacer{flex:1;}
+
+  .success-panel{text-align:center;padding:8px 0 4px;}
+  .success-icon{
+    width:60px;height:60px;border-radius:50%;background:var(--primary-50);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+  }
+  .success-icon svg{width:28px;height:28px;color:var(--primary);}
+  .success-panel h3{font-size:20px;margin-bottom:10px;}
+  .success-panel p{font-size:14.5px;color:var(--gray-500);line-height:1.6;margin:0 0 24px;}
+
+  /* =========================================================
+     Responsive
+     ========================================================= */
+  @media (max-width:860px){
+    .beneficios-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:640px){
+    .profe-hero{padding:64px 0 72px;}
+    .profe-beneficios, .profe-faq{padding:64px 0;}
+    .beneficios-grid{grid-template-columns:1fr;}
+    .field-row{grid-template-columns:1fr;}
+    .hero-actions, .cta-actions{flex-direction:column;align-items:stretch;}
+    .modal-card{max-height:92vh;}
+  }
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     NOTA PARA EL DESARROLLADOR (eliminar, no va al sitio)
+     ========================================================= -->
+<div class="dev-note">
+  <h4>📌 Nota para el equipo de desarrollo</h4>
+  <p>
+    Esta maqueta es para la página de <strong>Profesores</strong>. Igual que en la maqueta de
+    "Itinerarios", <strong>no incluye header ni footer</strong> — son los mismos que ya están
+    en el resto del sitio. El bloque a integrar está marcado entre los comentarios
+    <code>SECCIÓN A INTEGRAR</code>, e incluye: hero, beneficios, FAQ, banda de cierre y el
+    formulario modal de 5 pasos (que hoy es solo de demostración, sin conexión real a backend).
+  </p>
+  <p>
+    Los dos botones <strong>"Convertite en profesor ahora"</strong> (el del hero y el de la
+    banda final) abren el mismo modal. Al finalizar el paso 5 se muestra una pantalla de éxito
+    de ejemplo — hay que conectar el envío real del formulario (email / CRM / lo que corresponda)
+    donde dice <code>// TODO: conectar envío real del formulario</code> en el script.
+  </p>
+</div>
+
+<!-- ===== SECCIÓN A INTEGRAR: INICIO ===== -->
+
+<!-- ================= HERO ================= -->
+<section class="profe-hero" id="profesores-hero">
+  <div class="wrap hero-inner">
+    <span class="eyebrow on-dark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
+      Convertite en profesor
+    </span>
+    <h1>Tus habilidades y experiencia, <span class="highlight">volcadas en un curso online</span></h1>
+    <p>Vos ponés el contenido y FUDE lo hace realidad. Compartí y enseñá tu experiencia a través de un curso online producido por FUDE — inspirá e inspirate junto a los mejores profesores.</p>
+    <p>FUDE es una plataforma que brinda conocimientos y herramientas educativas a miles de personas todos los meses. Sumate a nosotros y ayudanos a inspirar a miles de personas a capacitarse y crecer.</p>
+
+    <div class="hero-chips">
+      <span class="hero-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Producción incluida</span>
+      <span class="hero-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12.5l2 2 4-5"/></svg>Ganás por tus cursos</span>
+      <span class="hero-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3c2.5 2.5 4 6 4 9s-1.5 6.5-4 9c-2.5-2.5-4-6-4-9s1.5-6.5 4-9z"/></svg>Llegás a miles de alumnos</span>
+    </div>
+
+    <div class="hero-actions">
+      <button type="button" class="btn btn-primary js-open-form">
+        Convertite en profesor ahora
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+      <a href="#profesores-faq" class="btn btn-outline">Ver preguntas frecuentes</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BENEFICIOS ================= -->
+<section class="profe-beneficios" id="profesores-beneficios">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17l-7 4 1.5-8L1 8l8-1L12 0l3 7 8 1-6.5 5L18 21z"/></svg>
+        Por qué enseñar en FUDE
+      </span>
+      <h2>Tu experiencia y habilidad <span class="highlight">valen mucho</span></h2>
+      <p>Sacale el máximo provecho a tu pasión. Creá un curso para miles de personas en todo el mundo y generá más ingresos.</p>
+    </div>
+
+    <div class="beneficios-grid">
+      <div class="beneficio-card">
+        <div class="beneficio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <h3>Producción a cargo de FUDE</h3>
+        <p>Vos te encargás del contenido, nosotros del resto: diseño, edición y producción multimedia de tu curso.</p>
+      </div>
+      <div class="beneficio-card">
+        <div class="beneficio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12.5l2 2 4-5"/></svg></div>
+        <h3>Generás ingresos</h3>
+        <p>Cobrás por tus cursos, sin tener que afrontar los costos de producción de tu propio bolsillo.</p>
+      </div>
+      <div class="beneficio-card">
+        <div class="beneficio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <h3>Formato a tu medida</h3>
+        <p>Texto con impronta multimedia o video: elegimos juntos el formato que mejor se adapte a tu curso.</p>
+      </div>
+      <div class="beneficio-card">
+        <div class="beneficio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9c.36-.61.39-1.34.06-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06c.48.33 1.21.3 1.82-.06A1.65 1.65 0 0 0 10 3.09V3a2 2 0 1 1 4 0v.09c0 .69.39 1.32 1 1.51.61.33 1.34.3 1.82-.06l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06c-.36.48-.39 1.21-.06 1.82.19.6.82 1 1.51 1H21a2 2 0 1 1 0 4h-.09c-.69 0-1.32.39-1.51 1z"/></svg></div>
+        <h3>Te acompañamos</h3>
+        <p>Un equipo de FUDE te asesora en cada etapa: desde el temario hasta la publicación final.</p>
+      </div>
+      <div class="beneficio-card">
+        <div class="beneficio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3c2.5 2.5 4 6 4 9s-1.5 6.5-4 9c-2.5-2.5-4-6-4-9s1.5-6.5 4-9z"/></svg></div>
+        <h3>Alcance global</h3>
+        <p>Tu curso llega a miles de personas en Argentina y en el resto del mundo.</p>
+      </div>
+      <div class="beneficio-card">
+        <div class="beneficio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+        <h3>Áreas variadas</h3>
+        <p>Salud, Administración, Estética, Oficios, Veterinaria, Deportes, Turismo, Diseño y más.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="profe-faq" id="profesores-faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 1.5-2.5 2-2.5 3.5"/><line x1="12" y1="16.5" x2="12" y2="16.6"/></svg>
+        Preguntas frecuentes
+      </span>
+      <h2>Todo lo que necesitás saber</h2>
+      <p>Si te queda alguna duda después de leer esto, escribinos al completar el formulario.</p>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          ¿Quién puede publicar un curso en FUDE?
+          <span class="faq-toggle-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <div class="faq-answer-pad">
+Cualquier profesional que quiera compartir sus habilidades y conocimientos. Un equipo de profesionales se encarga de revisar cada propuesta detalladamente para asegurar que cumple con los estándares de calidad de FUDE. Además de tu propuesta de curso, es indispensable que envíes toda la información necesaria para que nos hagamos una idea clara de quién eres y qué es lo que haces.
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+            <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          ¿Tiene costo?
+          <span class="faq-toggle-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <div class="faq-answer-pad">
+No, no tienes que preocuparte de nada, Fude se encargará de los costos de la producción de tu curso y tú, además, ganarás dinero.
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          ¿Qué se necesita?
+          <span class="faq-toggle-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <div class="faq-answer-pad">
+Enviarnos un temario tentativo del curso que quieres desarrollar, pero, sobre todo, necesitas muchísimas ganas de enseñar y compartir tus conocimientos con la comunidad. Del resto se encarga FUDE.
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          ¿Qué tipo de cursos se pueden proponer?
+          <span class="faq-toggle-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <div class="faq-answer-pad">
+La idea es que los cursos estén orientados a crear un proyecto en cualquiera de las áreas que hay en FUDE: Salud, Administración, Estética, Oficios, Veterinaria, Iniciación Profesional, Deportes, Turismo,Diseño. La misión de FUDE es ayudar a que cada día miles de personas puedan aprender nuevas habilidades, avanzar en sus carreras y explorar sus hobbies, a la vez que comparten sus conocimientos y proyectos con la comunidad.
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          ¿Cómo son los cursos de FUDE?
+          <span class="faq-toggle-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <div class="faq-answer-pad">
+              Buena pregunta. No existen dos cursos iguales. Un curso FUDE suele tener contenidos en formato escrito que un equipo de diseñadores de nuestra Empresa les da una impronta multimedia pero también tenemos cursos en video. En cualquier caso, te asesoraremos detalladamente sobre todos estos temas.
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          ¿Qué necesito para recibir pagos por mis cursos?
+          <span class="faq-toggle-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <div class="faq-answer-pad">
+              Si estás en Argentina, solo necesitás una cuenta bancaria a tu nombre para recibir las
+              transferencias. Si estás fuera de Argentina, necesitás una cuenta de PayPal.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA FINAL ================= -->
+<section class="profe-cta" id="profesores-cta">
+  <div class="wrap">
+    <h2>¿Tenés algo para enseñar?</h2>
+    <p>Contanos tu propuesta y te ayudamos a convertirla en un curso online.</p>
+    <div class="cta-actions">
+      <button type="button" class="btn btn-primary js-open-form">Convertite en profesor ahora</button>
+      <a href="#profesores-faq" class="btn btn-outline">Ver preguntas frecuentes</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MODAL: FORMULARIO 5 PASOS ================= -->
+<div class="modal-overlay" id="form-profesor-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card">
+    <div class="modal-head">
+      <span class="modal-step-label" id="modal-step-label">Paso 1 de 5</span>
+      <button type="button" class="modal-close js-close-form" aria-label="Cerrar formulario">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+      </button>
+    </div>
+    <div class="modal-progress"><div class="modal-progress-fill" id="modal-progress-fill"></div></div>
+
+    <div class="modal-body">
+      <form id="form-profesor" novalidate>
+
+        <!-- Paso 1 -->
+        <div class="form-step is-active" data-step="1">
+          <h3 id="modal-title">¿Cuál es tu especialidad?</h3>
+          <p>Elegí el área que mejor representa tu experiencia.</p>
+          <div class="chip-grid" role="radiogroup" aria-label="Especialidad">
+            <input class="chip-input visually-hidden" type="radio" name="especialidad" id="esp-salud" value="Salud"><label class="chip" for="esp-salud">Salud</label>
+            <input class="chip-input visually-hidden" type="radio" name="especialidad" id="esp-admin" value="Administración"><label class="chip" for="esp-admin">Administración</label>
+            <input class="chip-input visually-hidden" type="radio" name="especialidad" id="esp-estetica" value="Estética"><label class="chip" for="esp-estetica">Estética</label>
+            <input class="chip-input visually-hidden" type="radio" name="especialidad" id="esp-iniciacion" value="Iniciación Profesional"><label class="chip" for="esp-iniciacion">Iniciación Profesional</label>
+            <input class="chip-input visually-hidden" type="radio" name="especialidad" id="esp-deportes" value="Deportes"><label class="chip" for="esp-deportes">Deportes</label>
+            <input class="chip-input visually-hidden" type="radio" name="especialidad" id="esp-turismo" value="Hotelería y Turismo"><label class="chip" for="esp-turismo">Hotelería y Turismo</label>
+            <input class="chip-input visually-hidden" type="radio" name="especialidad" id="esp-diseno" value="Diseño"><label class="chip" for="esp-diseno">Diseño</label>
+            <input class="chip-input visually-hidden" type="radio" name="especialidad" id="esp-oficios" value="Oficios"><label class="chip" for="esp-oficios">Oficios</label>
+            <input class="chip-input visually-hidden" type="radio" name="especialidad" id="esp-veterinaria" value="Veterinaria"><label class="chip" for="esp-veterinaria">Veterinaria</label>
+            <input class="chip-input visually-hidden" type="radio" name="especialidad" id="esp-otro" value="Otro"><label class="chip" for="esp-otro">Otro</label>
+          </div>
+        </div>
+
+        <!-- Paso 2 -->
+        <div class="form-step" data-step="2">
+          <h3>¿Qué curso te gustaría armar?</h3>
+          <p>Si ya tenés clara una o varias ideas de cursos, nos encantaría leer los detalles. Si no es así, contanos qué temáticas son tu especialidad para que podamos ayudarte.</p>
+          <div class="field">
+            <textarea name="idea_curso" placeholder="Contanos tu idea de curso..."></textarea>
+          </div>
+        </div>
+
+        <!-- Paso 3 -->
+        <div class="form-step" data-step="3">
+          <h3>Contanos un poco sobre vos</h3>
+          <p>Tu experiencia como profesional, como docente o esa conferencia que hayas impartido...</p>
+          <div class="field">
+            <textarea name="sobre_vos" placeholder="Tu experiencia, trayectoria, logros..."></textarea>
+          </div>
+        </div>
+
+        <!-- Paso 4 -->
+        <div class="form-step" data-step="4">
+          <h3>Dejanos descubrirte</h3>
+          <p>Pegá aquí la URL de tu web, tu portfolio online, tu cuenta de Instagram, tu cuenta de LinkedIn o aquellos sitios que mejor te definan.</p>
+          <div class="field">
+            <input type="url" name="links" placeholder="https://...">
+            <div class="field-hint">Opcional, pero nos ayuda mucho a conocerte mejor.</div>
+          </div>
+        </div>
+
+        <!-- Paso 5 -->
+        <div class="form-step" data-step="5">
+          <h3>Dejanos tus datos de contacto</h3>
+          <p>Esto nos va a permitir contactarte cuando revisemos tu propuesta.</p>
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="f-nombre">Nombre</label>
+              <input type="text" id="f-nombre" name="nombre" required>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-apellido">Apellido</label>
+              <input type="text" id="f-apellido" name="apellido" required>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-email">Email</label>
+              <input type="email" id="f-email" name="email" required>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-telefono">Teléfono</label>
+              <input type="tel" id="f-telefono" name="telefono" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel de éxito -->
+        <div class="form-step" data-step="success">
+          <div class="success-panel">
+            <div class="success-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3>¡Listo! Recibimos tu propuesta</h3>
+            <p>Nuestro equipo la va a revisar y se va a poner en contacto con vos a la brevedad.</p>
+            <button type="button" class="btn btn-primary js-close-form">Cerrar</button>
+          </div>
+        </div>
+
+        <div class="modal-actions" id="modal-actions">
+          <button type="button" class="btn btn-ghost js-prev-step" style="display:none;">Atrás</button>
+          <span class="step-spacer"></span>
+          <button type="button" class="btn btn-primary js-next-step">Siguiente</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECCIÓN A INTEGRAR: FIN ===== -->
+
+<script>
+  (function(){
+    var TOTAL_STEPS = 5;
+    var currentStep = 1;
+    var overlay = document.getElementById('form-profesor-overlay');
+    var stepLabel = document.getElementById('modal-step-label');
+    var progressFill = document.getElementById('modal-progress-fill');
+    var prevBtn = overlay.querySelector('.js-prev-step');
+    var nextBtn = overlay.querySelector('.js-next-step');
+    var lastFocusedEl = null;
+
+    function showStep(step){
+      overlay.querySelectorAll('.form-step').forEach(function(el){
+        el.classList.toggle('is-active', el.getAttribute('data-step') === String(step));
+      });
+      var isSuccess = step === 'success';
+      document.getElementById('modal-actions').style.display = isSuccess ? 'none' : 'flex';
+      if(!isSuccess){
+        stepLabel.textContent = 'Paso ' + step + ' de ' + TOTAL_STEPS;
+        progressFill.style.width = (step / TOTAL_STEPS * 100) + '%';
+        prevBtn.style.display = step > 1 ? 'inline-flex' : 'none';
+        nextBtn.textContent = step === TOTAL_STEPS ? 'Finalizar' : 'Siguiente';
+      }
+    }
+
+    function validateStep(step){
+      if(step === 1){
+        var chosen = overlay.querySelector('input[name="especialidad"]:checked');
+        if(!chosen){
+          alert('Elegí una especialidad para continuar.');
+          return false;
+        }
+      }
+      if(step === 5){
+        var required = overlay.querySelectorAll('.form-step[data-step="5"] [required]');
+        for(var i=0;i<required.length;i++){
+          if(!required[i].value.trim()){
+            required[i].focus();
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    nextBtn.addEventListener('click', function(){
+      if(!validateStep(currentStep)) return;
+      if(currentStep === TOTAL_STEPS){
+        // TODO: conectar envío real del formulario (email / CRM / endpoint propio)
+        showStep('success');
+        return;
+      }
+      currentStep++;
+      showStep(currentStep);
+    });
+
+    prevBtn.addEventListener('click', function(){
+      if(currentStep > 1){
+        currentStep--;
+        showStep(currentStep);
+      }
+    });
+
+    function openModal(triggerEl){
+      lastFocusedEl = triggerEl || document.activeElement;
+      currentStep = 1;
+      showStep(1);
+      overlay.querySelector('form').reset();
+      overlay.classList.add('is-open');
+      document.body.classList.add('modal-locked');
+      var firstInput = overlay.querySelector('.form-step.is-active input, .form-step.is-active textarea');
+      if(firstInput) firstInput.focus();
+    }
+
+    function closeModal(){
+      overlay.classList.remove('is-open');
+      document.body.classList.remove('modal-locked');
+      if(lastFocusedEl) lastFocusedEl.focus();
+    }
+
+    document.querySelectorAll('.js-open-form').forEach(function(btn){
+      btn.addEventListener('click', function(){ openModal(btn); });
+    });
+    overlay.querySelectorAll('.js-close-form').forEach(function(btn){
+      btn.addEventListener('click', closeModal);
+    });
+    overlay.addEventListener('click', function(e){
+      if(e.target === overlay) closeModal();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
+    });
+
+    /* FAQ acordeón */
+    document.querySelectorAll('.faq-question').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var item = btn.closest('.faq-item');
+        var open = item.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open);
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
