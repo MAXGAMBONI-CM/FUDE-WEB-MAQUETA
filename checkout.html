@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maqueta — Checkout 2×1 · FUDE by Educativo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     TOKENS — mismo sistema que profesores.html
+     ========================================================= */
+  :root{
+    --primary:#b83232;
+    --primary-dark:#8f2424;
+    --primary-50:#fbeeee;
+    --primary-100:#f3d9d9;
+    --primary-300:#d98f8f;
+    --ink:#1b1717;
+    --gray-700:#4a4444;
+    --gray-500:#7a7373;
+    --gray-300:#cfc7c7;
+    --gray-150:#ece7e7;
+    --gray-100:#f6f3f3;
+    --white:#ffffff;
+    --dark:#181011;
+    --dark-2:#241516;
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --shadow:0 2px 14px rgba(40,20,20,.06);
+    --shadow-hover:0 10px 28px rgba(40,20,20,.10);
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    color:var(--ink);background:var(--white);
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;}
+  @media(prefers-reduced-motion:reduce){
+    *{transition:none !important;animation:none !important;}
+  }
+
+  /* =========================================================
+     NOTA DE CORRECCIÓN — visible solo en maqueta
+     ========================================================= */
+  .dev-note{
+    max-width:640px;margin:0 auto 32px;padding:16px 20px;
+    background:#fff8e6;border:2px dashed #d9a32b;border-radius:12px;
+    color:#5c4400;font-size:13.5px;line-height:1.6;
+  }
+  .dev-note strong{color:#3d2e00;display:block;margin-bottom:4px;font-size:14px;}
+  .dev-note ul{margin:6px 0 0 18px;}
+  .dev-note li{margin-bottom:3px;}
+  .dev-note code{background:#f1e2b8;padding:1px 5px;border-radius:4px;font-size:12.5px;}
+
+  /* =========================================================
+     LAYOUT WRAPPER — contenido centrado, ancho controlado
+     ========================================================= */
+  .page-wrap{
+    max-width:640px;
+    margin:0 auto;
+    padding:0;
+  }
+
+  /* =========================================================
+     EYEBROW
+     ========================================================= */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--primary-50);color:var(--primary);
+    font-weight:600;font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+    padding:6px 14px;border-radius:999px;
+  }
+  .eyebrow svg{width:13px;height:13px;stroke:currentColor;stroke-width:2.5;fill:none;}
+
+  /* =========================================================
+     SECTION HEAD
+     ========================================================= */
+  .section-head{text-align:center;padding:0 24px;}
+  .section-head h2{
+    font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;
+    color:var(--ink);margin:10px 0 6px;line-height:1.25;
+  }
+  .section-head h2 span{color:var(--primary);}
+  .section-head p{font-size:14px;color:var(--gray-500);line-height:1.6;}
+
+  /* =========================================================
+     SECCIÓN 2×1
+     ========================================================= */
+  .section-2x1{
+    padding:40px 20px 28px;
+    background:var(--white);
+  }
+  .section-2x1 .section-head{margin-bottom:24px;}
+
+  /* grid de tarjetas */
+  .courses-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-bottom:8px;
+  }
+
+  .course-card{
+    background:var(--white);
+    border:1.5px solid var(--gray-150);
+    border-radius:var(--radius-md);
+    padding:16px 14px;
+    cursor:pointer;
+    position:relative;
+    box-shadow:var(--shadow);
+    transition:box-shadow .22s var(--ease), border-color .22s var(--ease), transform .2s var(--ease);
+    user-select:none;
+  }
+  .course-card:hover{
+    box-shadow:var(--shadow-hover);
+    border-color:var(--primary-300);
+    transform:translateY(-2px);
+  }
+  .course-card.selected{
+    border-color:var(--primary);
+    border-width:2px;
+    background:var(--primary-50);
+  }
+
+  /* check de selección */
+  .card-check{
+    display:none;
+    position:absolute;top:10px;right:10px;
+    width:20px;height:20px;border-radius:50%;
+    background:var(--primary);
+    align-items:center;justify-content:center;
+  }
+  .course-card.selected .card-check{display:flex;}
+  .card-check svg{width:11px;height:11px;stroke:#fff;stroke-width:2.5;fill:none;}
+
+  /* área / categoría */
+  .card-area{
+    display:inline-flex;align-items:center;gap:4px;
+    font-size:11px;font-weight:600;color:var(--primary);
+    text-transform:uppercase;letter-spacing:.04em;margin-bottom:7px;
+  }
+  .card-area svg{width:11px;height:11px;stroke:currentColor;stroke-width:2;fill:none;}
+
+  .card-name{
+    font-family:'Poppins',sans-serif;
+    font-size:14px;font-weight:700;
+    color:var(--ink);margin-bottom:4px;line-height:1.3;
+  }
+  .card-duration{font-size:12px;color:var(--gray-500);}
+
+  /* ---- ENLACE "BUSCAR OTRO" ---- */
+  .search-toggle{
+    text-align:center;margin-top:12px;
+  }
+  .search-toggle button{
+    background:none;border:none;
+    font-family:'Inter',sans-serif;font-size:13px;font-weight:600;
+    color:var(--primary);cursor:pointer;
+    text-decoration:underline;text-underline-offset:2px;
+    padding:0;
+  }
+
+  /* ---- PANEL DE BÚSQUEDA ---- */
+  .search-panel{
+    display:none;
+    margin-top:14px;
+    background:var(--gray-100);
+    border:1px solid var(--gray-150);
+    border-radius:var(--radius-md);
+    padding:16px;
+  }
+  .search-panel.open{display:block;}
+
+  .search-input-wrap{position:relative;margin-bottom:11px;}
+  .search-input-wrap .ico-search{
+    position:absolute;left:11px;top:50%;transform:translateY(-50%);
+    width:15px;height:15px;stroke:var(--gray-500);stroke-width:2;fill:none;
+  }
+  .search-input-wrap input{
+    width:100%;padding:10px 12px 10px 34px;
+    border:1px solid var(--gray-300);border-radius:var(--radius-sm);
+    font-family:'Inter',sans-serif;font-size:14px;color:var(--ink);
+    background:var(--white);outline:none;
+    transition:border-color .15s;
+  }
+  .search-input-wrap input:focus{border-color:var(--primary);}
+
+  /* chips de área */
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+  .chip-btn{
+    font-family:'Inter',sans-serif;font-size:12px;font-weight:600;
+    padding:5px 12px;border-radius:999px;cursor:pointer;
+    border:1.5px solid var(--gray-300);
+    background:var(--white);color:var(--gray-700);
+    transition:background .15s var(--ease), color .15s var(--ease), border-color .15s var(--ease);
+  }
+  .chip-btn.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+
+  /* resultados */
+  .search-results{display:flex;flex-direction:column;gap:7px;}
+  .result-item{
+    display:flex;align-items:center;gap:10px;
+    padding:10px 13px;border-radius:var(--radius-sm);
+    border:1px solid var(--gray-150);background:var(--white);
+    cursor:pointer;transition:border-color .15s, box-shadow .15s;
+  }
+  .result-item:hover{border-color:var(--primary-300);box-shadow:var(--shadow);}
+  .result-item.selected{border-color:var(--primary);border-width:2px;background:var(--primary-50);}
+  .result-info{flex:1;}
+  .result-name{font-size:13.5px;font-weight:600;color:var(--ink);}
+  .result-meta{font-size:12px;color:var(--gray-500);}
+  .result-dot{
+    width:18px;height:18px;border-radius:50%;
+    background:var(--primary);
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;transition:opacity .15s;flex-shrink:0;
+  }
+  .result-item.selected .result-dot{opacity:1;}
+  .result-dot svg{width:10px;height:10px;stroke:#fff;stroke-width:2.5;fill:none;}
+  .empty-search{font-size:13px;color:var(--gray-500);text-align:center;padding:14px 0;}
+
+  /* ---- ELEGIR MÁS TARDE ---- */
+  .later-wrap{text-align:center;margin-top:14px;}
+  .later-wrap button{
+    background:none;border:none;
+    font-family:'Inter',sans-serif;font-size:12px;
+    color:var(--gray-500);cursor:pointer;text-decoration:underline;text-underline-offset:2px;padding:0;
+  }
+
+  /* ---- BARRA STICKY ---- */
+  .sticky-bar{
+    display:none;
+    position:sticky;bottom:0;
+    background:var(--white);
+    border-top:1px solid var(--gray-150);
+    padding:14px 20px 16px;
+    margin-top:16px;
+  }
+  .sticky-bar.visible{display:block;}
+  .activate-btn{
+    width:100%;padding:15px;border:none;border-radius:999px;
+    background:var(--primary);color:#fff;
+    font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
+    transition:background .2s var(--ease), transform .15s var(--ease);
+    box-shadow:0 4px 16px rgba(184,50,50,.3);
+  }
+  .activate-btn:hover{background:var(--primary-dark);}
+  .activate-btn:active{transform:scale(.98);}
+  .activate-btn svg{width:15px;height:15px;stroke:#fff;stroke-width:2.2;fill:none;}
+
+  /* =========================================================
+     DIVISOR
+     ========================================================= */
+  .section-divider{height:1px;background:var(--gray-150);}
+
+  /* =========================================================
+     SECCIÓN QUÉ PASA AHORA
+     ========================================================= */
+  .section-steps{
+    padding:40px 20px 48px;
+    background:var(--gray-100);
+  }
+  .section-steps .section-head{
+    text-align:left;
+    padding:0;
+    margin-bottom:24px;
+  }
+  .section-steps .section-head h2{
+    font-size:20px;margin-top:8px;
+  }
+
+  /* pasos */
+  .step-item{
+    display:flex;gap:14px;align-items:flex-start;
+    padding:18px;border-radius:var(--radius-md);
+    background:var(--white);border:1px solid var(--gray-150);
+    box-shadow:var(--shadow);
+    margin-bottom:10px;
+  }
+  .step-num{
+    width:30px;height:30px;border-radius:50%;
+    background:var(--primary);color:#fff;
+    font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
+  }
+  .step-body{flex:1;}
+  .step-title{
+    font-family:'Poppins',sans-serif;font-size:14.5px;font-weight:700;
+    color:var(--ink);margin-bottom:5px;
+  }
+  .step-desc{font-size:13.5px;line-height:1.65;color:var(--gray-500);}
+  .step-desc strong{color:var(--ink);}
+  .step-cta{
+    display:inline-flex;align-items:center;gap:5px;margin-top:10px;
+    font-size:13px;font-weight:600;color:var(--primary);
+    text-decoration:none;cursor:pointer;
+    transition:text-decoration .15s;
+  }
+  .step-cta:hover{text-decoration:underline;}
+  .step-cta svg{width:13px;height:13px;stroke:currentColor;stroke-width:2.2;fill:none;}
+
+  /* redes sociales paso 4 */
+  .social-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .social-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:7px 15px;border-radius:999px;
+    font-size:12.5px;font-weight:600;text-decoration:none;
+    transition:opacity .15s, transform .15s;
+    cursor:pointer;
+  }
+  .social-btn:hover{opacity:.88;transform:translateY(-1px);}
+  .social-btn svg{width:14px;height:14px;flex-shrink:0;}
+  .social-ig{
+    background:linear-gradient(135deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    color:#fff;
+  }
+  .social-ig svg{stroke:#fff;stroke-width:1.8;fill:none;}
+  .social-yt{background:#ff0000;color:#fff;}
+  .social-yt svg{fill:#fff;stroke:none;}
+  .social-fb{background:#1877f2;color:#fff;}
+  .social-fb svg{fill:#fff;stroke:none;}
+
+  /* =========================================================
+     TOAST
+     ========================================================= */
+  .toast{
+    display:none;position:fixed;top:18px;left:50%;transform:translateX(-50%);
+    background:#1b7a3e;color:#fff;padding:11px 24px;border-radius:999px;
+    font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;
+    z-index:9999;white-space:nowrap;box-shadow:0 4px 18px rgba(0,0,0,.18);
+    transition:opacity .3s;
+  }
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="page-wrap">
+
+  <!-- ══════════════════════════════════════════════════════
+       NOTA DE CORRECCIÓN PARA EL EQUIPO
+       ══════════════════════════════════════════════════════ -->
+  <div class="dev-note" style="margin:28px 20px 0;">
+    <strong>⚠ Nota para dev / corrección — no forma parte del sitio final</strong>
+    A partir de esta sección se deben corregir dos bloques:
+    <ul>
+      <li><strong>Selector 2×1:</strong> cuando el alumno confirma su curso gratis, el sistema debe registrar la elección y disparar un email de resumen a <code>tecnica@educativo.net</code> con los siguientes datos: email del alumno, curso que compró (con N° de orden) y curso gratuito elegido.</li>
+      <li><strong>«Elegir más tarde»:</strong> si el alumno elige esa opción, debe quedar pendiente asociado a su N° de orden y enviarse un recordatorio por email con link de vuelta a este selector.</li>
+    </ul>
+    Flujo backend esperado:  El servidor dispara dos emails: uno interno a <code>tecnica@educativo.net</code> y uno de confirmación al alumno.
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 2×1
+       ══════════════════════════════════════════════════════ -->
+  <section class="section-2x1">
+
+    <div class="section-head">
+      <div class="eyebrow">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        Incluido en tu compra
+      </div>
+      <h2>Elegí tu segundo curso <span>gratis</span></h2>
+      <p>Acceso inmediato al activarlo. Sin costo adicional.</p>
+    </div>
+
+    <div class="courses-grid" id="coursesGrid">
+
+      <div class="course-card" data-name="Auxiliar de farmacia" onclick="selectCard(this)">
+        <div class="card-check">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-area">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Salud
+        </div>
+        <div class="card-name">Auxiliar de farmacia</div>
+        <div class="card-duration">6 meses</div>
+      </div>
+
+      <div class="course-card" data-name="Primeros auxilios" onclick="selectCard(this)">
+        <div class="card-check">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-area">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Salud
+        </div>
+        <div class="card-name">Primeros auxilios</div>
+        <div class="card-duration">6 meses</div>
+      </div>
+
+      <div class="course-card" data-name="Gestión de RR.HH" onclick="selectCard(this)">
+        <div class="card-check">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-area">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" stroke-linecap="round"/></svg>
+          Administración
+        </div>
+        <div class="card-name">Gestión de RR.HH</div>
+        <div class="card-duration">6 meses</div>
+      </div>
+
+      <div class="course-card" data-name="Curso profesional de diseño" onclick="selectCard(this)">
+        <div class="card-check">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="card-area">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><circle cx="12" cy="12" r="3"/></svg>
+          Diseño
+        </div>
+        <div class="card-name">Curso profesional de diseño</div>
+        <div class="card-duration">4 semanas</div>
+      </div>
+
+    </div><!-- /courses-grid -->
+
+    <!-- enlace buscador -->
+    <div class="search-toggle">
+      <button onclick="toggleSearch()">¿Ninguno te interesa? Buscá otro curso →</button>
+    </div>
+
+    <!-- panel de búsqueda -->
+    <div class="search-panel" id="searchPanel">
+      <div class="search-input-wrap">
+        <svg class="ico-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Buscá por nombre o área…" id="searchInput" oninput="renderResults()" />
+      </div>
+      <div class="chips" id="chipsContainer">
+        <button class="chip-btn active" onclick="setChip(this,'Todos')">Todos</button>
+        <button class="chip-btn" onclick="setChip(this,'Salud')">Salud</button>
+        <button class="chip-btn" onclick="setChip(this,'Administración')">Administración</button>
+        <button class="chip-btn" onclick="setChip(this,'Diseño')">Diseño</button>
+        <button class="chip-btn" onclick="setChip(this,'Estética')">Estética</button>
+        <button class="chip-btn" onclick="setChip(this,'Oficios')">Oficios</button>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+
+    <!-- elegir más tarde -->
+    <div class="later-wrap">
+      <button onclick="chooseLater()">Elegir más tarde</button>
+    </div>
+
+    <!-- barra sticky de confirmación -->
+    <div class="sticky-bar" id="stickyBar">
+      <button class="activate-btn" onclick="activateCourse()">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span id="activateLabel">Activar curso</span>
+      </button>
+    </div>
+
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN QUÉ PASA AHORA
+       ══════════════════════════════════════════════════════ -->
+  <section class="section-steps">
+
+    <div class="section-head">
+      <div class="eyebrow">Próximos pasos</div>
+      <h2>¿Qué pasa ahora?</h2>
+    </div>
+
+    <!-- Paso 1 -->
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Ingresá al campus con el email que te enviamos</div>
+        <div class="step-desc">
+          Te mandamos un email con tu usuario y contraseña. Usá esos datos para acceder al campus y empezar tu curso.
+        </div>
+        <a href="#" class="step-cta">
+          Ir al campus
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Paso 2 -->
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Activá tu tutor IA</div>
+        <div class="step-desc">
+          Dentro del campus encontrás el chat del tutor IA ya disponible. Podés hacer tu primera pregunta en menos de 1 minuto.
+        </div>
+      </div>
+    </div>
+
+    <!-- Paso 3 -->
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Accedé al material del Módulo 1</div>
+        <div class="step-desc">
+          Todos los contenidos y recursos del Módulo 1 ya están disponibles en la sección <strong>"Mis cursos"</strong>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Paso 4 -->
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Seguinos en redes</div>
+        <div class="step-desc">
+          Tips, novedades de cursos y contenido exclusivo para alumnos.
+        </div>
+        <div class="social-links">
+          <a href="https://instagram.com/fude.educativo" target="_blank" class="social-btn social-ig">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram
+          </a>
+          <a href="https://youtube.com/@fude.educativo" target="_blank" class="social-btn social-yt">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" style="fill:#ff0000"/></svg>
+            YouTube
+          </a>
+          <a href="https://facebook.com/fude.educativo" target="_blank" class="social-btn social-fb">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Facebook
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div><!-- /page-wrap -->
+
+<script>
+/* =========================================================
+   DATOS DE CURSOS (demo — reemplazar por endpoint real)
+   ========================================================= */
+var allCourses = [
+  {name:"Técnico en laboratorio",       area:"Salud",          duration:"8 meses"},
+  {name:"Asistente odontológico",       area:"Salud",          duration:"6 meses"},
+  {name:"Cuidados del adulto mayor",    area:"Salud",          duration:"5 meses"},
+  {name:"Maquillaje profesional",       area:"Estética",       duration:"5 meses"},
+  {name:"Diseño de uñas",               area:"Estética",       duration:"3 meses"},
+  {name:"Diseño gráfico",               area:"Diseño",         duration:"6 meses"},
+  {name:"Electricista domiciliario",    area:"Oficios",        duration:"4 meses"},
+  {name:"Plomería básica",              area:"Oficios",        duration:"3 meses"},
+  {name:"Contabilidad básica",          area:"Administración", duration:"6 meses"},
+  {name:"Marketing digital",            area:"Administración", duration:"4 meses"},
+];
+
+var selectedName     = null;
+var activeChip       = "Todos";
+var searchSelectedName = null;
+
+/* ---- selección de tarjeta curada ---- */
+function selectCard(el){
+  document.querySelectorAll('.course-card').forEach(function(c){ c.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedName = el.dataset.name;
+  searchSelectedName = null;
+  updateBar();
+}
+
+/* ---- barra sticky ---- */
+function updateBar(){
+  var bar   = document.getElementById('stickyBar');
+  var label = document.getElementById('activateLabel');
+  var name  = selectedName || searchSelectedName;
+  if(name){
+    bar.classList.add('visible');
+    label.textContent = 'Activar "' + name + '"';
+  } else {
+    bar.classList.remove('visible');
+  }
+}
+
+/* ---- panel de búsqueda ---- */
+function toggleSearch(){
+  var p = document.getElementById('searchPanel');
+  p.classList.toggle('open');
+  if(p.classList.contains('open')){
+    renderResults();
+    document.getElementById('searchInput').focus();
+  }
+}
+
+function setChip(el, area){
+  document.querySelectorAll('.chip-btn').forEach(function(c){ c.classList.remove('active'); });
+  el.classList.add('active');
+  activeChip = area;
+  renderResults();
+}
+
+function renderResults(){
+  var q         = document.getElementById('searchInput').value.toLowerCase();
+  var container = document.getElementById('searchResults');
+  var list      = allCourses.filter(function(c){
+    var matchArea = (activeChip === 'Todos') || (c.area === activeChip);
+    var matchQ    = c.name.toLowerCase().includes(q) || c.area.toLowerCase().includes(q);
+    return matchArea && matchQ;
+  });
+  if(!list.length){
+    container.innerHTML = '<p class="empty-search">No encontramos cursos. Probá con otra búsqueda.</p>';
+    return;
+  }
+  container.innerHTML = list.map(function(c){
+    var sel = (searchSelectedName === c.name);
+    return '<div class="result-item' + (sel ? ' selected' : '') + '" onclick="selectResult(this,\'' + c.name.replace(/'/g,"\\'") + '\')">'
+      + '<div class="result-info">'
+      + '<div class="result-name">' + c.name + '</div>'
+      + '<div class="result-meta">' + c.area + ' · ' + c.duration + '</div>'
+      + '</div>'
+      + '<div class="result-dot"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" stroke="#fff" stroke-width="2.5" fill="none"/></svg></div>'
+      + '</div>';
+  }).join('');
+}
+
+function selectResult(el, name){
+  document.querySelectorAll('.result-item').forEach(function(i){ i.classList.remove('selected'); });
+  el.classList.add('selected');
+  searchSelectedName = name;
+  selectedName = null;
+  document.querySelectorAll('.course-card').forEach(function(c){ c.classList.remove('selected'); });
+  updateBar();
+}
+
+/* ---- acciones ---- */
+function activateCourse(){
+  var name = selectedName || searchSelectedName;
+  if(!name) return;
+  showToast('✓ "' + name + '" activado en tu campus');
+
+  /*
+   * TODO (backend): POST /api/2x1/select
+   * Body: {
+   *   order_id        : "108938",           // N° de orden de la compra original
+   *   student_email   : "maria@email.com",  // email con el que se inscribió el alumno
+   *   purchased_course: "Auxiliar en Enfermería", // curso que pagó
+   *   free_course     : name                // curso gratuito que eligió ahora
+   * }
+   *
+   * El servidor debe disparar DOS emails:
+   *   1. Interno → tecnica@educativo.net
+   *      Asunto: "Nueva elección 2×1 — Orden #108938"
+   *      Cuerpo: alumno, curso comprado, curso elegido gratis.
+   *
+   *   2. Confirmación → student_email
+   *      Asunto: "Tu curso gratis fue activado"
+   *      Cuerpo: resumen de ambos cursos + link al campus.
+   */
+}
+
+function chooseLater(){
+  showToast('Te enviamos un recordatorio por email para completar tu elección');
+  /* TODO: POST /api/2x1/defer { order_id } */
+}
+
+/* ---- toast ---- */
+function showToast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(function(){ t.style.display = 'none'; }, 3800);
+}
+</script>
+</body>
+</html>
