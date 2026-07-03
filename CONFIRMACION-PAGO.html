@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirmación — Auxiliar de Farmacia | FUDE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#b83232;
+    --primary-dark:#8f2424;
+    --primary-50:#fbeeee;
+    --primary-100:#f3d9d9;
+    --primary-300:#d98f8f;
+    --ink:#1b1717;
+    --gray-700:#4a4444;
+    --gray-500:#7a7373;
+    --gray-300:#cfc7c7;
+    --gray-150:#ece7e7;
+    --gray-100:#f6f3f3;
+    --white:#ffffff;
+    --dark:#181011;
+    --dark-2:#241516;
+    --amber:#b8860b;
+    --amber-dark:#8f6a08;
+    --amber-50:#fdf6e3;
+    --amber-100:#f7e7b8;
+    --green:#27ae60;
+    --green-dark:#1b7a3e;
+    --green-50:#f0faf4;
+    --green-100:#c3e6cb;
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --shadow:0 2px 14px rgba(40,20,20,.06);
+    --shadow-hover:0 10px 28px rgba(40,20,20,.10);
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--gray-100);
+    min-height: 100vh;
+  }
+  img, svg { display: block; }
+  a { text-decoration: none; color: inherit; }
+
+  /* ===================== TICKER ===================== */
+  .ticker-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-150);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 8px 0;
+  }
+  .ticker-track {
+    display: inline-flex;
+    gap: 60px;
+    animation: ticker 22s linear infinite;
+    padding-left: 100%;
+  }
+  .ticker-track span { font-size: 13px; font-weight: 600; color: var(--ink); }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+
+  /* ===================== NAVBAR ===================== */
+  .navbar {
+    background: var(--primary);
+    padding: 0 24px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,.18);
+  }
+  .navbar-logo { display: flex; align-items: center; gap: 8px; }
+  .logo-box { background: var(--white); border-radius: 7px; padding: 4px 8px; display: flex; align-items: center; }
+  .logo-box span { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700; color: var(--primary); letter-spacing: -.5px; }
+  .logo-sub { font-size: 10px; color: rgba(255,255,255,.65); font-weight: 500; letter-spacing: .02em; }
+  .navbar-links { display: flex; align-items: center; gap: 24px; }
+  .navbar-links a { font-size: 14px; font-weight: 500; color: rgba(255,255,255,.88); display: flex; align-items: center; gap: 4px; transition: color .15s; }
+  .navbar-links a:hover { color: #fff; }
+  .navbar-links a svg { width: 12px; height: 12px; }
+  .navbar-links .sep { width: 1px; height: 18px; background: rgba(255,255,255,.22); }
+  .btn-acceso {
+    background: rgba(255,255,255,.15);
+    border: 1.5px solid rgba(255,255,255,.35);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .btn-acceso:hover { background: rgba(255,255,255,.25); }
+  .icon-moon {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .icon-moon svg { width: 14px; height: 14px; stroke: #fff; fill: none; }
+  .navbar-mobile { display: none; }
+
+  /* ===================== TRUST BAR ===================== */
+  .trust-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-150);
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--gray-500);
+  }
+  .trust-bar svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+  /* ===================== STEPPER ===================== */
+  .stepper-bar { background: var(--white); border-bottom: 1px solid var(--gray-150); padding: 0 24px; }
+  .stepper-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 0; padding: 18px 0; }
+  .step-node { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--gray-500); position: relative; }
+  .step-node.done { color: var(--primary); }
+  .step-node.active { color: var(--ink); font-weight: 600; }
+  .step-circle {
+    width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--gray-300);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; background: var(--white); flex-shrink: 0; transition: all .2s;
+  }
+  .step-node.done .step-circle { background: var(--primary); border-color: var(--primary); color: #fff; }
+  .step-node.active .step-circle { border-color: var(--primary); color: var(--primary); background: var(--primary-50); }
+  .step-line { width: 64px; height: 2px; background: var(--gray-150); margin: 0 4px; flex-shrink: 0; }
+  .step-line.done { background: var(--primary); }
+
+  /* ===================== LAYOUT PRINCIPAL ===================== */
+  .confirm-wrap { max-width: 700px; margin: 0 auto; padding: 32px 24px 60px; }
+
+  /* TABS DE ESTADO */
+  .status-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+  .status-tab {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 16px; border-radius: var(--radius-sm);
+    font-size: 14px; font-weight: 600;
+    border: 1.5px solid var(--gray-150);
+    background: var(--white);
+    color: var(--gray-500);
+    transition: all .18s var(--ease);
+  }
+  .status-tab svg { width: 16px; height: 16px; flex-shrink: 0; }
+  /* Estado real: transferencia pendiente = activo/resaltado */
+  .status-tab.is-pending {
+    background: var(--amber-50);
+    border-color: var(--amber-100);
+    color: var(--amber-dark);
+  }
+  /* Pago online: no aplica todavía, por eso queda neutro (NO verde, NO tildado) */
+  .status-tab.is-inactive {
+    background: var(--white);
+    border-color: var(--gray-150);
+    color: var(--gray-300);
+  }
+
+  /* ICONO CENTRAL */
+  .confirm-icon-wrap { display: flex; justify-content: center; margin-bottom: 18px; }
+  .confirm-icon {
+    width: 62px; height: 62px; border-radius: 50%;
+    border: 2px solid var(--primary);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--primary);
+  }
+  .confirm-icon svg { width: 26px; height: 26px; }
+
+  .confirm-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px; font-weight: 700; color: var(--ink);
+    text-align: center; margin-bottom: 10px;
+  }
+  .confirm-sub {
+    font-size: 14.5px; color: var(--gray-500); text-align: center;
+    max-width: 480px; margin: 0 auto 18px; line-height: 1.55;
+  }
+  .reserva-badge-wrap { display: flex; justify-content: center; margin-bottom: 26px; }
+  .reserva-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--primary-50); color: var(--primary);
+    font-size: 13px; font-weight: 600;
+    padding: 7px 16px; border-radius: 999px;
+    border: 1px solid var(--primary-100);
+  }
+  .reserva-badge svg { width: 14px; height: 14px; }
+
+  /* AVISO VENCIMIENTO */
+  .expiry-box {
+    background: var(--amber-50);
+    border: 1px solid var(--amber-100);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .expiry-box .icon { font-size: 20px; line-height: 1; flex-shrink: 0; }
+  .expiry-box strong { display: block; font-size: 14.5px; color: var(--ink); margin-bottom: 4px; }
+  .expiry-box p { font-size: 13.5px; color: var(--gray-700); line-height: 1.55; }
+
+  /* DATOS BANCARIOS */
+  .bank-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .bank-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 15px 20px; border-bottom: 1px solid var(--gray-150);
+    font-size: 14px;
+  }
+  .bank-row:last-child { border-bottom: none; }
+  .bank-row .label { color: var(--gray-500); }
+  .bank-row .value { font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 10px; }
+  .btn-copiar {
+    border: 1.5px solid var(--gray-300);
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    padding: 5px 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px; font-weight: 600;
+    color: var(--gray-700);
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .btn-copiar:hover { background: var(--gray-100); }
+
+  /* IMPORTE A PAGAR */
+  .amount-box {
+    background: var(--amber-50);
+    border: 1px solid var(--amber-100);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+  .amount-box .amount-label { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+  .amount-box .amount-sub { font-size: 12.5px; color: var(--gray-500); }
+  .amount-box .amount-value { text-align: right; }
+  .amount-box .amount-main { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 700; color: var(--primary); line-height: 1.1; }
+  .amount-box .amount-old { font-size: 13px; color: var(--gray-300); text-decoration: line-through; }
+
+  /* PASOS */
+  .steps-title { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 16px; }
+  .steps-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 30px; }
+  .step-item { display: flex; gap: 14px; }
+  .step-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--gray-150); color: var(--gray-700);
+    font-size: 12.5px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-item-text strong { display: block; font-size: 14.5px; color: var(--ink); margin-bottom: 2px; }
+  .step-item-text span { font-size: 13.5px; color: var(--gray-500); line-height: 1.55; }
+
+  /* COMPROBANTE WHATSAPP */
+  .comprobante-title { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 14px; }
+  .wa-box {
+    background: var(--green-50);
+    border: 1px solid var(--green-100);
+    border-radius: var(--radius-lg);
+    padding: 30px 24px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .wa-box .wa-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(37,211,102,.14);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 12px;
+  }
+  .wa-box .wa-icon svg { width: 24px; height: 24px; color: #25D366; }
+  .wa-box .wa-number { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .wa-box .wa-caption { font-size: 13.5px; color: var(--gray-500); margin-bottom: 16px; }
+  .btn-whatsapp {
+    background: #25D366; color: #fff; border: none;
+    font-family: 'Inter', sans-serif; font-size: 14.5px; font-weight: 700;
+    padding: 13px 26px; border-radius: 999px; cursor: pointer;
+    transition: background .18s;
+  }
+  .btn-whatsapp:hover { background: #1fb956; }
+
+  /* LOCK NOTICE */
+  .lock-box {
+    background: var(--gray-100);
+    border: 1px solid var(--gray-150);
+    border-radius: var(--radius-md);
+    padding: 15px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .lock-box .icon { font-size: 18px; line-height: 1.2; flex-shrink: 0; }
+  .lock-box strong { display: block; font-size: 14px; color: var(--ink); margin-bottom: 3px; }
+  .lock-box span { font-size: 13px; color: var(--gray-500); line-height: 1.5; }
+
+  /* WHATSAPP FLOTANTE */
+  .whatsapp-float {
+    position: fixed; bottom: 26px; right: 26px;
+    width: 54px; height: 54px; border-radius: 50%;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,.25);
+    cursor: pointer; z-index: 90; transition: transform .15s;
+  }
+  .whatsapp-float:hover { transform: scale(1.06); }
+  .whatsapp-float svg { width: 26px; height: 26px; }
+
+  /* ===================== FOOTER ===================== */
+  .footer { background: var(--primary-50); border-top: 1px solid var(--primary-100); padding: 48px 24px 28px; margin-top: 40px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 32px; }
+  .footer-col h4 { font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 14px; }
+  .footer-col a { display: block; font-size: 13.5px; color: var(--gray-700); margin-bottom: 10px; transition: color .15s; }
+  .footer-col a:hover { color: var(--primary); }
+  .footer-social { display: flex; gap: 10px; margin-bottom: 22px; }
+  .footer-social a { width: 34px; height: 34px; border-radius: 50%; background: var(--white); display: flex; align-items: center; justify-content: center; margin-bottom: 0; }
+  .footer-social svg { width: 15px; height: 15px; color: var(--gray-700); }
+  .footer-payments { display: flex; flex-wrap: wrap; gap: 6px; }
+  .footer-payments span { background: var(--white); border-radius: 4px; padding: 5px 8px; font-size: 10px; font-weight: 700; color: var(--gray-700); border: 1px solid var(--gray-150); }
+
+  /* ===================== TOAST ===================== */
+  .toast {
+    display: none; position: fixed; top: 70px; left: 50%; transform: translateX(-50%);
+    background: var(--dark); color: #fff; padding: 11px 22px; border-radius: 999px;
+    font-family: 'Inter', sans-serif; font-size: 13.5px; font-weight: 600;
+    z-index: 9999; white-space: nowrap; box-shadow: 0 4px 20px rgba(0,0,0,.22);
+    animation: fadeIn .2s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateX(-50%) translateY(-6px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+
+  /* ===================== RESPONSIVE MOBILE ===================== */
+  @media (max-width: 768px) {
+    .navbar-links { display: none; }
+    .navbar-mobile { display: flex; align-items: center; gap: 10px; }
+    .stepper-inner { gap: 0; padding: 14px 0; }
+    .step-node span { display: none; }
+    .step-line { width: 32px; }
+    .confirm-wrap { padding: 20px 16px 48px; }
+    .status-tabs { grid-template-columns: 1fr; }
+    .confirm-title { font-size: 21px; }
+    .amount-box { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .amount-box .amount-value { text-align: left; }
+    .bank-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 400px) {
+    .step-line { width: 20px; }
+    .footer-inner { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div style="max-width:700px;margin:16px auto 0;padding:16px 20px;background:#fff8e1;border:2px dashed #d4a017;border-radius:12px;font-family:sans-serif;">
+  <p style="margin:0 0 8px;font-weight:800;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#8a6d00;">
+    📝 Nota para desarrollo — Confirmación
+  </p>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.6;color:#4a3d00;">
+    <li>Se corrigió el estado de los tabs superiores: <strong>"Transferencia Bancaria Pendiente"</strong> debe quedar activo/resaltado (color ámbar), ya que ese es el estado real de la reserva.</li>
+    <li><strong>"Pago online"</strong> debe quedar neutro/gris, sin tilde verde ni fondo verde, porque todavía no fue el medio efectivamente utilizado.</li>
+    <li>El resto de la sección (datos bancarios, importe a pagar, pasos, envío de comprobante por WhatsApp) se mantiene igual.</li>
+  </ul>
+</div>
+<!-- ====== TOAST ====== -->
+<div class="toast" id="toast"></div>
+
+<!-- ====== TICKER ====== -->
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <span>Cursos a Distancia y Cursos Online con Certificación</span>
+    <span>Cursos a Distancia y Cursos Online con Certificación</span>
+    <span>Cursos a Distancia y Cursos Online con Certificación</span>
+    <span>Cursos a Distancia y Cursos Online con Certificación</span>
+  </div>
+</div>
+
+<!-- ====== NAVBAR ====== -->
+<nav class="navbar">
+  <div class="navbar-logo">
+    <div class="logo-box"><span>fude</span></div>
+    <span class="logo-sub">by Educativo</span>
+  </div>
+  <div class="navbar-links">
+    <a href="#">Cursos
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </a>
+    <a href="#">Gratis
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </a>
+    <a href="#">Carreras Cortas
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </a>
+    <a href="#">Empresas</a>
+    <a href="#">Blog</a>
+    <div class="sep"></div>
+    <div class="icon-moon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </div>
+    <button class="btn-acceso">Acceso Alumnos</button>
+  </div>
+  <div class="navbar-mobile">
+    <div class="icon-moon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </div>
+    <button class="btn-acceso">Acceso Alumnos</button>
+  </div>
+</nav>
+
+<!-- ====== TRUST BAR ====== -->
+<div class="trust-bar">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+  Pago 100% seguro · SSL
+</div>
+
+<!-- ====== STEPPER (paso 3 activo) ====== -->
+<div class="stepper-bar">
+  <div class="stepper-inner">
+    <div class="step-node done">
+      <div class="step-circle">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <span>Tus datos</span>
+    </div>
+    <div class="step-line done"></div>
+    <div class="step-node done">
+      <div class="step-circle">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <span>Forma de pago</span>
+    </div>
+    <div class="step-line done"></div>
+    <div class="step-node active">
+      <div class="step-circle">3</div>
+      <span>Confirmación</span>
+    </div>
+  </div>
+</div>
+
+<!-- ====== CONTENIDO CONFIRMACIÓN ====== -->
+<div class="confirm-wrap">
+
+  <!-- Tabs de estado: corregido, transferencia pendiente es el estado real -->
+  <div class="status-tabs">
+    <div class="status-tab is-inactive">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      Pago online
+    </div>
+    <div class="status-tab is-pending">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Transferencia Bancaria Pendiente
+    </div>
+  </div>
+
+  <div class="confirm-icon-wrap">
+    <div class="confirm-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    </div>
+  </div>
+
+  <h1 class="confirm-title">¡Ya casi! Completá tu pago</h1>
+  <p class="confirm-sub">Tu inscripción está reservada. Realizá el pago y envianos el comprobante por WhatsApp para activar el acceso al campus.</p>
+
+  <div class="reserva-badge-wrap">
+    <div class="reserva-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Reserva N° EDU-20250643
+    </div>
+  </div>
+
+  <!-- Aviso de vencimiento -->
+  <div class="expiry-box">
+    <div class="icon">⏰</div>
+    <div>
+      <strong>Tu reserva vence en 48 hs</strong>
+      <p>Tenés tiempo hasta el <strong>03 de mayo de 2025</strong> para realizar el pago. Pasada esa fecha la reserva se libera automáticamente.</p>
+    </div>
+  </div>
+
+  <!-- Datos bancarios -->
+  <div class="bank-card">
+    <div class="bank-row"><span class="label">Banco</span><span class="value">Banco Galicia</span></div>
+    <div class="bank-row"><span class="label">Titular</span><span class="value">Educativo S.A.</span></div>
+    <div class="bank-row"><span class="label">CUIT</span><span class="value">30-12345678-9</span></div>
+    <div class="bank-row">
+      <span class="label">CBU</span>
+      <span class="value">0070123456789012345678
+        <button class="btn-copiar" onclick="copyValue('0070123456789012345678')">Copiar</button>
+      </span>
+    </div>
+    <div class="bank-row">
+      <span class="label">Alias</span>
+      <span class="value">EDUCATIVO.NET
+        <button class="btn-copiar" onclick="copyValue('EDUCATIVO.NET')">Copiar</button>
+      </span>
+    </div>
+  </div>
+
+  <!-- Importe a pagar -->
+  <div class="amount-box">
+    <div>
+      <div class="amount-label">Importe a pagar</div>
+      <div class="amount-sub">Transferencia bancaria</div>
+    </div>
+    <div class="amount-value">
+      <div class="amount-main">$270.000</div>
+      <div class="amount-old">$334.800</div>
+    </div>
+  </div>
+
+  <!-- Pasos -->
+  <h2 class="steps-title">¿Qué tenés que hacer?</h2>
+  <div class="steps-list">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-item-text">
+        <strong>Realizá el pago</strong>
+        <span>Usá los datos de arriba. El importe exacto es $216.000.</span>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-item-text">
+        <strong>Envianos el comprobante por WhatsApp</strong>
+        <span>Enviá el comprobante de pago al +54 11 2345-6789 y nuestro equipo lo verificará.</span>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-item-text">
+        <strong>Activamos tu acceso en menos de 24 hs</strong>
+        <span>Una vez verificado el pago, te enviamos las credenciales del campus por email y tu acceso se activa automáticamente.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Envío de comprobante -->
+  <h2 class="comprobante-title">Envianos tu comprobante de pago</h2>
+  <div class="wa-box">
+    <div class="wa-icon">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.98.578 3.826 1.575 5.379L2 22l4.755-1.548A9.953 9.953 0 0 0 12.001 22c5.522 0 10-4.477 10-10s-4.478-10-10-10zm0 18.222a8.178 8.178 0 0 1-4.417-1.286l-.317-.19-3.156 1.028 1.05-3.076-.207-.318A8.166 8.166 0 0 1 3.778 12c0-4.535 3.688-8.222 8.223-8.222 4.535 0 8.222 3.687 8.222 8.222 0 4.535-3.687 8.222-8.222 8.222z"/></svg>
+    </div>
+    <div class="wa-number">+54 11 2345-6789</div>
+    <div class="wa-caption">Envianos el comprobante a este número</div>
+    <button class="btn-whatsapp" onclick="showToast('Abriendo WhatsApp…')">Abrir WhatsApp</button>
+  </div>
+
+  <!-- Aviso de acceso pendiente -->
+  <div class="lock-box">
+    <div class="icon">🔒</div>
+    <div>
+      <strong>Acceso al campus pendiente de pago</strong>
+      <span>Vas a recibir las credenciales por email en menos de 24 hs hábiles tras confirmar el pago.</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ====== WHATSAPP FLOTANTE ====== -->
+<div class="whatsapp-float" onclick="showToast('Abriendo WhatsApp…')">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.98.578 3.826 1.575 5.379L2 22l4.755-1.548A9.953 9.953 0 0 0 12.001 22c5.522 0 10-4.477 10-10s-4.478-10-10-10zm0 18.222a8.178 8.178 0 0 1-4.417-1.286l-.317-.19-3.156 1.028 1.05-3.076-.207-.318A8.166 8.166 0 0 1 3.778 12c0-4.535 3.688-8.222 8.223-8.222 4.535 0 8.222 3.687 8.222 8.222 0 4.535-3.687 8.222-8.222 8.222z"/></svg>
+</div>
+
+<!-- ====== FOOTER ====== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>FUDE by Educativo</h4>
+      <a href="#">Preguntas Frecuentes</a>
+      <a href="#">Quiénes Somos</a>
+      <a href="#">Términos y Condiciones</a>
+      <h4 style="margin-top:22px;">Contacto</h4>
+      <a href="mailto:info@educativo.net">info@educativo.net</a>
+    </div>
+    <div class="footer-col">
+      <h4>Comunidad</h4>
+      <a href="#">Blog</a>
+      <a href="#">Profesores</a>
+      <a href="#">Bolsa de trabajo</a>
+    </div>
+    <div class="footer-col">
+      <h4>Estudiá con nosotros</h4>
+      <a href="#">Salud</a>
+      <a href="#">Administración</a>
+      <a href="#">Estética</a>
+      <a href="#">Educación</a>
+      <a href="#">Deportes</a>
+      <a href="#">Oficios</a>
+    </div>
+    <div class="footer-col">
+      <h4>¡Seguinos!</h4>
+      <div class="footer-social">
+        <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.87v-6.98H7.9V12h2.6V9.8c0-2.56 1.53-3.98 3.87-3.98 1.12 0 2.29.2 2.29.2v2.5H15.3c-1.27 0-1.67.79-1.67 1.6V12h2.85l-.46 2.89h-2.4v6.98A10 10 0 0 0 22 12z"/></svg></a>
+        <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.9 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.45.53C6.09.28 6.82.11 7.88.06 8.94.01 9.28 0 12 0zm0 5.35A6.65 6.65 0 1 0 12 18.65 6.65 6.65 0 0 0 12 5.35zm0 10.97a4.32 4.32 0 1 1 0-8.64 4.32 4.32 0 0 1 0 8.64zm6.9-11.22a1.55 1.55 0 1 1-3.1 0 1.55 1.55 0 0 1 3.1 0z"/></svg></a>
+        <a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.6 15.6V8.4l6.4 3.6-6.4 3.6z"/></svg></a>
+      </div>
+      <h4>Medios de Pago</h4>
+      <div class="footer-payments">
+        <span>Mastercard</span><span>Visa</span><span>Amex</span><span>Cabal</span>
+        <span>Mercado Pago</span><span>NaranjaX</span><span>Cordobesa</span>
+        <span>Galicia</span><span>BBVA</span><span>Walmart</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function copyValue(val) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(val).then(function(){ showToast('Copiado: ' + val); });
+    } else {
+      showToast('Copiado: ' + val);
+    }
+  }
+
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.display = 'block';
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(function(){ t.style.display = 'none'; }, 3000);
+  }
+</script>
+</body>
+</html>
