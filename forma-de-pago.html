@@ -238,7 +238,7 @@
   }
 
   .course-heading { margin-bottom: 16px; }
-  .course-eyebrow { font-size: 13px; color: var(--gray-500); margin-bottom: 3px; }
+  .course-eyebrow { font-size: 17px; color: var(--gray-500); margin-bottom: 3px; }
   .course-title { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--ink); }
 
   /* BANNER 2x1 */
@@ -760,7 +760,6 @@
     }
 
     /* En mobile, la columna derecha (pago) va primero */
-    .col-right { order: -1; }
 
     .price-main { font-size: 28px; }
     .banner-2x1-big { font-size: 28px; }
@@ -791,29 +790,12 @@
 </style>
 </head>
 <body>
-<div style="max-width:1100px;margin:16px auto 0;padding:16px 20px;background:#fff8e1;border:2px dashed #d4a017;border-radius:12px;font-family:sans-serif;">
-  <p style="margin:0 0 8px;font-weight:800;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#8a6d00;">
-    📝 Nota para desarrollo — Forma de pago
-  </p>
-  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.6;color:#4a3d00;">
-    <li><strong>Opción 1:</strong> agregar aclaración de que es con tarjeta de crédito. Cambiar el título de "Pago en 12 cuotas de $27.900" a algo como <em>"12 cuotas de $27.900 con tarjeta de Credito"</em>.</li>
-    <li><strong>Opción 2 (Transferencia bancaria):</strong> se mantiene igual, sin cambios. Revisar bien los montos, tanto para transferencia como los demas.</li>
-    <li><strong>Eliminar</strong> el acordeón/modal que se despliega debajo de la opción de transferencia con los datos bancarios (Banco, CBU, Alias, CUIT). Esos datos ya no van ahí — se movieron a la pantalla de confirmación (paso 3).</li>
-    <li><strong>Opción 3 (Mercado Pago):</strong> detallar las formas de pago disponibles dentro de Mercado Pago (ej. tarjeta de crédito, débito, dinero en cuenta, etc.), como se ve en la maqueta.</li>
-  </ul>
-</div>
+
 <!-- ====== TOAST ====== -->
 <div class="toast" id="toast"></div>
 
 <!-- ====== TICKER ====== -->
-<div class="ticker-bar">
-  <div class="ticker-track">
-    <span>Cursos a Distancia y Cursos Online con Certificación</span>
-    <span>Cursos a Distancia y Cursos Online con Certificación</span>
-    <span>Cursos a Distancia y Cursos Online con Certificación</span>
-    <span>Cursos a Distancia y Cursos Online con Certificación</span>
-  </div>
-</div>
+
 
 <!-- ====== NAVBAR ====== -->
 <nav class="navbar">
@@ -884,8 +866,9 @@
   <div class="col-left">
 
     <div class="course-heading">
-      <div class="course-eyebrow">Auxiliar de Farmacia</div>
-      <div class="course-title">12 cuotas de $27.900</div>
+      <div class="course-title">Auxiliar de Farmacia</div>
+      <div class="course-eyebrow">duración: 5 meses</div>
+
     </div>
 
     <!-- Banner 2x1 -->
@@ -910,7 +893,6 @@
     <div class="price-block">
       <div class="price-main">$27.900</div>
       <div class="price-sub">12 cuotas sin interés de $27.900</div>
-      <div class="price-tag">12 cuotas de $27.900</div>
     </div>
 
     <!-- Features -->
