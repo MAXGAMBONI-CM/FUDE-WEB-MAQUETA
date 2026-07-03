@@ -780,6 +780,10 @@
     .price-main { font-size: 24px; }
     .footer-inner { grid-template-columns: 1fr; }
   }
+  .highlight-price {
+  font-weight: 800;       /* Más grueso que el bold común */
+  color: black;         /* Color verde éxito/dinero (cámbialo por tu color de acento) */
+}
 </style>
 </head>
 <body>
@@ -975,11 +979,10 @@
           <div class="radio-dot"><div class="radio-inner"></div></div>
           <div class="pay-info">
             <div class="pay-name">
-              12 cuotas de $27.900 con tarjeta de Credito
+              12 cuotas de <span class="highlight-price">$27.900</span> con tarjeta de Credito
               <span class="badge-pop">Popular</span>
             </div>
-            <div class="pay-price">$334.800</div>
-            <div class="pay-sub">Total financiado</div>
+            <div class="pay-sub">Total financiado $334.800</div>
           </div>
           <svg class="check-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
