@@ -193,87 +193,65 @@
   }
   .pill-badge svg{ color:var(--red); }
 
-  /* CTA card */
+  /* CTA card (rediseño v2) */
   .cta-card{
-    background:#f4f4f4;
-    border-radius:18px;
+    background:#fff;
+    border-radius:16px;
     overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
   }
-  .cta-banner{
-    background:linear-gradient(90deg,var(--red),#d14848);
+  .offer-banner{
+    background:var(--red);
     color:#fff;
     font-size:13px;
     font-weight:700;
-    padding:10px 18px;
-    display:flex;align-items:center;justify-content:space-between;
-  }
-  .cta-banner .fude-pill{
-    background:rgba(0,0,0,.25);
-    padding:2px 10px;
-    border-radius:10px;
-    font-size:11px;
-  }
-  .cta-body{ padding:22px 22px 26px; }
-  .cta-price-block{
-    margin-bottom:16px;
-    display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;
-  }
-  .cta-price-label{ font-size:20px; color:var(--text-gray); }
-  .cta-price-amount{ color:var(--red); font-size:26px; font-weight:800; letter-spacing:-.5px; }
-
-  /* Nuevo bloque de precio (estilo tomado de prueba.html) */
-  .va-price-container{
-    display:flex; align-items:baseline; gap:6px; margin-bottom:8px;
-  }
-  .va-currency{ font-size:18px; font-weight:700; color:var(--text-dark); }
-  .va-amount{ font-size:34px; font-weight:900; color:var(--text-dark); letter-spacing:-1px; line-height:1; }
-  .va-period{ font-size:14px; color:var(--text-gray); font-weight:500; }
-  .va-subtext{
-    font-size:18px; font-weight:600; color:#2b7a3e; background:#eef9f1;
-    display:inline-block; padding:4px 10px; border-radius:6px; margin-bottom:16px;
-  }
-
-  .pay-logos-row{
-    display:flex; flex-wrap:wrap; align-items:center; gap:8px;
-    margin-bottom:20px;
-  }
-  .logo-chip{
-    height:32px;
-    display:flex; align-items:center; justify-content:center;
-    background:#fff; border:1px solid var(--border-gray); border-radius:7px;
-    padding:0 10px;
-  }
-  .logo-chip img{ height:16px; width:auto; display:block; object-fit:contain; }
-  .cta-btn{
-    display:block; width:100%; text-align:center;
-    padding:13px; border-radius:9px; font-size:14px; font-weight:700;
-    margin-bottom:10px; border:none;
-  }
-  .cta-btn.solid{ background:var(--red); color:#fff; }
-  .cta-btn.outline{ background:#fff; border:1px solid var(--red); color:var(--red); }
-  .x2-box{
-    background:var(--black-3);
-    border-radius:12px;
-    margin-top:16px;
-    padding:18px;
     text-align:center;
-    position:relative;
-    overflow:hidden;
+    padding:11px 16px;
+    letter-spacing:.2px;
   }
-  .x2-ribbon{
-    position:absolute; top:12px; left:-32px;
-    background:var(--red); color:#fff; font-size:10px; font-weight:700;
-    padding:4px 40px; transform:rotate(-38deg);
+  .cta-body{ padding:24px 22px 26px; }
+  .price-row{
+    display:flex; align-items:baseline; gap:6px; margin-bottom:4px;
   }
-  .x2-box .big{ color:#fff; font-size:40px; font-weight:800; margin-top:14px; }
-  .x2-box .small{ color:#999; font-size:12px; }
-  .x2-box .small b{ color:#fff; }
-  .includes-title{ font-size:14px; font-weight:700; margin:22px 0 12px; }
-  .includes-list{ display:flex; flex-direction:column; gap:10px; }
-  .includes-list li{ display:flex; align-items:center; gap:10px; font-size:13px; color:#333; }
-  .includes-list svg{ color:var(--red); flex-shrink:0; }
-  .pay-title{ font-size:13px; font-weight:700; margin:20px 0 8px; }
-  .pay-row{ font-size:12px; color:var(--text-gray); }
+  .price-amount{
+    font-size:34px; font-weight:800; color:var(--text-dark);
+    letter-spacing:-.8px; line-height:1;
+  }
+  .price-period{ font-size:14px; color:var(--text-gray); font-weight:500; }
+  .price-note{ font-size:13.5px; color:var(--text-gray); margin-bottom:20px; }
+  .btn-primary{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; background:var(--red); color:#fff; border:none;
+    padding:14px; border-radius:10px; font-size:15px; font-weight:700;
+    margin-bottom:10px; cursor:pointer;
+  }
+  .btn-secondary{
+    display:block; width:100%; text-align:center;
+    background:none; border:none; color:var(--red);
+    font-size:13.5px; font-weight:600; padding:6px;
+    margin-bottom:22px; cursor:pointer;
+  }
+  .cta-divider{ height:1px; background:var(--border-gray); margin:0 0 20px; }
+  .includes-title{
+    font-size:13px; font-weight:700; color:var(--text-dark);
+    margin-bottom:14px; text-transform:uppercase; letter-spacing:.4px;
+  }
+  .includes-list{ list-style:none; display:flex; flex-direction:column; gap:11px; margin-bottom:22px; }
+  .includes-list li{ display:flex; align-items:center; gap:10px; font-size:13.5px; color:#3a3a3a; }
+  .check-icon{
+    width:18px; height:18px; border-radius:50%;
+    background:var(--red-soft);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .check-icon svg{ color:var(--red); }
+  .pay-title{ font-size:12px; color:var(--text-lgray); margin-bottom:10px; }
+  .pay-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .pay-chip{
+    font-size:11px; font-weight:600; color:#555;
+    background:#f6f6f4; border:1px solid var(--border-gray);
+    padding:5px 10px; border-radius:6px;
+  }
 
   .whatsapp-float{
     position:fixed; right:24px; bottom:24px;
@@ -606,42 +584,44 @@
     </div>
 
     <div class="cta-card">
-      <div class="cta-banner">
-        <span>🔥 2x1 por tiempo limitado</span>
-        <span class="fude-pill">FUDE</span>
-      </div>
+      <div class="offer-banner">🔥 2x1 por tiempo limitado</div>
       <div class="cta-body">
-        <div class="va-price-container">
-          <span class="va-currency">$</span>
-          <span class="va-amount">27.900</span>
-          <span class="va-period">/ mes</span>
+        <div class="price-row">
+          <span class="price-amount">$27.900</span>
+          <span class="price-period">/ mes</span>
         </div>
-        <div class="va-subtext">12 cuotas con tarjeta de crédito</div>
-        <div class="pay-logos-row">
-          <span class="logo-chip"><img src="visa.png" alt="Visa" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'VISA',style:'font-size:10px;font-weight:800;color:#999'}))"></span>
-          <span class="logo-chip"><img src="mastercard.png" alt="Mastercard" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Mastercard',style:'font-size:10px;font-weight:800;color:#999'}))"></span>
-          <span class="logo-chip"><img src="amex.png" alt="American Express" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Amex',style:'font-size:10px;font-weight:800;color:#999'}))"></span>
-          <span class="logo-chip"><img src="naranjax.png" alt="Naranja X" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Naranja X',style:'font-size:10px;font-weight:800;color:#999'}))"></span>
-        </div>
-        <button class="cta-btn solid">Inscribirme</button>
-        <button class="cta-btn outline">Consultar más info</button>
+        <div class="price-note">12 cuotas con tarjeta de crédito</div>
 
-        <div class="x2-box">
-          <div class="x2-ribbon">Por tiempo limitado</div>
-          <div class="big">2x1</div>
-          <div class="small">en <b>cursos online</b></div>
-        </div>
+        <button class="btn-primary">
+          Inscribirme
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+        <button class="btn-secondary">Consultar más info</button>
 
-        <div class="includes-title">Este curso incluye:</div>
+        <div class="cta-divider"></div>
+
+        <div class="includes-title">Este curso incluye</div>
         <ul class="includes-list">
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Acceso inmediato al campus</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Tutor IA disponible 24/7</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Material de estudio descargable</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Certificado universitario digital</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Acceso 12 meses</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Bolsa de trabajo activa</li>
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Acompañamiento docente</li>
+          <li><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Acceso inmediato al campus</li>
+          <li><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Tutor IA disponible 24/7</li>
+          <li><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Material de estudio descargable</li>
+          <li><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Certificado universitario digital</li>
+          <li><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Acceso por 12 meses</li>
+          <li><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Bolsa de trabajo activa</li>
+          <li><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Acompañamiento docente</li>
         </ul>
+
+        <div class="cta-divider"></div>
+
+        <div class="pay-title">Medios de pago</div>
+        <div class="pay-row">
+          <span class="pay-chip">Visa</span>
+          <span class="pay-chip">Mastercard</span>
+          <span class="pay-chip">Amex</span>
+          <span class="pay-chip">Naranja X</span>
+          <span class="pay-chip">MP</span>
+          <span class="pay-chip">Transferencia</span>
+        </div>
       </div>
     </div>
   </div>
@@ -807,11 +787,7 @@
           </div>
           <div class="cert-image-wrap">
             <div class="cert-image-frame">
-              <!-- reemplazar por: <img src="certificado.png"> -->
-              <div class="cert-image-placeholder">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a8896f" stroke-width="1.5"><rect x="2" y="4" width="20" height="14" rx="2"/><circle cx="8" cy="10" r="2"/><path d="M2 16l4-4 3 3 5-5 6 6"/></svg>
-                <span>Imagen del certificado<br>de Auxiliar de Farmacia<br>(pendiente de reemplazo)</span>
-              </div>
+              <img src="certificado.webp"> 
             </div>
           </div>
         </div>
