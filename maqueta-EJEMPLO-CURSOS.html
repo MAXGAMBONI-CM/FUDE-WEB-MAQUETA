@@ -136,6 +136,67 @@
   }
 
   /* ===================================================== */
+  /* SUB-HEADER STICKY (nav por secciones del curso) */
+  /* ===================================================== */
+  #aprender, #quien, #plan, #testimonios, #certificacion, #faq{
+    scroll-margin-top:86px;
+  }
+  .course-subnav{
+    position:fixed; top:0; left:0; right:0;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border-gray);
+    box-shadow:0 8px 24px rgba(0,0,0,.06);
+    z-index:300;
+    transform:translateY(-100%);
+    opacity:0;
+    pointer-events:none;
+    transition:transform .3s ease, opacity .3s ease;
+  }
+  .course-subnav.visible{
+    transform:translateY(0); opacity:1; pointer-events:auto;
+  }
+  .subnav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:22px; padding:10px 0;
+  }
+  .subnav-logo{
+    display:flex; align-items:center; gap:8px;
+    font-weight:800; font-size:15px; flex-shrink:0;
+  }
+  .subnav-logo .logo-mark-mini{
+    width:28px;height:28px;border-radius:50%;
+    background:var(--red); color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px; font-weight:800;
+  }
+  .subnav-links{
+    display:flex; align-items:center; gap:2px;
+    overflow-x:auto; scrollbar-width:none;
+  }
+  .subnav-links::-webkit-scrollbar{ display:none; }
+  .subnav-links a{
+    font-size:13px; font-weight:600; color:var(--text-gray);
+    padding:9px 15px; border-radius:20px; white-space:nowrap;
+    transition:color .2s ease, background-color .2s ease;
+  }
+  .subnav-links a:hover{ color:var(--text-dark); background:#f6f6f4; }
+  .subnav-links a.active{ color:var(--red); background:var(--red-soft); }
+  .subnav-cta{
+    flex-shrink:0; white-space:nowrap;
+    background:var(--red); color:#fff; border:none;
+    padding:9px 18px; border-radius:8px; font-size:13px; font-weight:700;
+    position:relative; overflow:hidden; isolation:isolate;
+    box-shadow:0 4px 14px rgba(184,50,50,.35);
+    animation:btnPulse 2.6s ease-in-out infinite;
+  }
+  @media (max-width:900px){
+    .subnav-logo{ display:none; }
+    .subnav-cta{ display:none; }
+  }
+
+  /* ===================================================== */
   /* HERO */
   /* ===================================================== */
   .hero{
@@ -224,6 +285,15 @@
     width:100%; background:var(--red); color:#fff; border:none;
     padding:14px; border-radius:10px; font-size:15px; font-weight:700;
     margin-bottom:10px; cursor:pointer;
+    position:relative; overflow:hidden; isolation:isolate;
+    box-shadow:0 4px 14px rgba(184,50,50,.35);
+    animation:btnPulse 2.6s ease-in-out infinite;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary:hover{ transform:translateY(-1px); }
+  @keyframes btnPulse{
+    0%,100%{ box-shadow:0 4px 14px rgba(184,50,50,.35); }
+    50%{ box-shadow:0 4px 20px rgba(184,50,50,.6); }
   }
   .btn-secondary{
     display:block; width:100%; text-align:center;
@@ -258,6 +328,22 @@
     width:52px; height:52px; border-radius:50%;
     background:#25d366; display:flex; align-items:center; justify-content:center;
     box-shadow:0 6px 16px rgba(0,0,0,.25); z-index:50;
+  }
+
+  .back-to-top{
+    position:fixed; right:24px; bottom:86px;
+    width:44px; height:44px; border-radius:50%;
+    background:var(--black); border:1px solid var(--border-dark);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 16px rgba(0,0,0,.2); z-index:50;
+    color:#fff; cursor:pointer;
+    opacity:0; transform:translateY(10px);
+    pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease, background-color .2s ease;
+  }
+  .back-to-top:hover{ background:var(--red); }
+  .back-to-top.visible{
+    opacity:1; transform:translateY(0); pointer-events:auto;
   }
 
   /* ===================================================== */
@@ -537,6 +623,27 @@
 </header>
 
 <!-- ======================================================= -->
+<!-- SUB-HEADER STICKY DEL CURSO (aparece al hacer scroll) -->
+<!-- ======================================================= -->
+<nav class="course-subnav" id="courseSubnav">
+  <div class="wrap subnav-inner">
+    <div class="subnav-logo">
+      <div class="logo-mark-mini">F</div>
+      <div>fude</div>
+    </div>
+    <div class="subnav-links">
+      <a href="#aprender" data-target="aprender">Qué vas a aprender</a>
+      <a href="#quien" data-target="quien">Para quién es</a>
+      <a href="#plan" data-target="plan">Plan de estudio</a>
+      <a href="#testimonios" data-target="testimonios">Testimonios</a>
+      <a href="#certificacion" data-target="certificacion">Certificación</a>
+      <a href="#faq" data-target="faq">FAQ</a>
+    </div>
+    <button class="subnav-cta" id="subnavCta">Inscribirme ahora</button>
+  </div>
+</nav>
+
+<!-- ======================================================= -->
 <!-- HERO -->
 <!-- ======================================================= -->
 <section class="hero">
@@ -568,7 +675,7 @@
       </div>
     </div>
 
-    <div class="cta-card">
+    <div class="cta-card" id="cta">
       <div class="offer-banner">🔥 2x1 por tiempo limitado</div>
       <div class="cta-body">
         <div class="price-row">
@@ -578,7 +685,7 @@
         <div class="price-note">12 cuotas con tarjeta de crédito</div>
 
         <button class="btn-primary">
-          Inscribirme
+          Inscribirme ahora
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </button>
         <button class="btn-secondary">Consultar más info</button>
@@ -616,30 +723,40 @@
   <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.06L2 22l5.1-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.44-4.38-1.2l-.31-.19-3.02.79.81-2.94-.2-.3A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
 </div>
 
+<button class="back-to-top" id="backToTop" aria-label="Volver arriba">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
 <!-- ======================================================= -->
 <!-- CONTENIDO -->
 <!-- ======================================================= -->
 <section class="content-section">
   <div class="wrap content-grid">
     <div class="content-main">
-      <h2>¿Qué vas a aprender?</h2>
-      <div class="learn-grid">
-        <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Rol del auxiliar de farmacia y buenas prácticas de dispensación</div>
-        <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Fármacos: clasificación, mecanismo de acción y vías de administración</div>
-        <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Lectura de prospectos y manejo de medicamentos especiales</div>
-        <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Antibióticos, antiinflamatorios y farmacovigilancia</div>
-        <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Patologías frecuentes: diabetes, hipertensión, trastornos digestivos y de la piel</div>
-        <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Sistema de salud argentino: obras sociales, prepagas y normativa vigente</div>
+      <div id="aprender">
+        <h2>¿Qué vas a aprender?</h2>
+        <div class="learn-grid">
+          <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Rol del auxiliar de farmacia y buenas prácticas de dispensación</div>
+          <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Fármacos: clasificación, mecanismo de acción y vías de administración</div>
+          <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Lectura de prospectos y manejo de medicamentos especiales</div>
+          <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Antibióticos, antiinflamatorios y farmacovigilancia</div>
+          <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Patologías frecuentes: diabetes, hipertensión, trastornos digestivos y de la piel</div>
+          <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Sistema de salud argentino: obras sociales, prepagas y normativa vigente</div>
+        </div>
       </div>
 
-      <h2>¿Para quién es este curso?</h2>
-      <p class="who">Personas sin experiencia que buscan ingresar al sector salud.</p>
-      <p class="who">Trabajadores de farmacias que desean certificar sus conocimientos.</p>
-      <p class="who">Estudiantes de carreras afines que buscan formación complementaria.</p>
-      <p class="who">Familiares de pacientes que quieren aprender sobre medicamentos y cuidados básicos.</p>
+      <div id="quien">
+        <h2>¿Para quién es este curso?</h2>
+        <p class="who">Personas sin experiencia que buscan ingresar al sector salud.</p>
+        <p class="who">Trabajadores de farmacias que desean certificar sus conocimientos.</p>
+        <p class="who">Estudiantes de carreras afines que buscan formación complementaria.</p>
+        <p class="who">Familiares de pacientes que quieren aprender sobre medicamentos y cuidados básicos.</p>
+      </div>
 
-      <h2 style="margin-top:36px;">Plan de estudio</h2>
-      <div class="modules" id="modules"></div>
+      <div id="plan" style="margin-top:36px;">
+        <h2>Plan de estudio</h2>
+        <div class="modules" id="modules"></div>
+      </div>
     </div>
 
     <aside>
@@ -721,7 +838,7 @@
 <!-- ======================================================= -->
 <!-- TESTIMONIOS -->
 <!-- ======================================================= -->
-<section class="testi-section">
+<section class="testi-section" id="testimonios">
   <div class="wrap">
     <span class="testi-eyebrow">★ Lo que dicen nuestros alumnos</span>
     <h2>Más de 90.000 alumnos formados en Argentina y Latam</h2>
@@ -757,7 +874,7 @@
 <!-- ======================================================= -->
 <!-- NUEVO: CERTIFICACIÓN UNIVERSITARIA -->
 <!-- ======================================================= -->
-<section class="cert-section">
+<section class="cert-section" id="certificacion">
   <div class="wrap">
     <div class="review-highlight">
       <span class="new-tag">NUEVO</span>
@@ -784,7 +901,7 @@
 <!-- ======================================================= -->
 <!-- NUEVO: PREGUNTAS FRECUENTES -->
 <!-- ======================================================= -->
-<section class="faq-section">
+<section class="faq-section" id="faq">
   <div class="wrap">
     <div class="review-highlight">
       <span class="new-tag">NUEVO</span>
@@ -924,6 +1041,63 @@
     document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
     if(!wasOpen){ item.classList.add('open'); }
   }
+
+  // Sub-header sticky: aparece al pasar el hero y marca la sección activa
+  (function(){
+    const subnav = document.getElementById('courseSubnav');
+    const heroEl = document.querySelector('.hero');
+    const links = document.querySelectorAll('.subnav-links a');
+    const sectionIds = ['aprender','quien','plan','testimonios','certificacion','faq'];
+    const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+    const backToTop = document.getElementById('backToTop');
+
+    function updateVisibility(){
+      const heroBottom = heroEl.getBoundingClientRect().bottom;
+      const pastHero = heroBottom < 0;
+      subnav.classList.toggle('visible', pastHero);
+      if(backToTop) backToTop.classList.toggle('visible', pastHero);
+    }
+    window.addEventListener('scroll', updateVisibility, { passive:true });
+    updateVisibility();
+
+    if(backToTop){
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top:0, behavior:'smooth' });
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          links.forEach(l => l.classList.remove('active'));
+          const activeLink = document.querySelector(`.subnav-links a[data-target="${entry.target.id}"]`);
+          if(activeLink) activeLink.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+    sections.forEach(sec => observer.observe(sec));
+
+    function scrollToTarget(id){
+      const target = document.getElementById(id);
+      if(!target) return;
+      const top = target.getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({ top, behavior:'smooth' });
+    }
+
+    links.forEach(link => {
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        scrollToTarget(this.dataset.target);
+      });
+    });
+
+    const subnavCta = document.getElementById('subnavCta');
+    if(subnavCta){
+      subnavCta.addEventListener('click', () => scrollToTarget('cta'));
+    }
+  })();
 
   // Generar los 13 módulos del plan de estudio (acordeón simple, contenido placeholder)
   const modulesWrap = document.getElementById('modules');
