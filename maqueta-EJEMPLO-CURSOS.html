@@ -114,6 +114,12 @@
     font-weight:800;
     font-size:20px;
   }
+  .logo-img{
+  height:40px;
+  width:auto;
+  object-fit:contain;
+  display:block;
+}
   .logo-mark{
     width:34px;height:34px;border-radius:50%;
     background:var(--red);
@@ -165,6 +171,12 @@
     display:flex; align-items:center; gap:8px;
     font-weight:800; font-size:15px; flex-shrink:0;
   }
+  .subnav-logo-img{
+  height:40px;
+  width:auto;
+  object-fit:contain;
+  display:block;
+}
   .subnav-logo .logo-mark-mini{
     width:28px;height:28px;border-radius:50%;
     background:var(--red); color:#fff;
@@ -604,10 +616,9 @@
 <!-- ======================================================= -->
 <header>
   <div class="wrap header-inner">
-    <div class="logo">
-      <div class="logo-mark">F</div>
-      <div>fude<small>by Educativo</small></div>
-    </div>
+<div class="logo">
+  <img src="fude-black.webp" alt="FUDE" class="logo-img">
+</div>
     <nav>
       <a href="#">Cursos <span class="caret">▾</span></a>
       <a href="#">Gratis <span class="caret">▾</span></a>
@@ -627,10 +638,9 @@
 <!-- ======================================================= -->
 <nav class="course-subnav" id="courseSubnav">
   <div class="wrap subnav-inner">
-    <div class="subnav-logo">
-      <div class="logo-mark-mini">F</div>
-      <div>fude</div>
-    </div>
+<div class="subnav-logo">
+  <img src="fude-black.webp" alt="FUDE" class="subnav-logo-img">
+</div>
     <div class="subnav-links">
       <a href="#aprender" data-target="aprender">Qué vas a aprender</a>
       <a href="#quien" data-target="quien">Para quién es</a>
