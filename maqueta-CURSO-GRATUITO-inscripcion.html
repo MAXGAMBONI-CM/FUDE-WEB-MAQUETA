@@ -75,6 +75,37 @@
   .header-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
   .btn-alumno{background:#fff;color:var(--red);font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;border:2px solid rgba(255,255,255,0.3);cursor:pointer;transition:all 0.15s;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
   .btn-alumno:hover{background:#ffe8ec;transform:scale(1.02)}
+  .menu-toggle{
+    display:none;
+    background:none;border:none;color:#fff;
+    width:40px;height:40px;align-items:center;justify-content:center;
+    cursor:pointer;flex-shrink:0;
+  }
+  .menu-toggle .icon-close{ display:none; }
+  .menu-toggle.active .icon-open{ display:none; }
+  .menu-toggle.active .icon-close{ display:block; }
+
+  /* ─── HEADER RESPONSIVE (mobile) ─── */
+  @media (max-width:900px){
+    .header-inner{ flex-wrap:wrap; padding:12px 20px; height:auto; min-height:64px; }
+    .logo{ order:1; margin-right:0; }
+    .menu-toggle{ display:flex; order:2; margin-left:auto; }
+    .header-right{ order:3; margin-left:12px; }
+    nav{
+      order:4;
+      display:none;
+      flex-direction:column;
+      align-items:stretch;
+      width:100%;
+      gap:0;
+      background:var(--red-dark);
+      border-radius:0 0 14px 14px;
+      margin-top:12px;
+      overflow:hidden;
+    }
+    nav.mobile-open{ display:flex; }
+    .nav-link{ width:100%; border-radius:0; padding:14px 18px; font-size:15px; }
+  }
 
   /* ===================================================== */
   /* MINI HERO DE LA PÁGINA DE INSCRIPCIÓN */
@@ -142,7 +173,7 @@
 
   /* Captcha visual */
   .captcha-box{
-    display:flex; align-items:center; gap:14px;
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
     background:#f9f9f8; border:1px solid var(--border-gray);
     border-radius:10px; padding:12px 14px; margin-bottom:20px;
   }
@@ -232,6 +263,21 @@
     .inscripcion-grid{ grid-template-columns:1fr; }
     .field-row{ grid-template-columns:1fr; }
     .wrap{ padding:0 20px; }
+  }
+  @media (max-width:480px){
+    .wrap{ padding:0 16px; }
+    .header-inner{ padding:10px 16px; }
+    .logo img{ height:40px !important; }
+    .mini-hero{ padding:32px 0; }
+    .mini-hero h1{ font-size:22px; }
+    .form-card{ padding:24px 20px; }
+    .method-card{ padding:22px 20px; }
+    .captcha-box{ padding:12px; }
+    .captcha-input{ flex-basis:100%; }
+    .success-section{ padding:60px 0 80px; }
+    .success-section h2{ font-size:21px; }
+    .btn-campus{ width:100%; justify-content:center; padding:15px 20px; }
+    .recovery-head h2{ font-size:20px; }
   }
 
   /* ===================================================== */
@@ -326,6 +372,10 @@
     <a href="#" class="logo">
       <img src="fude-black.webp" style="height: 50px; width: auto;">
     </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+      <svg class="icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
     <nav>
       <a href="#" class="nav-link">Cursos</a>
       <a href="#" class="nav-link">Gratis</a>
@@ -521,6 +571,19 @@ hay una sección que dice <b>"¿Olvidó su contraseña?"</b> que dispara el sigu
 </footer>
 
 <script>
+  // Menú hamburguesa (header, mobile)
+  (function(){
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.querySelector('header nav');
+    if(menuToggle && mainNav){
+      menuToggle.addEventListener('click', () => {
+        const isOpen = mainNav.classList.toggle('mobile-open');
+        menuToggle.classList.toggle('active', isOpen);
+        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    }
+  })();
+
   document.getElementById('btnInscribirse').addEventListener('click', function(e){
     e.preventDefault();
     document.getElementById('miniHero').classList.add('hidden');
