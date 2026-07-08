@@ -87,6 +87,53 @@
   .header-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
   .btn-alumno{background:#fff;color:var(--red);font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;border:2px solid rgba(255,255,255,0.3);cursor:pointer;transition:all 0.15s;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
   .btn-alumno:hover{background:#ffe8ec;transform:scale(1.02)}
+  .menu-toggle{
+    display:none;
+    background:none;border:none;color:#fff;
+    width:40px;height:40px;align-items:center;justify-content:center;
+    cursor:pointer;flex-shrink:0;
+  }
+  .menu-toggle .icon-close{ display:none; }
+  .menu-toggle.active .icon-open{ display:none; }
+  .menu-toggle.active .icon-close{ display:block; }
+
+  /* ─── HEADER RESPONSIVE (mobile) ─── */
+  @media (max-width:900px){
+    .header-inner{ flex-wrap:wrap; padding:12px 20px; height:auto; min-height:64px; }
+    .logo{ order:1; margin-right:0; }
+    .menu-toggle{ display:flex; order:2; margin-left:auto; }
+    .header-right{ order:3; margin-left:12px; }
+    nav{
+      order:4;
+      display:none;
+      flex-direction:column;
+      align-items:stretch;
+      width:100%;
+      gap:0;
+      background:var(--red-dark);
+      border-radius:0 0 14px 14px;
+      margin-top:12px;
+      overflow:hidden;
+    }
+    nav.mobile-open{ display:flex; }
+    .nav-item{ width:100%; }
+    .nav-link{ width:100%; justify-content:space-between; border-radius:0; padding:14px 18px; font-size:15px; }
+    .nav-item:hover .nav-link svg{ transform:none; }
+    .nav-item.open .nav-link svg{ transform:rotate(180deg); }
+    .dropdown{
+      position:static; display:none; min-width:0; width:100%;
+      box-shadow:none; border:none; border-radius:0;
+      background:rgba(0,0,0,.15); padding:6px 14px;
+    }
+    .nav-item:hover .dropdown{ display:none; }
+    .nav-item.open .dropdown{ display:block; }
+    .dropdown-grid{ grid-template-columns:1fr; }
+    .drop-area{ padding:10px 4px; }
+    .drop-area:hover{ background:none; }
+    .drop-area-title{ color:#fff; }
+    .drop-area-course{ color:rgba(255,255,255,0.75); }
+    .drop-area:hover .drop-area-course{ color:#fff; }
+  }
 
   /* ===================================================== */
   /* SUB-HEADER STICKY (nav por secciones del curso gratuito) */
@@ -165,7 +212,7 @@
   }
   .hero h1{
     color:#fff;
-    font-size:40px;
+    font-size:clamp(26px, 6vw, 40px);
     font-weight:800;
     margin-bottom:16px;
     letter-spacing:-.5px;
@@ -341,14 +388,32 @@
   }
 
   @media (max-width:900px){
-    .info-grid{ grid-template-columns:1fr; }
+    .info-grid{ grid-template-columns:1fr; gap:40px; }
     .diff-grid{ grid-template-columns:1fr; }
     .tech-grid{ grid-template-columns:1fr 1fr; }
     .footer-grid{ grid-template-columns:1fr 1fr; }
     .wrap{ padding:0 20px; }
+    .hero{ padding:44px 0 48px; }
+    .correction-note{ margin:20px; padding:18px 20px; }
   }
   @media (max-width:560px){
     .tech-grid{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr; gap:26px; }
+    .footer-col .pay-logos{ max-width:none; }
+  }
+  @media (max-width:480px){
+    .wrap{ padding:0 16px; }
+    .hero{ padding:36px 0 40px; }
+    .hero p.desc{ font-size:14px; }
+    .badge-row{ gap:8px; }
+    .pill-badge{ font-size:11.5px; padding:7px 12px; }
+    .btn-primary-lg{ width:100%; padding:15px 20px; font-size:15px; }
+    .cert-note{ max-width:100%; }
+    .info-main h2{ font-size:20px; }
+    .whatsapp-float{ width:46px; height:46px; right:16px; bottom:16px; }
+    .back-to-top{ width:40px; height:40px; right:18px; bottom:72px; }
+    .header-inner{ padding:10px 16px; }
+    .logo img{ height:40px !important; }
   }
 </style>
 </head>
@@ -377,6 +442,10 @@
     <a href="#" class="logo">
       <img src="fude-black.webp" style="height: 50px; width: auto;">
     </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+      <svg class="icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
     <nav>
       <div class="nav-item">
         <button class="nav-link">
@@ -643,6 +712,27 @@
 </footer>
 
 <script>
+  // Menú hamburguesa (header principal, mobile)
+  (function(){
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.querySelector('header nav');
+    if(menuToggle && mainNav){
+      menuToggle.addEventListener('click', () => {
+        const isOpen = mainNav.classList.toggle('mobile-open');
+        menuToggle.classList.toggle('active', isOpen);
+        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    }
+    // En mobile, "Cursos" abre/cierra su submenú al tocar en vez de hover
+    document.querySelectorAll('.nav-item > button.nav-link').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if(window.innerWidth <= 900){
+          btn.parentElement.classList.toggle('open');
+        }
+      });
+    });
+  })();
+
   // Sub-header sticky: aparece al pasar el hero y marca la sección activa
   (function(){
     const subnav = document.getElementById('courseSubnav');
