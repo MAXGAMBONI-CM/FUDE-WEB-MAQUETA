@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FUDE — Inscripción Curso Gratuito (maqueta)</title>
+<style>
+  :root{
+    --black:#121212;
+    --black-2:#1c1c1c;
+    --black-3:#0a0a0a;
+    --border-dark:#2c2c2c;
+    --red:#b83232;
+    --red-dark:#8f2727;
+    --red-soft:#f9efef;
+    --cream:#fdf1e7;
+    --cream-2:#fbe5d3;
+    --white:#ffffff;
+    --border-gray:#e8e8e8;
+    --text-dark:#121212;
+    --text-gray:#666;
+    --text-lgray:#999;
+    --green:#2e9e5b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:#fff;
+    color:var(--text-dark);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ text-decoration:none; color:inherit; }
+  ul{ list-style:none; }
+  button{ font-family:inherit; cursor:pointer; }
+  img{ max-width:100%; display:block; }
+  .wrap{ max-width:1240px; margin:0 auto; padding:0 40px; }
+
+  /* ===================================================== */
+  /* NOTA DE CORRECCIÓN / NOTA PARA EL PROGRAMADOR */
+  /* ===================================================== */
+  .correction-note{
+    background:#fff3cd;
+    border:1px solid #f0b429;
+    border-left:4px solid #f0b429;
+    border-radius:8px;
+    padding:22px 26px;
+    margin:28px auto;
+    max-width:1240px;
+    font-size:14px;
+    line-height:1.65;
+    color:#3a2e00;
+  }
+  .correction-note .tag{
+    display:inline-block;
+    background:#f0b429;
+    color:#3a2e00;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.5px;
+    padding:3px 10px;
+    border-radius:4px;
+    margin-bottom:14px;
+  }
+  .correction-note p.title{ margin:0 0 12px; font-weight:700; color:#7a5c00; font-size:15px; }
+  .correction-note ol{ margin:0; padding-left:20px; }
+  .correction-note li{ margin-bottom:10px; }
+
+  /* ─── HEADER (idéntico a la maqueta del curso) ─── */
+  header{background:var(--red);position:relative;top:0;z-index:100;box-shadow:0 2px 12px rgba(198,37,61,0.2)}
+  .header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;height:64px;gap:8px}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:16px;flex-shrink:0}
+  nav{display:flex;align-items:center;gap:2px;flex:1}
+  .nav-link{color:rgba(255,255,255,0.9);font-size:14px;font-weight:500;padding:8px 14px;border-radius:8px;text-decoration:none;display:flex;align-items:center;gap:5px;cursor:pointer;border:none;background:none;transition:background 0.15s;white-space:nowrap}
+  .nav-link:hover{background:rgba(0,0,0,0.12);color:#fff}
+  .header-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
+  .btn-alumno{background:#fff;color:var(--red);font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;border:2px solid rgba(255,255,255,0.3);cursor:pointer;transition:all 0.15s;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+  .btn-alumno:hover{background:#ffe8ec;transform:scale(1.02)}
+
+  /* ===================================================== */
+  /* MINI HERO DE LA PÁGINA DE INSCRIPCIÓN */
+  /* ===================================================== */
+  .mini-hero{
+    background:var(--black);
+    padding:40px 0;
+  }
+  .mini-hero .wrap{ max-width:1240px; }
+  .tag-free{
+    display:inline-block;
+    background:var(--red);
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    padding:6px 16px;
+    border-radius:20px;
+    margin-bottom:14px;
+  }
+  .mini-hero h1{
+    color:#fff;
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:-.4px;
+  }
+  .mini-hero p{
+    color:#aaa; font-size:14px; margin-top:8px;
+  }
+
+  /* ===================================================== */
+  /* SECCIÓN DE INSCRIPCIÓN */
+  /* ===================================================== */
+  .inscripcion-section{ padding:52px 0 72px; }
+  .inscripcion-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:40px;
+    align-items:start;
+  }
+
+  /* Card del formulario */
+  .form-card{
+    background:#fff;
+    border:1px solid var(--border-gray);
+    border-radius:16px;
+    padding:32px 34px;
+    box-shadow:0 4px 24px rgba(0,0,0,0.04);
+  }
+  .form-card h2{ font-size:19px; font-weight:800; margin-bottom:6px; }
+  .form-card .form-sub{ font-size:13.5px; color:var(--text-gray); margin-bottom:26px; }
+
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .field{ margin-bottom:16px; }
+  .field label{
+    display:block; font-size:12.5px; font-weight:700; color:#333;
+    margin-bottom:6px;
+  }
+  .field input{
+    width:100%; padding:12px 14px; border:1.5px solid var(--border-gray);
+    border-radius:9px; font-size:14px; color:var(--text-dark);
+    transition:border-color .15s ease;
+  }
+  .field input:focus{ outline:none; border-color:var(--red); }
+  .field input::placeholder{ color:#bbb; }
+
+  /* Captcha visual */
+  .captcha-box{
+    display:flex; align-items:center; gap:14px;
+    background:#f9f9f8; border:1px solid var(--border-gray);
+    border-radius:10px; padding:12px 14px; margin-bottom:20px;
+  }
+  .captcha-code{
+    font-family:"Courier New", monospace;
+    font-size:20px; font-weight:800; letter-spacing:4px;
+    color:#333; background:repeating-linear-gradient(115deg, #ececec, #ececec 2px, #e2e2e2 2px, #e2e2e2 4px);
+    padding:8px 18px; border-radius:6px; position:relative;
+    text-decoration:line-through; text-decoration-color:rgba(184,50,50,.25); text-decoration-thickness:2px;
+    transform:skewX(-4deg);
+    user-select:none;
+  }
+  .captcha-refresh{
+    width:34px; height:34px; border-radius:8px; background:#fff;
+    border:1px solid var(--border-gray); display:flex; align-items:center;
+    justify-content:center; color:var(--text-gray); flex-shrink:0;
+  }
+  .captcha-input{ flex:1; }
+  .captcha-input input{
+    width:100%; padding:10px 12px; border:1.5px solid var(--border-gray);
+    border-radius:8px; font-size:14px;
+  }
+  .captcha-note{ font-size:11.5px; color:var(--text-lgray); margin-top:-14px; margin-bottom:20px; }
+
+  .btn-primary-lg{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    width:100%;
+    background:var(--red); color:#fff; border:none;
+    padding:16px 34px; border-radius:10px; font-size:15.5px; font-weight:700;
+    cursor:pointer;
+    position:relative; overflow:hidden; isolation:isolate;
+    box-shadow:0 4px 14px rgba(184,50,50,.35);
+    transition:transform .15s ease, box-shadow .15s ease;
+    margin-bottom:16px;
+  }
+  .btn-primary-lg:hover{ transform:translateY(-1px); }
+
+  .login-note{
+    text-align:center; font-size:13.5px; color:var(--text-gray);
+  }
+  .login-note a{ color:var(--red); font-weight:700; }
+  .login-note a:hover{ text-decoration:underline; }
+
+  /* Card de metodología (sidebar) */
+  .method-card{
+    background:var(--cream);
+    border-radius:16px;
+    padding:28px 30px;
+  }
+  .method-card h3{ font-size:17px; font-weight:800; margin-bottom:14px; }
+  .method-card p{ font-size:13.5px; color:#444; line-height:1.7; margin-bottom:14px; }
+  .method-list{ display:flex; flex-direction:column; gap:10px; margin-bottom:18px; }
+  .method-item{ display:flex; gap:10px; font-size:13.5px; color:#333; line-height:1.55; }
+  .method-item svg{ color:var(--red); flex-shrink:0; margin-top:3px; }
+  .method-divider{ height:1px; background:rgba(0,0,0,0.08); margin:18px 0; }
+
+  /* ===================================================== */
+  /* PANTALLA DE ÉXITO */
+  /* ===================================================== */
+  .success-section{
+    display:none;
+    padding:90px 0 110px;
+    text-align:center;
+  }
+  .success-section.visible{ display:block; }
+  .inscripcion-section.hidden, .mini-hero.hidden{ display:none; }
+
+  .success-icon{
+    width:76px; height:76px; border-radius:50%;
+    background:var(--red-soft); color:var(--green);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 26px;
+  }
+  .success-section h2{ font-size:26px; font-weight:800; margin-bottom:12px; }
+  .success-section p{ font-size:15px; color:var(--text-gray); max-width:460px; margin:0 auto 32px; line-height:1.7; }
+  .btn-campus{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--black); color:#fff;
+    padding:16px 32px; border-radius:10px; font-size:15px; font-weight:700;
+    box-shadow:0 6px 20px rgba(0,0,0,.18);
+    transition:transform .15s ease, background-color .15s ease;
+  }
+  .btn-campus:hover{ background:var(--red); transform:translateY(-1px); }
+  .btn-campus svg{ flex-shrink:0; }
+
+  @media (max-width:900px){
+    .inscripcion-grid{ grid-template-columns:1fr; }
+    .field-row{ grid-template-columns:1fr; }
+    .wrap{ padding:0 20px; }
+  }
+
+  /* ===================================================== */
+  /* SEPARADOR — marca que lo de abajo es otra sección, aparte del checkout */
+  /* ===================================================== */
+  .section-divider{
+    padding:46px 0 0;
+    background:#f4f4f2;
+  }
+  .section-divider .wrap{
+    display:flex; align-items:center; gap:18px;
+  }
+  .section-divider .line{ flex:1; height:1px; background:var(--border-gray); }
+  .section-divider .dot{
+    width:7px; height:7px; border-radius:50%; background:var(--red); flex-shrink:0;
+  }
+
+  /* ===================================================== */
+  /* SECCIÓN: ¿OLVIDASTE TU USUARIO O CONTRASEÑA? */
+  /* ===================================================== */
+  .recovery-section{ padding:44px 0 90px; background:#f4f4f2; }
+  .recovery-eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:11.5px; font-weight:800; letter-spacing:.6px; text-transform:uppercase;
+    color:var(--red); background:var(--red-soft);
+    padding:6px 14px; border-radius:20px; margin-bottom:18px;
+  }
+  .recovery-head{ max-width:680px; margin:0 auto 48px; text-align:center; }
+  .recovery-head h2{ font-size:25px; font-weight:800; margin-bottom:12px; }
+  .recovery-head p{ font-size:14.5px; color:var(--text-gray); line-height:1.7; }
+  .recovery-head p b{ color:var(--text-dark); }
+
+  .recovery-steps{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:30px;
+    align-items:start;
+    max-width:980px; margin:0 auto;
+  }
+  .recovery-step{ display:flex; flex-direction:column; }
+  .step-label{
+    display:flex; align-items:center; gap:8px;
+    font-size:12.5px; font-weight:700; color:var(--red);
+    margin-bottom:12px;
+  }
+  .step-num{
+    width:20px; height:20px; border-radius:50%; background:var(--red); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:800; flex-shrink:0;
+  }
+  .step-caption{ font-size:12.5px; color:var(--text-gray); line-height:1.6; margin-top:12px; }
+
+  /* Captura real: contenedor con relación 1080x1350 (4:5) */
+  .capture-frame{
+    background:#fff; border:1px solid var(--border-gray); border-radius:14px;
+    overflow:hidden; box-shadow:0 6px 22px rgba(0,0,0,.07);
+    aspect-ratio:1080/1350;
+    width:100%;
+  }
+  .capture-frame img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+
+  @media (max-width:900px){
+    .recovery-steps{ grid-template-columns:1fr; max-width:420px; }
+    .recovery-section{ padding:36px 0 64px; }
+    .recovery-head{ margin-bottom:36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================================================= -->
+<!-- NOTA PARA EL PROGRAMADOR -->
+<!-- ======================================================= -->
+<div class="correction-note">
+  <div class="tag">NOTA PARA EL PROGRAMADOR</div>
+  <p class="title">Cómo funciona esta maqueta:</p>
+  <ol>
+    <li><b>Origen:</b> a esta pantalla se llega al hacer clic en "Inscribirme ahora" desde la página del curso gratuito (en vez de ir a un checkout de pago). El nombre del curso arriba es dinámico según el curso desde el que se vino.</li>
+    <li><b>Captcha:</b> es solo un placeholder visual (el código tachado + el input debajo). La generación real del código, validación y protección anti-bots quedan a cargo del programador.</li>
+    <li><b>Botón "Inscribirme":</b> en esta maqueta, al hacer clic simplemente cambia la vista a la pantalla de éxito (es solo para mostrar el flujo). En el sitio real esto debería validar el formulario, crear el usuario y luego mostrar la confirmación o redirigir.</li>
+    <li><b>Pantalla de éxito:</b> el botón "Ingresar al Campus Virtual" debe linkear a <code>https://www.educativovirtual.net/campusvirtual/moodle/</code>.</li>
+    <li><b>Sección "¿Olvidaste tu usuario o contraseña?":</b> son 3 capturas ilustrativas que explican el flujo de recuperación: 1) el alumno hace clic en "¿Olvidó su contraseña?" debajo del login, 2) completa el formulario con su usuario o correo, 3) ve el mensaje de confirmación. El cursor con el círculo animado solo indica dónde hace clic el usuario en cada paso, no es funcional.</li>
+    <li><b>Header:</b> se mantiene igual al resto del sitio, sin modificaciones.</li>
+  </ol>
+</div>
+
+<!-- ======================================================= -->
+<!-- HEADER -->
+<!-- ======================================================= -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <img src="fude-black.webp" style="height: 50px; width: auto;">
+    </a>
+    <nav>
+      <a href="#" class="nav-link">Cursos</a>
+      <a href="#" class="nav-link">Gratis</a>
+      <a href="#" class="nav-link">Carreras Cortas</a>
+      <a href="#" class="nav-link">Empresas</a>
+      <a href="#" class="nav-link">Blog</a>
+    </nav>
+    <div class="header-right">
+      <a href="#" class="btn-alumno">Acceso Alumnos</a>
+    </div>
+  </div>
+</header>
+
+<!-- ======================================================= -->
+<!-- MINI HERO (nombre del curso) -->
+<!-- ======================================================= -->
+<div class="mini-hero" id="miniHero">
+  <div class="wrap">
+    <span class="tag-free">Curso Gratuito</span>
+    <h1>Inscripción — Análisis de los Recursos Financieros</h1>
+    <p>Completá tus datos para crear tu usuario y acceder al campus.</p>
+  </div>
+</div>
+
+<!-- ======================================================= -->
+<!-- FORMULARIO DE INSCRIPCIÓN -->
+<!-- ======================================================= -->
+<section class="inscripcion-section" id="inscripcionSection">
+  <div class="wrap inscripcion-grid">
+
+    <!-- Columna: formulario -->
+    <div class="form-card">
+      <h2>Creá tu usuario</h2>
+      <p class="form-sub">Con estos datos vas a poder ingresar al campus una vez finalizada la inscripción.</p>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Nombre de usuario</label>
+          <input type="text" placeholder="Elegí un nombre de usuario">
+        </div>
+        <div class="field">
+          <label>Contraseña</label>
+          <input type="password" placeholder="Elegí una contraseña">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Nombre</label>
+          <input type="text" placeholder="Tu nombre">
+        </div>
+        <div class="field">
+          <label>Apellido</label>
+          <input type="text" placeholder="Tu apellido">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Correo electrónico</label>
+          <input type="email" placeholder="tu@email.com">
+        </div>
+        <div class="field">
+          <label>Teléfono móvil</label>
+          <input type="tel" placeholder="Ej: 11 2345 6789">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Verificación</label>
+        <div class="captcha-box">
+          <span class="captcha-code">iJSNd3</span>
+          <div class="captcha-refresh">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+          </div>
+          <div class="captcha-input">
+            <input type="text" placeholder="Ingresá el código">
+          </div>
+        </div>
+      </div>
+      <p class="captcha-note">Placeholder visual — la lógica real del captcha la implementa el programador.</p>
+
+      <button class="btn-primary-lg" id="btnInscribirse">
+        Inscribirme
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+
+      <p class="login-note">¿Ya sos alumno? <a href="#">Clic aquí para ingresar</a></p>
+    </div>
+
+    <!-- Columna: metodología -->
+    <div class="method-card">
+      <h3>Metodología de Estudio</h3>
+      <p>Nuestra metodología es muy sencilla:</p>
+      <div class="method-list">
+        <div class="method-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Podés ingresar al campus de forma inmediata, con el usuario y la contraseña que estableciste en la inscripción.</div>
+        <div class="method-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Realizás tus actividades con libertad, elegís días y horarios. Tendrás acceso al campus por 30 días.</div>
+        <div class="method-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Tené en cuenta que los cursos gratuitos no disponen de soporte como los cursos pagos.</div>
+        <div class="method-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Una vez que leas todo el contenido, podés solicitar un certificado por un arancel mínimo.</div>
+      </div>
+
+      <div class="method-divider"></div>
+
+      <p>En FUDE los horarios son totalmente flexibles: gracias a la metodología propuesta, nuestros alumnos pueden estudiar desde su casa, manejando sus tiempos.</p>
+      <div class="method-list">
+        <div class="method-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Nuestro material de estudio es exclusivo.</div>
+        <div class="method-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Acceso al material de estudio las 24 horas, los 7 días de la semana.</div>
+        <div class="method-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Nuestro moderno Campus Virtual es compatible con todos los sistemas operativos y navegadores y no precisa de complejas instalaciones.</div>
+        <div class="method-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> No exigimos un horario específico de conexión, ya que sólo logran complicar los tiempos de nuestros alumnos.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- PANTALLA DE ÉXITO -->
+<!-- ======================================================= -->
+<section class="success-section" id="successSection">
+  <div class="wrap">
+    <div class="success-icon">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <h2>¡Se ha realizado la inscripción con éxito!</h2>
+    <p>Ya podés disfrutar de los contenidos del curso. Ingresá al campus con el usuario y la contraseña que acabás de crear.</p>
+    <a href="https://www.educativovirtual.net/campusvirtual/moodle/" class="btn-campus" target="_blank">
+      Ingresar al Campus Virtual
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <br>
+  <br>
+  <br>
+
+
+<!-- ======================================================= -->
+<!-- SECCIÓN: ¿OLVIDASTE TU USUARIO O CONTRASEÑA? -->
+<!-- ======================================================= -->
+<section class="recovery-section">
+  <div class="wrap">
+    <div class="recovery-head">
+      <span class="recovery-eyebrow">Soporte al alumno</span>
+      <h2>¿Y si el alumno olvida su usuario o contraseña?</h2>
+      <p>No te preocupes, porque te enviamos por mail tu usuario y contraseña para ingresar al campus. 
+Si aun así no logra acceder, en la página de inicio del campus virtual 
+(<a href="https://www.educativovirtual.net/campusvirtual/moodle/" target="_blank"><b>www.educativovirtual.net/campusvirtual</b></a>) 
+hay una sección que dice <b>"¿Olvidó su contraseña?"</b> que dispara el siguiente flujo:</p>
+
+    </div>
+
+    <div class="recovery-steps">
+      <!-- Captura 1: login + botón olvidó contraseña -->
+      <div class="recovery-step">
+        <div class="step-label"><span class="step-num">1</span> Pantalla de inicio de sesión</div>
+        <div class="capture-frame">
+          <img src="RESTABLECER-1.png" alt="Pantalla de login con el botón ¿Olvidó su contraseña?">
+        </div>
+        <p class="step-caption">El alumno hace clic en "¿Olvidó su contraseña?", debajo del botón "Acceder".</p>
+      </div>
+
+      <!-- Captura 2: formulario de restablecer -->
+      <div class="recovery-step">
+        <div class="step-label"><span class="step-num">2</span> Formulario de restablecer</div>
+        <div class="capture-frame">
+          <img src="RESTABLECER-2.png" alt="Formulario para restablecer usuario o contraseña">
+        </div>
+        <p class="step-caption">Puede completar con lo que recuerde: su nombre de usuario o su correo electrónico.</p>
+      </div>
+
+      <!-- Captura 3: confirmación -->
+      <div class="recovery-step">
+        <div class="step-label"><span class="step-num">3</span> Confirmación</div>
+        <div class="capture-frame">
+          <img src="RESTABLECER-3.png" alt="Mensaje de confirmación de envío de instrucciones">
+        </div>
+        <p class="step-caption">Este es el mensaje que ve el alumno apenas envía el formulario del paso 2.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</section>
+
+
+
+<!-- ======================================================= -->
+<!-- FOOTER -->
+<!-- ======================================================= -->
+<footer style="background:linear-gradient(180deg,#fff 0%, var(--cream) 100%); padding:56px 0 40px;">
+  <div class="wrap" style="text-align:center; font-size:13px; color:#888;">
+    FUDE by Educativo — © 2026
+  </div>
+</footer>
+
+<script>
+  document.getElementById('btnInscribirse').addEventListener('click', function(e){
+    e.preventDefault();
+    document.getElementById('miniHero').classList.add('hidden');
+    document.getElementById('inscripcionSection').classList.add('hidden');
+    document.getElementById('successSection').classList.add('visible');
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+</script>
+
+</body>
+</html>

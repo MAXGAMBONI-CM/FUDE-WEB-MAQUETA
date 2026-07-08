@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FUDE — Curso Gratuito de Análisis de los Recursos Financieros (maqueta)</title>
+<style>
+  :root{
+    --black:#121212;
+    --black-2:#1c1c1c;
+    --black-3:#0a0a0a;
+    --border-dark:#2c2c2c;
+    --red:#b83232;
+    --red-dark:#8f2727;
+    --red-soft:#f9efef;
+    --cream:#fdf1e7;
+    --cream-2:#fbe5d3;
+    --white:#ffffff;
+    --border-gray:#e8e8e8;
+    --text-dark:#121212;
+    --text-gray:#666;
+    --text-lgray:#999;
+    --star:#f5b400;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:#fff;
+    color:var(--text-dark);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ text-decoration:none; color:inherit; }
+  ul{ list-style:none; }
+  button{ font-family:inherit; cursor:pointer; }
+  img{ max-width:100%; display:block; }
+  .wrap{ max-width:1240px; margin:0 auto; padding:0 40px; }
+
+  /* ===================================================== */
+  /* NOTA DE CORRECCIÓN */
+  /* ===================================================== */
+  .correction-note{
+    background:#fff3cd;
+    border:1px solid #f0b429;
+    border-left:4px solid #f0b429;
+    border-radius:8px;
+    padding:22px 26px;
+    margin:28px auto;
+    max-width:1240px;
+    font-size:14px;
+    line-height:1.65;
+    color:#3a2e00;
+  }
+  .correction-note .tag{
+    display:inline-block;
+    background:#f0b429;
+    color:#3a2e00;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.5px;
+    padding:3px 10px;
+    border-radius:4px;
+    margin-bottom:14px;
+  }
+  .correction-note p.title{ margin:0 0 12px; font-weight:700; color:#7a5c00; font-size:15px; }
+  .correction-note ol{ margin:0; padding-left:20px; }
+  .correction-note li{ margin-bottom:10px; }
+
+  /* ─── HEADER ─── */
+  header{background:var(--red);position:relative;top:0;z-index:100;box-shadow:0 2px 12px rgba(198,37,61,0.2)}
+  .header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;height:64px;gap:8px}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:16px;flex-shrink:0}
+  nav{display:flex;align-items:center;gap:2px;flex:1}
+  .nav-item{position:relative}
+  .nav-link{color:rgba(255,255,255,0.9);font-size:14px;font-weight:500;padding:8px 14px;border-radius:8px;text-decoration:none;display:flex;align-items:center;gap:5px;cursor:pointer;border:none;background:none;transition:background 0.15s;white-space:nowrap}
+  .nav-link:hover{background:rgba(0,0,0,0.12);color:#fff}
+  .nav-link.current{background:rgba(0,0,0,0.18);color:#fff}
+  .nav-link svg{transition:transform 0.2s}
+  .nav-item:hover .nav-link svg{transform:rotate(180deg)}
+  .dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:#fff;border:1px solid var(--border-gray);border-radius:14px;padding:10px;min-width:540px;box-shadow:0 20px 60px rgba(0,0,0,0.1);z-index:200}
+  .nav-item:hover .dropdown{display:block}
+  .dropdown-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+  .drop-area{padding:10px 12px;border-radius:10px;cursor:pointer;transition:background 0.15s;text-decoration:none;display:block}
+  .drop-area:hover{background:var(--red-soft)}
+  .drop-area-title{font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:5px}
+  .drop-area-course{display:block;color:var(--text-lgray);font-size:12px;padding:1px 0;transition:color 0.15s}
+  .drop-area:hover .drop-area-course{color:#555}
+  .header-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
+  .btn-alumno{background:#fff;color:var(--red);font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;border:2px solid rgba(255,255,255,0.3);cursor:pointer;transition:all 0.15s;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+  .btn-alumno:hover{background:#ffe8ec;transform:scale(1.02)}
+
+  /* ===================================================== */
+  /* SUB-HEADER STICKY (nav por secciones del curso gratuito) */
+  /* ===================================================== */
+  #temario, #objetivos, #metodologia, #requisitos, #diferencias, #tecnologia{
+    scroll-margin-top:86px;
+  }
+  .course-subnav{
+    position:fixed; top:0; left:0; right:0;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border-gray);
+    box-shadow:0 8px 24px rgba(0,0,0,.06);
+    z-index:300;
+    transform:translateY(-100%);
+    opacity:0;
+    pointer-events:none;
+    transition:transform .3s ease, opacity .3s ease;
+  }
+  .course-subnav.visible{
+    transform:translateY(0); opacity:1; pointer-events:auto;
+  }
+  .subnav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:22px; padding:10px 0;
+  }
+  .subnav-logo{
+    display:flex; align-items:center; gap:8px;
+    font-weight:800; font-size:15px; flex-shrink:0;
+  }
+  .subnav-logo-img{ height:70px; width:auto; object-fit:contain; display:block; }
+  .subnav-links{
+    display:flex; align-items:center; gap:2px;
+    overflow-x:auto; scrollbar-width:none;
+  }
+  .subnav-links::-webkit-scrollbar{ display:none; }
+  .subnav-links a{
+    font-size:15px; font-weight:600; color:var(--text-gray);
+    padding:9px 15px; border-radius:20px; white-space:nowrap;
+    transition:color .2s ease, background-color .2s ease;
+  }
+  .subnav-links a:hover{ color:var(--text-dark); background:#f6f6f4; }
+  .subnav-links a.active{ color:var(--red); background:var(--red-soft); }
+  .subnav-cta{
+    flex-shrink:0; white-space:nowrap;
+    background:var(--red); color:#fff; border:none;
+    padding:9px 18px; border-radius:8px; font-size:13px; font-weight:700;
+    position:relative; overflow:hidden; isolation:isolate;
+    box-shadow:0 4px 14px rgba(184,50,50,.35);
+    animation:btnPulse 2.6s ease-in-out infinite;
+  }
+  @media (max-width:900px){
+    .subnav-logo{ display:none; }
+    .subnav-cta{ display:none; }
+  }
+
+  /* ===================================================== */
+  /* HERO (versión gratuita — sin cta-card, una sola columna) */
+  /* ===================================================== */
+  .hero{
+    background:var(--black);
+    padding:56px 0 60px;
+    position:relative;
+  }
+  .hero-inner{ max-width:760px; }
+  .tag-free{
+    display:inline-block;
+    background:var(--red);
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    padding:6px 16px;
+    border-radius:20px;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    color:#fff;
+    font-size:40px;
+    font-weight:800;
+    margin-bottom:16px;
+    letter-spacing:-.5px;
+  }
+  .hero p.desc{
+    color:#aaa; font-size:15px; line-height:1.7;
+    margin-bottom:24px;
+  }
+  .badge-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px; }
+  .pill-badge{
+    background:var(--black-2);
+    border:1px solid var(--border-dark);
+    color:#ddd;
+    font-size:12.5px;
+    font-weight:600;
+    padding:8px 14px;
+    border-radius:20px;
+    display:flex;align-items:center;gap:6px;
+  }
+  .pill-badge svg{ color:var(--red); flex-shrink:0; }
+
+  .btn-primary-lg{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    background:var(--red); color:#fff; border:none;
+    padding:17px 34px; border-radius:10px; font-size:16px; font-weight:700;
+    cursor:pointer;
+    position:relative; overflow:hidden; isolation:isolate;
+    box-shadow:0 4px 14px rgba(184,50,50,.35);
+    animation:btnPulse 2.6s ease-in-out infinite;
+    transition:transform .15s ease, box-shadow .15s ease;
+    margin-bottom:14px;
+  }
+  .btn-primary-lg:hover{ transform:translateY(-1px); }
+  @keyframes btnPulse{
+    0%,100%{ box-shadow:0 4px 14px rgba(184,50,50,.35); }
+    50%{ box-shadow:0 4px 20px rgba(184,50,50,.6); }
+  }
+  .cert-note{
+    display:flex; gap:10px; align-items:flex-start;
+    max-width:520px; color:#999; font-size:13px; line-height:1.6;
+  }
+  .cert-note svg{ flex-shrink:0; margin-top:2px; color:var(--red); }
+
+  .whatsapp-float{
+    position:fixed; right:24px; bottom:24px;
+    width:52px; height:52px; border-radius:50%;
+    background:#25d366; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 16px rgba(0,0,0,.25); z-index:50;
+  }
+  .back-to-top{
+    position:fixed; right:24px; bottom:86px;
+    width:44px; height:44px; border-radius:50%;
+    background:var(--black); border:1px solid var(--border-dark);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 16px rgba(0,0,0,.2); z-index:50;
+    color:#fff; cursor:pointer;
+    opacity:0; transform:translateY(10px);
+    pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease, background-color .2s ease;
+  }
+  .back-to-top:hover{ background:var(--red); }
+  .back-to-top.visible{ opacity:1; transform:translateY(0); pointer-events:auto; }
+
+  /* ===================================================== */
+  /* SECCIÓN DE INFO (temario / objetivos / metodología / requisitos / diferencias / tecnología) */
+  /* ===================================================== */
+  .info-section{ padding:56px 0 64px; }
+  .info-grid{
+    display:grid;
+    grid-template-columns:1.6fr 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  .info-main > div{ margin-bottom:52px; }
+  .info-main > div:last-child{ margin-bottom:0; }
+  .info-main h2{ font-size:23px; font-weight:800; margin-bottom:18px; }
+  .info-main p{ font-size:14.5px; color:#333; line-height:1.75; margin-bottom:14px; }
+  .info-main p:last-child{ margin-bottom:0; }
+
+  /* Temario */
+  .modules{ display:flex; flex-direction:column; gap:10px; }
+  .module-item{ border:1px solid var(--border-gray); border-radius:12px; }
+  .module-q{
+    width:100%; background:none; border:none; text-align:left;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 18px; font-size:15px; font-weight:700; color:#1a1a1a;
+  }
+  .module-q .mplus{
+    width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    color:var(--red); font-size:18px; font-weight:400; transition:transform .2s ease;
+  }
+  .module-item.open .mplus{ transform:rotate(45deg); }
+  .module-a{ max-height:0; overflow:hidden; transition:max-height .3s ease; }
+  .module-item.open .module-a{ max-height:260px; }
+  .module-a-inner{ padding:0 18px 18px; font-size:13.5px; color:var(--text-gray); line-height:1.7; }
+  .module-a-inner li{ margin-bottom:4px; padding-left:14px; position:relative; }
+  .module-a-inner li::before{ content:"—"; position:absolute; left:0; color:var(--red); }
+
+  /* Requisitos */
+  .check-list{ display:flex; flex-direction:column; gap:14px; }
+  .check-item{ display:flex; gap:10px; font-size:14.5px; color:#333; line-height:1.55; }
+  .check-item svg{ color:var(--red); flex-shrink:0; margin-top:3px; }
+
+  /* Diferencias */
+  .diff-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px 32px; }
+  .diff-item{ display:flex; gap:10px; font-size:14px; color:#333; line-height:1.5; }
+  .diff-item svg{ color:var(--red); flex-shrink:0; margin-top:3px; }
+
+  /* Tecnología */
+  .tech-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:22px; }
+  .tech-feat{
+    background:#f9f9f8; border:1px solid var(--border-gray);
+    border-radius:12px; padding:16px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .tech-feat .ticon{
+    width:32px;height:32px;border-radius:8px;background:var(--red-soft);
+    display:flex;align-items:center;justify-content:center;color:var(--red);flex-shrink:0;
+  }
+  .tech-feat span{ font-size:13px; font-weight:600; color:#333; line-height:1.3; }
+
+  /* sidebar */
+  .aside-card{
+    background:var(--cream);
+    border-radius:16px;
+    padding:24px;
+    margin-bottom:28px;
+  }
+  .aside-card h3{ font-size:15px; font-weight:800; margin-bottom:8px; }
+  .aside-card p{ font-size:13px; color:var(--text-gray); line-height:1.6; }
+
+  .related-title{ font-size:17px; font-weight:800; margin-bottom:14px; }
+  .related-list{ display:flex; flex-direction:column; }
+  .related-item{
+    padding:12px 0; border-bottom:1px solid var(--border-gray);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .related-item .rname{ font-size:14px; font-weight:700; margin-bottom:3px; }
+  .related-item .rsub{ font-size:12px; color:var(--text-lgray); }
+  .rtag{
+    font-size:11px; font-weight:700; color:var(--red);
+    background:var(--red-soft); padding:3px 10px; border-radius:12px;
+    white-space:nowrap;
+  }
+  .share-title{ font-size:14px; font-weight:700; margin:26px 0 10px; }
+  .share-icons{ display:flex; gap:10px; }
+  .share-icons a{
+    width:34px;height:34px;border-radius:8px;background:#f2f2f2;
+    display:flex;align-items:center;justify-content:center;color:#333;
+  }
+
+  .note{ margin-top:8px; padding:12px 14px; background:#fdf6f0; border-left:3px solid var(--red); border-radius:4px; font-size:13px; color:#8a5a3a; line-height:1.6; }
+
+  /* ===================================================== */
+  /* FOOTER */
+  /* ===================================================== */
+  footer{
+    background:linear-gradient(180deg,#fff 0%, var(--cream) 100%);
+    padding:56px 0 40px;
+  }
+  .footer-grid{ display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:30px; margin-bottom:40px; }
+  .footer-col h4{ font-size:15px; font-weight:800; margin-bottom:16px; }
+  .footer-col a{ display:block; font-size:13px; color:#555; margin-bottom:10px; }
+  .footer-social{ display:flex; gap:10px; margin-bottom:22px; }
+  .footer-social a{
+    width:32px;height:32px;border-radius:8px;background:#fff;border:1px solid var(--border-gray);
+    display:flex;align-items:center;justify-content:center;color:#333;
+  }
+  .pay-logos{ display:flex; flex-wrap:wrap; gap:6px; max-width:220px; }
+  .pay-logos span{
+    font-size:9px; font-weight:700; background:#fff; border:1px solid var(--border-gray);
+    padding:4px 7px; border-radius:4px; color:#555;
+  }
+
+  @media (max-width:900px){
+    .info-grid{ grid-template-columns:1fr; }
+    .diff-grid{ grid-template-columns:1fr; }
+    .tech-grid{ grid-template-columns:1fr 1fr; }
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+    .wrap{ padding:0 20px; }
+  }
+  @media (max-width:560px){
+    .tech-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================================================= -->
+<!-- NOTA PARA EL PROGRAMADOR -->
+<!-- ======================================================= -->
+<div class="correction-note">
+  <div class="tag">NOTA PARA EL PROGRAMADOR</div>
+  <p class="title">Diferencias clave respecto a la maqueta de cursos pagos:</p>
+  <ol>
+    <li><b>Sin cta-card:</b> los cursos gratuitos no tienen tarjeta de precio/cuotas. El hero es a una sola columna, con el botón "Inscribirme ahora" directo sobre el fondo negro.</li>
+    <li><b>Aclaración de certificado:</b> debajo del botón principal siempre debe verse el texto aclarando que la certificación tiene un arancel mínimo opcional.</li>
+    <li><b>Estructura de contenido:</b> en vez de "Qué vas a aprender / Para quién / Plan de estudio / Testimonios / Certificación / FAQ", los cursos gratuitos usan 6 subsecciones fijas: Temario, Objetivos, Metodología, Requisitos, Diferencias y Tecnología. Revisar que el sub-nav sticky enlace correctamente a cada una.</li>
+    <li><b>Sin testimonios, sin tutor IA, sin certificación universitaria ni FAQ:</b> esas secciones son exclusivas de los cursos pagos, no van acá.</li>
+    <li><b>Header y footer:</b> se mantienen igual a la maqueta de cursos pagos, sin modificaciones.</li>
+  </ol>
+</div>
+
+<!-- ======================================================= -->
+<!-- HEADER -->
+<!-- ======================================================= -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <img src="fude-black.webp" style="height: 50px; width: auto;">
+    </a>
+    <nav>
+      <div class="nav-item">
+        <button class="nav-link">
+          Cursos
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5l5 5 5-5" stroke="rgba(255,255,255,0.85)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown">
+          <div class="dropdown-grid">
+            <a class="drop-area" href="#"><div class="drop-area-title">💻 Tecnología</div><span class="drop-area-course">Programación Web</span><span class="drop-area-course">Data Science</span><span class="drop-area-course">Ciberseguridad</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">🏥 Salud</div><span class="drop-area-course">Primeros Auxilios</span><span class="drop-area-course">Enfermería General</span><span class="drop-area-course">Nutrición</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">📊 Negocios</div><span class="drop-area-course">Marketing Digital</span><span class="drop-area-course">Gestión Empresarial</span><span class="drop-area-course">Recursos Humanos</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">🎨 Diseño</div><span class="drop-area-course">Diseño Gráfico</span><span class="drop-area-course">UX/UI Design</span><span class="drop-area-course">Fotografía</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">⚖️ Derecho</div><span class="drop-area-course">Derecho Laboral</span><span class="drop-area-course">Derecho Penal</span><span class="drop-area-course">Mediación</span></a>
+            <a class="drop-area" href="#"><div class="drop-area-title">🌍 Idiomas</div><span class="drop-area-course">Inglés Técnico</span><span class="drop-area-course">Portugués</span><span class="drop-area-course">Ver todas las áreas →</span></a>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="nav-link current">Gratis</a>
+      <a href="#" class="nav-link">Carreras Cortas</a>
+      <a href="#" class="nav-link">Empresas</a>
+      <a href="#" class="nav-link">Blog</a>
+    </nav>
+    <div class="header-right">
+      <a href="#" class="btn-alumno">Acceso Alumnos</a>
+    </div>
+  </div>
+</header>
+
+<!-- ======================================================= -->
+<!-- SUB-HEADER STICKY DEL CURSO GRATUITO -->
+<!-- ======================================================= -->
+<nav class="course-subnav" id="courseSubnav">
+  <div class="wrap subnav-inner">
+    <div class="subnav-logo">
+      <img src="logo-fude-fondoblanco.png" alt="FUDE" class="subnav-logo-img">
+    </div>
+    <div class="subnav-links">
+      <a href="#temario" data-target="temario">Temario</a>
+      <a href="#objetivos" data-target="objetivos">Objetivos</a>
+      <a href="#metodologia" data-target="metodologia">Metodología</a>
+      <a href="#requisitos" data-target="requisitos">Requisitos</a>
+      <a href="#diferencias" data-target="diferencias">Diferencias</a>
+      <a href="#tecnologia" data-target="tecnologia">Tecnología</a>
+    </div>
+    <button class="subnav-cta" id="subnavCta">Inscribirme ahora</button>
+  </div>
+</nav>
+
+<!-- ======================================================= -->
+<!-- HERO -->
+<!-- ======================================================= -->
+<section class="hero" id="cta">
+  <div class="wrap hero-inner">
+    <span class="tag-free">Curso Gratuito</span>
+    <h1>Análisis de los Recursos Financieros</h1>
+    <p class="desc">El curso gratuito de Análisis de los Recursos Financieros tiene como objetivo brindar una breve formación respecto a los recursos financieros presentes y futuros de una empresa. Dirigido a estudiantes de ciencias económicas y contadores públicos. No esperes más: comenzá nuestro curso de Análisis de los Recursos Financieros a distancia y aprendé mucho más sobre eso que en verdad te apasiona.</p>
+
+    <div class="badge-row">
+      <span class="pill-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg> 100% Online</span>
+      <span class="pill-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg> Curso Gratis</span>
+      <span class="pill-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg> Inicio inmediato</span>
+    </div>
+
+<div>
+  <a href="maqueta-CURSO-GRATUITO-inscripcion.html" class="btn-primary-lg">
+    Inscribirme ahora
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M5 12h14M13 5l7 7-7 7"/>
+    </svg>
+  </a>
+</div>
+
+
+    <div class="cert-note">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M7 13h4"/></svg>
+      <span>Este curso es gratuito. Si querés obtener un certificado que avale que lo realizaste, podés hacerlo abonando un arancel mínimo.</span>
+    </div>
+  </div>
+</section>
+
+<div class="whatsapp-float">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.06L2 22l5.1-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.44-4.38-1.2l-.31-.19-3.02.79.81-2.94-.2-.3A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+</div>
+
+<button class="back-to-top" id="backToTop" aria-label="Volver arriba">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- ======================================================= -->
+<!-- INFO DEL CURSO -->
+<!-- ======================================================= -->
+<section class="info-section">
+  <div class="wrap info-grid">
+    <div class="info-main">
+
+      <!-- TEMARIO -->
+      <div id="temario">
+        <h2>Temario del curso</h2>
+        <div class="modules" id="modules">
+          <div class="module-item open">
+            <button class="module-q" onclick="this.parentElement.classList.toggle('open')">
+              Módulo 1 <span class="mplus">+</span>
+            </button>
+            <div class="module-a">
+              <div class="module-a-inner">
+                <ul>
+                  <li>Concepto de recurso financiero y diferencias con las cuestiones económicas.</li>
+                  <li>Exposición de los cambios en los recursos financieros.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="module-item">
+            <button class="module-q" onclick="this.parentElement.classList.toggle('open')">
+              Módulo 2 <span class="mplus">+</span>
+            </button>
+            <div class="module-a">
+              <div class="module-a-inner">
+                <ul>
+                  <li>Análisis e interpretación de la información sobre los recursos financieros.</li>
+                  <li>La administración del efectivo.</li>
+                  <li>La planificación financiera.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OBJETIVOS -->
+      <div id="objetivos">
+        <h2>Objetivos</h2>
+        <p>FUDE tiene entre sus objetivos ofrecer a profesionales y estudiantes una constante actualización a través de la educación a distancia. También nos interesa poner a disposición de nuestros alumnos el acceso a enseñanza de calidad, con eficacia en lo aprendido, desarrollando recursos tecnológicos innovadores, como contenido online, animaciones, actividades de fijación interactivas, videos complementarios, actividades a desarrollar por los alumnos y juegos educativos que enriquecen la forma de aprender en la actualidad.</p>
+        <p><strong>Objetivo específico:</strong> brindar al alumno conocimientos y actualización sobre temas relacionados con Administración.</p>
+      </div>
+
+      <!-- METODOLOGÍA -->
+      <div id="metodologia">
+        <h2>Metodología</h2>
+        <p>El sistema de enseñanza a distancia ofrece múltiples beneficios a la hora de estudiar. El curso está diseñado a partir de prácticos recursos tecnológicos y pedagógicos que permiten fomentar la interacción tanto entre los participantes del curso, como entre los alumnos y tutores. Además, el uso de diversas herramientas digitales facilita la comprensión de los contenidos teóricos y prácticos del curso.</p>
+        <p>Nuestro modelo educativo, basado en la educación a distancia, le permite al alumno acceder a una formación profesional simplemente a través de una computadora con acceso a Internet. De este modo, al igualar las oportunidades de acceso a la educación, intentamos democratizar la formación académica y enriquecer el perfil laboral de los alumnos.</p>
+        <p>Los cursos online, a través de su modelo educativo y sus diversas herramientas, permiten estimular la participación de los alumnos en un Campus Virtual donde no existen barreras geográficas. Así, el proceso formativo se transfiere de manera uniforme y el conocimiento se propaga a todas partes del mundo.</p>
+      </div>
+
+      <!-- REQUISITOS -->
+      <div id="requisitos">
+        <h2>Requisitos</h2>
+        <div class="check-list">
+          <div class="check-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <span><strong>Edad:</strong> ser mayor de 16 años.</span></div>
+          <div class="check-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <span><strong>Estudios:</strong> haber finalizado el Ciclo Básico de Educación Secundaria.</span></div>
+          <div class="check-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <span><strong>Tecnología:</strong> contar con un dispositivo con conexión a Internet superior a 1 MB de velocidad.</span></div>
+          <div class="check-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <span>Los cursos gratuitos no entregan certificado por defecto.</span></div>
+        </div>
+        <div class="note">Si querés un certificado que avale que realizaste el curso, podés obtenerlo abonando un arancel mínimo.</div>
+      </div>
+
+      <!-- DIFERENCIAS -->
+      <div id="diferencias">
+        <h2>Diferencias en servicios ofrecidos</h2>
+        <div class="diff-grid">
+          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Contenidos audiovisuales, con juegos y actividades interactivas</div>
+          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Revista Digital Educativa</div>
+          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Newsletters para cada área de enseñanza</div>
+          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Índice de satisfacción de más del 98%</div>
+          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 92% de alumnos considera el material bueno y/o muy bueno</div>
+          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Carga horaria de 15 a 240 hs en múltiples áreas de enseñanza</div>
+          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Más de 200 cursos online</div>
+          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Atención online los 7 días de la semana</div>
+          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Miles de alumnos en Argentina, Chile, México y Perú</div>
+          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Certificado digital con criptografía de 256 bits en pagos</div>
+        </div>
+      </div>
+
+      <!-- TECNOLOGÍA -->
+      <div id="tecnologia">
+        <h2>Tecnología</h2>
+        <p>La tecnología educativa de los cursos online le permite al alumno estudiar de manera mucho más flexible y desde cualquier lugar. Además, mediante una actualización contínua, ofrecemos material interactivo y contenidos educativos complementarios que favorecen notablemente la experiencia de aprendizaje del alumno y enriquecen su perfil profesional.</p>
+        <div class="tech-grid">
+          <div class="tech-feat"><span class="ticon">🏠</span><span>Estudiá desde casa</span></div>
+          <div class="tech-feat"><span class="ticon">🎓</span><span>Campus propio</span></div>
+          <div class="tech-feat"><span class="ticon">🎬</span><span>Clases audiovisuales</span></div>
+          <div class="tech-feat"><span class="ticon">🎮</span><span>Juegos interactivos</span></div>
+          <div class="tech-feat"><span class="ticon">📹</span><span>Videos</span></div>
+          <div class="tech-feat"><span class="ticon">🕐</span><span>Flexibilidad: elegís días y horarios</span></div>
+          <div class="tech-feat"><span class="ticon">💬</span><span>Clases interactivas</span></div>
+          <div class="tech-feat"><span class="ticon">👥</span><span>Foro</span></div>
+          <div class="tech-feat"><span class="ticon">📜</span><span>Certificación digital (opcional)</span></div>
+          <div class="tech-feat"><span class="ticon">📝</span><span>Actividades de repaso</span></div>
+          <div class="tech-feat"><span class="ticon">🌐</span><span>Estándar mundial e-learning</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <aside>
+      <div class="aside-card">
+        <h3>¿Querés certificarte?</h3>
+        <p>Este curso es gratuito. Podés sumar un certificado que avale tu formación abonando un arancel mínimo, una vez finalizado.</p>
+      </div>
+
+      <div class="related-title">Otros cursos gratuitos</div>
+      <div class="related-list">
+        <div class="related-item"><div><div class="rname">Secretariado Médico</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
+        <div class="related-item"><div><div class="rname">Facturación Sanatorial</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
+        <div class="related-item"><div><div class="rname">Administración de PyMEs</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
+        <div class="related-item"><div><div class="rname">Costos y Presupuestos</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
+        <div class="related-item"><div><div class="rname">Introducción a RR.HH.</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
+      </div>
+
+      <div class="share-title">Comparte este curso:</div>
+      <div class="share-icons">
+        <a href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.06L2 22l5.1-1.33A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg></a>
+        <a href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4V23h-4V8zM8.5 8h3.8v2h.05c.53-1 1.83-2.05 3.77-2.05C20.5 7.95 23 9.5 23 14.1V23h-4v-8.1c0-1.93-.03-4.4-2.68-4.4-2.68 0-3.09 2.1-3.09 4.27V23h-4V8z"/></svg></a>
+        <a href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg></a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- FOOTER -->
+<!-- ======================================================= -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>FUDE by Educativo</h4>
+        <a href="#">Preguntas Frecuentes</a>
+        <a href="#">Quienes Somos</a>
+        <a href="#">Terminos y Condiciones</a>
+        <h4 style="margin-top:22px;">Contacto</h4>
+        <a href="#">info@educativo.net</a>
+      </div>
+      <div class="footer-col">
+        <h4>Comunidad</h4>
+        <a href="#">Blog</a>
+        <a href="#">Profesores</a>
+        <a href="#">Bolsa de trabajo</a>
+      </div>
+      <div class="footer-col">
+        <h4>Estudiá con nosotros</h4>
+        <a href="#">Salud</a>
+        <a href="#">Administración</a>
+        <a href="#">Estética</a>
+        <a href="#">Educación</a>
+        <a href="#">Deportes</a>
+        <a href="#">Oficios</a>
+      </div>
+      <div class="footer-col">
+        <h4>¡Seguinos!</h4>
+        <div class="footer-social">
+          <a href="#">f</a>
+          <a href="#">◎</a>
+          <a href="#">▶</a>
+        </div>
+        <h4>Medios de Pago</h4>
+        <div class="pay-logos">
+          <span>Mastercard</span><span>VISA</span><span>Amex</span><span>Cabal</span>
+          <span>Naranja X</span><span>Cordobesa</span><span>Galicia</span><span>BBVA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sub-header sticky: aparece al pasar el hero y marca la sección activa
+  (function(){
+    const subnav = document.getElementById('courseSubnav');
+    const heroEl = document.querySelector('.hero');
+    const links = document.querySelectorAll('.subnav-links a');
+    const sectionIds = ['temario','objetivos','metodologia','requisitos','diferencias','tecnologia'];
+    const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+    const backToTop = document.getElementById('backToTop');
+
+    function updateVisibility(){
+      const heroBottom = heroEl.getBoundingClientRect().bottom;
+      const pastHero = heroBottom < 0;
+      subnav.classList.toggle('visible', pastHero);
+      if(backToTop) backToTop.classList.toggle('visible', pastHero);
+    }
+    window.addEventListener('scroll', updateVisibility, { passive:true });
+    updateVisibility();
+
+    if(backToTop){
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top:0, behavior:'smooth' });
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          links.forEach(l => l.classList.remove('active'));
+          const activeLink = document.querySelector(`.subnav-links a[data-target="${entry.target.id}"]`);
+          if(activeLink) activeLink.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+    sections.forEach(sec => observer.observe(sec));
+
+    function scrollToTarget(id){
+      const target = document.getElementById(id);
+      if(!target) return;
+      const top = target.getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({ top, behavior:'smooth' });
+    }
+
+    links.forEach(link => {
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        scrollToTarget(this.dataset.target);
+      });
+    });
+
+    const subnavCta = document.getElementById('subnavCta');
+    if(subnavCta){
+      subnavCta.addEventListener('click', () => {
+        window.scrollTo({ top:0, behavior:'smooth' });
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
