@@ -82,6 +82,37 @@
   .header-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
   .btn-alumno{background:#fff;color:var(--primary);font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;border:2px solid rgba(255,255,255,0.3);white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
   .btn-alumno:hover{background:#ffe8ec}
+  .menu-toggle{
+    display:none;
+    background:none;border:none;color:#fff;
+    width:40px;height:40px;align-items:center;justify-content:center;
+    cursor:pointer;flex-shrink:0;
+  }
+  .menu-toggle .icon-close{ display:none; }
+  .menu-toggle.active .icon-open{ display:none; }
+  .menu-toggle.active .icon-close{ display:block; }
+
+  /* ─── HEADER RESPONSIVE (mobile) ─── */
+  @media (max-width:900px){
+    .header-inner{ flex-wrap:wrap; padding:12px 20px; height:auto; min-height:64px; }
+    .logo{ order:1; margin-right:0; }
+    .menu-toggle{ display:flex; order:2; margin-left:auto; }
+    .header-right{ order:3; margin-left:12px; }
+    nav.main-nav{
+      order:4;
+      display:none;
+      flex-direction:column;
+      align-items:stretch;
+      width:100%;
+      gap:0;
+      background:var(--primary-dark);
+      border-radius:0 0 14px 14px;
+      margin-top:12px;
+      overflow:hidden;
+    }
+    nav.main-nav.mobile-open{ display:flex; }
+    .nav-link{ width:100%; border-radius:0; padding:14px 18px; font-size:15px; }
+  }
 
   /* ========================================================= HERO + FORM */
   .hero-section{background:var(--black);color:#fff;padding:64px 0 76px;}
@@ -125,6 +156,18 @@
     .hero-grid{grid-template-columns:1fr;gap:36px;}
     .hero-stats{flex-wrap:wrap;gap:28px;}
     .field-row{grid-template-columns:1fr;}
+  }
+  @media (max-width:480px){
+    .wrap{ padding:0 16px; }
+    .header-inner{ padding:10px 16px; }
+    .logo img{ height:40px !important; }
+    .dev-note{ margin:16px; padding:16px 18px; }
+    .hero-section{ padding:44px 0 52px; }
+    .form-card{ padding:24px 20px; }
+    .hero-stats{ gap:20px; }
+    .why-card, .gpack-card{ padding:22px 20px; }
+    .pack-summary{ padding:22px 56px 20px 18px; }
+    .cta-buttons .btn-white, .cta-buttons .btn-outline-white{ width:100%; text-align:center; }
   }
 
   /* ========================================================= EYEBROW / HEAD genérico */
@@ -380,6 +423,10 @@
     <a href="#" class="logo">
       <img src="fude-black.webp" style="height: 50px; width: auto;">
     </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+      <svg class="icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
     <nav class="main-nav">
       <a href="#" class="nav-link">Cursos</a>
       <a href="#" class="nav-link">Gratis</a>
@@ -1360,6 +1407,17 @@
 <script>
   (function(){
     var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ---------- Menú hamburguesa (header, mobile) ----------
+    var menuToggle = document.getElementById('menuToggle');
+    var mainNav = document.querySelector('header nav.main-nav');
+    if (menuToggle && mainNav) {
+      menuToggle.addEventListener('click', function(){
+        var isOpen = mainNav.classList.toggle('mobile-open');
+        menuToggle.classList.toggle('active', isOpen);
+        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    }
 
     // ---------- Itinerarios: abrir/cerrar tarjetas ----------
     document.querySelectorAll('.pack-toggle').forEach(function(btn){
