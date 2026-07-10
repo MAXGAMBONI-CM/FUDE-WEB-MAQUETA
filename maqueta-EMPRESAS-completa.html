@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FUDE — Empresas (maqueta completa)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#b83232;
+    --primary-dark:#8f2424;
+    --primary-50:#fbeeee;
+    --primary-100:#f3d9d9;
+    --primary-300:#d98f8f;
+    --primary-600:#b83232;
+    --ink:#1b1717;
+    --black:#141010;
+    --gray-700:#4a4444;
+    --gray-500:#7a7373;
+    --gray-300:#cfc7c7;
+    --gray-150:#ece7e7;
+    --gray-100:#f6f3f3;
+    --white:#ffffff;
+    --cream:#fdf1e7;
+    --green:#2e9e5b;
+    --radius-lg:20px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --shadow:0 2px 14px rgba(40,20,20,.06);
+    --shadow-hover:0 10px 28px rgba(40,20,20,.10);
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;margin:0;padding:0;}
+  button{font-family:inherit;cursor:pointer;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  h1,h2,h3,h4{font-family:'Poppins',sans-serif;}
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; scroll-behavior:auto !important; animation:none !important;}
+  }
+
+  /* =========================================================
+     NOTA PARA EL DESARROLLADOR — no forma parte del sitio real
+     ========================================================= */
+  .dev-note{
+    font-family:'Inter',system-ui,sans-serif;
+    max-width:1180px;
+    margin:24px auto;
+    padding:20px 26px;
+    background:#fff8e6;
+    border:2px dashed #d9a32b;
+    border-radius:12px;
+    color:#5c4400;
+    font-size:14px;
+    line-height:1.6;
+  }
+  .dev-note h4{margin:0 0 10px;font-size:15px;color:#3d2e00;}
+  .dev-note ol{margin:0;padding-left:20px;}
+  .dev-note li{margin-bottom:8px;}
+  .dev-note code{background:#f1e2b8;padding:1px 5px;border-radius:4px;font-size:13px;}
+
+  /* ========================================================= HEADER */
+  header.site-header{background:var(--primary);position:relative;top:0;z-index:100;box-shadow:0 2px 12px rgba(184,50,50,.2)}
+  .header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;height:64px;gap:8px}
+  .logo{display:flex;align-items:center;gap:10px;margin-right:16px;flex-shrink:0}
+  .logo-mark{width:34px;height:34px;border-radius:8px;background:#fff;color:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:800;font-family:'Poppins',sans-serif;}
+  .logo-text{color:#fff;font-weight:800;font-size:18px;font-family:'Poppins',sans-serif;}
+  nav.main-nav{display:flex;align-items:center;gap:2px;flex:1}
+  .nav-link{color:rgba(255,255,255,0.9);font-size:14px;font-weight:500;padding:8px 14px;border-radius:8px;display:flex;align-items:center;gap:5px;background:none;border:none;white-space:nowrap}
+  .nav-link:hover{background:rgba(0,0,0,0.12);color:#fff}
+  .header-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
+  .btn-alumno{background:#fff;color:var(--primary);font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;border:2px solid rgba(255,255,255,0.3);white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+  .btn-alumno:hover{background:#ffe8ec}
+
+  /* ========================================================= HERO + FORM */
+  .hero-section{background:var(--black);color:#fff;padding:64px 0 76px;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start;}
+  .hero-eyebrow{
+    display:inline-block;background:var(--primary);color:#fff;font-size:12px;font-weight:700;
+    letter-spacing:.05em;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:20px;
+  }
+  .hero-copy h1{font-size:clamp(30px,4vw,42px);font-weight:800;line-height:1.15;letter-spacing:-.5px;margin:0 0 18px;}
+  .hero-copy h1 .accent{color:#e85d5d;}
+  .hero-copy p.hero-sub{font-size:15.5px;color:#c9c3c3;line-height:1.7;max-width:520px;margin:0 0 34px;}
+  .hero-stats{display:flex;gap:40px;}
+  .hero-stat b{display:block;font-family:'Poppins',sans-serif;font-size:26px;font-weight:800;color:#fff;}
+  .hero-stat span{display:block;font-size:12.5px;color:#a8a2a2;margin-top:4px;}
+
+  /* form card */
+  .form-card{
+    background:#fff;color:var(--ink);border-radius:18px;padding:32px 34px;
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+  }
+  .form-card h2{font-size:19px;font-weight:800;margin:0 0 4px;}
+  .form-card .form-sub{font-size:13.5px;color:var(--gray-500);margin:0 0 22px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:12px;font-weight:700;color:#333;margin-bottom:6px;}
+  .field input, .field select{
+    width:100%;padding:11px 13px;border:1.5px solid var(--gray-150);border-radius:9px;
+    font-size:13.5px;color:var(--ink);font-family:inherit;background:#fff;
+  }
+  .field select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237a7373' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;}
+  .field input:focus, .field select:focus{outline:none;border-color:var(--primary);}
+  .btn-submit{
+    width:100%;background:var(--primary);color:#fff;border:none;padding:15px 24px;border-radius:10px;
+    font-size:15px;font-weight:700;box-shadow:0 4px 14px rgba(184,50,50,.35);margin-top:4px;
+    transition:transform .15s var(--ease), background .15s var(--ease);
+  }
+  .btn-submit:hover{background:var(--primary-dark);transform:translateY(-1px);}
+  .form-note{text-align:center;font-size:12px;color:var(--gray-500);margin-top:14px;}
+
+  @media (max-width:960px){
+    .hero-grid{grid-template-columns:1fr;gap:36px;}
+    .hero-stats{flex-wrap:wrap;gap:28px;}
+    .field-row{grid-template-columns:1fr;}
+  }
+
+  /* ========================================================= EYEBROW / HEAD genérico */
+  .section-head{text-align:center;max-width:720px;margin:0 auto 44px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:6px;background:var(--primary-50);color:var(--primary);
+    font-weight:700;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;
+    padding:7px 16px;border-radius:999px;margin-bottom:16px;
+  }
+  .section-head h2{font-size:clamp(26px,3.4vw,36px);font-weight:700;line-height:1.2;margin:0 0 12px;color:var(--ink);}
+  .section-head p{color:var(--gray-500);font-size:15.5px;line-height:1.6;margin:0;}
+
+  /* ========================================================= POR QUÉ ELEGIRNOS */
+  .why-section{padding:80px 0;background:#fff;}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:980px;margin:0 auto;}
+  .why-card{background:var(--gray-100);border:1px solid var(--gray-150);border-radius:var(--radius-md);padding:26px 24px;transition:border-color .2s var(--ease), transform .2s var(--ease);}
+  .why-card:hover{border-color:var(--primary-300);transform:translateY(-2px);}
+  .why-icon{width:44px;height:44px;border-radius:11px;background:var(--primary-50);color:var(--primary);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .why-icon svg{width:22px;height:22px;}
+  .why-card h3{font-size:16.5px;font-weight:600;margin:0 0 8px;color:var(--ink);}
+  .why-card p{font-size:13.5px;color:var(--gray-500);line-height:1.6;margin:0;}
+  @media (max-width:900px){ .why-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .why-grid{grid-template-columns:1fr;} }
+
+  /* ========================================================= PAQUETES (grid simple) */
+  .paquetes-section{padding:80px 0 90px;background:var(--gray-100);}
+  .paquetes-filters{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 0 40px;}
+  .gfilter-pill{
+    font-family:inherit;font-size:14px;font-weight:600;color:var(--gray-700);background:#fff;
+    border:1px solid var(--gray-150);padding:10px 18px;border-radius:999px;transition:all .2s var(--ease);
+  }
+  .gfilter-pill:hover{border-color:var(--primary-300);color:var(--primary);}
+  .gfilter-pill.active{background:var(--primary);border-color:var(--primary);color:#fff;}
+
+  .paquetes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .gpack-card{
+    background:#fff;border:1px solid var(--gray-150);border-radius:var(--radius-lg);padding:26px 26px 24px;
+    display:flex;flex-direction:column;box-shadow:var(--shadow);transition:box-shadow .2s var(--ease), border-color .2s var(--ease);
+    position:relative;
+  }
+  .gpack-card:hover{box-shadow:var(--shadow-hover);}
+  .gpack-card.featured{border-color:var(--primary-300);background:linear-gradient(180deg,#fff, var(--primary-50) 220%);}
+  .gpack-badge{
+    position:absolute;top:20px;right:20px;background:var(--primary);color:#fff;font-size:11px;font-weight:700;
+    padding:4px 12px;border-radius:999px;text-transform:uppercase;letter-spacing:.03em;
+  }
+  .gpack-eyebrow{font-size:12px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.03em;margin-bottom:10px;}
+  .gpack-card h3{font-size:19px;font-weight:600;margin:0 0 10px;color:var(--ink);}
+  .gpack-card .gpack-desc{font-size:13.5px;color:var(--gray-500);line-height:1.55;margin:0 0 18px;min-height:56px;}
+  .gpack-courses{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;flex:1;}
+  .gpack-courses li{display:flex;gap:8px;font-size:13px;color:var(--gray-700);line-height:1.5;}
+  .gpack-courses svg{width:15px;height:15px;color:var(--primary);flex-shrink:0;margin-top:2px;}
+  .gpack-meta{display:flex;gap:20px;padding-top:16px;border-top:1px solid var(--gray-150);margin-bottom:18px;}
+  .gpack-meta span{font-size:12.5px;color:var(--gray-700);display:flex;align-items:center;gap:6px;}
+  .gpack-meta strong{font-family:'Poppins',sans-serif;font-size:17px;color:var(--ink);}
+  .gpack-cta{
+    width:100%;background:var(--primary);color:#fff;border:none;padding:13px 20px;border-radius:999px;
+    font-size:14.5px;font-weight:700;transition:background .2s var(--ease);
+  }
+  .gpack-cta:hover{background:var(--primary-dark);}
+  .gpack-cta.outline{background:#fff;color:var(--primary);border:1.5px solid var(--primary);}
+  .gpack-cta.outline:hover{background:var(--primary-50);}
+
+  @media (max-width:900px){ .paquetes-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:640px){ .paquetes-grid{grid-template-columns:1fr;} }
+
+  /* ========================================================= (ITINERARIOS: estilos ya programados, sin tocar) */
+  .rutas-section{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:var(--white);color:var(--ink);padding:80px 24px 96px;
+  }
+  .rutas-container{max-width:1140px;margin:0 auto;}
+  .rutas-head{text-align:center;max-width:720px;margin:0 auto 40px;}
+  .rutas-head h2{font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,38px);line-height:1.2;margin:0 0 14px;color:var(--ink);}
+  .rutas-head p{color:var(--gray-500);font-size:16px;line-height:1.6;margin:0;}
+  .category-filters{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:36px 0 40px;}
+  .filter-pill{
+    display:inline-flex;align-items:center;gap:7px;font-family:inherit;font-size:14px;font-weight:500;
+    color:var(--gray-700);background:var(--white);border:1px solid var(--gray-150);padding:9px 16px;
+    border-radius:999px;cursor:pointer;transition:border-color .2s var(--ease), color .2s var(--ease), background .2s var(--ease);
+  }
+  .filter-pill svg{width:15px;height:15px;flex-shrink:0;}
+  .filter-pill:hover{border-color:var(--primary-300);color:var(--primary);}
+  .filter-pill.active{background:var(--primary);border-color:var(--primary);color:#fff;}
+  .packs-list{display:flex;flex-direction:column;gap:18px;}
+  .pack-card{
+    position:relative;background:var(--white);border:1px solid var(--gray-150);border-radius:var(--radius-lg);
+    box-shadow:var(--shadow);scroll-margin-top:24px;transition:box-shadow .25s var(--ease), border-color .25s var(--ease);
+  }
+  .pack-card:hover{box-shadow:var(--shadow-hover);}
+  .pack-card.is-open{border-color:var(--primary-300);}
+  .pack-summary{padding:28px 76px 26px 28px;cursor:pointer;}
+  .pack-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--primary);margin-bottom:12px;}
+  .pack-eyebrow svg{width:16px;height:16px;}
+  .pack-summary h3{font-family:'Poppins',sans-serif;font-size:21px;font-weight:600;margin:0 0 8px;color:var(--ink);}
+  .pack-desc{margin:0 0 16px;color:var(--gray-500);font-size:15px;line-height:1.55;max-width:680px;}
+  .pack-meta{display:flex;flex-wrap:wrap;gap:18px;}
+  .pack-meta span{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--gray-700);}
+  .pack-meta svg{width:15px;height:15px;color:var(--primary);flex-shrink:0;}
+  .pack-toggle{
+    position:absolute;top:24px;right:24px;width:40px;height:40px;border-radius:50%;border:1px solid var(--gray-150);
+    background:var(--white);color:var(--primary);display:flex;align-items:center;justify-content:center;cursor:pointer;
+    transition:background .25s var(--ease), border-color .25s var(--ease), transform .35s var(--ease);
+  }
+  .pack-toggle:hover{border-color:var(--primary);background:var(--primary-50);}
+  .pack-toggle svg{width:18px;height:18px;transition:transform .35s var(--ease);}
+  .pack-card.is-open .pack-toggle{background:var(--primary);border-color:var(--primary);color:#fff;}
+  .pack-card.is-open .pack-toggle svg{transform:rotate(45deg);}
+  .pack-details{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease);}
+  .pack-card.is-open .pack-details{grid-template-rows:1fr;}
+  .pack-details-inner{overflow:hidden;min-height:0;}
+  .pack-details-pad{padding:0 28px 32px;}
+  .level-path{display:flex;border-radius:var(--radius-sm);overflow:hidden;margin-bottom:30px;border:1px solid var(--gray-150);}
+  .level-step{flex:1;font-family:inherit;font-weight:600;font-size:13.5px;padding:12px 10px;text-align:center;border:none;cursor:pointer;color:var(--ink);background:var(--primary-100);transition:filter .2s var(--ease);}
+  .level-step + .level-step{border-left:1px solid rgba(255,255,255,.55);}
+  .level-step:hover{filter:brightness(.96);}
+  .level-step.tint-2{background:var(--primary-300);color:#fff;}
+  .level-step.tint-3{background:var(--primary-600);color:#fff;}
+  .level-step.active-step{box-shadow:inset 0 -3px 0 var(--ink);}
+  .levels{display:flex;flex-direction:column;}
+  .level-block{display:flex;gap:18px;}
+  .level-marker{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+  .level-circle{width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;}
+  .level-line{flex:1;width:2px;background:var(--gray-150);margin:4px 0;}
+  .level-block:last-child .level-line{display:none;}
+  .level-content{padding-bottom:30px;flex:1;min-width:0;}
+  .level-content h4{font-family:'Poppins',sans-serif;font-size:16.5px;font-weight:600;margin:2px 0 4px;color:var(--ink);}
+  .level-tag{display:inline-block;font-size:12px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.03em;margin-bottom:16px;}
+  .courses-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+  .course-card{background:var(--gray-100);border:1px solid var(--gray-150);border-radius:var(--radius-md);padding:16px 18px;transition:border-color .2s var(--ease), background .2s var(--ease);}
+  .course-card:hover{border-color:var(--primary-300);background:var(--white);}
+  .course-card h5{font-size:14.5px;font-weight:600;margin:0 0 6px;color:var(--ink);}
+  .course-card p{font-size:13.5px;line-height:1.5;color:var(--gray-500);margin:0 0 14px;}
+  .course-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .badge{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding:4px 10px;border-radius:999px;}
+  .badge-inicial{background:var(--primary-50);color:var(--primary);}
+  .badge-intermedio{background:var(--primary-100);color:var(--primary-dark);}
+  .badge-avanzado{background:var(--primary);color:#fff;}
+  .ver-curso{font-size:13px;font-weight:600;color:var(--primary);white-space:nowrap;}
+  .ver-curso:hover{text-decoration:underline;}
+  .pack-footer{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:8px;padding-top:24px;border-top:1px solid var(--gray-150);}
+  .pack-stats{display:flex;flex-wrap:wrap;gap:22px;align-items:center;}
+  .pack-stats span{font-size:13.5px;color:var(--gray-700);}
+  .pack-stats strong{display:block;font-family:'Poppins',sans-serif;font-size:19px;color:var(--ink);}
+  .cta-btn{font-family:inherit;font-weight:600;font-size:14.5px;color:#fff;background:var(--primary);border:none;padding:13px 24px;border-radius:999px;cursor:pointer;transition:background .2s var(--ease), transform .2s var(--ease);}
+  .cta-btn:hover{background:var(--primary-dark);}
+  button:focus-visible, a:focus-visible{outline:2px solid var(--primary);outline-offset:2px;}
+  @media (max-width:720px){
+    .rutas-section{padding:56px 16px 72px;}
+    .pack-summary{padding:24px 64px 22px 20px;}
+    .pack-toggle{top:20px;right:18px;width:36px;height:36px;}
+    .pack-details-pad{padding:0 20px 26px;}
+    .courses-grid{grid-template-columns:1fr;}
+    .level-block{gap:12px;}
+    .pack-footer{flex-direction:column;align-items:flex-start;}
+    .cta-btn{width:100%;}
+  }
+
+  /* ========================================================= EL PROCESO */
+  .proceso-section{padding:80px 0;background:var(--gray-100);}
+  .proceso-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:1080px;margin:0 auto;}
+  .proceso-step{text-align:center;position:relative;}
+  .proceso-num{
+    width:48px;height:48px;border-radius:50%;background:var(--primary);color:#fff;font-family:'Poppins',sans-serif;
+    font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+  }
+  .proceso-step h3{font-size:16px;font-weight:600;margin:0 0 8px;}
+  .proceso-step p{font-size:13.5px;color:var(--gray-500);line-height:1.6;margin:0;}
+  @media (max-width:900px){ .proceso-grid{grid-template-columns:1fr 1fr;row-gap:36px;} }
+  @media (max-width:560px){ .proceso-grid{grid-template-columns:1fr;} }
+
+  /* ========================================================= TESTIMONIOS */
+  .testi-section{padding:80px 0;background:#fff;}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .testi-card{background:var(--gray-100);border:1px solid var(--gray-150);border-radius:var(--radius-lg);padding:28px 26px;display:flex;flex-direction:column;}
+  .testi-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .testi-avatar{
+    width:44px;height:44px;border-radius:50%;background:var(--primary);color:#fff;font-family:'Poppins',sans-serif;
+    font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .testi-name{font-size:14.5px;font-weight:700;color:var(--ink);}
+  .testi-role{font-size:12.5px;color:var(--gray-500);}
+  .testi-stars{color:#f0b429;font-size:13px;margin-bottom:12px;}
+  .testi-card p.quote{font-size:13.5px;color:var(--gray-700);line-height:1.65;margin:0 0 16px;flex:1;}
+  .testi-result{
+    display:inline-block;background:var(--primary-50);color:var(--primary);font-size:12.5px;font-weight:700;
+    padding:5px 12px;border-radius:999px;align-self:flex-start;
+  }
+  @media (max-width:900px){ .testi-grid{grid-template-columns:1fr;} }
+
+  /* ========================================================= CTA ROJO */
+  .cta-section{background:var(--primary);color:#fff;padding:70px 0;text-align:center;}
+  .cta-section h2{font-size:clamp(24px,3.2vw,32px);font-weight:700;margin:0 0 12px;}
+  .cta-section p{font-size:15px;color:#f3d9d9;margin:0 0 30px;}
+  .cta-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .btn-white{background:#fff;color:var(--primary);font-weight:700;font-size:15px;padding:14px 30px;border-radius:999px;border:none;}
+  .btn-white:hover{background:#ffe8ec;}
+  .btn-outline-white{background:transparent;color:#fff;font-weight:700;font-size:15px;padding:14px 30px;border-radius:999px;border:1.5px solid rgba(255,255,255,.55);}
+  .btn-outline-white:hover{background:rgba(255,255,255,.1);}
+
+  /* ========================================================= FAQ */
+  .faq-section{padding:80px 0 96px;background:#fff;}
+  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+  .faq-item{border:1px solid var(--gray-150);border-radius:14px;overflow:hidden;}
+  .faq-q{
+    width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:20px 24px;background:#fff;border:none;text-align:left;font-size:15px;font-weight:600;color:var(--ink);
+  }
+  .faq-q .faq-icon{
+    width:26px;height:26px;border-radius:50%;background:var(--primary-50);color:var(--primary);flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;transition:transform .3s var(--ease);
+  }
+  .faq-item.open .faq-icon{transform:rotate(45deg);background:var(--primary);color:#fff;}
+  .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s var(--ease);}
+  .faq-item.open .faq-a{grid-template-rows:1fr;}
+  .faq-a-inner{overflow:hidden;}
+  .faq-a-pad{padding:0 24px 20px;font-size:14px;color:var(--gray-500);line-height:1.65;}
+
+  /* ========================================================= FOOTER */
+  footer.site-footer{background:linear-gradient(180deg,#fff 0%, var(--cream) 100%);padding:56px 0 40px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:40px;}
+  .footer-brand h4{font-size:17px;font-weight:800;margin:0 0 10px;}
+  .footer-brand p{font-size:13px;color:var(--gray-500);line-height:1.6;max-width:220px;}
+  .footer-col h5{font-size:13px;font-weight:700;margin:0 0 14px;color:var(--ink);}
+  .footer-col a{display:block;font-size:13px;color:var(--gray-500);margin-bottom:10px;}
+  .footer-col a:hover{color:var(--primary);}
+  .footer-bottom{border-top:1px solid var(--gray-150);padding-top:24px;text-align:center;font-size:12.5px;color:var(--gray-500);}
+  @media (max-width:800px){ .footer-grid{grid-template-columns:1fr 1fr;} }
+</style>
+</head>
+<body>
+
+<!-- ======================================================= -->
+<!-- NOTA PARA EL PROGRAMADOR -->
+<!-- ======================================================= -->
+<div class="dev-note">
+  <h4>📌 Nota para el equipo de desarrollo — Página Empresas completa</h4>
+  <ol>
+    <li>La sección <strong>"Itinerarios de capacitación por rol y objetivo"</strong> ya venía programada y aprobada; la única modificación fue quitar la línea "Aval univ. · Certificación" del pie de cada pack.</li>
+    <li>Todos los botones que dicen <strong>"Solicitar cotización"</strong> (en los packs de la grilla, en el CTA rojo y en el botón flotante) hacen scroll hasta el formulario del hero (<code>#propuesta</code>). En el sitio real deberían además pre-cargar el área de interés según el pack de origen, si es posible.</li>
+    <li>El botón <strong>"Ver todos los paquetes"</strong> del CTA rojo baja hasta la sección de paquetes (<code>#paquetes</code>).</li>
+    <li>Los filtros de la sección "Elegí el área y el paquete ideal" son independientes de los filtros de "Itinerarios" — cada uno filtra su propia grilla/lista.</li>
+    <li>Los testimonios ahora muestran nombre y cargo de una persona en lugar del nombre de la empresa</li>
+    <li>El formulario del hero es solo visual (sin validación real ni envío); quedan a cargo del programador la lógica de envío, validaciones y conexión con CRM/mail.</li>
+  </ol>
+</div>
+
+<!-- ======================================================= -->
+<!-- HEADER -->
+<!-- ======================================================= -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <img src="fude-black.webp" style="height: 50px; width: auto;">
+    </a>
+    <nav class="main-nav">
+      <a href="#" class="nav-link">Cursos</a>
+      <a href="#" class="nav-link">Gratis</a>
+      <a href="#" class="nav-link">Carreras Cortas</a>
+      <a href="#" class="nav-link">Empresas</a>
+      <a href="#" class="nav-link">Blog</a>
+    </nav>
+    <div class="header-right">
+      <a href="#" class="btn-alumno">Acceso Alumnos</a>
+    </div>
+  </div>
+</header>
+
+<!-- ======================================================= -->
+<!-- HERO + FORMULARIO -->
+<!-- ======================================================= -->
+<section class="hero-section" id="propuesta">
+  <div class="wrap hero-grid">
+
+    <div class="hero-copy">
+      <span class="hero-eyebrow">Soluciones para empresas</span>
+      <h1>Capacitá tu equipo con <span class="accent">rutas formativas a medida</span></h1>
+      <p class="hero-sub">Paquetes de cursos online con certificación universitaria para empresas de cualquier tamaño. Administración, Inteligencia Artificial, Salud Laboral, Negocios y más. Con tutor IA disponible 24/7 para cada empleado.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>+200</b><span>empresas activas</span></div>
+        <div class="hero-stat"><b>+8.000</b><span>empleados capacitados</span></div>
+        <div class="hero-stat"><b>98%</b><span>tasa de finalización</span></div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h2>Solicitá una propuesta</h2>
+      <p class="form-sub">Completá el formulario y te contactamos.</p>
+
+      <div class="field">
+        <label>Nombre y apellido</label>
+        <input type="text" placeholder="Tu nombre completo">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Cargo</label>
+          <input type="text" placeholder="Ej: Gerente de RRHH">
+        </div>
+        <div class="field">
+          <label>Empresa</label>
+          <input type="text" placeholder="Nombre de la empresa">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Correo electrónico</label>
+          <input type="email" placeholder="tu@empresa.com">
+        </div>
+        <div class="field">
+          <label>Teléfono / celular</label>
+          <input type="tel" placeholder="Ej: 11 2345 6789">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Cantidad de empleados</label>
+          <select>
+            <option value="">Seleccionar</option>
+            <option>1 - 10</option>
+            <option>11 - 50</option>
+            <option>51 - 100</option>
+            <option>101 - 500</option>
+            <option>Más de 500</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Área de interés</label>
+          <select>
+            <option value="">Seleccionar</option>
+            <option>Administración</option>
+            <option>Inteligencia Artificial</option>
+            <option>Salud Laboral</option>
+            <option>Negocios</option>
+            <option>Liderazgo</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn-submit">Quiero una propuesta</button>
+      <p class="form-note">Sin compromiso. Te respondemos en 24 hs hábiles.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- POR QUÉ ELEGIRNOS -->
+<!-- ======================================================= -->
+<section class="why-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Por qué elegirnos</span>
+      <h2>La plataforma de capacitación que se adapta a tu empresa</h2>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="10" r="1.4"/><circle cx="15" cy="10" r="1.4"/><path d="M8 15c1 1 2.2 1.5 4 1.5s3-.5 4-1.5"/></svg></div>
+        <h3>Tutor IA para cada empleado</h3>
+        <p>Asistente inteligente disponible 24/7 para resolver dudas al instante.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 13v4M12 8v9M16 11v6"/></svg></div>
+        <h3>Dashboard de seguimiento</h3>
+        <p>Panel en tiempo real con métricas de progreso y finalización.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M9 12h6M9 16h6"/></svg></div>
+        <h3>Rutas formativas a medida</h3>
+        <p>Itinerarios personalizados según el rol y objetivo de cada empleado.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg></div>
+        <h3>Factura y pago empresarial</h3>
+        <p>Gestión centralizada de facturación y medios de pago corporativos.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3-6.5 7-6.5s7 2.9 7 6.5"/></svg></div>
+        <h3>Asesor comercial dedicado</h3>
+        <p>Acompañamiento personalizado durante toda la experiencia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- PAQUETES DE CAPACITACIÓN (grilla simple + filtros) -->
+<!-- ======================================================= -->
+<section class="paquetes-section" id="paquetes">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Paquetes de capacitación</span>
+      <h2>Elegí el área y el paquete ideal para tu equipo</h2>
+    </div>
+
+    <nav class="paquetes-filters" aria-label="Filtrar paquetes por área">
+      <button class="gfilter-pill active" type="button" data-gfilter="todos">Todos</button>
+      <button class="gfilter-pill" type="button" data-gfilter="administracion">Administración</button>
+      <button class="gfilter-pill" type="button" data-gfilter="ia">Inteligencia Artificial</button>
+      <button class="gfilter-pill" type="button" data-gfilter="salud">Salud Laboral</button>
+      <button class="gfilter-pill" type="button" data-gfilter="negocios">Negocios</button>
+      <button class="gfilter-pill" type="button" data-gfilter="liderazgo">Liderazgo</button>
+    </nav>
+
+    <div class="paquetes-grid">
+
+      <!-- Pack Administración -->
+      <div class="gpack-card" data-gcategory="administracion">
+        <span class="gpack-eyebrow">Administración</span>
+        <h3>Pack Administración</h3>
+        <p class="gpack-desc">Formación integral en administración, finanzas y operaciones para equipos corporativos.</p>
+        <ul class="gpack-courses">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Product Manager</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Jefe de Compras</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Excel</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Gestión de Cobranzas</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Cajero Comercial</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Recepcionista</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Asistente en RRHH</li>
+        </ul>
+        <div class="gpack-meta">
+          <span><strong>7</strong> cursos</span>
+          <span><strong>3</strong> niveles</span>
+        </div>
+        <button class="gpack-cta scroll-to-propuesta" type="button">Solicitar cotización</button>
+      </div>
+
+      <!-- Pack IA -->
+      <div class="gpack-card" data-gcategory="ia">
+        <span class="gpack-eyebrow">Inteligencia Artificial</span>
+        <h3>Pack IA</h3>
+        <p class="gpack-desc">Capacitá a tu equipo en herramientas de IA aplicadas a procesos empresariales.</p>
+        <ul class="gpack-courses">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Inteligencia Artificial desde Cero: Conceptos y Mentalidad Digital</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>El Arte del "Prompting": Cómo Hablarle a la IA para obtener Resultados</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>IA para la Gestión Administrativa y Operativa Diaria</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Marketing, Redes Sociales y Contenido Comercial con IA</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Análisis de Datos y Reportes Inteligentes (IA sin Código)</li>
+        </ul>
+        <div class="gpack-meta">
+          <span><strong>5</strong> cursos</span>
+          <span><strong>3</strong> niveles</span>
+        </div>
+        <button class="gpack-cta scroll-to-propuesta" type="button">Solicitar cotización</button>
+      </div>
+
+      <!-- Pack Salud -->
+      <div class="gpack-card" data-gcategory="salud">
+        <span class="gpack-eyebrow">Salud Laboral</span>
+        <h3>Pack Salud y Seguridad</h3>
+        <p class="gpack-desc">Cumplí con las normativas vigentes y promové una cultura de prevención.</p>
+        <ul class="gpack-courses">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Medicina Laboral</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Higiene y Seguridad</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Primeros Auxilios</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Ergonomía y Prevención de Accidentes</li>
+        </ul>
+        <div class="gpack-meta">
+          <span><strong>4</strong> cursos</span>
+          <span><strong>3</strong> niveles</span>
+        </div>
+        <button class="gpack-cta scroll-to-propuesta" type="button">Solicitar cotización</button>
+      </div>
+
+      <!-- Pack Negocios -->
+      <div class="gpack-card" data-gcategory="negocios">
+        <span class="gpack-eyebrow">Negocios</span>
+        <h3>Pack Ventas y Negocios</h3>
+        <p class="gpack-desc">Desarrollá habilidades comerciales y estratégicas en tu equipo de ventas.</p>
+        <ul class="gpack-courses">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Marketing Digital</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Atención al Cliente</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>CM con IA</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Vendedor Profesional</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Telemarketing</li>
+        </ul>
+        <div class="gpack-meta">
+          <span><strong>5</strong> cursos</span>
+          <span><strong>3</strong> niveles</span>
+        </div>
+        <button class="gpack-cta scroll-to-propuesta" type="button">Solicitar cotización</button>
+      </div>
+
+      <!-- Pack Liderazgo -->
+      <div class="gpack-card" data-gcategory="liderazgo">
+        <span class="gpack-eyebrow">Liderazgo</span>
+        <h3>Pack Liderazgo y RRHH</h3>
+        <p class="gpack-desc">Formá líderes capaces de gestionar equipos con habilidades blandas y estratégicas.</p>
+        <ul class="gpack-courses">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Coaching y Gestión de Equipos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Inteligencia Emocional para Líderes y Equipos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Auditoría Interna</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Comunicación Efectiva y Persuasiva en el Trabajo</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Adaptabilidad y Resiliencia en Entornos Cambiantes</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Pensamiento Crítico y Toma de Decisiones Estratégicas</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Trabajo Colaborativo y Gestión de Equipos Multidisciplinarios</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Resolución de Conflictos y Negociación Constructiva</li>
+        </ul>
+        <div class="gpack-meta">
+          <span><strong>8</strong> cursos</span>
+          <span><strong>3</strong> niveles</span>
+        </div>
+        <button class="gpack-cta scroll-to-propuesta" type="button">Solicitar cotización</button>
+      </div>
+
+      <!-- Personalizado -->
+      <div class="gpack-card featured" data-gcategory="todos">
+        <span class="gpack-badge">Destacado</span>
+        <span class="gpack-eyebrow">Personalizado</span>
+        <h3>Armá a medida</h3>
+        <p class="gpack-desc">Diseñamos un plan de capacitación único para las necesidades de tu empresa.</p>
+        <ul class="gpack-courses"></ul>
+        <div style="flex:1;"></div>
+        <button class="gpack-cta outline scroll-to-propuesta" type="button" style="margin-top:auto;">Consultar</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- ITINERARIOS DE CAPACITACIÓN (sección ya programada — solo se quitó "Aval univ. · Certificación") -->
+<!-- ======================================================= -->
+<section class="rutas-section" id="itinerarios">
+  <div class="rutas-container">
+
+    <div class="rutas-head">
+      <span class="eyebrow">Rutas formativas</span>
+      <h2>Itinerarios de capacitación por rol y objetivo</h2>
+      <p>Cada pack combina cursos en secuencia lógica para construir competencias reales. Tu equipo avanza fase a fase, con certificación universitaria en cada etapa.</p>
+    </div>
+
+    <nav class="category-filters" aria-label="Filtrar rutas por categoría">
+      <button class="filter-pill" type="button" data-target="pack-administracion">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="3" y1="12" x2="21" y2="12"/></svg>
+        Administración
+      </button>
+      <button class="filter-pill" type="button" data-target="pack-salud">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4.4-2-8-5.4-8-10V6l8-3.5L20 6v5c0 4.6-3.6 8-8 10z"/><line x1="12" y1="9" x2="12" y2="15"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+        Salud y seguridad
+      </button>
+      <button class="filter-pill" type="button" data-target="pack-ventas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>
+        Ventas y negocios
+      </button>
+      <button class="filter-pill" type="button" data-target="pack-liderazgo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.3 2.5-6 5.5-6s5.5 2.7 5.5 6"/><circle cx="17.5" cy="9" r="2.4"/><path d="M15 14.2c2.2.4 4 2.4 4 5.8"/></svg>
+        Liderazgo y RRHH
+      </button>
+      <button class="filter-pill" type="button" data-target="pack-ia">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10" y="10" width="4" height="4"/><line x1="12" y1="2" x2="12" y2="7"/><line x1="12" y1="17" x2="12" y2="22"/><line x1="2" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="22" y2="12"/></svg>
+        Inteligencia artificial
+      </button>
+    </nav>
+
+    <div class="packs-list">
+
+      <!-- ============== PACK 1: ADMINISTRACIÓN ============== -->
+      <article class="pack-card" id="pack-administracion" data-category="administracion">
+        <button class="pack-toggle" type="button" aria-expanded="false" aria-controls="det-administracion" aria-label="Mostrar ruta completa de Pack Administración">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="pack-summary">
+          <span class="pack-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="3" y1="12" x2="21" y2="12"/></svg>
+            Administración
+          </span>
+          <h3>Pack Administración</h3>
+          <p class="pack-desc">Ideal para estructurar la gestión operativa, comercial y de capital humano desde la base hasta la toma de decisiones estratégicas.</p>
+          <div class="pack-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>7 cursos</span>
+            <span title="Duración estimada — confirmar con contenidos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>16 meses*</span>
+          </div>
+        </div>
+
+        <div class="pack-details" id="det-administracion">
+          <div class="pack-details-inner">
+            <div class="pack-details-pad">
+
+              <div class="level-path">
+                <button class="level-step tint-1" type="button" data-level="1">Nivel 1</button>
+                <button class="level-step tint-2" type="button" data-level="2">Nivel 2</button>
+                <button class="level-step tint-3" type="button" data-level="3">Nivel 3</button>
+              </div>
+
+              <div class="levels">
+                <div class="level-block" data-level="1">
+                  <div class="level-marker"><span class="level-circle">1</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Fundamentos operativos y atención</h4>
+                    <span class="level-tag">Nivel inicial</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Recepcionista</h5>
+                        <p>Comunicación corporativa, recepción de clientes y organización de la agenda de oficina.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Cajero Comercial</h5>
+                        <p>Manejo de flujos de caja, herramientas de facturación, arqueo y nociones básicas de administración comercial.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="2">
+                  <div class="level-marker"><span class="level-circle">2</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Gestión interna y control</h4>
+                    <span class="level-tag">Nivel intermedio</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Excel</h5>
+                        <p>La herramienta clave y transversal para analizar datos, automatizar reportes y gestionar planillas administrativas.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Gestión de Cobranzas</h5>
+                        <p>Técnicas de seguimiento de cuentas a cobrar, negociación con clientes morosos y optimización del flujo de caja.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Asistente en RRHH</h5>
+                        <p>Gestión de legajos, soporte en nóminas, inducción de personal y administración de las necesidades internas del equipo.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="3">
+                  <div class="level-marker"><span class="level-circle">3</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Liderazgo de procesos</h4>
+                    <span class="level-tag">Nivel avanzado</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Jefe de Compras</h5>
+                        <p>Gestión estratégica de proveedores, negociación de contratos, control de stock y optimización del presupuesto corporativo.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Product Manager</h5>
+                        <p>Visión global del negocio para el ciclo de vida del producto, coordinación entre áreas y alineación con los objetivos del mercado.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pack-footer">
+                <div class="pack-stats">
+                  <span><strong>7</strong>Cursos</span>
+                  <span><strong>3</strong>Niveles</span>
+                </div>
+                <button class="cta-btn scroll-to-propuesta" type="button">Solicitar cotización</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============== PACK 2: SALUD Y SEGURIDAD ============== -->
+      <article class="pack-card" id="pack-salud" data-category="salud">
+        <button class="pack-toggle" type="button" aria-expanded="false" aria-controls="det-salud" aria-label="Mostrar ruta completa de Pack Salud y Seguridad">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="pack-summary">
+          <span class="pack-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4.4-2-8-5.4-8-10V6l8-3.5L20 6v5c0 4.6-3.6 8-8 10z"/><line x1="12" y1="9" x2="12" y2="15"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
+            Salud y seguridad
+          </span>
+          <h3>Pack Salud y Seguridad</h3>
+          <p class="pack-desc">Diseñado para construir una cultura de prevención, cumplimiento normativo y respuesta ante emergencias.</p>
+          <div class="pack-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>4 cursos</span>
+            <span title="Duración estimada — confirmar con contenidos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>8 meses*</span>
+          </div>
+        </div>
+
+        <div class="pack-details" id="det-salud">
+          <div class="pack-details-inner">
+            <div class="pack-details-pad">
+
+              <div class="level-path">
+                <button class="level-step tint-1" type="button" data-level="1">Nivel 1</button>
+                <button class="level-step tint-2" type="button" data-level="2">Nivel 2</button>
+                <button class="level-step tint-3" type="button" data-level="3">Nivel 3</button>
+              </div>
+
+              <div class="levels">
+                <div class="level-block" data-level="1">
+                  <div class="level-marker"><span class="level-circle">1</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Concientización y ergonomía</h4>
+                    <span class="level-tag">Nivel inicial</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Ergonomía y Prevención de Accidentes</h5>
+                        <p>Adaptación del puesto de trabajo (físico o remoto) para mitigar riesgos musculoesqueléticos y fatiga.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="2">
+                  <div class="level-marker"><span class="level-circle">2</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Higiene y normativa</h4>
+                    <span class="level-tag">Nivel intermedio</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Higiene y Seguridad</h5>
+                        <p>Comprensión del marco legal, identificación de riesgos laborales y buenas prácticas ambientales dentro de la empresa.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="3">
+                  <div class="level-marker"><span class="level-circle">3</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Respuesta y gestión médica</h4>
+                    <span class="level-tag">Nivel avanzado / especializado</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Primeros Auxilios</h5>
+                        <p>Capacitación práctica fundamental para saber actuar ante emergencias y salvar vidas en el entorno de trabajo.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Medicina Laboral</h5>
+                        <p>Gestión de la salud ocupacional, control de ausentismo médico, exámenes periódicos y bienestar integral del trabajador.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pack-footer">
+                <div class="pack-stats">
+                  <span><strong>4</strong>Cursos</span>
+                  <span><strong>3</strong>Niveles</span>
+                </div>
+                <button class="cta-btn scroll-to-propuesta" type="button">Solicitar cotización</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============== PACK 3: VENTAS Y NEGOCIOS ============== -->
+      <article class="pack-card" id="pack-ventas" data-category="negocios">
+        <button class="pack-toggle" type="button" aria-expanded="false" aria-controls="det-ventas" aria-label="Mostrar ruta completa de Pack Ventas y Negocios">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="pack-summary">
+          <span class="pack-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>
+            Ventas y negocios
+          </span>
+          <h3>Pack Ventas y Negocios</h3>
+          <p class="pack-desc">Una ruta comercial completa que va desde el contacto telefónico inicial hasta el marketing impulsado por Inteligencia Artificial.</p>
+          <div class="pack-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>5 cursos</span>
+            <span title="Duración estimada — confirmar con contenidos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>10 meses*</span>
+          </div>
+        </div>
+
+        <div class="pack-details" id="det-ventas">
+          <div class="pack-details-inner">
+            <div class="pack-details-pad">
+
+              <div class="level-path">
+                <button class="level-step tint-1" type="button" data-level="1">Nivel 1</button>
+                <button class="level-step tint-2" type="button" data-level="2">Nivel 2</button>
+                <button class="level-step tint-3" type="button" data-level="3">Nivel 3</button>
+              </div>
+
+              <div class="levels">
+                <div class="level-block" data-level="1">
+                  <div class="level-marker"><span class="level-circle">1</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Conexión y atención al cliente</h4>
+                    <span class="level-tag">Nivel inicial</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Atención al Cliente</h5>
+                        <p>Desarrollo de la empatía, resolución de consultas y construcción de la experiencia de compra que fideliza clientes.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Telemarketing</h5>
+                        <p>Técnicas de prospección en frío, manejo de guiones telefónicos y conversión de llamadas en oportunidades de negocio.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="2">
+                  <div class="level-marker"><span class="level-circle">2</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Venta profesional</h4>
+                    <span class="level-tag">Nivel intermedio</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Vendedor Profesional</h5>
+                        <p>Metodología de venta consultiva, detección de necesidades del cliente y manejo de objeciones para cerrar acuerdos.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="3">
+                  <div class="level-marker"><span class="level-circle">3</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Marketing y ecosistema digital</h4>
+                    <span class="level-tag">Nivel avanzado</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Marketing Digital</h5>
+                        <p>Planificación de embudos de venta (funnels), posicionamiento de marca y pauta publicitaria en entornos digitales.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>CM (Community Manager) con IA</h5>
+                        <p>Gestión avanzada de redes sociales potenciada con herramientas de IA para crear contenido y automatizar respuestas.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pack-footer">
+                <div class="pack-stats">
+                  <span><strong>6</strong>Cursos</span>
+                  <span><strong>3</strong>Niveles</span>
+                </div>
+                <button class="cta-btn scroll-to-propuesta" type="button">Solicitar cotización</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============== PACK 4: LIDERAZGO Y RRHH ============== -->
+      <article class="pack-card" id="pack-liderazgo" data-category="liderazgo">
+        <button class="pack-toggle" type="button" aria-expanded="false" aria-controls="det-liderazgo" aria-label="Mostrar ruta completa de Pack Liderazgo y RRHH">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="pack-summary">
+          <span class="pack-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.3 2.5-6 5.5-6s5.5 2.7 5.5 6"/><circle cx="17.5" cy="9" r="2.4"/><path d="M15 14.2c2.2.4 4 2.4 4 5.8"/></svg>
+            Liderazgo y RRHH
+          </span>
+          <h3>Pack Liderazgo y RRHH</h3>
+          <p class="pack-desc">La ruta de habilidades blandas (soft skills) y de gestión para transformar mandos medios y directivos en líderes de alto rendimiento.</p>
+          <div class="pack-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>8 cursos</span>
+            <span title="Duración estimada — confirmar con contenidos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>18 meses*</span>
+          </div>
+        </div>
+
+        <div class="pack-details" id="det-liderazgo">
+          <div class="pack-details-inner">
+            <div class="pack-details-pad">
+
+              <div class="level-path">
+                <button class="level-step tint-1" type="button" data-level="1">Nivel 1</button>
+                <button class="level-step tint-2" type="button" data-level="2">Nivel 2</button>
+                <button class="level-step tint-3" type="button" data-level="3">Nivel 3</button>
+              </div>
+
+              <div class="levels">
+                <div class="level-block" data-level="1">
+                  <div class="level-marker"><span class="level-circle">1</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Eficiencia personal y adaptabilidad</h4>
+                    <span class="level-tag">Habilidades base</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Comunicación Efectiva y Persuasiva en el Trabajo</h5>
+                        <p>Clave para transmitir ideas con claridad, influir positivamente y alinear expectativas en el equipo.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Adaptabilidad y Resiliencia en Entornos Cambiantes</h5>
+                        <p>Preparación psicológica y metodológica para afrontar la incertidumbre y liderar transformaciones corporativas.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="2">
+                  <div class="level-marker"><span class="level-circle">2</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Gestión del talento y colaboración</h4>
+                    <span class="level-tag">Habilidades de conducción</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Inteligencia Emocional para Líderes y Equipos</h5>
+                        <p>Control del estrés, empatía laboral y automotivación como pilares del clima organizacional.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Trabajo Colaborativo y Gestión de Equipos Multidisciplinarios</h5>
+                        <p>Romper silos organizacionales y potenciar la sinergia entre profesionales de distintas áreas.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Coaching y Gestión de Equipos</h5>
+                        <p>Herramientas formativas para delegar con éxito, dar feedback constructivo y desarrollar el potencial de los colaboradores.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="3">
+                  <div class="level-marker"><span class="level-circle">3</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Estrategia, auditoría y resolución</h4>
+                    <span class="level-tag">Alta dirección</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Resolución de Conflictos y Negociación Constructiva</h5>
+                        <p>Mediación interna y externa para transformar los problemas en acuerdos beneficiosos para la organización.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Pensamiento Crítico y Toma de Decisiones Estratégicas</h5>
+                        <p>Análisis objetivo de escenarios complejos para mitigar riesgos y elegir el mejor rumbo de acción.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Auditoría Interna</h5>
+                        <p>El proceso de control, cumplimiento de estándares de calidad y mejora continua para blindar los procesos de la empresa.</p>
+                        <div class="course-footer"><span class="badge badge-avanzado">Avanzado</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pack-footer">
+                <div class="pack-stats">
+                  <span><strong>8</strong>Cursos</span>
+                  <span><strong>3</strong>Niveles</span>
+                </div>
+                <button class="cta-btn scroll-to-propuesta" type="button">Solicitar cotización</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============== PACK 5: INTELIGENCIA ARTIFICIAL ============== -->
+      <article class="pack-card" id="pack-ia" data-category="ia">
+        <button class="pack-toggle" type="button" aria-expanded="false" aria-controls="det-ia" aria-label="Mostrar ruta completa de Pack IA">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="pack-summary">
+          <span class="pack-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10" y="10" width="4" height="4"/><line x1="12" y1="2" x2="12" y2="7"/><line x1="12" y1="17" x2="12" y2="22"/><line x1="2" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="22" y2="12"/></svg>
+            Inteligencia artificial
+          </span>
+          <h3>Pack IA</h3>
+          <p class="pack-desc">Alfabetización digital y aplicación práctica de la Inteligencia Artificial en las tareas diarias de administración, comercial, marketing y gerencia.</p>
+          <div class="pack-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>5 cursos</span>
+            <span title="Duración estimada — confirmar con contenidos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>10 meses*</span>
+          </div>
+        </div>
+
+        <div class="pack-details" id="det-ia">
+          <div class="pack-details-inner">
+            <div class="pack-details-pad">
+
+              <div class="level-path">
+                <button class="level-step tint-1" type="button" data-level="1">Nivel 1</button>
+                <button class="level-step tint-3" type="button" data-level="2">Nivel 2</button>
+              </div>
+
+              <div class="levels">
+                <div class="level-block" data-level="1">
+                  <div class="level-marker"><span class="level-circle">1</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Beginner — alfabetización y adopción digital</h4>
+                    <span class="level-tag">Nivel inicial</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>Inteligencia Artificial desde Cero</h5>
+                        <p>Conceptos y mentalidad digital: qué es la IA generativa, qué herramientas existen y cómo cambia el rol del trabajador.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>El Arte del "Prompting"</h5>
+                        <p>Cómo redactar instrucciones efectivas para ChatGPT o Gemini y obtener resultados útiles en lugar de respuestas genéricas.</p>
+                        <div class="course-footer"><span class="badge badge-inicial">Inicial</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="level-block" data-level="2">
+                  <div class="level-marker"><span class="level-circle">2</span><span class="level-line"></span></div>
+                  <div class="level-content">
+                    <h4>Intermedio — productividad y aplicación práctica</h4>
+                    <span class="level-tag">Nivel intermedio</span>
+                    <div class="courses-grid">
+                      <div class="course-card">
+                        <h5>IA para la Gestión Administrativa y Operativa Diaria</h5>
+                        <p>Uso de la IA integrada en Office, Workspace y WhatsApp para minutar reuniones, transcribir audios y redactar documentos.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Marketing, Redes Sociales y Contenido Comercial con IA</h5>
+                        <p>Herramientas de diseño, video y texto automatizado para crear publicaciones y propuestas comerciales con presupuesto de pyme.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                      <div class="course-card">
+                        <h5>Análisis de Datos y Reportes Inteligentes (IA sin código)</h5>
+                        <p>Subir planillas de Excel a herramientas de IA para identificar tendencias, detectar problemas y generar gráficos automáticamente.</p>
+                        <div class="course-footer"><span class="badge badge-intermedio">Intermedio</span><a class="ver-curso" href="#">Ver curso →</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pack-footer">
+                <div class="pack-stats">
+                  <span><strong>5</strong>Cursos</span>
+                  <span><strong>2</strong>Niveles</span>
+                </div>
+                <button class="cta-btn scroll-to-propuesta" type="button">Solicitar cotización</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- EL PROCESO -->
+<!-- ======================================================= -->
+<section class="proceso-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">El proceso</span>
+      <h2>Empezar es muy simple</h2>
+    </div>
+    <div class="proceso-grid">
+      <div class="proceso-step">
+        <div class="proceso-num">1</div>
+        <h3>Nos contactás</h3>
+        <p>Completá el formulario y un asesor se comunica con vos en 24 hs.</p>
+      </div>
+      <div class="proceso-step">
+        <div class="proceso-num">2</div>
+        <h3>Diseñamos la ruta</h3>
+        <p>Analizamos tus necesidades y armamos el plan ideal para tu equipo.</p>
+      </div>
+      <div class="proceso-step">
+        <div class="proceso-num">3</div>
+        <h3>Activamos el acceso</h3>
+        <p>Damos de alta a los usuarios en la plataforma con acceso inmediato.</p>
+      </div>
+      <div class="proceso-step">
+        <div class="proceso-num">4</div>
+        <h3>Seguimos juntos</h3>
+        <p>Acompañamos el progreso con reportes y ajustes periódicos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- LO QUE DICEN LAS EMPRESAS (testimonios anonimizados por persona) -->
+<!-- ======================================================= -->
+<section class="testi-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Lo que dicen las empresas</span>
+      <h2>Resultados reales de nuestros clientes</h2>
+    </div>
+
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar">JV</div>
+          <div>
+            <div class="testi-name">Juan Carlos Villareal</div>
+            <div class="testi-role">Jefe de RRHH · +180 empleados</div>
+          </div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">Implementamos las rutas formativas para todo el equipo administrativo. En 3 meses vimos una mejora notable en la eficiencia operativa.</p>
+        <span class="testi-result">40% más de eficiencia</span>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar">LV</div>
+          <div>
+            <div class="testi-name">Lucas Valverde</div>
+            <div class="testi-role">Gerente Regional Córdoba · +320 empleados</div>
+          </div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">El dashboard de seguimiento nos permite identificar áreas de mejora en tiempo real. La capacitación continua elevó el nivel de nuestro equipo.</p>
+        <span class="testi-result">95% de satisfacción</span>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-head">
+          <div class="testi-avatar">ME</div>
+          <div>
+            <div class="testi-name">María Eugenia Solari</div>
+            <div class="testi-role">Directora de Capital Humano · +500 empleados</div>
+          </div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="quote">La flexibilidad de los paquetes nos permitió capacitar a distintas áreas con contenidos específicos. Muy recomendable.</p>
+        <span class="testi-result">60% menos rotación</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- CTA ROJO -->
+<!-- ======================================================= -->
+<section class="cta-section">
+  <div class="wrap">
+    <h2>¿Querés capacitar a tu equipo?</h2>
+    <p>Solicitud de propuesta personalizada sin cargo. Te respondemos en 24 hs hábiles.</p>
+    <div class="cta-buttons">
+      <button class="btn-white scroll-to-propuesta" type="button">Solicitar cotización</button>
+      <a href="#paquetes" class="btn-outline-white">Ver todos los paquetes</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- PREGUNTAS FRECUENTES -->
+<!-- ======================================================= -->
+<section class="faq-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2>Todo lo que necesitás saber</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" type="button">¿Cuál es la cantidad mínima de empleados?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p class="faq-a-pad">Trabajamos con un mínimo de 3 empleados por empresa. A partir de ahí, adaptamos los planes tanto para PyMEs como para grandes corporaciones según el volumen de tu equipo.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">¿Podemos combinar cursos de distintas áreas?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p class="faq-a-pad">Sí. Los paquetes son modulares y podés combinar cursos de diferentes áreas para armar la ruta formativa que mejor se adapte a tu empresa.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">¿Cómo funciona el dashboard?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p class="faq-a-pad">Accedés a un panel en tiempo real donde podés ver el progreso individual y grupal, tasas de finalización, rendimiento y más métricas clave.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">¿Los certificados tienen validez?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p class="faq-a-pad">Sí, todos nuestros cursos cuentan con certificación universitaria con validez oficial en todo el territorio argentino.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">¿Cómo es la facturación?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p class="faq-a-pad">Emitimos factura electrónica A o B según corresponda. Podés pagar por transferencia, tarjeta corporativa o débito automático.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- FOOTER -->
+<!-- ======================================================= -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>FUDE by Educativo</h4>
+        <p>Formación online con certificación universitaria para personas y empresas de todo el país.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Comunidad</h5>
+        <a href="#">Blog</a>
+        <a href="#">Bolsa de trabajo</a>
+      </div>
+      <div class="footer-col">
+        <h5>Estudia con nosotros</h5>
+        <a href="#">Salud</a>
+        <a href="#">Administración</a>
+        <a href="#">Deportes</a>
+        <a href="#">Oficios</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contacto</h5>
+        <a href="#">Preguntas frecuentes</a>
+        <a href="#">Quienes somos</a>
+        <a href="#">Términos y condiciones</a>
+      </div>
+    </div>
+    <div class="footer-bottom">FUDE by Educativo — © 2026</div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ---------- Itinerarios: abrir/cerrar tarjetas ----------
+    document.querySelectorAll('.pack-toggle').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var card = btn.closest('.pack-card');
+        var open = card.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open);
+      });
+    });
+    document.querySelectorAll('.pack-summary').forEach(function(summary){
+      summary.addEventListener('click', function(e){
+        if (e.target.closest('a')) return;
+        var card = summary.closest('.pack-card');
+        var btn = card.querySelector('.pack-toggle');
+        var open = card.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open);
+      });
+    });
+
+    // ---------- Itinerarios: botones de nivel ----------
+    document.querySelectorAll('.level-step').forEach(function(step){
+      step.addEventListener('click', function(e){
+        e.stopPropagation();
+        var card = step.closest('.pack-card');
+        var lvl = step.getAttribute('data-level');
+        var block = card.querySelector('.level-block[data-level="' + lvl + '"]');
+        card.querySelectorAll('.level-step').forEach(function(s){ s.classList.remove('active-step'); });
+        step.classList.add('active-step');
+        if (block) { block.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' }); }
+      });
+    });
+
+    // ---------- Itinerarios: filtros por categoría ----------
+    document.querySelectorAll('.category-filters .filter-pill').forEach(function(pill){
+      pill.addEventListener('click', function(){
+        document.querySelectorAll('.category-filters .filter-pill').forEach(function(p){ p.classList.remove('active'); });
+        pill.classList.add('active');
+        var target = document.getElementById(pill.getAttribute('data-target'));
+        if (target) {
+          target.classList.add('is-open');
+          target.querySelector('.pack-toggle').setAttribute('aria-expanded', 'true');
+          target.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ---------- Grilla de paquetes: filtros por área ----------
+    document.querySelectorAll('.gfilter-pill').forEach(function(pill){
+      pill.addEventListener('click', function(){
+        document.querySelectorAll('.gfilter-pill').forEach(function(p){ p.classList.remove('active'); });
+        pill.classList.add('active');
+        var cat = pill.getAttribute('data-gfilter');
+        document.querySelectorAll('.gpack-card').forEach(function(card){
+          var cardCat = card.getAttribute('data-gcategory');
+          var show = (cat === 'todos') || (cardCat === cat) || (cardCat === 'todos');
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+
+    // ---------- Scroll al formulario de propuesta ----------
+    document.querySelectorAll('.scroll-to-propuesta').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var target = document.getElementById('propuesta');
+        if (target) { target.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' }); }
+      });
+    });
+
+    // ---------- FAQ acordeón ----------
+    document.querySelectorAll('.faq-item').forEach(function(item){
+      var q = item.querySelector('.faq-q');
+      q.addEventListener('click', function(){
+        var wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
+        if (!wasOpen) { item.classList.add('open'); }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
