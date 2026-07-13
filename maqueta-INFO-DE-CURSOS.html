@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fude · Maqueta - Tarjetas de Curso Corregidas (Estética)</title>
+<style>
+  :root{
+    --rojo: #b23a3a;
+    --uai: #721839;
+    --gris-texto: #6b6b6b;
+    --borde: #e6e2e2;
+    --nota-bg: #fff8e1;
+    --nota-borde: #f2c94c;
+    --code-bg: #f3dfb0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background:#f3f1ee;
+    margin:0;
+    padding:40px 20px 100px;
+    color:#222;
+  }
+  .wrap{max-width:1200px;margin:0 auto;}
+  h1{font-size:22px;margin-bottom:4px;}
+  .sub{color:var(--gris-texto);margin-top:0;margin-bottom:34px;font-size:14px;}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:34px;
+    margin-bottom:44px;
+  }
+
+  .card-col{}
+  .card-label{
+    font-weight:700;font-size:14px;margin-bottom:10px;color:#333;
+  }
+  .card-label small{display:block;font-weight:400;color:var(--gris-texto);font-size:12px;margin-top:2px;}
+
+  .card{
+    background:#fff;
+    border:1px solid var(--borde);
+    border-radius:16px;
+    padding:22px 22px 24px;
+    box-shadow:0 2px 6px rgba(0,0,0,.04);
+  }
+  .cat{color:var(--rojo);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.3px;}
+  .rating{margin:8px 0 10px;font-size:14px;display:flex;align-items:center;gap:6px;}
+  .rating .star{color:#f5a623;}
+  .rating .count{color:#999;}
+  .title{font-size:20px;font-weight:800;margin:2px 0 12px;line-height:1.2;}
+  .meta{font-size:13.5px;color:#555;margin-bottom:14px;display:flex;gap:14px;flex-wrap:wrap;}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+  .pill{
+    display:inline-flex;align-items:center;gap:6px;
+    border-radius:20px;padding:6px 14px;font-size:12.5px;font-weight:700;color:#fff;
+  }
+  .pill.ia{background:var(--rojo);}
+  .pill.uai{background:var(--uai);}
+  .pill.fude{
+    background:linear-gradient(135deg, #d64545 0%, var(--rojo) 55%, #8f2020 100%);
+    box-shadow:0 0 8px rgba(214,69,69,.5), inset 0 1px 0 rgba(255,255,255,.3);
+  }
+  .pill .logo-img{
+    background:#fff;border-radius:50%;
+    width:18px;height:18px;display:flex;align-items:center;justify-content:center;
+    overflow:hidden;flex:none;
+  }
+  .pill .logo-img img{width:100%;height:100%;object-fit:contain;}
+  .cert-line{font-size:13.5px;color:#333;margin-bottom:14px;}
+  .price{color:var(--rojo);font-weight:800;font-size:22px;margin-bottom:16px;}
+  .btn{
+    display:block;text-align:center;border:1.5px solid var(--rojo);color:var(--rojo);
+    border-radius:24px;padding:10px;font-weight:700;font-size:14px;
+  }
+
+  /* Nota pineada estilo referencia */
+  .note-box{
+    background:var(--nota-bg);
+    border:2px dashed var(--nota-borde);
+    border-radius:14px;
+    padding:22px 30px 26px;
+    max-width:1100px;
+  }
+  .note-title{
+    font-size:16px;font-weight:800;margin:0 0 16px;color:#3a2e10;
+    display:flex;align-items:center;gap:8px;
+  }
+  .note-list{list-style:none;margin:0;padding:0;}
+  .note-list li{
+    font-size:14.5px;line-height:1.6;color:#3a2e10;margin-bottom:12px;
+    padding-left:26px;position:relative;
+  }
+  .note-list li:last-child{margin-bottom:0;}
+  .note-list .n{
+    position:absolute;left:0;top:1px;font-weight:800;color:#3a2e10;
+  }
+  .ref-shot{
+    width:100%;border-radius:10px;border:1px solid var(--borde);display:block;margin-bottom:14px;
+  }
+  .ref-block{margin-bottom:46px;}
+  .ref-note{
+    background:var(--nota-bg);border:2px dashed var(--nota-borde);border-radius:12px;
+    padding:16px 20px;font-size:14px;line-height:1.6;color:#3a2e10;
+  }
+  .ref-note b{color:#231a05;}
+  .db-callout{
+    margin-top:26px;background:#eaf1ff;border:2px solid #2f6fed;border-radius:12px;
+    padding:18px 22px;font-size:14.5px;line-height:1.6;color:#12305e;
+  }
+  .db-callout b{color:#0b1e40;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Fude — Tarjetas de curso corregidas (Grid Estética)</h1>
+  <p class="sub">Maqueta de referencia visual — contenido corregido según revisión. No es diseño final, es guía de datos/lógica para el equipo de desarrollo.</p>
+
+  <div class="grid">
+
+    <!-- CARD 1: Maquillaje Profesional -->
+    <div class="card-col">
+      <div class="card-label">Variante A — Curso largo CON certificado universitario<small>Ej: Maquillaje Profesional</small></div>
+      <div class="card">
+        <div class="cat">Estética</div>
+        <div class="rating"><span class="star">★</span> 4.3 <span class="count">(30)</span></div>
+        <div class="title">Maquillaje Profesional</div>
+        <div class="meta"><span>4 meses</span><span>Inicio inmediato</span></div>
+        <div class="badges">
+          <span class="pill ia">Tutor IA</span>
+          <span class="pill uai"><span class="logo-img"><img src="logo-uai.png" alt="UAI" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'UAI',style:'font-size:8px;font-weight:900;color:#721839;'}))"></span> Certificado por UAI</span>
+        </div>
+        <div class="cert-line">Cert. universitario</div>
+        <div class="price">US$ 230</div>
+        <div class="btn">Ver cursos</div>
+      </div>
+    </div>
+
+    <!-- CARD 2: Colorimetria -->
+    <div class="card-col">
+      <div class="card-label">Variante B — Curso corto / píldora (sin certificado universitario)<small>Ej: Colorimetría de Peluquería</small></div>
+      <div class="card">
+        <div class="cat">Estética</div>
+        <div class="rating"><span class="star">★</span> 4.6 <span class="count">(69)</span></div>
+        <div class="title">Colorimetría de Peluquería</div>
+        <div class="meta"><span>Hasta 1 mes</span><span>Inicio inmediato</span></div>
+        <div class="badges">
+          <span class="pill ia">Tutor IA</span>
+        </div>
+        <div class="cert-line">Constancia de cursado</div>
+        <div class="price">US$ 30</div>
+        <div class="btn">Ver cursos</div>
+      </div>
+    </div>
+
+    <!-- CARD 3: Drenaje Linfatico -->
+    <div class="card-col">
+      <div class="card-label">Variante C — Curso medio con certificado propio Fude<small>Ej: Drenaje Linfático Manual</small></div>
+      <div class="card">
+        <div class="cat">Estética</div>
+        <div class="rating"><span class="star">★</span> 4.5 <span class="count">(56)</span></div>
+        <div class="title">Drenaje Linfático Manual</div>
+        <div class="meta"><span>2 meses</span><span>Inicio inmediato</span></div>
+        <div class="badges">
+          <span class="pill ia">Tutor IA</span>
+          <span class="pill fude"><span class="logo-img"><img src="logo-fude.png" alt="Fude" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'F',style:'font-size:10px;font-weight:900;color:#b23a3a;'}))"></span> Certificado FUDE</span>
+        </div>
+        <div class="cert-line">Certificado Fude</div>
+        <div class="price">US$ 144</div>
+        <div class="btn">Ver cursos</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title" style="font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#444;margin:0 0 22px;border-left:4px solid var(--rojo);padding-left:10px;">Referencia — Página de detalle de cada curso (capturas reales anotadas)</div>
+
+  <div class="ref-block">
+    <img class="ref-shot" alt="Curso corto/píldora sin certificado universitario" src="Curso-corto-píldora-sin-certificado-universitario.png">
+    <div class="ref-note">
+      <b>Curso corto/píldora (ej. Colorimetría de Peluquería):</b> corregir duración de "1 meses" a <b>"Hasta 1 mes"</b> — este criterio aplica a todos los cursos cortos. Corregir el texto de certificación de "Cert. incluido" a <b>"Constancia de cursado"</b>. En la sección "Este curso incluye" del modal: <b>"Certificado universitario digital" → "Constancia de cursado"</b>, y <b>"Acceso 12 meses" → "Hasta 1 mes"</b>. Además, quitar el cartel de "2x1 por tiempo limitado" en este tipo de curso (no aplica a cursos cortos).
+    </div>
+  </div>
+
+  <div class="ref-block">
+    <img src="Curso-largo-CON-certificado-universitario.png" alt="Curso largo con certificado universitario UAI" class="ref-shot">
+    <div class="ref-note">
+      <b>Curso largo con certificado UAI (ej. Maquillaje Profesional):</b> este es el caso correcto de referencia — duración "4 meses" ✅, badge/cartel "Este curso está certificado por UAI" ✅, "Certificado universitario digital" y "Acceso 12 meses" en el "Este curso incluye" ✅. Usar esta tarjeta como modelo para todos los cursos que sí otorgan certificación universitaria real.
+    </div>
+  </div>
+
+  <div class="ref-block">
+    <img src="Curso-medio-con-certificado-Fude.png" alt="Curso medio con certificado propio Fude" class="ref-shot">
+<div class="ref-note">
+      <b>Curso medio con certificado propio (ej. Drenaje Linfático Manual):</b> la duración "2 meses" está bien (es un curso largo, no una píldora). Corregir el texto de certificación de "Cert. incluido" a <b>"Certificado FUDE"</b>. En "Este curso incluye": <b>"Certificado universitario digital" → "Certificado FUDE"</b>. El "Acceso 12 meses" en este caso está bien, ya que el curso sí dura ese tiempo de acceso real.
+    </div>
+  </div>
+
+  <div class="db-callout">
+    <b>⚠️ Importante — origen del dato:</b> tanto la información que aparece en el <b>grid/listado de cursos por área</b> como la que aparece en la <b>página de detalle de cada curso</b> (duración, tipo de certificación, badge UAI/FUDE, "Este curso incluye", acceso) debe traerse <b>dinámicamente desde la base de datos de cada curso</b>, no estar escrita a mano ni hardcodeada en el frontend. Así evitamos que quede desactualizada como pasa hoy, y que cualquier cambio futuro se actualice automáticamente en ambos lugares (grid + detalle) a la vez.
+  </div>
+
+  <div class="section-title" style="font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#444;margin:46px 0 18px;border-left:4px solid var(--rojo);padding-left:10px;">Resumen — Nota para el equipo de desarrollo</div>
+
+  <div class="note-box">
+    <div class="note-title">📌 Nota para el equipo de desarrollo — Grid/Listado + Página de detalle de cursos</div>
+    <ul class="note-list">
+      <li><span class="n">1.</span> Revisar la <b>duración</b> de todos los cursos del área de Estética (y luego el resto de áreas): los cursos cortos/píldora deben mostrar <b>"Hasta 1 mes"</b>, nunca una cifra en meses inventada. Ej: Colorimetría de Peluquería figuraba con "1 meses"/"4 meses" según la pantalla, y en realidad es "Hasta 1 mes".</li>
+      <li><span class="n">2.</span> Revisar el <b>texto de certificación</b> de cada curso, hay 3 variantes posibles según el tipo real de curso: <b>"Cert. universitario"</b> (cursos con certificación UAI), <b>"Constancia de cursado"</b> (cursos cortos/píldora, sin certificación universitaria) y <b>"Certificado FUDE"</b> (certificado propio de la plataforma, no universitario).</li>
+      <li><span class="n">3.</span> Agregar el <b>badge nuevo "Certificado por UAI"</b> + logo, con el mismo estilo del pill "Tutor IA" pero con fondo <code class="tag">#721839</code> y texto blanco. Mostrar <u>únicamente</u> en los cursos que realmente otorgan certificado universitario UAI (Variante A).</li>
+      <li><span class="n">4.</span> Agregar también el <b>badge "Certificado FUDE"</b> para los cursos con certificado propio de la plataforma (Variante C). Mismo estilo/tamaño que el badge UAI, pero con fondo rojo con un efecto brillo/degradé (no plano) para diferenciarlo visualmente del UAI y de "Tutor IA".</li>
+      <li><span class="n">5.</span> Los dos logos (UAI y FUDE) van como <code class="tag">&lt;img&gt;</code> dentro del badge — en esta maqueta son placeholders (<code class="tag">logo-uai.png</code> / <code class="tag">logo-fude.png</code>), reemplazar por los archivos finales.</li>
+      <li><span class="n">6.</span> En la <b>página de detalle de cada curso</b> y en el modal de inscripción ("Este curso incluye"), aplicar el mismo criterio: reemplazar "Certificado universitario digital" por "Constancia de cursado" o "Certificado FUDE" según corresponda, y ajustar "Acceso 12 meses" a la duración real del curso (ej. "Hasta 1 mes" en cursos cortos, en el caso de cursos mayores a un mes si corresponde "Acceso 12 meses").</li>
+      <li><span class="n">7.</span> El cartel de <b>"2x1 por tiempo limitado"</b> no debería aparecer en los cursos cortos/píldora (ver nota sobre la captura de Colorimetría).</li>
+      <li><span class="n">8.</span> <b>Toda esta información (duración, tipo de certificación, badges, "Este curso incluye", acceso) debe salir de forma dinámica desde la base de datos de cada curso — tanto en el grid/listado como en la página de detalle —</b>, no estar hardcodeada ni escrita a mano, para que un cambio se refleje automáticamente en los dos lugares.</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
