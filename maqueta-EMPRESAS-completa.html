@@ -125,13 +125,14 @@
   .hero-copy h1 .accent{color:#e85d5d;}
   .hero-copy p.hero-sub{font-size:15.5px;color:#c9c3c3;line-height:1.7;max-width:520px;margin:0 0 34px;}
   .hero-stats{display:flex;gap:40px;}
-  .hero-stat b{display:block;font-family:'Poppins',sans-serif;font-size:26px;font-weight:800;color:#b83232;}
+  .hero-stat b{display:block;font-family:'Poppins',sans-serif;font-size:26px;font-weight:800;color:#fff;}
   .hero-stat span{display:block;font-size:12.5px;color:#a8a2a2;margin-top:4px;}
 
   /* form card */
   .form-card{
     background:#fff;color:var(--ink);border-radius:18px;padding:32px 34px;
     box-shadow:0 20px 50px rgba(0,0,0,.35);
+    scroll-margin-top:20px;
   }
   .form-card h2{font-size:19px;font-weight:800;margin:0 0 4px;}
   .form-card .form-sub{font-size:13.5px;color:var(--gray-500);margin:0 0 22px;}
@@ -449,7 +450,7 @@
     <div class="hero-copy">
       <span class="hero-eyebrow">Soluciones para empresas</span>
       <h1>Capacitá tu equipo con <span class="accent">rutas formativas a medida</span></h1>
-      <p class="hero-sub">Paquetes de cursos online con certificación universitaria para empresas de cualquier tamaño. Administración, Inteligencia Artificial, Salud Laboral, Negocios y más. Con tutor IA disponible 24/7 para cada empleado.</p>
+      <p class="hero-sub">Paquetes de cursos online con certificación universitaria y/o FUDE con validez en todo el territorio argentino. para empresas de cualquier tamaño. Administración, Inteligencia Artificial, Salud Laboral, Negocios y más. Con tutor IA disponible 24/7 para cada empleado.</p>
       <div class="hero-stats">
         <div class="hero-stat"><b>+200</b><span>empresas activas</span></div>
         <div class="hero-stat"><b>+8.000</b><span>empleados capacitados</span></div>
@@ -457,7 +458,7 @@
       </div>
     </div>
 
-    <div class="form-card">
+    <div class="form-card" id="form-propuesta">
       <h2>Solicitá una propuesta</h2>
       <p class="form-sub">Completá el formulario y te contactamos.</p>
 
@@ -1361,7 +1362,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" type="button">¿Los certificados tienen validez?<span class="faq-icon">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner"><p class="faq-a-pad">Sí, todos nuestros cursos cuentan con certificación universitaria con validez oficial en todo el territorio argentino.</p></div></div>
+        <div class="faq-a"><div class="faq-a-inner"><p class="faq-a-pad">Sí, todos nuestros cursos cuentan con certificación universitaria y/o  FUDE con validez en todo el territorio argentino.</p></div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" type="button">¿Cómo es la facturación?<span class="faq-icon">+</span></button>
@@ -1481,7 +1482,10 @@
     // ---------- Scroll al formulario de propuesta ----------
     document.querySelectorAll('.scroll-to-propuesta').forEach(function(btn){
       btn.addEventListener('click', function(){
-        var target = document.getElementById('propuesta');
+        var isMobile = window.matchMedia('(max-width:960px)').matches;
+        var target = isMobile
+          ? document.getElementById('form-propuesta')
+          : document.getElementById('propuesta');
         if (target) { target.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' }); }
       });
     });
