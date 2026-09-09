@@ -23,6 +23,12 @@
     --white:#ffffff;
     --dark:#181011;
     --dark-2:#241516;
+    --step-done:#2e7d32;
+    --step-done-bg:#eaf6ec;
+    --step-active:#63b876;
+    --step-active-bg:#eef9f0;
+    --step-pending:#e79a9a;
+    --step-pending-bg:#fbeeee;
     --radius-lg:22px;
     --radius-md:14px;
     --radius-sm:9px;
@@ -184,8 +190,9 @@
     color: var(--gray-500);
     position: relative;
   }
-  .step-node.done { color: var(--primary); }
-  .step-node.active { color: var(--ink); font-weight: 600; }
+  .step-node.done { color: var(--step-done); }
+  .step-node.active { color: var(--step-active); font-weight: 600; }
+  .step-node.pending { color: var(--step-pending); }
   .step-circle {
     width: 28px;
     height: 28px;
@@ -201,22 +208,28 @@
     transition: all .2s;
   }
   .step-node.done .step-circle {
-    background: var(--primary);
-    border-color: var(--primary);
+    background: var(--step-done);
+    border-color: var(--step-done);
     color: #fff;
   }
   .step-node.active .step-circle {
-    border-color: var(--primary);
-    color: var(--primary);
+    border-color: var(--step-active);
+    background: var(--step-active-bg);
+    color: var(--step-active);
+  }
+  .step-node.pending .step-circle {
+    border-color: var(--step-pending);
+    background: var(--step-pending-bg);
+    color: var(--step-pending);
   }
   .step-line {
     width: 64px;
     height: 2px;
-    background: var(--gray-150);
+    background: var(--step-pending-bg);
     margin: 0 4px;
     flex-shrink: 0;
   }
-  .step-line.done { background: var(--primary); }
+  .step-line.done { background: var(--step-done); }
 
   /* ===================== LAYOUT PRINCIPAL ===================== */
   .checkout-wrap {
@@ -235,6 +248,51 @@
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow);
     padding: 24px;
+  }
+
+  /* OFERTA POR TIEMPO LIMITADO */
+  .offer-timer {
+    margin: -24px -24px 16px;
+    background: var(--dark);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .offer-timer svg { width: 16px; height: 16px; color: #ffb020; flex-shrink: 0; }
+  .offer-timer-label {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+  }
+  .offer-timer-count {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .offer-timer-count span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ink);
+    background: #fff;
+    border-radius: 5px;
+    padding: 3px 6px;
+    min-width: 22px;
+    text-align: center;
+  }
+  .offer-timer-count em {
+    font-style: normal;
+    font-size: 11px;
+    color: rgba(255,255,255,.6);
+  }
+  @media (max-width: 480px) {
+    .offer-timer { margin: -24px -20px 2px; border-radius: var(--radius-md) var(--radius-md) 0 0; padding: 9px 14px; }
   }
 
   .course-heading { margin-bottom: 16px; }
@@ -432,7 +490,9 @@
     gap: 10px;
     margin-bottom: 20px;
   }
+  .course-row-main { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
   .course-row-name { font-size: 14.5px; font-weight: 600; color: var(--ink); }
+  .course-row-sub { font-size: 12px; color: var(--gray-500); }
   .badge-2x1-activo {
     font-size: 11.5px;
     font-weight: 600;
@@ -792,13 +852,16 @@
 <body>
 <div style="max-width:1100px;margin:16px auto 0;padding:16px 20px;background:#fff8e1;border:2px dashed #d4a017;border-radius:12px;font-family:sans-serif;">
   <p style="margin:0 0 8px;font-weight:800;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#8a6d00;">
-    📝 Nota para desarrollo — Forma de pago
+    📝 Nota para desarrollo — Forma de pago (actualización)
   </p>
   <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.6;color:#4a3d00;">
-    <li><strong>Opción 1:</strong> agregar aclaración de que es con tarjeta de crédito. Cambiar el título de "Pago en 12 cuotas de $27.900" a algo como <em>"12 cuotas de $27.900 con tarjeta de Credito"</em>.</li>
-    <li><strong>Opción 2 (Transferencia bancaria):</strong> se mantiene igual, sin cambios. Revisar bien los montos, tanto para transferencia como los demas.</li>
-    <li><strong>Eliminar</strong> el acordeón/modal que se despliega debajo de la opción de transferencia con los datos bancarios (Banco, CBU, Alias, CUIT). Esos datos ya no van ahí — se movieron a la pantalla de confirmación (paso 3).</li>
-    <li><strong>Opción 3 (Mercado Pago):</strong> detallar las formas de pago disponibles dentro de Mercado Pago (ej. tarjeta de crédito, débito, dinero en cuenta, etc.), como se ve en la maqueta.</li>
+    <li><strong>Stepper:</strong> recoloreado — paso completado en verde fuerte con tilde, paso activo en verde claro, pasos pendientes en rojo claro.</li>
+    <li><strong>Nuevo banner "Oferta por tiempo limitado"</strong> arriba de la tarjeta del curso, con ícono de reloj y cuenta regresiva (DD:HH:MM). Los valores del contador son estáticos en esta maqueta — falta lógica real de countdown.</li>
+    <li><strong>"2x1 activo"</strong> ahora lleva emoji 🔥, y se agregó un subtítulo gris debajo del nombre del curso con formato Área · Duración · Tutor IA incluido (dinámico por curso).</li>
+    <li><strong>Botón final</strong> renombrado de "Pagar" a <em>"Finalizar inscripción"</em>.</li>
+    <li><strong>Certificación:</strong> "Certificado universitario digital" pasa a llamarse "Certificado digital" en todos los cursos; solo se suma la imagen/sello de certificación UAI en los cursos con certificación universitaria real.</li>
+    <li><strong>⚠️ Revisar valores de los cursos:</strong> en la página principal / de prueba los precios se ven mal (posible desalineación entre cuotas, transferencia y Mercado Pago). Validar los tres montos antes de pasar a producción.</li>
+    <li>Pendiente aparte (no en este archivo): botón "Consultar más info" más llamativo y tarjetas de "Cursos relacionados" en la página de info del curso — se aplican cuando se comparta esa maqueta.</li>
   </ul>
 </div>
 <!-- ====== TOAST ====== -->
@@ -869,7 +932,7 @@
       <span>Forma de pago</span>
     </div>
     <div class="step-line"></div>
-    <div class="step-node">
+    <div class="step-node pending">
       <div class="step-circle">3</div>
       <span>Confirmación</span>
     </div>
@@ -881,6 +944,15 @@
 
   <!-- COLUMNA IZQUIERDA -->
   <div class="col-left">
+
+    <!-- Oferta por tiempo limitado -->
+    <div class="offer-timer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+      <span class="offer-timer-label">Oferta por tiempo limitado</span>
+      <div class="offer-timer-count">
+        <span>02</span><em>d</em> <span>14</span><em>h</em> <span>36</span><em>m</em>
+      </div>
+    </div>
 
     <div class="course-heading">
       <div class="course-title">Auxiliar de Farmacia</div>
@@ -928,7 +1000,7 @@
       </li>
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        Certificado universitario digital
+        Certificado digital
       </li>
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -956,8 +1028,11 @@
 
     <!-- Curso + 2x1 activo -->
     <div class="course-row">
-      <span class="course-row-name">Auxiliar de Farmacia</span>
-      <span class="badge-2x1-activo">2x1 activo</span>
+      <div class="course-row-main">
+        <span class="course-row-name">Auxiliar de Farmacia</span>
+        <span class="course-row-sub">Salud · 5 meses · Tutor IA incluido</span>
+      </div>
+      <span class="badge-2x1-activo">🔥 2x1 activo</span>
     </div>
 
     <!-- Tarjeta usuario -->
@@ -1042,7 +1117,7 @@
     <!-- Acciones -->
     <div class="actions-row">
       <button class="btn-back" onclick="showToast('Volviendo al paso anterior…')">Atrás</button>
-      <button class="btn-finalizar" onclick="showToast('¡Procesando tu inscripción!')">Pagar</button>
+      <button class="btn-finalizar" onclick="showToast('¡Procesando tu inscripción!')">Finalizar inscripción</button>
     </div>
 
   </div>
