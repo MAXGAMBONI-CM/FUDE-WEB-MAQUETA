@@ -285,10 +285,19 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
     50%{ box-shadow:0 4px 20px rgba(184,50,50,.6); }
   }
   .btn-secondary{
-    display:block; width:100%; text-align:center;
-    background:none; border:none; color:var(--red);
-    font-size:13.5px; font-weight:600; padding:6px;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; text-align:center;
+    background:#fff; border:2px solid var(--red); color:var(--red);
+    font-size:14px; font-weight:700; padding:12px;
+    border-radius:10px;
     margin-bottom:22px; cursor:pointer;
+    box-shadow:0 2px 8px rgba(184,50,50,.12);
+    transition:background-color .15s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-secondary:hover{
+    background:var(--red-soft);
+    transform:translateY(-1px);
+    box-shadow:0 4px 12px rgba(184,50,50,.2);
   }
   .cta-divider{ height:1px; background:var(--border-gray); margin:0 0 20px; }
   .includes-title{
@@ -304,6 +313,20 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
     flex-shrink:0;
   }
   .check-icon svg{ color:var(--red); }
+  /* Insignia certificación universitaria UAI (solo cursos con este tipo de certificación) */
+  .uai-strip{
+    display:flex; align-items:center; gap:10px;
+    background:#fff8f5; border:1px solid #f3d9ce;
+    border-radius:10px; padding:10px 12px;
+    margin-bottom:22px;
+  }
+  .uai-strip img{
+    width:34px; height:34px; object-fit:contain; flex-shrink:0; border-radius:6px;
+  }
+  .uai-strip span{ font-size:12px; color:#5a3a30; line-height:1.4; }
+  .uai-strip b{ color:#c2453f; }
+  .pill-uai{ background:#fff; border:1px solid #f3d9ce; color:#c2453f; }
+  .pill-uai img{ width:16px; height:16px; object-fit:contain; border-radius:3px; }
   .pay-title{ font-size:12px; color:var(--text-lgray); margin-bottom:10px; }
   .pay-row{ display:flex; flex-wrap:wrap; gap:8px; }
   .pay-chip{
@@ -392,16 +415,30 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
   .guarantee-card p{ font-size:13px; color:var(--text-gray); line-height:1.6; }
 
   .related-title{ font-size:17px; font-weight:800; margin-bottom:14px; }
-  .related-list{ display:flex; flex-direction:column; }
+  .related-list{ display:flex; flex-direction:column; gap:10px; }
   .related-item{
-    padding:12px 0; border-bottom:1px solid var(--border-gray);
-    display:flex; align-items:center; justify-content:space-between;
+    padding:14px; border:1px solid var(--border-gray); border-radius:14px;
+    display:flex; align-items:center; gap:12px;
+    background:#fff; cursor:pointer;
+    transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+  }
+  .related-item:hover{
+    border-color:var(--red);
+    box-shadow:0 6px 16px rgba(184,50,50,.12);
+    transform:translateY(-1px);
+  }
+  .related-icon{
+    width:40px; height:40px; border-radius:10px; flex-shrink:0;
+    background:var(--red-soft);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--red);
   }
   .related-item .rname{ font-size:14px; font-weight:700; margin-bottom:3px; }
-  .related-item .rsub{ font-size:12px; color:var(--text-lgray); }
+  .related-item .rsub{ font-size:12px; color:var(--text-lgray); display:flex; align-items:center; gap:4px; }
   .rtag{
     font-size:11px; font-weight:700; color:var(--red);
     background:var(--red-soft); padding:3px 10px; border-radius:12px;
+    margin-left:auto; flex-shrink:0;
   }
   .share-title{ font-size:14px; font-weight:700; margin:26px 0 10px; }
   .share-icons{ display:flex; gap:10px; }
@@ -593,26 +630,20 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
 <!-- ======================================================= -->
 <div style="background:#fff3cd;border:1px solid #f0b429;border-left:4px solid #f0b429;border-radius:8px;padding:22px 26px;margin:28px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.65;color:#3a2e00;">
   <div style="display:inline-block;background:#f0b429;color:#3a2e00;font-size:11px;font-weight:700;letter-spacing:.5px;padding:3px 10px;border-radius:4px;margin-bottom:14px;">
-    NOTA PARA EL PROGRAMADOR - VERSION DESKTOP
+    NOTA PARA EL PROGRAMADOR
   </div>
   <p style="margin:0 0 12px;font-weight:700;color:#7a5c00;font-size:15px;">
-    Modificaciones realizadas a tener en cuenta:
+    Se anexa / envía por separado una captura de pantalla con capturas señalando los puntos donde la maqueta anterior no cumplía con los lineamientos. A continuación se detallan las modificaciones realizadas sobre esta versión:
   </p>
   <ol style="margin:0;padding-left:20px;">
     <li style="margin-bottom:14px;">
-      <b>Certificado incluido:</b> en la información de cada curso, para todos los cursos que <u>no</u> tengan certificación de la UAIA, debe indicarse el texto "Certificado incluido".
+      <b>Certificado incluido:</b> el texto <b>"Certificado Incluido"</b> debe aparecer siempre en toda la información de cada curso (badges del hero y detalle "Este curso incluye"), sin importar el tipo de certificación. Para los cursos con <b>certificación universitaria</b>, se suma además una insignia/imagen que indica "Este curso está certificado por la UAI (Universidad Abierta Interamericana)" — pero el texto base sigue siendo el mismo para todos los cursos. 
     </li>
     <li style="margin-bottom:14px;">
-      <b>Modal / formulario de inscripción:</b> el valor de cada cuota va en un texto más grande y en negrita, con el "/mes" en un texto más chico al lado. Debajo de ese valor va el texto "12 cuotas con tarjeta de crédito". El botón principal dice <b>"Inscribirme ahora"</b> y debe tener algún detalle visual que lo destaque (sombra, animación, etc. — a definir con diseño). Debajo de ese botón va el botón secundario <b>"Consultar más info"</b>, que al hacer clic debe redirigir al WhatsApp de FUDE.
-    </li>
-    <li style="margin-bottom:14px;">
-      <b>Sub-nav sticky:</b> se añadió una barra de navegación fija que aparece mientras el usuario scrollea la página del curso. Incluye enlaces a las distintas secciones del curso (que se van marcando como activas a medida que el usuario baja) y un botón de inscripción. Al hacer clic en cada <code>&lt;a&gt;</code> debe llevar directo a su sección correspondiente — revisar que los anchors queden bien enlazados.
-    </li>
-    <li style="margin-bottom:14px;">
-      <b>Nuevas secciones:</b> se agregaron dos secciones nuevas en la página de información de cada curso, debajo de Testimonios: <b>Certificación</b> y, debajo de esta, <b>Preguntas Frecuentes</b>.
+      <b>Botón "Consultar más info":</b> ahora tiene apariencia de botón real (fondo, borde y sombra sutil) para que se note claramente que es clickeable, sin competir visualmente con el botón principal "Inscribirme ahora" que sigue siendo el más destacado.
     </li>
     <li style="margin-bottom:0;">
-      <b>Header:</b> el header es solo de ejemplo / referencia. Lo importante a respetar es el formato del sub-nav sticky. Si por diseño o coherencia visual se quiere modificar el header, se puede — de todos modos, cualquier cambio consultarlo antes con Gonzalo.
+      <b>Cursos relacionados:</b> se rediseñaron como tarjetas tipo botón. Cada tarjeta muestra un ícono genérico de curso (el mismo para todos, no uno distinto por curso), el nombre del curso y debajo el texto "Inicio inmediato".
     </li>
   </ol>
 </div>
@@ -668,12 +699,7 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
       <a href="#certificacion" data-target="certificacion">Certificación</a>
       <a href="#faq" data-target="faq">FAQ</a>
     </div>
-    <a href="https://educativo-net.vercel.app/checkout/auxiliar-de-farmacia?id=1" 
-   class="subnav-cta" 
-   id="subnavCta">
-   Inscribirme ahora
-</a>
-
+    <button class="subnav-cta" id="subnavCta">Inscribirme ahora</button>
   </div>
 </nav>
 
@@ -722,7 +748,9 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
           Inscribirme ahora
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </button>
-        <button class="btn-secondary">Consultar más info</button>
+        <button class="btn-secondary">
+          Consultar más info
+        </button>
 
         <div class="cta-divider"></div>
 
@@ -804,11 +832,11 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
 
       <div class="related-title">Cursos relacionados</div>
       <div class="related-list">
-        <div class="related-item"><div><div class="rname">Secretariado Médico</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
-        <div class="related-item"><div><div class="rname">Facturación Sanatorial</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
-        <div class="related-item"><div><div class="rname">Auxiliar de Enfermería</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
-        <div class="related-item"><div><div class="rname">Asistente Dental</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
-        <div class="related-item"><div><div class="rname">Auxiliar de Laboratorio Bioquímico</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
+        <div class="related-item"><span class="related-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span><div><div class="rname">Secretariado Médico</div><div class="rsub">Inicio inmediato - 5 meses</div></div></div>
+        <div class="related-item"><span class="related-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span><div><div class="rname">Facturación Sanatorial</div><div class="rsub">Inicio inmediato - 4 meses</div></div></div>
+        <div class="related-item"><span class="related-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span><div><div class="rname">Auxiliar de Enfermería</div><div class="rsub">Inicio inmediato - 5 meses</div></div></div>
+        <div class="related-item"><span class="related-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span><div><div class="rname">Asistente Dental</div><div class="rsub">Inicio inmediato - 4 meses</div></div></div>
+        <div class="related-item"><span class="related-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span><div><div class="rname">Auxiliar de Laboratorio Bioquímico</div><div class="rsub">Inicio inmediato - 5 meses</div></div></div>
       </div>
 
       <div class="share-title">Comparte este curso:</div>
