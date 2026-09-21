@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FUDE — Curso Gratuito de Análisis de los Recursos Financieros (maqueta)</title>
+<title>FUDE — Auxiliar de Farmacia (maqueta corrección)</title>
 <style>
   :root{
     --black:#121212;
@@ -40,16 +40,12 @@
   /* ===================================================== */
   .correction-note{
     background:#fff3cd;
-    border:1px solid #f0b429;
-    border-left:4px solid #f0b429;
-    border-radius:8px;
-    padding:22px 26px;
-    margin:28px auto;
-    max-width:1240px;
+    border-bottom:3px solid #f0b429;
+    padding:16px 24px;
     font-size:14px;
-    line-height:1.65;
     color:#3a2e00;
   }
+  .correction-note b{ color:#7a5c00; }
   .correction-note .tag{
     display:inline-block;
     background:#f0b429;
@@ -57,88 +53,75 @@
     font-size:11px;
     font-weight:700;
     letter-spacing:.5px;
-    padding:3px 10px;
+    padding:2px 8px;
     border-radius:4px;
-    margin-bottom:14px;
+    margin-right:8px;
   }
-  .correction-note p.title{ margin:0 0 12px; font-weight:700; color:#7a5c00; font-size:15px; }
-  .correction-note ol{ margin:0; padding-left:20px; }
-  .correction-note li{ margin-bottom:10px; }
+  .correction-note ul{ margin:8px 0 0 20px; list-style:disc; }
+  .correction-note li{ margin-bottom:2px; }
 
-  /* ─── HEADER ─── */
-  header{background:var(--red);position:relative;top:0;z-index:100;box-shadow:0 2px 12px rgba(198,37,61,0.2)}
-  .header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;height:64px;gap:8px}
-  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:16px;flex-shrink:0}
-  nav{display:flex;align-items:center;gap:2px;flex:1}
-  .nav-item{position:relative}
-  .nav-link{color:rgba(255,255,255,0.9);font-size:14px;font-weight:500;padding:8px 14px;border-radius:8px;text-decoration:none;display:flex;align-items:center;gap:5px;cursor:pointer;border:none;background:none;transition:background 0.15s;white-space:nowrap}
-  .nav-link:hover{background:rgba(0,0,0,0.12);color:#fff}
-  .nav-link.current{background:rgba(0,0,0,0.18);color:#fff}
-  .nav-link svg{transition:transform 0.2s}
-  .nav-item:hover .nav-link svg{transform:rotate(180deg)}
-  .dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:#fff;border:1px solid var(--border-gray);border-radius:14px;padding:10px;min-width:540px;box-shadow:0 20px 60px rgba(0,0,0,0.1);z-index:200}
-  .nav-item:hover .dropdown{display:block}
-  .dropdown-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
-  .drop-area{padding:10px 12px;border-radius:10px;cursor:pointer;transition:background 0.15s;text-decoration:none;display:block}
-  .drop-area:hover{background:var(--red-soft)}
-  .drop-area-title{font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:5px}
-  .drop-area-course{display:block;color:var(--text-lgray);font-size:12px;padding:1px 0;transition:color 0.15s}
-  .drop-area:hover .drop-area-course{color:#555}
-  .header-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
-  .btn-alumno{background:#fff;color:var(--red);font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;border:2px solid rgba(255,255,255,0.3);cursor:pointer;transition:all 0.15s;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
-  .btn-alumno:hover{background:#ffe8ec;transform:scale(1.02)}
-  .menu-toggle{
-    display:none;
-    background:none;border:none;color:#fff;
-    width:40px;height:40px;align-items:center;justify-content:center;
-    cursor:pointer;flex-shrink:0;
+  .review-highlight{ position:relative; }
+  .new-tag{
+    position:absolute;
+    top:-14px; left:50%;
+    transform:translateX(-50%);
+    background:#f0b429;
+    color:#3a2e00;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.6px;
+    padding:5px 16px;
+    border-radius:20px;
+    z-index:5;
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
   }
-  .menu-toggle .icon-close{ display:none; }
-  .menu-toggle.active .icon-open{ display:none; }
-  .menu-toggle.active .icon-close{ display:block; }
-
-  /* ─── HEADER RESPONSIVE (mobile) ─── */
-  @media (max-width:900px){
-    .header-inner{ flex-wrap:wrap; padding:12px 20px; height:auto; min-height:64px; }
-    .logo{ order:1; margin-right:0; }
-    .menu-toggle{ display:flex; order:2; margin-left:auto; }
-    .header-right{ order:3; margin-left:12px; }
-    nav{
-      order:4;
-      display:none;
-      flex-direction:column;
-      align-items:stretch;
-      width:100%;
-      gap:0;
-      background:var(--red-dark);
-      border-radius:0 0 14px 14px;
-      margin-top:12px;
-      overflow:hidden;
-    }
-    nav.mobile-open{ display:flex; }
-    .nav-item{ width:100%; }
-    .nav-link{ width:100%; justify-content:space-between; border-radius:0; padding:14px 18px; font-size:15px; }
-    .nav-item:hover .nav-link svg{ transform:none; }
-    .nav-item.open .nav-link svg{ transform:rotate(180deg); }
-    .dropdown{
-      position:static; display:none; min-width:0; width:100%;
-      box-shadow:none; border:none; border-radius:0;
-      background:rgba(0,0,0,.15); padding:6px 14px;
-    }
-    .nav-item:hover .dropdown{ display:none; }
-    .nav-item.open .dropdown{ display:block; }
-    .dropdown-grid{ grid-template-columns:1fr; }
-    .drop-area{ padding:10px 4px; }
-    .drop-area:hover{ background:none; }
-    .drop-area-title{ color:#fff; }
-    .drop-area-course{ color:rgba(255,255,255,0.75); }
-    .drop-area:hover .drop-area-course{ color:#fff; }
+  .review-highlight > .review-outline{
+    outline:2px dashed #f0b429;
+    outline-offset:10px;
+    border-radius:24px;
   }
 
   /* ===================================================== */
-  /* SUB-HEADER STICKY (nav por secciones del curso gratuito) */
+  /* TICKER */
   /* ===================================================== */
-  #temario, #objetivos, #metodologia, #requisitos, #diferencias, #tecnologia{
+  .ticker{
+    display:flex;
+    justify-content:space-around;
+    background:#fff;
+    border-bottom:1px solid var(--border-gray);
+    padding:8px 0;
+    font-size:12px;
+    color:#333;
+  }
+
+ /* ─── HEADER ─── */
+header{background:var(--red);position:relative;top:0;z-index:100;box-shadow:0 2px 12px rgba(198,37,61,0.2)}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;height:64px;gap:8px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:16px;flex-shrink:0}
+.logo-mark{background:#fff;color:var(--red);font-weight:800;font-size:17px;padding:5px 10px;border-radius:6px;letter-spacing:-0.5px}
+.logo-text{color:rgba(255,255,255,0.9);font-weight:600;font-size:15px}
+nav{display:flex;align-items:center;gap:2px;flex:1}
+.nav-item{position:relative}
+.nav-link{color:rgba(255,255,255,0.9);font-size:14px;font-weight:500;padding:8px 14px;border-radius:8px;text-decoration:none;display:flex;align-items:center;gap:5px;cursor:pointer;border:none;background:none;font-family:'DM Sans',sans-serif;transition:background 0.15s;white-space:nowrap}
+.nav-link:hover{background:rgba(0,0,0,0.12);color:#fff}
+.nav-link svg{transition:transform 0.2s}
+.nav-item:hover .nav-link svg{transform:rotate(180deg)}
+.dropdown{display:none;position:absolute;top:calc(100% + 8px);left:0;background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px;min-width:540px;box-shadow:0 20px 60px rgba(0,0,0,0.1);z-index:200}
+.nav-item:hover .dropdown{display:block}
+.dropdown-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.drop-area{padding:10px 12px;border-radius:10px;cursor:pointer;transition:background 0.15s;text-decoration:none;display:block}
+.drop-area:hover{background:var(--red-bg)}
+.drop-area-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px}
+.drop-area-course{display:block;color:var(--muted);font-size:12px;padding:1px 0;transition:color 0.15s}
+.drop-area:hover .drop-area-course{color:#555}
+.header-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
+.btn-alumno{background:#fff;color:var(--red);font-weight:700;font-size:13px;padding:9px 20px;border-radius:8px;text-decoration:none;border:2px solid rgba(255,255,255,0.3);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.btn-alumno:hover{background:#ffe8ec;transform:scale(1.02)}
+
+  /* ===================================================== */
+  /* SUB-HEADER STICKY (nav por secciones del curso) */
+  /* ===================================================== */
+  #aprender, #quien, #plan, #testimonios, #certificacion, #faq{
     scroll-margin-top:86px;
   }
   .course-subnav{
@@ -165,14 +148,25 @@
     display:flex; align-items:center; gap:8px;
     font-weight:800; font-size:15px; flex-shrink:0;
   }
-  .subnav-logo-img{ height:70px; width:auto; object-fit:contain; display:block; }
+  .subnav-logo-img{
+  height:85px;
+  width:auto;
+  object-fit:contain;
+  display:block;
+}
+  .subnav-logo .logo-mark-mini{
+    width:28px;height:28px;border-radius:50%;
+    background:var(--red); color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px; font-weight:800;
+  }
   .subnav-links{
     display:flex; align-items:center; gap:2px;
     overflow-x:auto; scrollbar-width:none;
   }
   .subnav-links::-webkit-scrollbar{ display:none; }
   .subnav-links a{
-    font-size:15px; font-weight:600; color:var(--text-gray);
+    font-size:16px; font-weight:600; color:var(--text-gray);
     padding:9px 15px; border-radius:20px; white-space:nowrap;
     transition:color .2s ease, background-color .2s ease;
   }
@@ -192,15 +186,20 @@
   }
 
   /* ===================================================== */
-  /* HERO (versión gratuita — sin cta-card, una sola columna) */
+  /* HERO */
   /* ===================================================== */
   .hero{
     background:var(--black);
-    padding:56px 0 60px;
+    padding:48px 0 56px;
     position:relative;
   }
-  .hero-inner{ max-width:760px; }
-  .tag-free{
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  .tag-salud{
     display:inline-block;
     background:var(--red);
     color:#fff;
@@ -212,49 +211,134 @@
   }
   .hero h1{
     color:#fff;
-    font-size:clamp(26px, 6vw, 40px);
+    font-size:42px;
     font-weight:800;
     margin-bottom:16px;
     letter-spacing:-.5px;
   }
+  .rating-row{
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:20px; font-size:14px; color:#ccc;
+  }
+  .stars{ display:flex; gap:2px; }
   .hero p.desc{
     color:#aaa; font-size:15px; line-height:1.7;
-    margin-bottom:24px;
+    max-width:600px; margin-bottom:22px;
   }
-  .badge-row{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px; }
+  .meta-row{
+    display:flex; gap:22px; color:#ccc; font-size:13px;
+    margin-bottom:22px; flex-wrap:wrap;
+  }
+  .meta-row span{ display:flex; align-items:center; gap:6px; }
+  .badge-row{ display:flex; gap:10px; flex-wrap:wrap; }
   .pill-badge{
     background:var(--black-2);
     border:1px solid var(--border-dark);
     color:#ddd;
-    font-size:12.5px;
+    font-size:12px;
     font-weight:600;
     padding:8px 14px;
     border-radius:20px;
     display:flex;align-items:center;gap:6px;
   }
-  .pill-badge svg{ color:var(--red); flex-shrink:0; }
+  .pill-badge svg{ color:var(--red); }
 
-  .btn-primary-lg{
-    display:inline-flex; align-items:center; justify-content:center; gap:8px;
-    background:var(--red); color:#fff; border:none;
-    padding:17px 34px; border-radius:10px; font-size:16px; font-weight:700;
-    cursor:pointer;
+  /* CTA card (rediseño v2) */
+  .cta-card{
+    background:#fff;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+  }
+  .offer-banner{
+    background:var(--red);
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+    text-align:center;
+    padding:11px 16px;
+    letter-spacing:.2px;
+  }
+  .cta-body{ padding:24px 22px 26px; }
+  .price-row{
+    display:flex; align-items:baseline; gap:6px; margin-bottom:4px;
+  }
+  .price-amount{
+    font-size:34px; font-weight:800; color:var(--text-dark);
+    letter-spacing:-.8px; line-height:1;
+  }
+  .price-period{ font-size:14px; color:var(--text-gray); font-weight:500; }
+  .price-note{ font-size:13.5px; color:var(--text-gray); margin-bottom:20px; }
+  .btn-primary{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; background:var(--red); color:#fff; border:none;
+    padding:14px; border-radius:10px; font-size:15px; font-weight:700;
+    margin-bottom:10px; cursor:pointer;
     position:relative; overflow:hidden; isolation:isolate;
     box-shadow:0 4px 14px rgba(184,50,50,.35);
     animation:btnPulse 2.6s ease-in-out infinite;
     transition:transform .15s ease, box-shadow .15s ease;
-    margin-bottom:14px;
   }
-  .btn-primary-lg:hover{ transform:translateY(-1px); }
+  .btn-primary:hover{ transform:translateY(-1px); }
   @keyframes btnPulse{
     0%,100%{ box-shadow:0 4px 14px rgba(184,50,50,.35); }
     50%{ box-shadow:0 4px 20px rgba(184,50,50,.6); }
   }
-  .cert-note{
-    display:flex; gap:10px; align-items:flex-start;
-    max-width:520px; color:#999; font-size:13px; line-height:1.6;
+  .btn-secondary{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; text-align:center;
+    background:#fff; border:2px solid var(--red); color:var(--red);
+    font-size:14px; font-weight:700; padding:12px;
+    border-radius:10px;
+    margin-bottom:22px; cursor:pointer;
+    box-shadow:0 2px 8px rgba(184,50,50,.12);
+    transition:background-color .15s ease, transform .15s ease, box-shadow .15s ease;
   }
-  .cert-note svg{ flex-shrink:0; margin-top:2px; color:var(--red); }
+  .btn-secondary:hover{
+    background:var(--red-soft);
+    transform:translateY(-1px);
+    box-shadow:0 4px 12px rgba(184,50,50,.2);
+  }
+  .cta-divider{ height:1px; background:var(--border-gray); margin:0 0 20px; }
+  .includes-title{
+    font-size:13px; font-weight:700; color:var(--text-dark);
+    margin-bottom:14px; text-transform:uppercase; letter-spacing:.4px;
+  }
+  .includes-list{ list-style:none; display:flex; flex-direction:column; gap:11px; margin-bottom:22px; }
+  .includes-list li{ display:flex; align-items:center; gap:10px; font-size:13.5px; color:#3a3a3a; }
+  .check-icon{
+    width:18px; height:18px; border-radius:50%;
+    background:var(--red-soft);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .check-icon svg{ color:var(--red); }
+  /* Insignia certificación universitaria UAI (solo cursos con este tipo de certificación) */
+  .uai-strip{
+    display:flex; align-items:center; gap:10px;
+    background:#fff8f5; border:1px solid #f3d9ce;
+    border-radius:10px; padding:10px 12px;
+    margin-bottom:22px;
+  }
+  .uai-strip img{
+    width:34px; height:34px; object-fit:contain; flex-shrink:0; border-radius:6px;
+  }
+  .uai-strip span{ font-size:12px; color:#5a3a30; line-height:1.4; }
+  .uai-strip b{ color:#c2453f; }
+  .pill-uai{ background:#fff; border:1px solid #f3d9ce; color:#c2453f; }
+  .pill-uai img{ width:16px; height:16px; object-fit:contain; border-radius:3px; }
+  .pay-title{ font-size:12px; color:var(--text-lgray); margin-bottom:10px; }
+  .pay-row{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+  .pay-chip{
+    display:flex; align-items:center; justify-content:center;
+    background:#fff; border:1px solid var(--border-gray);
+    padding:6px 10px; border-radius:6px;
+    height:28px; box-sizing:content-box;
+  }
+  .pay-chip img{ height:16px; width:auto; display:block; object-fit:contain; }
+  .pay-chip svg{ height:18px; width:auto; display:block; }
+  .pay-chip.pay-transfer{ gap:6px; padding:6px 12px; }
+  .pay-chip.pay-transfer span{ font-size:11px; font-weight:600; color:#555; }
 
   .whatsapp-float{
     position:fixed; right:24px; bottom:24px;
@@ -262,6 +346,7 @@
     background:#25d366; display:flex; align-items:center; justify-content:center;
     box-shadow:0 6px 16px rgba(0,0,0,.25); z-index:50;
   }
+
   .back-to-top{
     position:fixed; right:24px; bottom:86px;
     width:44px; height:44px; border-radius:50%;
@@ -274,88 +359,91 @@
     transition:opacity .25s ease, transform .25s ease, background-color .2s ease;
   }
   .back-to-top:hover{ background:var(--red); }
-  .back-to-top.visible{ opacity:1; transform:translateY(0); pointer-events:auto; }
+  .back-to-top.visible{
+    opacity:1; transform:translateY(0); pointer-events:auto;
+  }
 
   /* ===================================================== */
-  /* SECCIÓN DE INFO (temario / objetivos / metodología / requisitos / diferencias / tecnología) */
+  /* CONTENT SECTION */
   /* ===================================================== */
-  .info-section{ padding:56px 0 64px; }
-  .info-grid{
+  .content-section{
+    padding:56px 0;
+  }
+  .content-grid{
     display:grid;
     grid-template-columns:1.6fr 1fr;
     gap:56px;
     align-items:start;
   }
-  .info-main > div{ margin-bottom:52px; }
-  .info-main > div:last-child{ margin-bottom:0; }
-  .info-main h2{ font-size:23px; font-weight:800; margin-bottom:18px; }
-  .info-main p{ font-size:14.5px; color:#333; line-height:1.75; margin-bottom:14px; }
-  .info-main p:last-child{ margin-bottom:0; }
+  .content-main h2{ font-size:24px; font-weight:800; margin-bottom:20px; }
+  .learn-grid{
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:18px 40px; margin-bottom:40px;
+  }
+  .learn-item{ display:flex; gap:10px; font-size:14px; color:#333; line-height:1.5; }
+  .learn-item svg{ color:var(--red); flex-shrink:0; margin-top:3px; }
 
-  /* Temario */
-  .modules{ display:flex; flex-direction:column; gap:10px; }
-  .module-item{ border:1px solid var(--border-gray); border-radius:12px; }
+  .content-main p.who{ font-size:14px; color:#333; margin-bottom:14px; line-height:1.6; }
+
+  .modules{ margin-top:10px; display:flex; flex-direction:column; gap:10px; }
+  .module-item{ border-bottom:1px solid var(--border-gray); }
   .module-q{
     width:100%; background:none; border:none; text-align:left;
     display:flex; align-items:center; justify-content:space-between;
-    padding:16px 18px; font-size:15px; font-weight:700; color:#1a1a1a;
+    padding:14px 4px; font-size:15px; font-weight:700; color:#1a1a1a;
   }
   .module-q .mplus{
-    width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    width:20px;height:20px;display:flex;align-items:center;justify-content:center;
     color:var(--red); font-size:18px; font-weight:400; transition:transform .2s ease;
   }
   .module-item.open .mplus{ transform:rotate(45deg); }
-  .module-a{ max-height:0; overflow:hidden; transition:max-height .3s ease; }
-  .module-item.open .module-a{ max-height:260px; }
-  .module-a-inner{ padding:0 18px 18px; font-size:13.5px; color:var(--text-gray); line-height:1.7; }
-  .module-a-inner li{ margin-bottom:4px; padding-left:14px; position:relative; }
-  .module-a-inner li::before{ content:"—"; position:absolute; left:0; color:var(--red); }
-
-  /* Requisitos */
-  .check-list{ display:flex; flex-direction:column; gap:14px; }
-  .check-item{ display:flex; gap:10px; font-size:14.5px; color:#333; line-height:1.55; }
-  .check-item svg{ color:var(--red); flex-shrink:0; margin-top:3px; }
-
-  /* Diferencias */
-  .diff-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px 32px; }
-  .diff-item{ display:flex; gap:10px; font-size:14px; color:#333; line-height:1.5; }
-  .diff-item svg{ color:var(--red); flex-shrink:0; margin-top:3px; }
-
-  /* Tecnología */
-  .tech-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:22px; }
-  .tech-feat{
-    background:#f9f9f8; border:1px solid var(--border-gray);
-    border-radius:12px; padding:16px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .tech-feat .ticon{
-    width:32px;height:32px;border-radius:8px;background:var(--red-soft);
-    display:flex;align-items:center;justify-content:center;color:var(--red);flex-shrink:0;
-  }
-  .tech-feat span{ font-size:13px; font-weight:600; color:#333; line-height:1.3; }
+  .module-a{ max-height:0; overflow:hidden; transition:max-height .25s ease; }
+  .module-item.open .module-a{ max-height:120px; }
+  .module-a-inner{ padding:0 4px 16px; font-size:13px; color:var(--text-gray); }
 
   /* sidebar */
-  .aside-card{
+  .guarantee-card{
     background:var(--cream);
     border-radius:16px;
-    padding:24px;
+    padding:26px;
+    text-align:center;
     margin-bottom:28px;
   }
-  .aside-card h3{ font-size:15px; font-weight:800; margin-bottom:8px; }
-  .aside-card p{ font-size:13px; color:var(--text-gray); line-height:1.6; }
+  .guarantee-icon{
+    width:44px;height:44px;border-radius:50%;
+    background:#f3d9be;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 12px;
+    color:var(--red);
+  }
+  .guarantee-card h3{ font-size:16px; font-weight:800; margin-bottom:8px; }
+  .guarantee-card p{ font-size:13px; color:var(--text-gray); line-height:1.6; }
 
   .related-title{ font-size:17px; font-weight:800; margin-bottom:14px; }
-  .related-list{ display:flex; flex-direction:column; }
+  .related-list{ display:flex; flex-direction:column; gap:10px; }
   .related-item{
-    padding:12px 0; border-bottom:1px solid var(--border-gray);
-    display:flex; align-items:center; justify-content:space-between;
+    padding:14px; border:1px solid var(--border-gray); border-radius:14px;
+    display:flex; align-items:center; gap:12px;
+    background:#fff; cursor:pointer;
+    transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+  }
+  .related-item:hover{
+    border-color:var(--red);
+    box-shadow:0 6px 16px rgba(184,50,50,.12);
+    transform:translateY(-1px);
+  }
+  .related-icon{
+    width:40px; height:40px; border-radius:10px; flex-shrink:0;
+    background:var(--red-soft);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--red);
   }
   .related-item .rname{ font-size:14px; font-weight:700; margin-bottom:3px; }
-  .related-item .rsub{ font-size:12px; color:var(--text-lgray); }
+  .related-item .rsub{ font-size:12px; color:var(--text-lgray); display:flex; align-items:center; gap:4px; }
   .rtag{
     font-size:11px; font-weight:700; color:var(--red);
     background:var(--red-soft); padding:3px 10px; border-radius:12px;
-    white-space:nowrap;
+    margin-left:auto; flex-shrink:0;
   }
   .share-title{ font-size:14px; font-weight:700; margin:26px 0 10px; }
   .share-icons{ display:flex; gap:10px; }
@@ -364,7 +452,147 @@
     display:flex;align-items:center;justify-content:center;color:#333;
   }
 
-  .note{ margin-top:8px; padding:12px 14px; background:#fdf6f0; border-left:3px solid var(--red); border-radius:4px; font-size:13px; color:#8a5a3a; line-height:1.6; }
+  /* ===================================================== */
+  /* TUTOR IA */
+  /* ===================================================== */
+  .tutor-section{ padding:0 0 56px; }
+  .tutor-card{
+    background:var(--black);
+    border-radius:22px;
+    padding:44px;
+  }
+  .ia-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    background:rgba(184,50,50,.18); color:#ff8f8f;
+    font-size:11px; font-weight:700; letter-spacing:.6px; text-transform:uppercase;
+    padding:6px 14px; border-radius:20px; margin-bottom:18px;
+  }
+  .tutor-card h2{ color:#fff; font-size:30px; font-weight:800; margin-bottom:10px; }
+  .tutor-card .sub{ color:#999; font-size:14px; margin-bottom:30px; }
+  .tutor-grid{ display:grid; grid-template-columns:1fr 1fr 1.3fr; gap:16px; }
+  .tutor-feat{
+    background:var(--black-2); border:1px solid var(--border-dark);
+    border-radius:14px; padding:18px;
+  }
+  .tutor-feat .ficon{
+    width:34px;height:34px;border-radius:9px;background:#262626;
+    display:flex;align-items:center;justify-content:center;color:var(--red);
+    margin-bottom:12px;
+  }
+  .tutor-feat h4{ color:#fff; font-size:14px; margin-bottom:6px; }
+  .tutor-feat p{ color:#999; font-size:12px; line-height:1.5; }
+  .tutor-feats-col{ display:flex; flex-direction:column; gap:16px; }
+  .chat-box{
+    grid-row: span 2;
+    background:var(--black-2); border:1px solid var(--border-dark);
+    border-radius:14px; padding:20px; display:flex; flex-direction:column;
+  }
+  .chat-box .q{ color:#fff; font-size:14px; font-weight:700; margin-bottom:12px; }
+  .chat-bubble{
+    background:var(--black-3); border-radius:10px; padding:14px;
+    color:#bbb; font-size:12.5px; line-height:1.6; flex:1; margin-bottom:14px;
+  }
+  .chat-input-row{ display:flex; gap:8px; }
+  .chat-input-row input{
+    flex:1; background:var(--black-3); border:1px solid var(--border-dark);
+    border-radius:8px; padding:10px 12px; color:#ccc; font-size:12px;
+  }
+  .chat-input-row button{
+    background:var(--red); color:#fff; border:none; border-radius:8px;
+    padding:0 18px; font-size:12px; font-weight:700;
+  }
+
+  /* ===================================================== */
+  /* TESTIMONIOS */
+  /* ===================================================== */
+  .testi-section{
+    background:var(--cream);
+    padding:56px 0;
+    text-align:center;
+  }
+  .testi-eyebrow{
+    display:inline-block; background:var(--cream-2); color:var(--red);
+    font-size:12px; font-weight:700; padding:6px 16px; border-radius:20px; margin-bottom:16px;
+  }
+  .testi-section h2{ font-size:26px; font-weight:800; margin-bottom:36px; }
+  .testi-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:900px; margin:0 auto; }
+  .testi-card{
+    background:#fff; border-radius:16px; padding:26px; text-align:left;
+  }
+  .testi-card .tstars{ display:flex; gap:2px; margin-bottom:14px; }
+  .testi-card p.quote{ font-size:14px; color:#333; line-height:1.6; margin-bottom:18px; }
+  .testi-card .tname{ font-size:14px; font-weight:700; }
+  .testi-card .trole{ font-size:12px; color:var(--text-lgray); }
+
+  /* ===================================================== */
+  /* CERTIFICACIÓN (NUEVO) */
+  /* ===================================================== */
+  .cert-section{ padding:56px 0; }
+  .cert-card{
+    background:#fffdfc;
+    border-radius:28px;
+    padding:64px 56px;
+    display:flex;
+    align-items:center;
+    gap:64px;
+  }
+  .cert-text{ flex:1; }
+  .cert-eyebrow{
+    display:inline-flex; align-items:center; gap:6px;
+    background:#ffece4; color:#c2453f;
+    font-size:12px; font-weight:700; letter-spacing:.6px; text-transform:uppercase;
+    padding:8px 16px; border-radius:30px; margin-bottom:22px;
+  }
+  .cert-title{
+    font-size:36px; font-weight:800; line-height:1.28; color:var(--text-dark); max-width:460px;
+  }
+  .cert-title .highlight{ color:#e14a2e; }
+  .cert-image-wrap{ flex:0 0 400px; }
+  .cert-image-frame{
+    background:#fff; border-radius:20px; padding:16px;
+    box-shadow:0 30px 60px -20px rgba(210,140,90,.35), 0 8px 24px rgba(0,0,0,.06);
+  }
+  .cert-image-placeholder{
+    width:100%; aspect-ratio:1.5/1; border-radius:10px;
+    background:repeating-linear-gradient(45deg, #f1e9e2 0 12px, #f7f1ec 12px 24px);
+    border:1px dashed #d8c9bc;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+    color:#a8896f; font-size:13px; text-align:center; padding:20px;
+  }
+  .cert-image-placeholder svg{ opacity:.7; }
+  .cert-image-frame img{ width:100%; display:block; border-radius:10px; }
+
+  /* ===================================================== */
+  /* FAQ (NUEVO) */
+  /* ===================================================== */
+  .faq-section{ padding:20px 0 64px; }
+  .faq-inner{ max-width:900px; margin:0 auto; }
+  .faq-header{ text-align:center; margin-bottom:32px; }
+  .faq-header h2{ font-size:28px; font-weight:700; color:#121219; }
+  .faq-list{ display:flex; flex-direction:column; gap:14px; }
+  .faq-item{ background:#fff; border:1px solid #e5e5e5; border-radius:14px; transition:border-color .2s ease; }
+  .faq-item.open{ border-color:#b83232; }
+  .faq-question{
+    width:100%; background:none; border:none; text-align:left; padding:20px 22px;
+    display:flex; align-items:center; justify-content:space-between; cursor:pointer; gap:16px;
+  }
+  .faq-q-text{ color:#1a1a1a; font-size:15px; font-weight:600; transition:color .2s ease; }
+  .faq-item.open .faq-q-text{ color:#b83232; }
+  .chevron{ flex-shrink:0; display:flex; align-items:center; justify-content:center; width:20px; height:20px; transition:transform .25s ease; }
+  .chevron svg path{ transition:stroke .2s ease; }
+  .faq-item.open .chevron{ transform:rotate(180deg); }
+  .faq-item.open .chevron svg path{ stroke:#b83232; }
+  .faq-answer{ max-height:0; overflow:hidden; transition:max-height .3s ease; }
+  .faq-item.open .faq-answer{ max-height:600px; }
+  .faq-answer-inner{
+    padding:0 22px 22px; color:#555; font-size:14px; line-height:1.7;
+    border-top:1px solid #f0e5e5; padding-top:16px; margin:0 22px;
+  }
+  .faq-answer-inner a{ color:#b83232; }
+  .faq-answer-inner strong{ color:#222 !important; }
+  .faq-answer-inner b{ color:#222 !important; }
+  .pill{ display:inline-block; background:#f9efef; color:#b83232; font-size:12px; padding:5px 12px; border-radius:20px; margin:2px 6px 2px 0; }
+  .note{ margin-top:12px; padding:10px 12px; background:#fdf6f0; border-left:3px solid #b83232; border-radius:4px; font-size:13px; color:#8a5a3a; }
 
   /* ===================================================== */
   /* FOOTER */
@@ -376,6 +604,7 @@
   .footer-grid{ display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:30px; margin-bottom:40px; }
   .footer-col h4{ font-size:15px; font-weight:800; margin-bottom:16px; }
   .footer-col a{ display:block; font-size:13px; color:#555; margin-bottom:10px; }
+  .footer-col.contact h4:nth-of-type(2){ margin-top:20px; }
   .footer-social{ display:flex; gap:10px; margin-bottom:22px; }
   .footer-social a{
     width:32px;height:32px;border-radius:8px;background:#fff;border:1px solid var(--border-gray);
@@ -388,64 +617,49 @@
   }
 
   @media (max-width:900px){
-    .info-grid{ grid-template-columns:1fr; gap:40px; }
-    .diff-grid{ grid-template-columns:1fr; }
-    .tech-grid{ grid-template-columns:1fr 1fr; }
+    .hero-grid, .content-grid{ grid-template-columns:1fr; }
+    .learn-grid{ grid-template-columns:1fr; }
+    .tutor-grid{ grid-template-columns:1fr; }
+    .testi-grid{ grid-template-columns:1fr; }
     .footer-grid{ grid-template-columns:1fr 1fr; }
+    .cert-card{ flex-direction:column; padding:40px 28px; gap:36px; }
+    .cert-image-wrap{ flex:0 0 auto; width:100%; }
+    .cert-title{ font-size:26px; max-width:none; }
     .wrap{ padding:0 20px; }
-    .hero{ padding:44px 0 48px; }
-    .correction-note{ margin:20px; padding:18px 20px; }
-  }
-  @media (max-width:560px){
-    .tech-grid{ grid-template-columns:1fr; }
-    .footer-grid{ grid-template-columns:1fr; gap:26px; }
-    .footer-col .pay-logos{ max-width:none; }
-  }
-  @media (max-width:480px){
-    .wrap{ padding:0 16px; }
-    .hero{ padding:36px 0 40px; }
-    .hero p.desc{ font-size:14px; }
-    .badge-row{ gap:8px; }
-    .pill-badge{ font-size:11.5px; padding:7px 12px; }
-    .btn-primary-lg{ width:100%; padding:15px 20px; font-size:15px; }
-    .cert-note{ max-width:100%; }
-    .info-main h2{ font-size:20px; }
-    .whatsapp-float{ width:46px; height:46px; right:16px; bottom:16px; }
-    .back-to-top{ width:40px; height:40px; right:18px; bottom:72px; }
-    .header-inner{ padding:10px 16px; }
-    .logo img{ height:40px !important; }
   }
 </style>
 </head>
 <body>
-
-<!-- ======================================================= -->
+  <!-- ======================================================= -->
 <!-- NOTA PARA EL PROGRAMADOR -->
 <!-- ======================================================= -->
-<div class="correction-note">
-  <div class="tag">NOTA PARA EL PROGRAMADOR</div>
-  <p class="title">Diferencias clave respecto a la maqueta de cursos pagos:</p>
-  <ol>
-    <li><b>Sin cta-card:</b> los cursos gratuitos no tienen tarjeta de precio/cuotas. El hero es a una sola columna, con el botón "Inscribirme ahora" directo sobre el fondo negro.</li>
-    <li><b>Aclaración de certificado:</b> debajo del botón principal siempre debe verse el texto aclarando que la certificación tiene un arancel mínimo opcional.</li>
-    <li><b>Estructura de contenido:</b> en vez de "Qué vas a aprender / Para quién / Plan de estudio / Testimonios / Certificación / FAQ", los cursos gratuitos usan 6 subsecciones fijas: Temario, Objetivos, Metodología, Requisitos, Diferencias y Tecnología. Revisar que el sub-nav sticky enlace correctamente a cada una.</li>
-    <li><b>Sin testimonios, sin tutor IA, sin certificación universitaria ni FAQ:</b> esas secciones son exclusivas de los cursos pagos, no van acá.</li>
-    <li><b>Header y footer:</b> se mantienen igual a la maqueta de cursos pagos, sin modificaciones.</li>
+<div style="background:#fff3cd;border:1px solid #f0b429;border-left:4px solid #f0b429;border-radius:8px;padding:22px 26px;margin:28px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.65;color:#3a2e00;">
+  <div style="display:inline-block;background:#f0b429;color:#3a2e00;font-size:11px;font-weight:700;letter-spacing:.5px;padding:3px 10px;border-radius:4px;margin-bottom:14px;">
+    NOTA PARA EL PROGRAMADOR
+  </div>
+  <p style="margin:0 0 12px;font-weight:700;color:#7a5c00;font-size:15px;">
+    Se anexa / envía por separado una captura de pantalla con capturas señalando los puntos donde la maqueta anterior no cumplía con los lineamientos. A continuación se detallan las modificaciones realizadas sobre esta versión:
+  </p>
+  <ol style="margin:0;padding-left:20px;">
+    <li style="margin-bottom:14px;">
+      <b>Certificado incluido:</b> el texto <b>"Certificado Incluido"</b> debe aparecer siempre en toda la información de cada curso (badges del hero y detalle "Este curso incluye"), sin importar el tipo de certificación. Para los cursos con <b>certificación universitaria</b>, se suma además una insignia/imagen que indica "Este curso está certificado por la UAI (Universidad Abierta Interamericana)" — pero el texto base sigue siendo el mismo para todos los cursos. 
+    </li>
+    <li style="margin-bottom:14px;">
+      <b>Botón "Consultar más info":</b> ahora tiene apariencia de botón real (fondo, borde y sombra sutil) para que se note claramente que es clickeable, sin competir visualmente con el botón principal "Inscribirme ahora" que sigue siendo el más destacado.
+    </li>
+    <li style="margin-bottom:0;">
+      <b>Cursos relacionados:</b> se rediseñaron como tarjetas tipo botón. Cada tarjeta muestra un ícono genérico de curso (el mismo para todos, no uno distinto por curso), el nombre del curso y debajo el texto "Inicio inmediato".
+    </li>
   </ol>
 </div>
-
 <!-- ======================================================= -->
 <!-- HEADER -->
 <!-- ======================================================= -->
 <header>
   <div class="header-inner">
-    <a href="#" class="logo">
-      <img src="fude-black.webp" style="height: 50px; width: auto;">
-    </a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
-      <svg class="icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-      <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
+<a href="#" class="logo">
+  <img src="fude-black.webp" style="height: 50px; width: auto;">
+</a>
     <nav>
       <div class="nav-item">
         <button class="nav-link">
@@ -463,7 +677,7 @@
           </div>
         </div>
       </div>
-      <a href="#" class="nav-link current">Gratis</a>
+      <a href="#" class="nav-link">Gratis</a>
       <a href="#" class="nav-link">Carreras Cortas</a>
       <a href="#" class="nav-link">Empresas</a>
       <a href="#" class="nav-link">Blog</a>
@@ -475,20 +689,20 @@
 </header>
 
 <!-- ======================================================= -->
-<!-- SUB-HEADER STICKY DEL CURSO GRATUITO -->
+<!-- SUB-HEADER STICKY DEL CURSO (aparece al hacer scroll) -->
 <!-- ======================================================= -->
 <nav class="course-subnav" id="courseSubnav">
   <div class="wrap subnav-inner">
-    <div class="subnav-logo">
-      <img src="logo-fude-fondoblanco.png" alt="FUDE" class="subnav-logo-img">
-    </div>
+<div class="subnav-logo">
+  <img src="logo-fude-fondoblanco.png" alt="FUDE" class="subnav-logo-img">
+</div>
     <div class="subnav-links">
-      <a href="#temario" data-target="temario">Temario</a>
-      <a href="#objetivos" data-target="objetivos">Objetivos</a>
-      <a href="#metodologia" data-target="metodologia">Metodología</a>
-      <a href="#requisitos" data-target="requisitos">Requisitos</a>
-      <a href="#diferencias" data-target="diferencias">Diferencias</a>
-      <a href="#tecnologia" data-target="tecnologia">Tecnología</a>
+      <a href="#aprender" data-target="aprender">Qué vas a aprender</a>
+      <a href="#quien" data-target="quien">Para quién es</a>
+      <a href="#plan" data-target="plan">Plan de estudio</a>
+      <a href="#testimonios" data-target="testimonios">Testimonios</a>
+      <a href="#certificacion" data-target="certificacion">Certificación</a>
+      <a href="#faq" data-target="faq">FAQ</a>
     </div>
     <button class="subnav-cta" id="subnavCta">Inscribirme ahora</button>
   </div>
@@ -497,31 +711,80 @@
 <!-- ======================================================= -->
 <!-- HERO -->
 <!-- ======================================================= -->
-<section class="hero" id="cta">
-  <div class="wrap hero-inner">
-    <span class="tag-free">Curso Gratuito</span>
-    <h1>Análisis de los Recursos Financieros</h1>
-    <p class="desc">El curso gratuito de Análisis de los Recursos Financieros tiene como objetivo brindar una breve formación respecto a los recursos financieros presentes y futuros de una empresa. Dirigido a estudiantes de ciencias económicas y contadores públicos. No esperes más: comenzá nuestro curso de Análisis de los Recursos Financieros a distancia y aprendé mucho más sobre eso que en verdad te apasiona.</p>
-
-    <div class="badge-row">
-      <span class="pill-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg> 100% Online</span>
-      <span class="pill-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg> Curso Gratis</span>
-      <span class="pill-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg> Inicio inmediato</span>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tag-salud">Salud</span>
+      <h1>Auxiliar de Farmacia</h1>
+      <div class="rating-row">
+        <span class="stars">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f5b400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f5b400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f5b400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f5b400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f5b400" opacity=".5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        </span>
+        <b style="color:#fff">4.5</b> (150 reseñas) &nbsp;•&nbsp; 1200 alumnos
+      </div>
+      <p class="desc">La salud necesita personas capacitadas, responsables y preparadas para brindar una atención de calidad. Vas a formarte en uno de los perfiles más buscados del área, incorporando conocimientos sobre medicamentos, atención farmacéutica, farmacología y funcionamiento del sistema de salud. Aprendé de manera 100% online, a tu ritmo y desde donde estés, con una capacitación pensada para ayudarte a desarrollar herramientas prácticas y ampliar tus oportunidades laborales en farmacias, centros de salud y distintos espacios del sector.</p>
+      <div class="meta-row">
+        <span>🕐 5 meses</span>
+        <span>📋 Plan de estudio incluido</span>
+        <span>⚡ Inicio inmediato</span>
+      </div>
+      <div class="badge-row">
+        <span class="pill-badge">🤖 Tutor IA 24/7</span>
+        <span class="pill-badge">🎓 Certificado Incluido</span>
+        <span class="pill-badge">🔥 2x1 por tiempo limitado</span>
+        <span class="pill-badge">💼 Bolsa de trabajo</span>
+      </div>
     </div>
 
-<div>
-  <a href="maqueta-CURSO-GRATUITO-inscripcion.html" class="btn-primary-lg">
-    Inscribirme ahora
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M5 12h14M13 5l7 7-7 7"/>
-    </svg>
-  </a>
-</div>
+    <div class="cta-card" id="cta">
+      <div class="offer-banner">🔥 2x1 por tiempo limitado</div>
+      <div class="cta-body">
+        <div class="price-row">
+          <span class="price-amount">$27.900</span>
+          <span class="price-period">/ mes</span>
+        </div>
+        <div class="price-note">12 cuotas con tarjeta de crédito</div>
 
+        <button class="btn-primary">
+          Inscribirme ahora
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+        <button class="btn-secondary">
+          Consultar más info
+        </button>
 
-    <div class="cert-note">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M7 13h4"/></svg>
-      <span>Este curso es gratuito. Si querés obtener un certificado que avale que lo realizaste, podés hacerlo abonando un arancel mínimo.</span>
+        <div class="cta-divider"></div>
+
+        <div class="includes-title">Este curso incluye</div>
+        <ul class="includes-list">
+          <li><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Acceso inmediato al campus</li>
+          <li><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Tutor IA disponible 24/7</li>
+          <li><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Material de estudio descargable</li>
+          <li><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Certificado Incluido</li>
+          <li><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Acceso por 12 meses</li>
+          <li><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Bolsa de trabajo activa</li>
+          <li><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span> Acompañamiento docente</li>
+        </ul>
+
+        <div class="cta-divider"></div>
+
+        <div class="pay-title">Medios de pago</div>
+        <div class="pay-row">
+        <span class="pay-chip"><img src="visa.png" alt=""></span>
+          <span class="pay-chip"><img src="mastercard.png" alt=""></span>
+          <span class="pay-chip"><img src="amex.png" alt=""></span>
+          <span class="pay-chip"><img src="naranjax.png" alt=""></span>
+          <span class="pay-chip"><img src="mercado-pago-1.svg" alt=""></span> 
+          <span class="pay-chip pay-transfer" title="Transferencia bancaria">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M3 10l4-5M3 10l4 5M21 14H3M21 14l-4-5M21 14l-4 5"/></svg>
+            <span>Transferencia</span>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -535,124 +798,53 @@
 </button>
 
 <!-- ======================================================= -->
-<!-- INFO DEL CURSO -->
+<!-- CONTENIDO -->
 <!-- ======================================================= -->
-<section class="info-section">
-  <div class="wrap info-grid">
-    <div class="info-main">
-
-      <!-- TEMARIO -->
-      <div id="temario">
-        <h2>Temario del curso</h2>
-        <div class="modules" id="modules">
-          <div class="module-item open">
-            <button class="module-q" onclick="this.parentElement.classList.toggle('open')">
-              Módulo 1 <span class="mplus">+</span>
-            </button>
-            <div class="module-a">
-              <div class="module-a-inner">
-                <ul>
-                  <li>Concepto de recurso financiero y diferencias con las cuestiones económicas.</li>
-                  <li>Exposición de los cambios en los recursos financieros.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="module-item">
-            <button class="module-q" onclick="this.parentElement.classList.toggle('open')">
-              Módulo 2 <span class="mplus">+</span>
-            </button>
-            <div class="module-a">
-              <div class="module-a-inner">
-                <ul>
-                  <li>Análisis e interpretación de la información sobre los recursos financieros.</li>
-                  <li>La administración del efectivo.</li>
-                  <li>La planificación financiera.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+<section class="content-section">
+  <div class="wrap content-grid">
+    <div class="content-main">
+      <div id="aprender">
+        <h2>¿Qué vas a aprender?</h2>
+        <div class="learn-grid">
+          <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Rol del auxiliar de farmacia y buenas prácticas de dispensación</div>
+          <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Fármacos: clasificación, mecanismo de acción y vías de administración</div>
+          <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Lectura de prospectos y manejo de medicamentos especiales</div>
+          <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Antibióticos, antiinflamatorios y farmacovigilancia</div>
+          <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Patologías frecuentes: diabetes, hipertensión, trastornos digestivos y de la piel</div>
+          <div class="learn-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b83232" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Sistema de salud argentino: obras sociales, prepagas y normativa vigente</div>
         </div>
       </div>
 
-      <!-- OBJETIVOS -->
-      <div id="objetivos">
-        <h2>Objetivos</h2>
-        <p>FUDE tiene entre sus objetivos ofrecer a profesionales y estudiantes una constante actualización a través de la educación a distancia. También nos interesa poner a disposición de nuestros alumnos el acceso a enseñanza de calidad, con eficacia en lo aprendido, desarrollando recursos tecnológicos innovadores, como contenido online, animaciones, actividades de fijación interactivas, videos complementarios, actividades a desarrollar por los alumnos y juegos educativos que enriquecen la forma de aprender en la actualidad.</p>
-        <p><strong>Objetivo específico:</strong> brindar al alumno conocimientos y actualización sobre temas relacionados con Administración.</p>
+      <div id="quien">
+        <h2>¿Para quién es este curso?</h2>
+        <p class="who">Personas sin experiencia que buscan ingresar al sector salud.</p>
+        <p class="who">Trabajadores de farmacias que desean certificar sus conocimientos.</p>
+        <p class="who">Estudiantes de carreras afines que buscan formación complementaria.</p>
+        <p class="who">Familiares de pacientes que quieren aprender sobre medicamentos y cuidados básicos.</p>
       </div>
 
-      <!-- METODOLOGÍA -->
-      <div id="metodologia">
-        <h2>Metodología</h2>
-        <p>El sistema de enseñanza a distancia ofrece múltiples beneficios a la hora de estudiar. El curso está diseñado a partir de prácticos recursos tecnológicos y pedagógicos que permiten fomentar la interacción tanto entre los participantes del curso, como entre los alumnos y tutores. Además, el uso de diversas herramientas digitales facilita la comprensión de los contenidos teóricos y prácticos del curso.</p>
-        <p>Nuestro modelo educativo, basado en la educación a distancia, le permite al alumno acceder a una formación profesional simplemente a través de una computadora con acceso a Internet. De este modo, al igualar las oportunidades de acceso a la educación, intentamos democratizar la formación académica y enriquecer el perfil laboral de los alumnos.</p>
-        <p>Los cursos online, a través de su modelo educativo y sus diversas herramientas, permiten estimular la participación de los alumnos en un Campus Virtual donde no existen barreras geográficas. Así, el proceso formativo se transfiere de manera uniforme y el conocimiento se propaga a todas partes del mundo.</p>
+      <div id="plan" style="margin-top:36px;">
+        <h2>Plan de estudio</h2>
+        <div class="modules" id="modules"></div>
       </div>
-
-      <!-- REQUISITOS -->
-      <div id="requisitos">
-        <h2>Requisitos</h2>
-        <div class="check-list">
-          <div class="check-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <span><strong>Edad:</strong> ser mayor de 16 años.</span></div>
-          <div class="check-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <span><strong>Estudios:</strong> haber finalizado el Ciclo Básico de Educación Secundaria.</span></div>
-          <div class="check-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <span><strong>Tecnología:</strong> contar con un dispositivo con conexión a Internet superior a 1 MB de velocidad.</span></div>
-          <div class="check-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <span>Los cursos gratuitos no entregan certificado por defecto.</span></div>
-        </div>
-        <div class="note">Si querés un certificado que avale que realizaste el curso, podés obtenerlo abonando un arancel mínimo.</div>
-      </div>
-
-      <!-- DIFERENCIAS -->
-      <div id="diferencias">
-        <h2>Diferencias en servicios ofrecidos</h2>
-        <div class="diff-grid">
-          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Contenidos audiovisuales, con juegos y actividades interactivas</div>
-          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Revista Digital Educativa</div>
-          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Newsletters para cada área de enseñanza</div>
-          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Índice de satisfacción de más del 98%</div>
-          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 92% de alumnos considera el material bueno y/o muy bueno</div>
-          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Carga horaria de 15 a 240 hs en múltiples áreas de enseñanza</div>
-          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Más de 200 cursos online</div>
-          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Atención online los 7 días de la semana</div>
-          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Miles de alumnos en Argentina, Chile, México y Perú</div>
-          <div class="diff-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Certificado digital con criptografía de 256 bits en pagos</div>
-        </div>
-      </div>
-
-      <!-- TECNOLOGÍA -->
-      <div id="tecnologia">
-        <h2>Tecnología</h2>
-        <p>La tecnología educativa de los cursos online le permite al alumno estudiar de manera mucho más flexible y desde cualquier lugar. Además, mediante una actualización contínua, ofrecemos material interactivo y contenidos educativos complementarios que favorecen notablemente la experiencia de aprendizaje del alumno y enriquecen su perfil profesional.</p>
-        <div class="tech-grid">
-          <div class="tech-feat"><span class="ticon">🏠</span><span>Estudiá desde casa</span></div>
-          <div class="tech-feat"><span class="ticon">🎓</span><span>Campus propio</span></div>
-          <div class="tech-feat"><span class="ticon">🎬</span><span>Clases audiovisuales</span></div>
-          <div class="tech-feat"><span class="ticon">🎮</span><span>Juegos interactivos</span></div>
-          <div class="tech-feat"><span class="ticon">📹</span><span>Videos</span></div>
-          <div class="tech-feat"><span class="ticon">🕐</span><span>Flexibilidad: elegís días y horarios</span></div>
-          <div class="tech-feat"><span class="ticon">💬</span><span>Clases interactivas</span></div>
-          <div class="tech-feat"><span class="ticon">👥</span><span>Foro</span></div>
-          <div class="tech-feat"><span class="ticon">📜</span><span>Certificación digital (opcional)</span></div>
-          <div class="tech-feat"><span class="ticon">📝</span><span>Actividades de repaso</span></div>
-          <div class="tech-feat"><span class="ticon">🌐</span><span>Estándar mundial e-learning</span></div>
-        </div>
-      </div>
-
     </div>
 
     <aside>
-      <div class="aside-card">
-        <h3>¿Querés certificarte?</h3>
-        <p>Este curso es gratuito. Podés sumar un certificado que avale tu formación abonando un arancel mínimo, una vez finalizado.</p>
+      <div class="guarantee-card">
+        <div class="guarantee-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+        </div>
+        <h3>Garantía de satisfacción</h3>
+        <p>Si en los primeros 7 días no estás conforme con el curso, te devolvemos el dinero sin preguntas.</p>
       </div>
 
-      <div class="related-title">Otros cursos gratuitos</div>
+      <div class="related-title">Cursos relacionados</div>
       <div class="related-list">
-        <div class="related-item"><div><div class="rname">Secretariado Médico</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
-        <div class="related-item"><div><div class="rname">Facturación Sanatorial</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
-        <div class="related-item"><div><div class="rname">Administración de PyMEs</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
-        <div class="related-item"><div><div class="rname">Costos y Presupuestos</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
-        <div class="related-item"><div><div class="rname">Introducción a RR.HH.</div><div class="rsub">Inicio inmediato</div></div><span class="rtag">Gratis</span></div>
+        <div class="related-item"><span class="related-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span><div><div class="rname">Secretariado Médico</div><div class="rsub">Inicio inmediato - 5 meses</div></div></div>
+        <div class="related-item"><span class="related-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span><div><div class="rname">Facturación Sanatorial</div><div class="rsub">Inicio inmediato - 4 meses</div></div></div>
+        <div class="related-item"><span class="related-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span><div><div class="rname">Auxiliar de Enfermería</div><div class="rsub">Inicio inmediato - 5 meses</div></div></div>
+        <div class="related-item"><span class="related-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span><div><div class="rname">Asistente Dental</div><div class="rsub">Inicio inmediato - 4 meses</div></div></div>
+        <div class="related-item"><span class="related-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span><div><div class="rname">Auxiliar de Laboratorio Bioquímico</div><div class="rsub">Inicio inmediato - 5 meses</div></div></div>
       </div>
 
       <div class="share-title">Comparte este curso:</div>
@@ -662,6 +854,207 @@
         <a href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg></a>
       </div>
     </aside>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- TUTOR IA -->
+<!-- ======================================================= -->
+<section class="tutor-section">
+  <div class="wrap">
+    <div class="tutor-card">
+      <span class="ia-badge">🤖 Inteligencia artificial</span>
+      <h2>Tu Tutor IA en este curso</h2>
+      <p class="sub">Tutor IA — Auxiliar de Farmacia &nbsp;·&nbsp; Entrenado con el contenido completo de este curso · Disponible 24 hs</p>
+
+      <div class="tutor-grid">
+        <div class="tutor-feats-col">
+          <div class="tutor-feat">
+            <div class="ficon">❓</div>
+            <h4>Resuelve dudas</h4>
+            <p>Responde preguntas sobre cualquier lección al instante</p>
+          </div>
+          <div class="tutor-feat">
+            <div class="ficon">📝</div>
+            <h4>Guía tu progreso</h4>
+            <p>Sugiere el próximo paso según tu avance</p>
+          </div>
+        </div>
+        <div class="tutor-feats-col">
+          <div class="tutor-feat">
+            <div class="ficon">✅</div>
+            <h4>Corrige actividades</h4>
+            <p>Feedback personalizado en cada evaluación</p>
+          </div>
+          <div class="tutor-feat">
+            <div class="ficon">🕐</div>
+            <h4>Disponible siempre</h4>
+            <p>De madrugada, fines de semana, cuando lo necesites</p>
+          </div>
+        </div>
+        <div class="chat-box">
+          <div class="q">¿Cuál es la diferencia entre una vía IM e IV?</div>
+          <div class="chat-bubble">La vía intramuscular (IM) introduce el medicamento en el tejido muscular, con absorción más lenta y sostenida. La intravenosa (IV) lo introduce directamente en el torrente sanguíneo, con efecto inmediato. En enfermería usamos IM para antibióticos y vacunas, e IV en emergencias o cuando se requiere efecto rápido.</div>
+          <div class="chat-input-row">
+            <input type="text" placeholder="Hacé una pregunta sobre el...">
+            <button>Preguntar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- TESTIMONIOS -->
+<!-- ======================================================= -->
+<section class="testi-section" id="testimonios">
+  <div class="wrap">
+    <span class="testi-eyebrow">★ Lo que dicen nuestros alumnos</span>
+    <h2>Más de 90.000 alumnos formados en Argentina y Latam</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="tstars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5b400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5b400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5b400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5b400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5b400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        </div>
+        <p class="quote">"Mejoré mi nivel rápidamente y pude acceder a mejores trabajos."</p>
+        <div class="tname">Nicolás Agüero</div>
+        <div class="trole">Inglés técnico - Mendoza</div>
+      </div>
+      <div class="testi-card">
+        <div class="tstars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5b400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5b400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5b400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5b400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5b400"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        </div>
+        <p class="quote">"El material está muy bien organizado y los tutores responden rápido."</p>
+        <div class="tname">Abril Benitez</div>
+        <div class="trole">Auxiliar veterinaria - Santa Fe</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- NUEVO: CERTIFICACIÓN UNIVERSITARIA -->
+<!-- ======================================================= -->
+<section class="cert-section" id="certificacion">
+  <div class="wrap">
+    <div class="review-highlight">
+      <span class="new-tag">NUEVO</span>
+      <div class="review-outline">
+        <div class="cert-card">
+          <div class="cert-text">
+            <span class="cert-eyebrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c2453f" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M7 13h4"/></svg>
+              Certificación universitaria
+            </span>
+            <h2 class="cert-title">Certificación Universitaria <span class="highlight">con respaldo académico y estándares de excelencia</span></h2>
+          </div>
+          <div class="cert-image-wrap">
+            <div class="cert-image-frame">
+              <img src="certificado.webp"> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= -->
+<!-- NUEVO: PREGUNTAS FRECUENTES -->
+<!-- ======================================================= -->
+<section class="faq-section" id="faq">
+  <div class="wrap">
+    <div class="review-highlight">
+      <span class="new-tag">NUEVO</span>
+      <div class="review-outline faq-inner">
+        <div class="faq-header">
+          <h2>Preguntas Frecuentes</h2>
+        </div>
+
+        <div class="faq-list">
+
+          <div class="faq-item" data-cat="pagos">
+            <button class="faq-question" onclick="toggle(this)">
+              <span class="faq-q-text">¿Cuáles son las formas y medios de pago?</span>
+              <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <strong style="color:#ccc;font-size:13px">Argentina:</strong><br>
+                <span class="pill">Rapipago / CobroExpress</span><span class="pill">Tarjeta crédito / débito</span><span class="pill">Transferencia bancaria</span><br><br>
+                <strong style="color:#ccc;font-size:13px">Exterior:</strong><br>
+                <span class="pill">PayPal</span><span class="pill">Western Union</span><br><br>
+                <strong style="color:#ccc;font-size:13px">Modalidades:</strong><br>
+                <b style="color:#ddd">Financiado</b> — hasta 12 cuotas fijas con tarjeta de crédito<br>
+                <b style="color:#ddd">Con descuento</b> — 20% pagando el total por transferencia · 15% en 1 pago con tarjeta
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-cat="cursado">
+            <button class="faq-question" onclick="toggle(this)">
+              <span class="faq-q-text">¿Cómo accedo al campus y al material del curso?</span>
+              <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Tras tu primer pago, recibís por email tu usuario, contraseña e instructivo para acceder al campus: <a href="https://educativovirtual.net/campus/moodle/" target="_blank">educativovirtual.net/campus/moodle</a>.<br><br>
+                Desde allí podés ver apuntes, videos y material interactivo cuando quieras. Solo necesitás una PC con conexión a internet.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-cat="cursado">
+            <button class="faq-question" onclick="toggle(this)">
+              <span class="faq-q-text">¿Cómo hago consultas al tutor?</span>
+              <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Podés contactar a tu tutor por <strong style="color:#ddd">correo electrónico</strong>. Al momento de recibir la información de acceso al campus virtual, se te asigna un mail personal del tutor. Ese correo también está disponible dentro del campus, y podés usarlo para consultas más específicas o privadas.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-cat="cursado">
+            <button class="faq-question" onclick="toggle(this)">
+              <span class="faq-q-text">¿Cuánto tiempo tengo para terminar el curso?</span>
+              <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Tenés <strong style="color:#ddd">12 meses</strong> desde que se activa tu acceso para completar el curso.
+                <div class="note">Si querés retomar el curso luego del vencimiento, deberás reinscribirte desde cero.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-cat="certificados">
+            <button class="faq-question" onclick="toggle(this)">
+              <span class="faq-q-text">¿Cómo obtengo el certificado y qué validez tiene?</span>
+              <span class="chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Una vez aprobado el curso, podés descargarlo desde el campus. Incluye un <strong style="color:#ddd">ID único verificable</strong> por cualquier empresa o persona.<br><br>
+                Los certificados tienen <strong style="color:#ddd">validez nacional</strong> y están avalados por <strong style="color:#ddd">FUDE y/o la Universidad Abierta Interamericana</strong>.
+                <div class="note">Los cursos gratuitos no incluyen certificado por defecto, pero podés obtenerlo abonando un arancel mínimo.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -712,33 +1105,19 @@
 </footer>
 
 <script>
-  // Menú hamburguesa (header principal, mobile)
-  (function(){
-    const menuToggle = document.getElementById('menuToggle');
-    const mainNav = document.querySelector('header nav');
-    if(menuToggle && mainNav){
-      menuToggle.addEventListener('click', () => {
-        const isOpen = mainNav.classList.toggle('mobile-open');
-        menuToggle.classList.toggle('active', isOpen);
-        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      });
-    }
-    // En mobile, "Cursos" abre/cierra su submenú al tocar en vez de hover
-    document.querySelectorAll('.nav-item > button.nav-link').forEach(btn => {
-      btn.addEventListener('click', () => {
-        if(window.innerWidth <= 900){
-          btn.parentElement.classList.toggle('open');
-        }
-      });
-    });
-  })();
+  function toggle(btn){
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if(!wasOpen){ item.classList.add('open'); }
+  }
 
   // Sub-header sticky: aparece al pasar el hero y marca la sección activa
   (function(){
     const subnav = document.getElementById('courseSubnav');
     const heroEl = document.querySelector('.hero');
     const links = document.querySelectorAll('.subnav-links a');
-    const sectionIds = ['temario','objetivos','metodologia','requisitos','diferencias','tecnologia'];
+    const sectionIds = ['aprender','quien','plan','testimonios','certificacion','faq'];
     const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 
     const backToTop = document.getElementById('backToTop');
@@ -786,11 +1165,23 @@
 
     const subnavCta = document.getElementById('subnavCta');
     if(subnavCta){
-      subnavCta.addEventListener('click', () => {
-        window.scrollTo({ top:0, behavior:'smooth' });
-      });
+      subnavCta.addEventListener('click', () => scrollToTarget('cta'));
     }
   })();
+
+  // Generar los 13 módulos del plan de estudio (acordeón simple, contenido placeholder)
+  const modulesWrap = document.getElementById('modules');
+  for(let i=1;i<=13;i++){
+    const div = document.createElement('div');
+    div.className = 'module-item';
+    div.innerHTML = `
+      <button class="module-q" onclick="this.parentElement.classList.toggle('open')">
+        Modulo ${i} <span class="mplus">+</span>
+      </button>
+      <div class="module-a"><div class="module-a-inner">Contenido del módulo (placeholder).</div></div>
+    `;
+    modulesWrap.appendChild(div);
+  }
 </script>
 
 </body>
