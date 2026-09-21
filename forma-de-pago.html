@@ -591,6 +591,37 @@
   .pay-sub s { color: var(--gray-300); }
   .pay-sub .link { color: var(--primary); font-weight: 600; }
 
+  /* Fila de descuento bajo el precio (transferencia / Mercado Pago) */
+  .pay-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    font-size: 12px;
+    color: var(--gray-500);
+    line-height: 1.5;
+    margin-top: 3px;
+  }
+  .tag-green {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--step-done);
+    background: var(--step-done-bg);
+    border: 1px solid #cfe8d2;
+    padding: 2px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .old-price {
+    color: var(--gray-500);
+    font-size: 12.5px;
+    font-weight: 500;
+    text-decoration: line-through;
+    white-space: nowrap;
+  }
+
   .check-mark {
     width: 22px;
     height: 22px;
@@ -860,7 +891,7 @@
     <li><strong>"2x1 activo"</strong> ahora lleva emoji 🔥, y se agregó un subtítulo gris debajo del nombre del curso con formato Área · Duración · Tutor IA incluido (dinámico por curso).</li>
     <li><strong>Botón final</strong> renombrado de "Pagar" a <em>"Finalizar inscripción"</em>.</li>
     <li><strong>Certificación:</strong> "Certificado universitario digital" pasa a llamarse "Certificado digital" en todos los cursos; solo se suma la imagen/sello de certificación UAI en los cursos con certificación universitaria real.</li>
-    <li><strong>⚠️ Revisar valores de los cursos:</strong> en la página principal / de prueba los precios se ven mal (posible desalineación entre cuotas, transferencia y Mercado Pago). Validar los tres montos antes de pasar a producción.</li>
+    <li><strong>Precios y descuentos en "Forma de pago":</strong> las cuotas con tarjeta no cambian (12 cuotas de $27.900). <em>Transferencia bancaria:</em> $270.000 con etiqueta verde "Pago por transferencia", precio de lista $337.500 tachado en gris y etiqueta verde "20% OFF". <em>Saldo de Mercado Pago / Débito / Crédito:</em> $286.875, con la línea "Saldo de Mercado Pago / Débito / Crédito · Total $286.875", precio de lista $337.500 tachado y etiqueta verde "15% OFF". Los montos y porcentajes son estáticos en la maqueta; en el sitio real deben calcularse por curso a partir del precio de lista (337.500 − 20% = 270.000 · 337.500 − 15% = 286.875).</li>
     <li>Pendiente aparte (no en este archivo): botón "Consultar más info" más llamativo y tarjetas de "Cursos relacionados" en la página de info del curso — se aplican cuando se comparta esa maqueta.</li>
   </ul>
 </div>
@@ -1076,8 +1107,10 @@
               <span class="badge-pop">Popular</span>
             </div>
             <div class="pay-price">$270.000</div>
-            <div class="pay-sub">
-              Transferencia bancaria · <span class="link">Pago por transferencia</span> · <s>$334.800</s>
+            <div class="pay-meta">
+              <span class="tag-green">Pago por transferencia</span>
+              <s class="old-price">$337.500</s>
+              <span class="tag-green">20% OFF</span>
             </div>
           </div>
           <svg class="check-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -1089,6 +1122,11 @@
           <div class="pay-info">
             <div class="pay-name">Saldo de Mercado Pago / Débito / Crédito</div>
             <div class="pay-price">$286.875</div>
+            <div class="pay-meta">
+              <span>Saldo de Mercado Pago / Débito / Crédito · Total $286.875</span>
+              <s class="old-price">$337.500</s>
+              <span class="tag-green">15% OFF</span>
+            </div>
           </div>
           <svg class="check-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         </div>
@@ -1175,8 +1213,8 @@
 <script>
   var payTotals = {
     opt1: '$334.800',
-    opt2: '$216.000',
-    opt3: '$229.500'
+    opt2: '$270.000',
+    opt3: '$286.875'
   };
 
   function selectPay(id) {
