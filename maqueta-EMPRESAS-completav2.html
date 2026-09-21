@@ -387,6 +387,7 @@ nav.main-nav{
     .form-card{ padding:24px 20px; }
     .hero-stats{ gap:20px; }
     .why-card, .gpack-card{ padding:22px 20px; }
+    .proceso-step{ padding:24px 20px 22px; }
     .pack-summary{ padding:22px 56px 20px 18px; }
     .cta-buttons .btn-white, .cta-buttons .btn-outline-white{ width:100%; text-align:center; }
   }
@@ -403,15 +404,26 @@ nav.main-nav{
 
   /* ========================================================= POR QUÉ ELEGIRNOS */
   .why-section{padding:80px 0;background:#fff;}
-  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:980px;margin:0 auto;}
+  .why-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:24px;max-width:980px;margin:0 auto;}
+  .why-card{grid-column:span 2;}
+  /* 5 tarjetas: la segunda fila (2 tarjetas) queda centrada */
+  .why-card:nth-child(4){grid-column:2 / span 2;}
+  .why-card:nth-child(5){grid-column:4 / span 2;}
   .why-card{background:var(--gray-100);border:1px solid var(--gray-150);border-radius:var(--radius-md);padding:26px 24px;transition:border-color .2s var(--ease), transform .2s var(--ease);}
   .why-card:hover{border-color:var(--primary-300);transform:translateY(-2px);}
   .why-icon{width:44px;height:44px;border-radius:11px;background:var(--primary-50);color:var(--primary);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
   .why-icon svg{width:22px;height:22px;}
   .why-card h3{font-size:16.5px;font-weight:600;margin:0 0 8px;color:var(--ink);}
   .why-card p{font-size:13.5px;color:var(--gray-500);line-height:1.6;margin:0;}
-  @media (max-width:900px){ .why-grid{grid-template-columns:1fr 1fr;} }
-  @media (max-width:600px){ .why-grid{grid-template-columns:1fr;} }
+  @media (max-width:900px){
+    .why-grid{grid-template-columns:1fr 1fr;}
+    .why-card, .why-card:nth-child(4), .why-card:nth-child(5){grid-column:auto;}
+    .why-card:last-child{grid-column:1 / -1;width:calc(50% - 12px);justify-self:center;}
+  }
+  @media (max-width:600px){
+    .why-grid{grid-template-columns:1fr;}
+    .why-card:last-child{width:auto;}
+  }
 
   /* ========================================================= PAQUETES (grid simple) */
   .paquetes-section{padding:80px 0 90px;background:var(--gray-100);}
@@ -549,16 +561,38 @@ nav.main-nav{
 
   /* ========================================================= EL PROCESO */
   .proceso-section{padding:80px 0;background:var(--gray-100);}
-  .proceso-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:1080px;margin:0 auto;}
-  .proceso-step{text-align:center;position:relative;}
-  .proceso-num{
-    width:48px;height:48px;border-radius:50%;background:var(--primary);color:#fff;font-family:'Poppins',sans-serif;
-    font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+  .proceso-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;max-width:1080px;margin:0 auto;}
+  .proceso-step{
+    position:relative;text-align:left;
+    background:#fff;border:1px solid var(--gray-150);border-radius:var(--radius-lg);
+    padding:28px 24px 26px;box-shadow:var(--shadow);
+    transition:transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s var(--ease);
   }
-  .proceso-step h3{font-size:16px;font-weight:600;margin:0 0 8px;}
+  .proceso-step:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:var(--primary-300);}
+  .proceso-num{
+    width:44px;height:44px;border-radius:50%;background:var(--primary);color:#fff;font-family:'Poppins',sans-serif;
+    font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;margin:0 0 20px;
+    box-shadow:0 0 0 6px var(--primary-50);
+  }
+  .proceso-step h3{font-size:16.5px;font-weight:600;margin:0 0 8px;color:var(--ink);}
   .proceso-step p{font-size:13.5px;color:var(--gray-500);line-height:1.6;margin:0;}
-  @media (max-width:900px){ .proceso-grid{grid-template-columns:1fr 1fr;row-gap:36px;} }
-  @media (max-width:560px){ .proceso-grid{grid-template-columns:1fr;} }
+  /* Conector decorativo entre pasos (flecha en círculo) */
+  .proceso-step:not(:last-child)::after{
+    content:"";position:absolute;top:50%;right:-29px;width:30px;height:30px;transform:translateY(-50%);
+    background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b83232' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l6 6-6 6'/%3E%3C/svg%3E") center/14px no-repeat;
+    border:1px solid var(--gray-150);border-radius:50%;z-index:1;
+  }
+  @media (max-width:900px){
+    .proceso-grid{grid-template-columns:1fr 1fr;}
+    .proceso-step:nth-child(2)::after{display:none;}
+  }
+  @media (max-width:560px){
+    .proceso-grid{grid-template-columns:1fr;gap:34px;}
+    .proceso-step:not(:last-child)::after{
+      display:block;top:auto;right:auto;bottom:-32px;left:50%;
+      transform:translateX(-50%) rotate(90deg);
+    }
+  }
 
   /* ========================================================= TESTIMONIOS */
   .testi-section{padding:80px 0;background:#fff;}
@@ -654,17 +688,9 @@ nav.main-nav{
 <div class="dev-note">
   <h4>📌 Nota para el equipo de desarrollo — Página Empresas completa</h4>
   <ol>
-    <li><strong>Esta página vive en un subdominio propio</strong> (ej. <code>empresas.educativo.net</code>), separado del sitio para personas particulares. Por eso el header y el footer NO deben tener ningún botón, link o redirección hacia el sitio principal de usuarios individuales — son dos públicos distintos y no deben cruzarse.</li>
-    <li><strong>Header:</strong> se sacaron los links "Cursos", "Gratis", "Carreras Cortas" y "Blog". Solo queda: logo (apunta a la home de este mismo subdominio, no al sitio de personas), la etiqueta "Empresas" (ya no es un link — es indicador de sección activa, va con <code>&lt;span&gt;</code>, no <code>&lt;a&gt;</code>), el toggle de modo noche y "Acceso Alumnos".</li>
-    <li><strong>Toggle de modo noche:</strong> el botón <code>.theme-toggle</code> es SOLO VISUAL por ahora (no tiene lógica de dark mode implementada). Falta: definir la paleta de modo oscuro, guardar preferencia (localStorage) y programar el <code>toggle</code> de la clase/atributo correspondiente en <code>&lt;html&gt;</code> o <code>&lt;body&gt;</code>.</li>
-    <li><strong>Footer:</strong> se sacaron las secciones "Estudiá con nosotros" (listado de cursos) y "Comunidad". Quedan 4 bloques en 2 columnas: (1) FUDE by Educativo + links Preguntas Frecuentes / Quiénes Somos / Términos y Condiciones, (2) Contacto con el email, (3) ¡Seguinos! con íconos de Facebook/Instagram/YouTube, (4) Medios de Pago. Los links de la columna 1 tienen hover en rojo con un leve corrimiento a la derecha (<code>.footer-links a:hover</code>).</li>
-    <li>Los íconos de <strong>Medios de Pago</strong> (Western Union, PayPal) son placeholders genéricos — reemplazar por los logos/isotipos reales de cada marca.</li>
-    <li>La sección <strong>"Itinerarios de capacitación por rol y objetivo"</strong> ya venía programada y aprobada; la única modificación fue quitar la línea "Aval univ. · Certificación" del pie de cada pack.</li>
-    <li>Todos los botones que dicen <strong>"Solicitar cotización"</strong> (en los packs de la grilla, en el CTA rojo y en el botón flotante) hacen scroll hasta el formulario del hero (<code>#propuesta</code>). En el sitio real deberían además pre-cargar el área de interés según el pack de origen, si es posible.</li>
-    <li>El botón <strong>"Ver todos los paquetes"</strong> del CTA rojo baja hasta la sección de paquetes (<code>#paquetes</code>).</li>
-    <li>Los filtros de la sección "Elegí el área y el paquete ideal" son independientes de los filtros de "Itinerarios" — cada uno filtra su propia grilla/lista.</li>
-    <li>Los testimonios ahora muestran nombre y cargo de una persona en lugar del nombre de la empresa.</li>
-    <li>El formulario del hero es solo visual (sin validación real ni envío); quedan a cargo del programador la lógica de envío, validaciones y conexión con CRM/mail.</li>
+    <li><strong>Sección "Por qué elegirnos":</strong> quedan solo 5 tarjetas (Tutor IA para cada empleado, Dashboard de seguimiento, Rutas formativas a medida, Factura y pago empresarial, Asesor comercial dedicado). <strong>Hay que sacar la tarjeta "Certificación universitaria"</strong> ("Certificados con validez oficial que potencian el perfil de tu equipo") del sitio real. Con 5 tarjetas, la segunda fila (2 tarjetas) queda centrada.</li>
+    <li><strong>Sección "El proceso":</strong> cada paso ahora es una tarjeta independiente (fondo blanco, borde y sombra suave, número dentro de un círculo rojo) con hover de elevación. Entre tarjetas hay una flecha conectora decorativa (<code>.proceso-step::after</code>, solo CSS) que en mobile pasa a apuntar hacia abajo.</li>
+    <li><strong>Preguntas frecuentes:</strong> se quitó "¿Los certificados tienen validez?" y en su lugar va "¿Qué acompañamiento tienen los empleados durante la cursada?" (Tutor IA 24/7 + tutor que orienta y ayuda).</li>
   </ol>
 </div>
 
@@ -1683,8 +1709,8 @@ nav.main-nav{
         <div class="faq-a"><div class="faq-a-inner"><p class="faq-a-pad">Accedés a un panel en tiempo real donde podés ver el progreso individual y grupal, tasas de finalización, rendimiento y más métricas clave.</p></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" type="button">¿Los certificados tienen validez?<span class="faq-icon">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner"><p class="faq-a-pad">Sí, todos nuestros cursos cuentan con certificación universitaria y/o  FUDE con validez en todo el territorio argentino.</p></div></div>
+        <button class="faq-q" type="button">¿Qué acompañamiento tienen los empleados durante la cursada?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><p class="faq-a-pad">Cada empleado cuenta con un Tutor IA disponible 24/7: un asistente inteligente que resuelve dudas al instante, a cualquier hora del día. Además, tienen el acompañamiento de un tutor que los ayuda y orienta a lo largo de toda la cursada, para que nadie avance solo.</p></div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" type="button">¿Cómo es la facturación?<span class="faq-icon">+</span></button>
