@@ -168,7 +168,7 @@ header{background:var(--primary-color);color:#fff}
   box-shadow:0 4px 12px var(--primary-color-opcity);
 }
 .box button:hover{filter:brightness(1.08)}
-.ask{margin-top:20px}
+.ask{margin-top:20px;}
 .ask p{font-weight:600;font-size:15px;margin:0;color:#bbb}
 .wa{
   display:inline-block;
@@ -180,8 +180,11 @@ header{background:var(--primary-color);color:#fff}
   padding:10px 20px;
   border-radius:999px;
   transition: all 0.2s;
+      border:1.5px solid #b83232;
+    background:rgba(184,50,50,.16);
+    
 }
-.wa:hover{background:rgba(255,255,255,0.1); border-color: var(--primary-color);}
+.wa:hover{ background:#b83232; border-color:#b83232; color:#fff; transform:translateY(-2px); fill:#fff; }
 
 /* Botón flotante de WhatsApp (Fixed en esquina inferior derecha) */
 .whatsapp-float {
