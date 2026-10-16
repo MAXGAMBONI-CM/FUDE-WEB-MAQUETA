@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FUDE by Educativo — Maqueta de cambios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,800;0,900;1,800;1,900&display=swap">
+<style>
+:root{
+  --primary-color: #b83232;
+  --primary-color-opcity: #b83232d7;
+  --red:#b83232;
+  --red-dark:#9E1F2A;
+  --ink:#161616;
+  --peach:#FFF3EE;
+  --soft:#FBE3DA
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Montserrat',system-ui,sans-serif;font-weight:400;color:var(--ink);background:#fff;line-height:1.5}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-weight:800;margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+
+/* cintillo */
+.ticker{height:44px;border-bottom:1px solid var(--ink);display:flex;align-items:center;justify-content:center;gap:120px;overflow:hidden;white-space:nowrap;font-weight:600;font-size:14px}
+
+/* header */
+header{background:var(--primary-color);color:#fff}
+.nav{height:92px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav img{height:84px;width:auto;display:block}
+.nav nav{display:flex;align-items:center;gap:34px;font-weight:600;font-size:15px}
+.nav nav a{display:flex;align-items:center;gap:6px}
+.nav nav a:hover{opacity:.8}
+.moon{width:60px;height:44px;border:0;border-radius:999px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.pill{background:rgba(255,255,255,.18);padding:12px 22px;border-radius:999px}
+
+/* hero */
+.hero{background:linear-gradient(165deg,#FFF3EE 0%,#FBD9C9 55%,#F5A582 100%);padding:72px 0 0}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.tag{display:inline-block;background:var(--primary-color);color:#fff;font-weight:800;font-size:13px;letter-spacing:.6px;padding:10px 18px;border-radius:999px}
+.hero h1{font-size:54px;line-height:1.1;letter-spacing:-1.5px;margin-top:26px}
+.hero h1 em{font-style:normal;color:var(--primary-color)}
+.hero p{font-size:18px;line-height:1.7;margin:26px 0 0;max-width:540px;color:#2a2a2a}
+.btn{display:inline-block;background:var(--primary-color);color:#fff;font-weight:800;font-size:17px;padding:18px 36px;border-radius:999px;box-shadow:0 10px 24px var(--primary-color-opcity);margin-top:34px}
+.btn:hover{filter:brightness(1.08)}
+.promo{text-align:center}
+
+/* Estilo para la imagen promocional con enlace */
+.promo-img-link {
+  display: inline-block;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 28px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+.promo-img-link:hover {
+  transform: scale(1.02);
+}
+.promo-img-link img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 28px;
+}
+
+.promo .cuotas{font-weight:900;font-size:34px;color:#4a2118;margin-top:20px}
+
+/* barra de números (en el hero, con más aire) */
+.stats{
+    margin-top: 1px;
+    transform: translateY(50%);
+    background: #fff;
+    border-radius: 560px;
+    box-shadow: 0 24px 60px rgba(120, 40, 20, .22);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding: 20px 30px;
+}
+.stat{text-align:center;padding:6px 10px}
+.stat+.stat{border-left:1px solid #F0D6CC}
+.stat b{display:block;font-weight:900;font-size:42px;line-height:1;color:var(--primary-color);letter-spacing:-1px}
+.stat span{display:block;font-size:14px;font-weight:500;color:#444;margin-top:18px}
+.hero-space{height:90px}
+
+/* buscador súper compacto y junto */
+.search{background:#FFF8F5;padding:60px 0 50px;text-align:center}
+.search .wrap{max-width:940px}
+.eyebrow{display:inline-block;background:var(--soft);color:var(--red-dark);font-weight:800;font-size:12px;letter-spacing:1.4px;padding:6px 14px;border-radius:999px}
+.search h2{font-weight:900;font-size:42px;line-height:1.1;letter-spacing:-1.5px;margin-top:10px}
+.hl{display:inline-block;background:var(--primary-color);color:#fff;font-style:italic;padding:0 .22em;transform:skewX(-6deg);margin-left:.1em}
+.hl span{display:inline-block;transform:skewX(6deg)}
+.box{margin-top:20px;background:#fff;border:2px solid var(--primary-color);border-radius:999px;padding:6px 6px 6px 20px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 24px rgba(184,50,50,.12)}
+.box input{flex:1;min-width:0;border:0;outline:0;font-family:inherit;font-weight:500;font-size:17px;color:var(--ink);background:transparent;padding:8px 0}
+.box input::placeholder{color:#8a7b77}
+.box button{border:0;background:var(--primary-color);color:#fff;font-family:inherit;font-weight:800;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 4px 12px var(--primary-color-opcity)}
+.box button:hover{filter:brightness(1.08)}
+.ask{margin-top:20px}
+.ask p{font-weight:600;font-size:15px;margin:0}
+.wa{display:inline-block;margin-top:8px;border:2px solid var(--primary-color);color:var(--red-dark);font-weight:600;font-size:14px;padding:10px 20px;border-radius:999px}
+.wa:hover{background:var(--soft)}
+
+.rest{background:#EFE7E4;color:#5a4a46;text-align:center;font-size:14px;padding:26px 24px}
+
+/* footer */
+footer{background:#FBF1EE}
+.fgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:40px;padding:64px 0 0}
+footer h4{font-weight:800;font-size:16px;margin:0 0 18px}
+.links{display:flex;flex-direction:column;gap:12px;font-size:14px}
+.links a:hover{text-decoration:underline}
+
+/* Bloque de contenido gratis adaptado al estilo oscuro/neutral del footer */
+.free{background:#161616;color:#fff;border-radius:22px;padding:26px 22px;box-shadow:0 14px 30px rgba(0,0,0,.15)}
+.free .b{display:inline-block;background:var(--primary-color);color:#fff;font-weight:800;font-size:11px;letter-spacing:1.4px;padding:6px 12px;border-radius:999px}
+.free h4{font-weight:900;font-size:24px;line-height:1.15;margin:14px 0 18px;color:#fff}
+.free a{display:inline-flex;align-items:center;justify-content:space-between;width:100%;background:rgba(255,255,255,.1);color:#fff;font-weight:800;font-size:14px;padding:12px 18px;border-radius:999px;transition:background 0.2s}
+.free a:hover{background:var(--primary-color)}
+
+.soc{display:flex;gap:12px}
+.soc a{width:40px;height:40px;border-radius:50%;background:#EFE3DF;display:flex;align-items:center;justify-content:center;font-weight:800}
+.pay{border:1px dashed #C9AFA6;border-radius:10px;padding:18px 12px;font-size:13px;color:#6b5a55;text-align:center}
+.copy{border-top:1px solid #E5D3CD;margin-top:48px;padding:20px 0 40px;font-size:13px;color:#6b5a55}
+
+@media (max-width:1000px){
+.hero-grid{grid-template-columns:1fr}
+.stats{grid-template-columns:repeat(2,1fr);padding:32px 20px}
+.stat+.stat{border-left:0}
+.fgrid{grid-template-columns:repeat(2,1fr)}
+.nav nav{display:none}
+.hero h1{font-size:40px}.search h2{font-size:36px}
+.hero-space{height:200px}
+.search{padding-top:150px}
+.box{border-radius:28px;flex-wrap:wrap;padding:14px}
+.box button{width:100%;justify-content:center}
+.ticker{gap:60px}
+}
+</style>
+</head>
+<body>
+
+<div class="ticker"><span>Cursos a Distancia y Cursos Online con Certificación</span><span>Cursos a Distancia y Cursos Online con Certificación</span><span>Cursos a Distancia y Cursos Online con Certificación</span></div>
+
+<header>
+<div class="wrap nav">
+<a href="#" aria-label="FUDE by Educativo"><img src="fude-black.webp"></a>
+<nav>
+<a href="#">Cursos <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+<a href="#">Carreras Cortas <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+<a href="#">Empresas</a>
+<a href="#">Blog</a>
+<button class="moon" aria-label="Activar modo noche"><svg width="22" height="22" viewBox="0 0 24 24" fill="#161616" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></button>
+<a href="#" class="pill">Acceso Alumnos</a>
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<div class="wrap">
+<div class="hero-grid">
+<div>
+<span class="tag">FORMACIÓN PROFESIONAL</span>
+<h1>Cursos online con <em>Certificación Universitaria</em></h1>
+<p>Más de 300 cursos a distancia en 16 áreas temáticas. Aprendé a tu ritmo con acompañamiento docente real y tu propio tutor de inteligencia artificial disponible las 24 hs.</p>
+<a href="#" class="btn">Inscribirme Ahora</a>
+</div>
+<div class="promo">
+  <a href="#" class="promo-img-link">
+    <img src="promo-1.webp" alt="Por tiempo limitado 2x1 en cursos online">
+  </a>
+  <div class="cuotas">+ 12 Cuotas Fijas</div>
+</div>
+</div>
+
+<div class="stats">
+<div class="stat"><b>+85k</b><span>Alumnos Formados</span></div>
+<div class="stat"><b>16</b><span>Áreas temáticas</span></div>
+<div class="stat"><b>15</b><span>Años de Experiencia</span></div>
+<div class="stat"><b>24/7</b><span>Tutor de IA disponible</span></div>
+<div class="stat"><b>98%</b><span>Índice de satisfacción</span></div>
+</div>
+</div>
+<div class="hero-space"></div>
+</section>
+
+<section class="search">
+<div class="wrap">
+<span class="eyebrow">ELEGÍ TU PRÓXIMO PASO</span>
+<h2>¿Qué querés <span class="hl"><span>aprender?</span></span></h2>
+<div class="box">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+<label for="q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Buscar cursos</label>
+<input id="q" type="text" placeholder="Escribí un curso, tema o carrera…">
+<button type="button">Buscar <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+</div>
+<div class="ask">
+<p>¿Preferís que te asesoremos?</p>
+<a class="wa" href="https://wa.me/5493512590001?text=Hola%21+Quiero+que+me+asesoren+para+elegir+un+curso." target="_blank" rel="noopener">Necesito asesoramiento por WhatsApp →</a>
+</div>
+</div>
+</section>
+
+<div class="rest">Resto de la página sin cambios: Cursos destacados · Herramientas · Metodología · Certificación · Áreas · Testimonios</div>
+
+<footer>
+<div class="wrap">
+<div class="fgrid">
+<div>
+<h4>FUDE by Educativo</h4>
+<div class="links"><a href="#">Preguntas Frecuentes</a><a href="#">Quienes Somos</a><a href="#">Terminos y Condiciones</a></div>
+<h4 style="margin-top:30px">Contacto</h4>
+<div class="links"><a href="#">info@educativo.net</a></div>
+</div>
+<div>
+<h4>Comunidad</h4>
+<div class="links"><a href="#">Contenido gratis</a><a href="#">Blog</a><a href="#">Profesores</a><a href="#">Bolsa de trabajo</a></div>
+</div>
+<div>
+<h4>Estudiá con nosotros</h4>
+<div class="links"><a href="#">Salud</a><a href="#">Administración</a><a href="#">Estética</a><a href="#">Educación</a><a href="#">Deportes</a><a href="#">Oficios</a></div>
+</div>
+<div>
+<h4>¡Seguinos!</h4>
+<div class="soc">
+<a href="#" aria-label="Facebook">f</a>
+<a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#161616" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+<a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="#161616" aria-hidden="true"><path d="M3 7a3 3 0 013-3h12a3 3 0 013 3v10a3 3 0 01-3 3H6a3 3 0 01-3-3zm7 2v6l5-3z"/></svg></a>
+</div>
+<h4 style="margin-top:30px">Medios de Pago</h4>
+<div class="pay">[Imagen de medios de pago]</div>
+</div>
+</div>
+<div class="copy">© FUDE by Educativo</div>
+</div>
+</footer>
+
+</body>
+</html>
