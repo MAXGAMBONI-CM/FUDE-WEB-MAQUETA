@@ -86,22 +86,124 @@ header{background:var(--primary-color);color:#fff}
 .stat span{display:block;font-size:14px;font-weight:500;color:#444;margin-top:18px}
 .hero-space{height:90px}
 
-/* buscador súper compacto y junto */
-.search{background:#FFF8F5;padding:60px 0 50px;text-align:center}
+/* Buscador con fondo oscuro moderno y canchero */
+.search{
+  background: linear-gradient(135deg, #111111 0%, #1c1c1c 100%);
+  color: #fff;
+  padding: 60px 0 50px;
+  text-align: center;
+}
 .search .wrap{max-width:940px}
-.eyebrow{display:inline-block;background:var(--soft);color:var(--red-dark);font-weight:800;font-size:12px;letter-spacing:1.4px;padding:6px 14px;border-radius:999px}
-.search h2{font-weight:900;font-size:42px;line-height:1.1;letter-spacing:-1.5px;margin-top:10px}
-.hl{display:inline-block;background:var(--primary-color);color:#fff;font-style:italic;padding:0 .22em;transform:skewX(-6deg);margin-left:.1em}
+.eyebrow{
+  display:inline-block;
+  background: rgba(184, 50, 50, 0.25);
+  color: #ff8b8b;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1.4px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(184, 50, 50, 0.4);
+}
+.search h2{
+  font-weight: 900;
+  font-size: 42px;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin-top: 10px;
+  color: #fff;
+}
+.hl{
+  display:inline-block;
+  background:var(--primary-color);
+  color:#fff;
+  font-style:italic;
+  padding:0 .22em;
+  transform:skewX(-6deg);
+  margin-left:.1em;
+}
 .hl span{display:inline-block;transform:skewX(6deg)}
-.box{margin-top:20px;background:#fff;border:2px solid var(--primary-color);border-radius:999px;padding:6px 6px 6px 20px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 24px rgba(184,50,50,.12)}
-.box input{flex:1;min-width:0;border:0;outline:0;font-family:inherit;font-weight:500;font-size:17px;color:var(--ink);background:transparent;padding:8px 0}
-.box input::placeholder{color:#8a7b77}
-.box button{border:0;background:var(--primary-color);color:#fff;font-family:inherit;font-weight:800;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 4px 12px var(--primary-color-opcity)}
+
+.box{
+  margin-top:20px;
+  background:#262626;
+  border:2px solid #383838;
+  border-radius:999px;
+  padding:6px 6px 6px 20px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  transition: border-color 0.2s;
+}
+.box:focus-within {
+  border-color: var(--primary-color);
+}
+.box input{
+  flex:1;
+  min-width:0;
+  border:0;
+  outline:0;
+  font-family:inherit;
+  font-weight:500;
+  font-size:17px;
+  color:#fff;
+  background:transparent;
+  padding:8px 0;
+}
+.box input::placeholder{color:#888}
+.box button{
+  border:0;
+  background:var(--primary-color);
+  color:#fff;
+  font-family:inherit;
+  font-weight:800;
+  font-size:16px;
+  padding:14px 28px;
+  border-radius:999px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:0 4px 12px var(--primary-color-opcity);
+}
 .box button:hover{filter:brightness(1.08)}
 .ask{margin-top:20px}
-.ask p{font-weight:600;font-size:15px;margin:0}
-.wa{display:inline-block;margin-top:8px;border:2px solid var(--primary-color);color:var(--red-dark);font-weight:600;font-size:14px;padding:10px 20px;border-radius:999px}
-.wa:hover{background:var(--soft)}
+.ask p{font-weight:600;font-size:15px;margin:0;color:#bbb}
+.wa{
+  display:inline-block;
+  margin-top:8px;
+  border:2px solid rgba(255,255,255,0.15);
+  color:#fff;
+  font-weight:600;
+  font-size:14px;
+  padding:10px 20px;
+  border-radius:999px;
+  transition: all 0.2s;
+}
+.wa:hover{background:rgba(255,255,255,0.1); border-color: var(--primary-color);}
+
+/* Botón flotante de WhatsApp (Fixed en esquina inferior derecha) */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #25d366;
+  color: #fff;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  z-index: 9999;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.whatsapp-float:hover {
+  transform: scale(1.08);
+  background-color: #20ba5a;
+}
 
 .rest{background:#EFE7E4;color:#5a4a46;text-align:center;font-size:14px;padding:26px 24px}
 
@@ -137,9 +239,123 @@ footer h4{font-weight:800;font-size:16px;margin:0 0 18px}
 .box button{width:100%;justify-content:center}
 .ticker{gap:60px}
 }
+
+/* ===== SECCIÓN: Banner de curso destacado (prefijo .cb-) ===== */
+.cb{
+  /* Para usar una foto de fondo: --cb-bg:url('fondo.webp'); el degradé gris queda encima como velo */
+  background:linear-gradient(180deg,rgba(30,30,30,.45),rgba(30,30,30,.55)),var(--cb-bg,linear-gradient(135deg,#9a9795 0%,#6e7172 55%,#5d6163 100%));
+  background-size:cover;background-position:center;
+  color:#fff;padding:60px 0 64px
+}
+.cb .wrap{max-width:1136px}
+.cb-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:stretch}
+.cb-body{display:flex;flex-direction:column;justify-content:flex-end;min-width:0}
+.cb h2{font-weight:800;font-size:38px;line-height:1.15;letter-spacing:-.5px}
+.cb-body p{font-size:19px;line-height:1.65;font-weight:500;margin:22px 0 0;color:#fff}
+.cb-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px;flex-wrap:wrap}
+.cb-badge{display:inline-flex;align-items:center;gap:8px;background:#e4e6ff;color:#1c2140;font-weight:700;font-size:13px;letter-spacing:.2px;padding:7px 15px;border-radius:999px}
+.cb-stats{display:flex;align-items:center;gap:22px;font-size:16px;font-weight:500}
+.cb-stats span{display:inline-flex;align-items:center;gap:6px}
+.cb-buy{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;background:var(--primary-color);color:#fff;font-size:20px;font-weight:600;padding:18px 36px;border-radius:999px;margin-top:28px;box-shadow:0 10px 24px rgba(0,0,0,.28);transition:filter .2s}
+.cb-buy b{font-weight:800}
+.cb-buy:hover{filter:brightness(1.1)}
+.cb-buy:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.cb-img{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:740/700;background:rgba(255,255,255,.14);border:2px dashed rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:600;font-size:14px;color:#fff;padding:16px}
+.cb-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cb-img:has(img){border:0;background:none;padding:0}
+
+@media (max-width:900px){
+.cb{padding:44px 0 52px}
+.cb-grid{grid-template-columns:1fr;gap:32px}
+.cb-img{order:-1;aspect-ratio:4/3}
+.cb h2{font-size:30px}
+.cb-body p{font-size:17px}
+.cb-buy{font-size:17px;padding:16px 28px}
+}
+
+/* ===== SECCIÓN: Formación flexible (prefijo .fl- para no pisar nada de la maqueta) ===== */
+.fl{padding:72px 0 80px;background:#fff;--fl-accent:#e23d28}
+.fl .wrap{max-width:1136px}
+.fl-title{font-weight:800;font-size:44px;line-height:1.35;letter-spacing:-1px;text-align:center;max-width:900px;margin:0 auto 48px}
+.fl-title em{font-style:normal;color:var(--fl-accent)}
+.fl-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;align-items:start}
+.fl-col{display:flex;flex-direction:column;gap:24px;min-width:0}
+.fl-card{border:1.5px solid var(--primary-color);border-radius:26px;padding:22px 22px 26px;background:#fff}
+.fl-head{display:flex;align-items:center;gap:12px}
+.fl-head h3{font-size:22px;font-weight:600;letter-spacing:-.2px}
+.fl-head svg{flex:none}
+.fl-card>p{font-size:14px;line-height:1.5;color:#444;margin:18px 0 0}
+
+/* espacios para imágenes */
+.fl-ph{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;border-radius:14px;background:#F6EEEB;border:1.5px dashed #D9B8AE;color:#9a6f63;font-size:12px;font-weight:600;padding:12px}
+.fl-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.fl-ph:has(img){border:0;background:none;padding:0}
+
+/* card 1: clases 24/7 */
+.fl-media{display:grid;grid-template-columns:1.63fr 1fr;gap:14px;margin-top:34px}
+.fl-media-main{min-height:100%;border-radius:18px;box-shadow:0 6px 22px rgba(0,0,0,.1)}
+.fl-media-side{display:grid;grid-template-rows:repeat(3,1fr);gap:8px}
+.fl-media-side .fl-ph{aspect-ratio:226/168;border-radius:12px}
+
+/* card 2: SCORM */
+.fl-scorm{display:flex;justify-content:center;margin-top:28px}
+.fl-scorm .fl-ph{width:100%;max-width:400px;aspect-ratio:400/280;border-radius:18px}
+
+/* quiz */
+.fl-quiz{margin-top:18px;border:1px solid #eee;border-radius:22px;padding:16px;box-shadow:0 8px 22px rgba(0,0,0,.07)}
+.fl-pill{display:inline-block;background:#c24a4a;color:#fff;font-weight:700;font-size:11px;padding:6px 14px;border-radius:999px}
+.fl-bar{height:6px;border-radius:99px;background:#e6e6e6;margin:16px 0 24px;overflow:hidden}
+.fl-bar i{display:block;width:33%;height:100%;background:var(--primary-color);border-radius:99px}
+.fl-q{display:flex;align-items:center;gap:14px}
+.fl-q-ico{flex:none;width:45px;height:45px;border-radius:50%;background:var(--primary-color);display:flex;align-items:center;justify-content:center}
+.fl-q p{margin:0;font-weight:600;font-size:15px;line-height:1.4}
+.fl-opts{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.fl-opt{display:flex;align-items:center;gap:16px;width:100%;font:inherit;font-size:14px;font-weight:500;color:var(--ink);text-align:left;background:#fff;border:1.5px solid var(--primary-color);border-radius:999px;padding:7px 14px;cursor:pointer;transition:background .15s,color .15s}
+.fl-opt b{flex:none;width:24px;height:24px;border-radius:50%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;transition:background .15s,color .15s}
+.fl-opt:hover{background:var(--peach)}
+.fl-opt.is-selected{background:var(--primary-color);color:#fff}
+.fl-opt.is-selected b{background:#fff;color:var(--primary-color)}
+.fl-opt:focus-visible{outline:3px solid var(--primary-color);outline-offset:2px}
+
+/* tutor IA */
+.fl-tutor{margin-top:18px;border:1px solid #eee;border-radius:20px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.07)}
+.fl-tutor-top{background:linear-gradient(180deg,#d8402f 0%,#c0352b 100%);color:#fff;padding:16px 18px 18px;display:flex;gap:14px}
+.fl-tutor-av{flex:none;width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center}
+.fl-tutor-top h4{margin:0;font-weight:700;font-size:17px;display:flex;align-items:center;gap:8px}
+.fl-tutor-top h4 span{background:rgba(255,255,255,.28);font-size:9px;font-weight:800;padding:2px 7px;border-radius:99px}
+.fl-tutor-top p{margin:6px 0 0;font-size:12px;line-height:1.4;color:#ffe9e5}
+.fl-chips{display:flex;gap:6px;margin-top:12px}
+.fl-chips span{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);font-size:11px;padding:4px 12px;border-radius:99px}
+.fl-chat{height:300px;overflow-y:auto;padding:12px 14px;background:#fafafa;display:flex;flex-direction:column;gap:14px}
+.fl-msg{display:flex;align-items:flex-end;gap:10px;font-size:13px;line-height:1.45}
+.fl-msg.user{justify-content:flex-end}
+.fl-msg.user .fl-bubble{background:#d8402f;color:#fff;border-radius:16px 16px 4px 16px;padding:10px 14px;max-width:80%}
+.fl-msg.bot .fl-bubble{background:#fff;border:1px solid #e3e3e3;border-radius:16px 16px 16px 4px;padding:12px 14px;max-width:78%;margin-left:0;color:#333}
+.fl-dot{flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.fl-dot.u{background:#4a5568}
+.fl-dot.b{background:#d8402f}
+
+@media (max-width:900px){
+.fl{padding:56px 0 64px}
+.fl-title{font-size:32px;margin-bottom:32px}
+.fl-grid{grid-template-columns:1fr}
+.fl-media{grid-template-columns:1fr}
+.fl-media-main{aspect-ratio:368/470}
+.fl-media-side{grid-template-rows:none;grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:520px){
+.fl-title{font-size:26px}
+.fl-media-side{grid-template-columns:1fr}
+.fl-media-side .fl-ph{aspect-ratio:16/10}
+}
 </style>
 </head>
 <body>
+
+<!-- Botón flotante de WhatsApp que sigue la navegación -->
+<a href="https://wa.me/5493512590001?text=Hola%21+Quiero+consultar+sobre+los+cursos." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Consultar por WhatsApp">
+  <svg width="36" height="36" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
 
 <div class="ticker"><span>Cursos a Distancia y Cursos Online con Certificación</span><span>Cursos a Distancia y Cursos Online con Certificación</span><span>Cursos a Distancia y Cursos Online con Certificación</span></div>
 
@@ -202,6 +418,136 @@ footer h4{font-weight:800;font-size:16px;margin:0 0 18px}
 </div>
 </section>
 
+<!-- ===== SECCIÓN: Banner de curso destacado ===== -->
+<section class="cb" id="curso-destacado">
+<div class="wrap">
+<div class="cb-grid">
+<div class="cb-body">
+<h2>Asistente Dental</h2>
+<p>ofrece una completa formación en cuanto a las principales nociones y conceptos que definen la actividad del asistente dental. El curso de Asistente Dental a distancia te permitirá aprender respecto a materiales dentales, bioseguridad y esterilización, operatoria dental y radiología….</p>
+<div class="cb-meta">
+<span class="cb-badge">APRENDE ONLINE <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 20h20"/></svg></span>
+<div class="cb-stats">
+<span><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><circle cx="12" cy="7" r="5"/><path d="M3 22c0-5 4-8 9-8s9 3 9 8z"/></svg>1200</span>
+<span><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.7 5.7 21.4l1.5-7.1L1.8 9.4l7.2-.8z"/></svg>98% (82)</span>
+</div>
+</div>
+<a href="#" class="cb-buy"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M1 2h4l.6 3H22l-2.500 9.500H7.800L8.200 16H20v2H6.500L3.400 4H1z"/><circle cx="9" cy="21" r="1.800"/><circle cx="18" cy="21" r="1.800"/></svg><b>Comprar</b> <b>12 cuotas de $ 24.800</b></a>
+</div>
+<!-- IMAGEN DEL CURSO — reemplazá el texto por: <img src="asistente-dental.webp" alt="Curso de Asistente Dental"> -->
+<img src="32.jpg" alt="Curso de Asistente Dental">
+</div>
+</div>
+</section>
+
+<!-- ===== SECCIÓN: Formación flexible, práctica y con apoyo inteligente ===== -->
+<section class="fl" id="formacion">
+<div class="wrap">
+<h2 class="fl-title">Formación flexible, <em>práctica y con apoyo inteligente</em></h2>
+
+<div class="fl-grid">
+
+<!-- COLUMNA IZQUIERDA -->
+<div class="fl-col">
+
+<article class="fl-card">
+<div class="fl-head">
+<svg width="30" height="24" viewBox="0 0 30 24" fill="#c24a4a" aria-hidden="true"><rect x="0" y="3" width="21" height="18" rx="4"/><path d="M23 9l7-4v14l-7-4z"/></svg>
+<h3>Acceso a tus clases 24/7</h3>
+</div>
+<p>Estudia a tu ritmo, en cualquier momento y desde cualquier lugar, con contenido disponible de forma permanente. Disfruta de acceso ilimitado a clases grabadas, disponibles las 24 horas, desde cualquier dispositivo.</p>
+
+<div class="fl-media">
+<!-- IMAGEN GRANDE (captura del aula virtual) — reemplazá el texto por: <img src="tu-imagen.webp" alt="Aula virtual de FUDE"> -->
+<div class="fl-ph fl-media-main">Captura del aula virtual<br>(ej. 368 × 470)</div>
+<div class="fl-media-side">
+<!-- 3 IMÁGENES CHICAS (docentes / alumnos) — mismo reemplazo con <img> -->
+<div class="fl-ph">Imagen 1<br>(226 × 168)</div>
+<div class="fl-ph">Imagen 2<br>(226 × 168)</div>
+<div class="fl-ph">Imagen 3<br>(226 × 168)</div>
+</div>
+</div>
+</article>
+
+<article class="fl-card">
+<div class="fl-head">
+<svg width="26" height="24" viewBox="0 0 26 24" fill="none" stroke="#c24a4a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="2" width="20" height="14" rx="2"/><path d="M1 21h24M10 7l-2.5 2.5L10 12M16 7l2.5 2.5L16 12"/></svg>
+<h3>Experiencia interactiva SCORM</h3>
+</div>
+<p>Estudiá a tu ritmo y elegí la modalidad que mejor se adapte a vos: accedé a clases grabadas disponibles las 24 horas o aprendé mediante contenido interactivo en formato SCORM, con actividades diseñadas para una experiencia más práctica y flexible.</p>
+<div class="fl-scorm">
+<!-- IMAGEN SCORM (tablet con el contenido interactivo) -->
+<div class="fl-ph">Imagen SCORM<br>(ej. 400 × 280)</div>
+</div>
+</article>
+
+</div>
+
+<!-- COLUMNA DERECHA -->
+<div class="fl-col">
+
+<article class="fl-card">
+<div class="fl-head">
+<svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="11" stroke="#c0352b" stroke-width="2.4"/></svg>
+<h3>Aprendizaje en cada paso.</h3>
+</div>
+<p>Contarás con distintas actividades prácticas en cada unidad para hacer tu experiencia más dinámica y entretenida.</p>
+
+<div class="fl-quiz" role="group" aria-label="Pregunta de práctica">
+<span class="fl-pill">Pregunta 1 de 3</span>
+<div class="fl-bar" aria-hidden="true"><i></i></div>
+<div class="fl-q">
+<span class="fl-q-ico"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><rect x="2" y="1" width="14" height="20" rx="3"/><path d="M8 17h2" stroke-linecap="round"/></svg></span>
+<p>¿Cuáles son los dos tipos principales de telemarketing según el texto?</p>
+</div>
+<div class="fl-opts">
+<button type="button" class="fl-opt"><b>A</b>Emisor y Receptor</button>
+<button type="button" class="fl-opt"><b>B</b>Proactivo y Reactivo</button>
+<button type="button" class="fl-opt"><b>C</b>Interno y Externo</button>
+<button type="button" class="fl-opt"><b>D</b>Frío y Caliente</button>
+</div>
+</div>
+</article>
+
+<article class="fl-card">
+<div class="fl-head">
+<svg width="28" height="24" viewBox="0 0 28 24" fill="#c24a4a" aria-hidden="true"><rect x="4" y="6" width="20" height="14" rx="4"/><rect x="12.5" y="1" width="3" height="5"/><circle cx="14" cy="1.5" r="1.8"/><rect x="0" y="11" width="3" height="5" rx="1.5"/><rect x="25" y="11" width="3" height="5" rx="1.5"/><circle cx="10" cy="13" r="2" fill="#fff"/><circle cx="18" cy="13" r="2" fill="#fff"/></svg>
+<h3>Tutor IA 24/7</h3>
+</div>
+<p>Un asistente inteligente que resuelve tus dudas al instante, revisa tus proyectos y te guía paso a paso en tu aprendizaje.</p>
+
+<div class="fl-tutor">
+<div class="fl-tutor-top">
+<span class="fl-tutor-av"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="7" width="14" height="12" rx="4"/><path d="M12 7V3M9 13h.01M15 13h.01" stroke-linecap="round"/></svg></span>
+<div>
+<h4>Tutor FUDE <span>IA</span></h4>
+<p>Responde dudas, corrige entregas y acompaña en cada paso. Feedback instantáneo y recomendaciones.</p>
+<div class="fl-chips"><span>Feedback</span><span>Ayuda</span></div>
+</div>
+</div>
+<div class="fl-chat" tabindex="0" aria-label="Ejemplo de conversación con el Tutor FUDE">
+<div class="fl-msg user"><div class="fl-bubble">No entendí… ¿Qué es un Objetivo SMART?</div><span class="fl-dot u"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span></div>
+<div class="fl-msg bot"><span class="fl-dot b"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><rect x="5" y="7" width="14" height="12" rx="4"/><path d="M12 7V3" stroke-linecap="round"/></svg></span><div class="fl-bubble">Un Objetivo SMART es un objetivo que cumple 5 condiciones clave: es Específico (sabe exactamente qué lograr), Medible (tiene métricas claras), Alcanzable (es realista), Relevante (importa para tu estrategia) y con Tiempo definido (tiene fecha límite). ¿Querés que practiquemos juntos construyendo uno? 😊</div></div>
+<div class="fl-msg user"><div class="fl-bubble">Me ayudarías con el tema sobre las entregas, ¿cómo funcionan?</div><span class="fl-dot u"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span></div>
+</div>
+</div>
+</article>
+
+</div>
+</div>
+</div>
+
+<script>
+document.querySelectorAll('.fl-opts').forEach(function(g){
+  g.addEventListener('click',function(e){
+    var b=e.target.closest('.fl-opt'); if(!b) return;
+    g.querySelectorAll('.fl-opt').forEach(function(o){o.classList.remove('is-selected')});
+    b.classList.add('is-selected');
+  });
+});
+</script>
+</section>
+
 <div class="rest">Resto de la página sin cambios: Cursos destacados · Herramientas · Metodología · Certificación · Áreas · Testimonios</div>
 
 <footer>
@@ -215,11 +561,13 @@ footer h4{font-weight:800;font-size:16px;margin:0 0 18px}
 </div>
 <div>
 <h4>Comunidad</h4>
-<div class="links"><a href="#">Contenido gratis</a><a href="#">Blog</a><a href="#">Profesores</a><a href="#">Bolsa de trabajo</a></div>
+<div class="links"><a href="#">Blog</a><a href="#">Profesores</a><a href="#">Bolsa de trabajo</a><a href="#">Cursos gratis</a></div>
 </div>
 <div>
 <h4>Estudiá con nosotros</h4>
 <div class="links"><a href="#">Salud</a><a href="#">Administración</a><a href="#">Estética</a><a href="#">Educación</a><a href="#">Deportes</a><a href="#">Oficios</a></div>
+</div>
+<div>
 </div>
 <div>
 <h4>¡Seguinos!</h4>
