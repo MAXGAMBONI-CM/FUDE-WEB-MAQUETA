@@ -168,7 +168,7 @@ header{background:var(--primary-color);color:#fff}
   box-shadow:0 4px 12px var(--primary-color-opcity);
 }
 .box button:hover{filter:brightness(1.08)}
-.ask{margin-top:20px;}
+.ask{margin-top:20px}
 .ask p{font-weight:600;font-size:15px;margin:0;color:#bbb}
 .wa{
   display:inline-block;
@@ -180,11 +180,8 @@ header{background:var(--primary-color);color:#fff}
   padding:10px 20px;
   border-radius:999px;
   transition: all 0.2s;
-      border:1.5px solid #b83232;
-    background:rgba(184,50,50,.16);
-    
 }
-.wa:hover{ background:#b83232; border-color:#b83232; color:#fff; transform:translateY(-2px); fill:#fff; }
+.wa:hover{background:rgba(255,255,255,0.1); border-color: var(--primary-color);}
 
 /* Botón flotante de WhatsApp (Fixed en esquina inferior derecha) */
 .whatsapp-float {
@@ -207,6 +204,53 @@ header{background:var(--primary-color);color:#fff}
   transform: scale(1.08);
   background-color: #20ba5a;
 }
+
+/* ===== BUSCADOR EN VIVO: resultados (prefijo .sr-) ===== */
+.search .wrap{max-width:1136px}
+.search .box{max-width:940px;margin-left:auto;margin-right:auto}
+.q-clear{display:none;flex:none;width:32px;height:32px;border:0;border-radius:50%;background:#383838;color:#fff;cursor:pointer;align-items:center;justify-content:center;padding:0;box-shadow:none}
+.q-clear:hover{background:#4a4a4a;filter:none}
+.search.is-searching .q-clear{display:flex}
+.search .box button.q-clear{padding:0;gap:0}
+.sr{display:grid;grid-template-rows:0fr;margin-top:0;text-align:left;transition:grid-template-rows .45s ease,margin-top .45s ease}
+.sr.open{grid-template-rows:1fr;margin-top:36px}
+.sr-in{overflow:hidden;min-height:0;padding:4px 2px}
+.sr-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px;color:#bbb;font-size:15px;font-weight:500}
+.sr-head b{color:#fff;font-weight:800}
+.sr-reset{font:inherit;font-weight:600;font-size:14px;color:#ff8b8b;background:none;border:0;cursor:pointer;text-decoration:underline;padding:4px}
+.sr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.sc{background:#fff;color:var(--ink);border:1px solid #e6e6e6;border-radius:26px;padding:22px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.sc:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(0,0,0,.45)}
+.sc-top{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:32px}
+.sc-area{color:var(--primary-color);font-weight:800;font-size:13px;letter-spacing:.5px}
+.sc-best{background:var(--primary-color);color:#fff;font-weight:800;font-size:12px;padding:6px 12px;border-radius:999px;white-space:nowrap}
+.sc-rate{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;margin-top:10px}
+.sc-rate i{font-style:normal;color:#777}
+.sc h3{font-size:19px;line-height:1.35;font-weight:800;margin:14px 0 0;min-height:51px}
+.sc h3 mark{background:#fbd9c9;color:inherit;border-radius:4px;padding:0 1px}
+.sc-meta{display:flex;gap:14px;font-size:13px;color:#555;margin-top:12px}
+.sc-tags{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-top:14px}
+.sc-ia{background:#c24a4a;color:#fff;font-weight:700;font-size:12px;padding:5px 13px;border-radius:999px}
+.sc-cert{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:700;font-size:12px;padding:4px 13px 4px 5px;border-radius:999px}
+.sc-cert span{width:20px;height:20px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900}
+.sc-cert.u{background:#6d1a36}.sc-cert.u span{color:#6d1a36}
+.sc-cert.f{background:linear-gradient(90deg,#c9403a,#9e1f2a)}.sc-cert.f span{color:#b83232;font-size:11px}
+.sc-price{color:var(--primary-color);font-weight:800;font-size:20px;margin-top:auto;padding-top:18px}
+.sc-btn{display:block;text-align:center;margin-top:14px;border:2px solid var(--primary-color);color:var(--primary-color);font-weight:700;font-size:14px;padding:12px;border-radius:999px;transition:background .2s,color .2s}
+.sc:hover .sc-btn,.sc-btn:focus-visible{background:var(--primary-color);color:#fff}
+.sc{animation:sc-in .35s ease both;animation-delay:calc(var(--i)*40ms)}
+@keyframes sc-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.sr-more{text-align:center;margin-top:26px}
+.sr-more a{display:inline-block;background:var(--primary-color);color:#fff;font-weight:800;font-size:16px;padding:15px 34px;border-radius:999px;box-shadow:0 6px 16px var(--primary-color-opcity)}
+.sr-empty{text-align:center;padding:12px 0 8px;color:#bbb}
+.sr-empty b{display:block;color:#fff;font-size:22px;font-weight:800;margin-bottom:8px}
+.sr-empty p{margin:0 auto;max-width:480px;font-size:15px}
+.search.is-searching .ask{margin-top:34px}
+.dev-note{max-width:940px;margin:34px auto 0;text-align:left;background:#fff8e1;color:#4a3b00;border:1.5px dashed #d9a400;border-radius:14px;padding:16px 20px;font-size:13px;line-height:1.55}
+.dev-note b{font-weight:800}.dev-note ul{margin:6px 0 0;padding-left:18px}
+@media (max-width:900px){.sr-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.sr-grid{grid-template-columns:1fr}.sc h3{min-height:0}.sr-head{flex-direction:column;align-items:flex-start;gap:4px}}
+@media (prefers-reduced-motion:reduce){.sr,.sc{transition:none;animation:none}}
 
 .rest{background:#EFE7E4;color:#5a4a46;text-align:center;font-size:14px;padding:26px 24px}
 
@@ -411,14 +455,89 @@ footer h4{font-weight:800;font-size:16px;margin:0 0 18px}
 <div class="box">
 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
 <label for="q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Buscar cursos</label>
-<input id="q" type="text" placeholder="Escribí un curso, tema o carrera…">
-<button type="button">Buscar <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+<input id="q" type="text" autocomplete="off" placeholder="Escribí un curso, tema o carrera…">
+<button type="button" class="q-clear" id="qClear" aria-label="Borrar búsqueda"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+<button type="button" id="qGo">Buscar <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
 </div>
+
+<!-- Resultados en vivo: cerrado hasta que se escribe algo -->
+<div class="sr" id="sr" aria-live="polite"><div class="sr-in">
+<div class="sr-head"><p id="srCount" style="margin:0"></p><button type="button" class="sr-reset" id="srReset">Limpiar búsqueda</button></div>
+<div class="sr-grid" id="srGrid"></div>
+<div class="sr-more" id="srMore"></div>
+</div></div>
+
 <div class="ask">
 <p>¿Preferís que te asesoremos?</p>
 <a class="wa" href="https://wa.me/5493425676592?text=Hola%21+Quiero+que+me+asesoren+para+elegir+un+curso." target="_blank" rel="noopener">Necesito asesoramiento por WhatsApp →</a>
 </div>
 </div>
+<script>
+(function(){
+/* [título, área, rating, reseñas, duración, cert (U=UAI / F=FUDE), precio cuota, más vendido] */
+var C=[
+["Asistente en Hotelería y Turismo","Hotelería y Turismo",4.9,74,"4 meses","F",24800,1],
+["Asistente en Emergencias Médicas","Salud",4.8,103,"4 meses","F",24800],
+["Asistente en Educación Especial","Educación",4.8,313,"5 meses","F",27900],
+["Auxiliar de Enfermería","Salud",4.9,64,"5 meses","F",27900,1],
+["Diseño de Indumentaria","Diseño",4.9,54,"5 meses","U",27900,1],
+["Liderazgo y Trabajo en Equipo","Administración",4.9,59,"2 meses","U",14467,1],
+["Auxiliar en Higiene y Seguridad en el Trabajo","Iniciación Profesional",4.8,73,"3 meses","U",23056],
+["Auxiliar de Laboratorio Bioquímico","Salud",4.8,83,"5 meses","F",27900],
+["Auxiliar Docente","Educación",4.7,397,"3 meses","F",23056],
+["Auxiliar de Farmacia","Salud",4.6,51,"5 meses","F",27900],
+["Auxiliar en Hemodiálisis","Salud",4.6,331,"3 meses","F",23056],
+["Asistente Jurídico","Sin área",4.7,62,"5 meses","F",27900],
+["Asistente en Marketing","Administración",4.7,77,"4 meses","F",24800],
+["Asistente Dental","Salud",4.7,82,"4 meses","F",24800]
+];
+var MAX=6,$=function(i){return document.getElementById(i)};
+var sec=document.querySelector('.search'),q=$('q'),sr=$('sr'),grid=$('srGrid'),cnt=$('srCount'),more=$('srMore');
+var norm=function(t){return t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()};
+var esc=function(t){return t.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+function hl(title,toks){
+  return title.replace(/[A-Za-zÀ-ÿ0-9]+/g,function(w){
+    var n=norm(w),t=toks.filter(function(k){return n.indexOf(k)===0})[0];
+    return t?'<mark>'+w.slice(0,t.length)+'</mark>'+w.slice(t.length):w;
+  });
+}
+function card(c,i,toks){
+  var u=c[5]==='U';
+  return '<article class="sc" style="--i:'+i+'"><div class="sc-top"><span class="sc-area">'+c[1]+'</span>'+(c[7]?'<span class="sc-best">Más vendido</span>':'')+'</div>'+
+  '<div class="sc-rate"><svg width="16" height="16" viewBox="0 0 24 24" fill="#f5b301" aria-hidden="true"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.7 5.7 21.4l1.5-7.1L1.8 9.4l7.2-.8z"/></svg>'+c[2].toFixed(1).replace('.',',')+' <i>('+c[3]+')</i></div>'+
+  '<h3>'+hl(c[0],toks)+'</h3><div class="sc-meta"><span>'+c[4]+'</span><span>Inicio inmediato</span></div>'+
+  '<div class="sc-tags"><span class="sc-ia">Tutor IA</span><span class="sc-cert '+(u?'u':'f')+'"><span>'+(u?'UAI':'F')+'</span>'+(u?'Certificado por UAI':'Certificado FUDE')+'</span></div>'+
+  '<div class="sc-price">12 cuotas de $ '+c[6].toLocaleString('es-AR')+'</div><a class="sc-btn" href="#">Ver curso</a></article>';
+}
+function run(){
+  var raw=q.value.trim(),toks=norm(raw).split(/\s+/).filter(Boolean);
+  sec.classList.toggle('is-searching',!!raw);
+  if(!raw){sr.classList.remove('open');return}
+  var res=C.map(function(c,i){
+    var w=norm(c[0]+' '+c[1]).split(/[^a-z0-9]+/);
+    var ok=toks.every(function(t){return w.some(function(x){return x.indexOf(t)===0})});
+    return ok?{c:c,s:norm(c[0]).indexOf(norm(raw))===0?0:1,i:i}:null;
+  }).filter(Boolean).sort(function(a,b){return a.s-b.s||a.i-b.i});
+  if(!res.length){
+    cnt.innerHTML='';
+    grid.innerHTML='<div class="sr-empty" style="grid-column:1/-1"><b>No encontramos “'+esc(raw)+'”</b><p>Probá con otra palabra, por ejemplo el área (salud, educación) o el inicio del nombre del curso. También podés pedir asesoramiento abajo.</p></div>';
+    more.innerHTML='';
+  }else{
+    cnt.innerHTML='<b>'+res.length+'</b> '+(res.length>1?'cursos':'curso')+' para “'+esc(raw)+'”';
+    grid.innerHTML=res.slice(0,MAX).map(function(r,i){return card(r.c,i,toks)}).join('');
+    more.innerHTML=res.length>MAX?'<a href="#">Ver los '+res.length+' resultados</a>':'';
+  }
+  sr.classList.add('open');
+}
+function clear(){q.value='';run();q.focus()}
+q.addEventListener('input',run);
+q.addEventListener('keydown',function(e){if(e.key==='Escape')clear()});
+$('qClear').addEventListener('click',clear);
+$('srReset').addEventListener('click',clear);
+$('qGo').addEventListener('click',function(){q.value.trim()?sr.scrollIntoView({behavior:'smooth',block:'nearest'}):q.focus()});
+})();
+</script>
+
 </section>
 
 <!-- ===== SECCIÓN: Banner de curso destacado ===== -->
