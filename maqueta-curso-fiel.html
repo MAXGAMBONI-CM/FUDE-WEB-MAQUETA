@@ -845,6 +845,67 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
     .advice-box h2{ font-size:22px; }
     .btn-advice{ width:100%; font-size:14px; padding:14px 18px; }
   }
+  /* ===================================================== */
+  /* MODAL: DESCARGAR TEMARIO (captura de datos)           */
+  /* ===================================================== */
+  .tm-modal{
+    position:fixed; inset:0; z-index:1000;
+    display:flex; align-items:center; justify-content:center;
+    padding:20px; background:rgba(10,10,10,.65);
+    opacity:0; transition:opacity .2s ease;
+  }
+  .tm-modal[hidden]{ display:none; }
+  .tm-modal.is-open{ opacity:1; }
+  .tm-dialog{
+    position:relative; width:100%; max-width:440px; max-height:calc(100vh - 40px); overflow-y:auto;
+    background:#fff; border-radius:28px; padding:36px 32px 30px;
+    box-shadow:0 24px 60px rgba(0,0,0,.4);
+    transform:translateY(12px); transition:transform .2s ease;
+  }
+  .tm-modal.is-open .tm-dialog{ transform:none; }
+  .tm-close{
+    position:absolute; top:14px; right:14px; width:36px; height:36px; border-radius:50%;
+    border:none; background:#f4f4f4; color:#121212; font-size:20px; line-height:1;
+    display:flex; align-items:center; justify-content:center; transition:background-color .15s ease;
+  }
+  .tm-close:hover{ background:#e8e8e8; }
+  .tm-eyebrow{
+    display:inline-block; background:var(--red-soft); color:var(--red);
+    font-size:12px; font-weight:700; padding:5px 14px; border-radius:999px; margin-bottom:14px;
+  }
+  .tm-dialog h2{ font-size:24px; font-weight:800; line-height:1.2; margin-bottom:8px; }
+  .tm-sub{ font-size:14px; color:var(--text-gray); line-height:1.6; margin-bottom:22px; }
+  .tm-field{ margin-bottom:14px; }
+  .tm-field label{ display:block; font-size:13px; font-weight:700; margin-bottom:6px; }
+  .tm-field input{
+    width:100%; font-size:15px; padding:13px 16px; border-radius:12px;
+    border:1.5px solid #dcdcdc; background:#fff; color:var(--text-dark);
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .tm-field input:focus{ outline:none; border-color:var(--red); box-shadow:0 0 0 3px rgba(184,50,50,.15); }
+  .tm-field input[aria-invalid="true"]{ border-color:#d93025; }
+  .tm-error{ display:none; font-size:12.5px; color:#d93025; margin-top:5px; }
+  .tm-field input[aria-invalid="true"] + .tm-error{ display:block; }
+  .tm-submit{
+    width:100%; margin-top:8px; background:var(--red); color:#fff; border:none;
+    font-size:15px; font-weight:700; padding:14px; border-radius:999px;
+    box-shadow:0 4px 14px rgba(184,50,50,.35);
+    transition:background-color .15s ease, transform .15s ease;
+  }
+  .tm-submit:hover{ background:var(--red-dark); transform:translateY(-1px); }
+  .tm-submit:disabled{ opacity:.7; cursor:default; transform:none; }
+  .tm-legal{ font-size:12px; color:var(--text-lgray); line-height:1.5; margin-top:14px; text-align:center; }
+  .tm-ok{ text-align:center; padding:8px 0 4px; }
+  .tm-ok-icon{
+    width:56px; height:56px; border-radius:50%; background:var(--red); color:#fff;
+    display:flex; align-items:center; justify-content:center; margin:0 auto 18px;
+  }
+  .tm-ok p{ font-size:14px; color:var(--text-gray); line-height:1.6; margin-bottom:6px; }
+  .tm-ok a.tm-retry{ color:var(--red); font-weight:700; text-decoration:underline; }
+  .tm-ok .tm-submit{ margin-top:20px; }
+  @media (max-width:900px){
+    .tm-dialog{ padding:32px 22px 24px; }
+  }
 </style>
 </head>
 <body>
@@ -952,11 +1013,11 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
           <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
           Necesito asesoramiento por WhatsApp →
         </a>
-        <!-- Cambiá href y download por el PDF real del temario -->
-        <a class="btn-temario" href="temario-auxiliar-de-farmacia.pdf" download="Temario-Auxiliar-de-Farmacia.pdf">
+        <!-- Cambiá data-pdf y data-filename por el PDF real del temario (se usa recién después de enviar el formulario) -->
+        <button type="button" class="btn-temario" id="openTemario" data-pdf="#" data-filename="Temario-Auxiliar-de-Farmacia.pdf" aria-haspopup="dialog">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
           Descargar temario
-        </a>
+        </button>
       </div>
     </div>
 
@@ -1340,7 +1401,6 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
         <a href="#">Blog</a>
         <a href="#">Profesores</a>
         <a href="#">Bolsa de trabajo</a>
-        <a href="#">Cursos gratis</a>
       </div>
       <div class="footer-col">
         <h4>Estudiá con nosotros</h4>
@@ -1367,6 +1427,63 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
     </div>
   </div>
 </footer>
+
+<!-- ======================================================= -->
+<!-- MODAL: DESCARGAR TEMARIO                                 -->
+<!--
+  NOTA PARA EL PROGRAMADOR
+  - Se abre con el botón #openTemario ("Descargar temario"). Ya no es un link directo al PDF.
+  - Campos: nombre, email, telefono (todos obligatorios). Más 2 ocultos: curso y origen.
+  - Al enviar: (1) guardar el contacto en la base de datos, (2) mandar el temario por correo
+    al email ingresado, (3) iniciar la descarga del PDF en el navegador.
+  - En esta maqueta el envío está simulado (ver el comentario TODO en el script del modal);
+    ahí va el POST real al backend. Si falla, mostrar un error y NO descargar.
+-->
+<!-- ======================================================= -->
+<div class="tm-modal" id="temarioModal" hidden>
+  <div class="tm-dialog" role="dialog" aria-modal="true" aria-labelledby="tmTitle">
+    <button type="button" class="tm-close" id="tmClose" aria-label="Cerrar">&times;</button>
+
+    <div id="tmFormView">
+      <span class="tm-eyebrow">Administración de Empresas
+</span>
+      <h2 id="tmTitle">Descargá el temario</h2>
+      <form id="tmForm" novalidate>
+        <input type="hidden" name="curso" value="auxiliar-de-farmacia">
+        <input type="hidden" name="origen" value="boton-descargar-temario">
+
+        <div class="tm-field">
+          <label for="tmNombre">Nombre</label>
+          <input type="text" id="tmNombre" name="nombre" autocomplete="name" placeholder="Tu nombre y apellido" required>
+          <div class="tm-error">Ingresá tu nombre.</div>
+        </div>
+        <div class="tm-field">
+          <label for="tmEmail">Correo electrónico</label>
+          <input type="email" id="tmEmail" name="email" autocomplete="email" placeholder="nombre@correo.com" required>
+          <div class="tm-error">Ingresá un correo válido.</div>
+        </div>
+        <div class="tm-field">
+          <label for="tmTel">Teléfono</label>
+          <input type="tel" id="tmTel" name="telefono" autocomplete="tel" inputmode="tel" placeholder="Ej: 342 1234567" required>
+          <div class="tm-error">Ingresá un teléfono válido, con código de área.</div>
+        </div>
+
+        <button type="submit" class="tm-submit" id="tmSubmit">Enviar y descargar</button>
+  
+      </form>
+    </div>
+
+    <div class="tm-ok" id="tmOkView" hidden>
+      <div class="tm-ok-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h2>¡Listo, <span id="tmOkName"></span>!</h2>
+      <p>Se está descargando el temario y te lo mandamos a <b id="tmOkMail"></b>.</p>
+      <p>¿No se descargó? <a class="tm-retry" id="tmRetry" href="#">Descargalo acá</a>.</p>
+      <button type="button" class="tm-submit" id="tmDone">Cerrar</button>
+    </div>
+  </div>
+</div>
 
 <script>
   function toggle(btn){
@@ -1506,6 +1623,104 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
     window.addEventListener('load', recalc);          // las imágenes ya cargaron
     card.querySelectorAll('img').forEach(i => i.addEventListener('load', recalc));
     recalc();
+  })();
+</script>
+
+<script>
+  // Modal "Descargar temario": pide nombre, correo y teléfono y recién ahí descarga el PDF
+  (function(){
+    const openBtn = document.getElementById('openTemario');
+    const modal   = document.getElementById('temarioModal');
+    if(!openBtn || !modal) return;
+    const form = document.getElementById('tmForm');
+    const formView = document.getElementById('tmFormView');
+    const okView = document.getElementById('tmOkView');
+    const submitBtn = document.getElementById('tmSubmit');
+    const retry = document.getElementById('tmRetry');
+    let lastFocus = null;
+
+    function openModal(){
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      requestAnimationFrame(() => modal.classList.add('is-open'));
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => form.nombre.focus(), 50);
+    }
+    function closeModal(){
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        modal.hidden = true;
+        form.reset();
+        form.querySelectorAll('input').forEach(i => i.removeAttribute('aria-invalid'));
+        formView.hidden = false; okView.hidden = true;
+        submitBtn.disabled = false; submitBtn.textContent = 'Enviar y descargar';
+      }, 200);
+      if(lastFocus) lastFocus.focus();
+    }
+
+    function startDownload(){
+      const a = document.createElement('a');
+      a.href = openBtn.dataset.pdf;
+      a.download = openBtn.dataset.filename || '';
+      document.body.appendChild(a); a.click(); a.remove();
+    }
+
+    function validate(){
+      const nombre = form.nombre.value.trim();
+      const email  = form.email.value.trim();
+      const tel    = form.telefono.value.replace(/\D/g, '');
+      const checks = [
+        [form.nombre,   nombre.length >= 2],
+        [form.email,    /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)],
+        [form.telefono, tel.length >= 8 && tel.length <= 15]
+      ];
+      let first = null;
+      checks.forEach(([input, ok]) => {
+        if(ok) input.removeAttribute('aria-invalid'); else { input.setAttribute('aria-invalid','true'); first = first || input; }
+      });
+      if(first) first.focus();
+      return !first;
+    }
+
+    form.addEventListener('input', e => e.target.removeAttribute('aria-invalid'));
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if(!validate()) return;
+      submitBtn.disabled = true; submitBtn.textContent = 'Enviando…';
+      const data = Object.fromEntries(new FormData(form));
+
+      // TODO programador: acá va el POST real al backend, que debe (1) guardar el contacto,
+      // (2) mandar el temario por correo. Si responde con error, mostrar el mensaje y NO descargar.
+      //   const res = await fetch('/api/temario', { method:'POST',
+      //     headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) });
+      //   if(!res.ok){ ...mostrar error...; submitBtn.disabled=false; return; }
+      await new Promise(r => setTimeout(r, 700)); // simulación para la maqueta
+
+      document.getElementById('tmOkName').textContent = data.nombre.trim().split(/\s+/)[0];
+      document.getElementById('tmOkMail').textContent = data.email.trim();
+      retry.href = openBtn.dataset.pdf;
+      formView.hidden = true; okView.hidden = false;
+      startDownload();
+    });
+
+    retry.addEventListener('click', e => { e.preventDefault(); startDownload(); });
+    openBtn.addEventListener('click', openModal);
+    document.getElementById('tmClose').addEventListener('click', closeModal);
+    document.getElementById('tmDone').addEventListener('click', closeModal);
+    modal.addEventListener('mousedown', e => { if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => {
+      if(modal.hidden) return;
+      if(e.key === 'Escape'){ closeModal(); return; }
+      if(e.key === 'Tab'){ // el foco queda dentro del modal
+        const f = [...modal.querySelectorAll('button, input, a[href]')].filter(el => el.offsetParent !== null && !el.disabled);
+        if(!f.length) return;
+        const first = f[0], last = f[f.length-1];
+        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+    });
   })();
 </script>
 
