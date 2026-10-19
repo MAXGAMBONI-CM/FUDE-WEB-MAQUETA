@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FUDE by Educativo — Maqueta de cambios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,800;0,900;1,800;1,900&display=swap">
+<style>
+:root{
+  --primary-color: #b83232;
+  --primary-color-opcity: #b83232d7;
+  --red:#b83232;
+  --red-dark:#9E1F2A;
+  --ink:#161616;
+  --peach:#FFF3EE;
+  --soft:#FBE3DA
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Montserrat',system-ui,sans-serif;font-weight:400;color:var(--ink);background:#fff;line-height:1.5}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-weight:800;margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+
+/* cintillo */
+.ticker{height:44px;border-bottom:1px solid var(--ink);display:flex;align-items:center;justify-content:center;gap:120px;overflow:hidden;white-space:nowrap;font-weight:600;font-size:14px}
+
+/* header */
+header{background:var(--primary-color);color:#fff}
+.nav{height:92px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav img{height:84px;width:auto;display:block}
+.nav nav{display:flex;align-items:center;gap:34px;font-weight:600;font-size:15px}
+.nav nav a{display:flex;align-items:center;gap:6px}
+.nav nav a:hover{opacity:.8}
+.moon{width:60px;height:44px;border:0;border-radius:999px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.pill{background:rgba(255,255,255,.18);padding:12px 22px;border-radius:999px}
+
+/* hero */
+.hero{background:linear-gradient(165deg,#FFF3EE 0%,#FBD9C9 55%,#F5A582 100%);padding:72px 0 0}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.tag{display:inline-block;background:var(--primary-color);color:#fff;font-weight:800;font-size:13px;letter-spacing:.6px;padding:10px 18px;border-radius:999px}
+.hero h1{font-size:54px;line-height:1.1;letter-spacing:-1.5px;margin-top:26px}
+.hero h1 em{font-style:normal;color:var(--primary-color)}
+.hero p{font-size:18px;line-height:1.7;margin:26px 0 0;max-width:540px;color:#2a2a2a}
+.btn{display:inline-block;background:var(--primary-color);color:#fff;font-weight:800;font-size:17px;padding:18px 36px;border-radius:999px;box-shadow:0 10px 24px var(--primary-color-opcity);margin-top:34px}
+.btn:hover{filter:brightness(1.08)}
+.promo{text-align:center}
+
+/* Estilo para la imagen promocional con enlace */
+.promo-img-link {
+  display: inline-block;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 28px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+.promo-img-link:hover {
+  transform: scale(1.02);
+}
+.promo-img-link img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 28px;
+}
+
+.promo .cuotas{font-weight:900;font-size:34px;color:#4a2118;margin-top:20px}
+
+/* barra de números (en el hero, con más aire) */
+.stats{
+    margin-top: 1px;
+    transform: translateY(50%);
+    background: #fff;
+    border-radius: 560px;
+    box-shadow: 0 24px 60px rgba(120, 40, 20, .22);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding: 20px 30px;
+}
+.stat{text-align:center;padding:6px 10px}
+.stat+.stat{border-left:1px solid #F0D6CC}
+.stat b{display:block;font-weight:900;font-size:42px;line-height:1;color:var(--primary-color);letter-spacing:-1px}
+.stat span{display:block;font-size:14px;font-weight:500;color:#444;margin-top:18px}
+.hero-space{height:90px}
+
+/* Buscador con fondo oscuro moderno y canchero */
+.search{
+  background: linear-gradient(135deg, #111111 0%, #1c1c1c 100%);
+  color: #fff;
+  padding: 60px 0 50px;
+  text-align: center;
+}
+.search .wrap{max-width:940px}
+.eyebrow{
+  display:inline-block;
+  background: rgba(184, 50, 50, 0.25);
+  color: #ff8b8b;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1.4px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(184, 50, 50, 0.4);
+}
+.search h2{
+  font-weight: 900;
+  font-size: 42px;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin-top: 10px;
+  color: #fff;
+}
+.hl{
+  display:inline-block;
+  background:var(--primary-color);
+  color:#fff;
+  font-style:italic;
+  padding:0 .22em;
+  transform:skewX(-6deg);
+  margin-left:.1em;
+}
+.hl span{display:inline-block;transform:skewX(6deg)}
+
+.box{
+  margin-top:20px;
+  background:#262626;
+  border:2px solid #383838;
+  border-radius:999px;
+  padding:6px 6px 6px 20px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  transition: border-color 0.2s;
+}
+.box:focus-within {
+  border-color: var(--primary-color);
+}
+.box input{
+  flex:1;
+  min-width:0;
+  border:0;
+  outline:0;
+  font-family:inherit;
+  font-weight:500;
+  font-size:17px;
+  color:#fff;
+  background:transparent;
+  padding:8px 0;
+}
+.box input::placeholder{color:#888}
+.box button{
+  border:0;
+  background:var(--primary-color);
+  color:#fff;
+  font-family:inherit;
+  font-weight:800;
+  font-size:16px;
+  padding:14px 28px;
+  border-radius:999px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:0 4px 12px var(--primary-color-opcity);
+}
+.box button:hover{filter:brightness(1.08)}
+.ask{margin-top:20px}
+.ask p{font-weight:600;font-size:15px;margin:0;color:#bbb}
+.wa{
+  display:inline-block;
+  margin-top:8px;
+  border:2px solid rgba(255,255,255,0.15);
+  color:#fff;
+  font-weight:600;
+  font-size:14px;
+  padding:10px 20px;
+  border-radius:999px;
+  transition: all 0.2s;
+}
+.wa:hover{background:rgba(255,255,255,0.1); border-color: var(--primary-color);}
+
+/* Botón flotante de WhatsApp (Fixed en esquina inferior derecha) */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #25d366;
+  color: #fff;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  z-index: 9999;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.whatsapp-float:hover {
+  transform: scale(1.08);
+  background-color: #20ba5a;
+}
+
+/* ===== BUSCADOR EN VIVO: resultados (prefijo .sr-) ===== */
+.search .wrap{max-width:1136px}
+.search .box{max-width:940px;margin-left:auto;margin-right:auto}
+.q-clear{display:none;flex:none;width:32px;height:32px;border:0;border-radius:50%;background:#383838;color:#fff;cursor:pointer;align-items:center;justify-content:center;padding:0;box-shadow:none}
+.q-clear:hover{background:#4a4a4a;filter:none}
+.search.is-searching .q-clear{display:flex}
+.search .box button.q-clear{padding:0;gap:0}
+.sr{display:grid;grid-template-rows:0fr;margin-top:0;text-align:left;transition:grid-template-rows .45s ease,margin-top .45s ease}
+.sr.open{grid-template-rows:1fr;margin-top:36px}
+.sr-in{overflow:hidden;min-height:0;padding:4px 2px}
+.sr-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px;color:#bbb;font-size:15px;font-weight:500}
+.sr-head b{color:#fff;font-weight:800}
+.sr-reset{font:inherit;font-weight:600;font-size:14px;color:#ff8b8b;background:none;border:0;cursor:pointer;text-decoration:underline;padding:4px}
+.sr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.sc{background:#fff;color:var(--ink);border:1px solid #e6e6e6;border-radius:26px;padding:22px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.sc:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(0,0,0,.45)}
+.sc-top{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:32px}
+.sc-area{color:var(--primary-color);font-weight:800;font-size:13px;letter-spacing:.5px}
+.sc-best{background:var(--primary-color);color:#fff;font-weight:800;font-size:12px;padding:6px 12px;border-radius:999px;white-space:nowrap}
+.sc-rate{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;margin-top:10px}
+.sc-rate i{font-style:normal;color:#777}
+.sc h3{font-size:19px;line-height:1.35;font-weight:800;margin:14px 0 0;min-height:51px}
+.sc h3 mark{background:#fbd9c9;color:inherit;border-radius:4px;padding:0 1px}
+.sc-meta{display:flex;gap:14px;font-size:13px;color:#555;margin-top:12px}
+.sc-tags{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-top:14px}
+.sc-ia{background:#c24a4a;color:#fff;font-weight:700;font-size:12px;padding:5px 13px;border-radius:999px}
+.sc-cert{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:700;font-size:12px;padding:4px 13px 4px 5px;border-radius:999px}
+.sc-cert span{width:20px;height:20px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900}
+.sc-cert.u{background:#6d1a36}.sc-cert.u span{color:#6d1a36}
+.sc-cert.f{background:linear-gradient(90deg,#c9403a,#9e1f2a)}.sc-cert.f span{color:#b83232;font-size:11px}
+.sc-price{color:var(--primary-color);font-weight:800;font-size:20px;margin-top:auto;padding-top:18px}
+.sc-btn{display:block;text-align:center;margin-top:14px;border:2px solid var(--primary-color);color:var(--primary-color);font-weight:700;font-size:14px;padding:12px;border-radius:999px;transition:background .2s,color .2s}
+.sc:hover .sc-btn,.sc-btn:focus-visible{background:var(--primary-color);color:#fff}
+.sc{animation:sc-in .35s ease both;animation-delay:calc(var(--i)*40ms)}
+@keyframes sc-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.sr-more{text-align:center;margin-top:26px}
+.sr-more a{display:inline-block;background:var(--primary-color);color:#fff;font-weight:800;font-size:16px;padding:15px 34px;border-radius:999px;box-shadow:0 6px 16px var(--primary-color-opcity)}
+.sr-empty{text-align:center;padding:12px 0 8px;color:#bbb}
+.sr-empty b{display:block;color:#fff;font-size:22px;font-weight:800;margin-bottom:8px}
+.sr-empty p{margin:0 auto;max-width:480px;font-size:15px}
+.search.is-searching .ask{margin-top:34px}
+.dev-note{max-width:940px;margin:34px auto 0;text-align:left;background:#fff8e1;color:#4a3b00;border:1.5px dashed #d9a400;border-radius:14px;padding:16px 20px;font-size:13px;line-height:1.55}
+.dev-note b{font-weight:800}.dev-note ul{margin:6px 0 0;padding-left:18px}
+@media (max-width:900px){.sr-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.sr-grid{grid-template-columns:1fr}.sc h3{min-height:0}.sr-head{flex-direction:column;align-items:flex-start;gap:4px}}
+@media (prefers-reduced-motion:reduce){.sr,.sc{transition:none;animation:none}}
+
+.rest{background:#EFE7E4;color:#5a4a46;text-align:center;font-size:14px;padding:26px 24px}
+
+/* footer */
+footer{background:#FBF1EE}
+.fgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:40px;padding:64px 0 0}
+footer h4{font-weight:800;font-size:16px;margin:0 0 18px}
+.links{display:flex;flex-direction:column;gap:12px;font-size:14px}
+.links a:hover{text-decoration:underline}
+
+/* Bloque de contenido gratis adaptado al estilo oscuro/neutral del footer */
+.free{background:#161616;color:#fff;border-radius:22px;padding:26px 22px;box-shadow:0 14px 30px rgba(0,0,0,.15)}
+.free .b{display:inline-block;background:var(--primary-color);color:#fff;font-weight:800;font-size:11px;letter-spacing:1.4px;padding:6px 12px;border-radius:999px}
+.free h4{font-weight:900;font-size:24px;line-height:1.15;margin:14px 0 18px;color:#fff}
+.free a{display:inline-flex;align-items:center;justify-content:space-between;width:100%;background:rgba(255,255,255,.1);color:#fff;font-weight:800;font-size:14px;padding:12px 18px;border-radius:999px;transition:background 0.2s}
+.free a:hover{background:var(--primary-color)}
+
+.soc{display:flex;gap:12px}
+.soc a{width:40px;height:40px;border-radius:50%;background:#EFE3DF;display:flex;align-items:center;justify-content:center;font-weight:800}
+.pay{border:1px dashed #C9AFA6;border-radius:10px;padding:18px 12px;font-size:13px;color:#6b5a55;text-align:center}
+.copy{border-top:1px solid #E5D3CD;margin-top:48px;padding:20px 0 40px;font-size:13px;color:#6b5a55}
+
+@media (max-width:1000px){
+.hero-grid{grid-template-columns:1fr}
+.stats{grid-template-columns:repeat(2,1fr);padding:32px 20px}
+.stat+.stat{border-left:0}
+.fgrid{grid-template-columns:repeat(2,1fr)}
+.nav nav{display:none}
+.hero h1{font-size:40px}.search h2{font-size:36px}
+.hero-space{height:200px}
+.search{padding-top:150px}
+.box{border-radius:28px;flex-wrap:wrap;padding:14px}
+.box button{width:100%;justify-content:center}
+.ticker{gap:60px}
+}
+
+/* ===== SECCIÓN: Banner de curso destacado (prefijo .cb-) ===== */
+.cb{
+  /* Para usar una foto de fondo: --cb-bg:url('fondo.webp'); el degradé gris queda encima como velo */
+  background:linear-gradient(180deg,rgba(30,30,30,.45),rgba(30,30,30,.55)),var(--cb-bg,linear-gradient(135deg,#9a9795 0%,#6e7172 55%,#5d6163 100%));
+  background-size:cover;background-position:center;
+  color:#fff;padding:60px 0 64px
+}
+.cb .wrap{max-width:1136px}
+.cb-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:stretch}
+.cb-body{display:flex;flex-direction:column;justify-content:flex-end;min-width:0}
+.cb h2{font-weight:800;font-size:38px;line-height:1.15;letter-spacing:-.5px}
+.cb-body p{font-size:19px;line-height:1.65;font-weight:500;margin:22px 0 0;color:#fff}
+.cb-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px;flex-wrap:wrap}
+.cb-badge{display:inline-flex;align-items:center;gap:8px;background:#e4e6ff;color:#1c2140;font-weight:700;font-size:13px;letter-spacing:.2px;padding:7px 15px;border-radius:999px}
+.cb-stats{display:flex;align-items:center;gap:22px;font-size:16px;font-weight:500}
+.cb-stats span{display:inline-flex;align-items:center;gap:6px}
+.cb-buy{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;background:var(--primary-color);color:#fff;font-size:20px;font-weight:600;padding:18px 36px;border-radius:999px;margin-top:28px;box-shadow:0 10px 24px rgba(0,0,0,.28);transition:filter .2s}
+.cb-buy b{font-weight:800}
+.cb-buy:hover{filter:brightness(1.1)}
+.cb-buy:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.cb-img{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:740/700;background:rgba(255,255,255,.14);border:2px dashed rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:600;font-size:14px;color:#fff;padding:16px}
+.cb-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cb-img:has(img){border:0;background:none;padding:0}
+
+@media (max-width:900px){
+.cb{padding:44px 0 52px}
+.cb-grid{grid-template-columns:1fr;gap:32px}
+.cb-img{order:-1;aspect-ratio:4/3}
+.cb h2{font-size:30px}
+.cb-body p{font-size:17px}
+.cb-buy{font-size:17px;padding:16px 28px}
+}
+
+/* ===== SECCIÓN: Formación flexible (prefijo .fl- para no pisar nada de la maqueta) ===== */
+.fl{padding:72px 0 80px;background:#fff;--fl-accent:#e23d28}
+.fl .wrap{max-width:1136px}
+.fl-title{font-weight:800;font-size:44px;line-height:1.35;letter-spacing:-1px;text-align:center;max-width:900px;margin:0 auto 48px}
+.fl-title em{font-style:normal;color:var(--fl-accent)}
+.fl-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;align-items:start}
+.fl-col{display:flex;flex-direction:column;gap:24px;min-width:0}
+.fl-card{border:1.5px solid var(--primary-color);border-radius:26px;padding:22px 22px 26px;background:#fff}
+.fl-head{display:flex;align-items:center;gap:12px}
+.fl-head h3{font-size:22px;font-weight:600;letter-spacing:-.2px}
+.fl-head svg{flex:none}
+.fl-card>p{font-size:14px;line-height:1.5;color:#444;margin:18px 0 0}
+
+/* espacios para imágenes */
+.fl-ph{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;border-radius:14px;background:#F6EEEB;border:1.5px dashed #D9B8AE;color:#9a6f63;font-size:12px;font-weight:600;padding:12px}
+.fl-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.fl-ph:has(img){border:0;background:none;padding:0}
+
+/* card 1: clases 24/7 */
+.fl-media{display:grid;grid-template-columns:1.63fr 1fr;gap:14px;margin-top:34px}
+.fl-media-main{min-height:100%;border-radius:18px;box-shadow:0 6px 22px rgba(0,0,0,.1)}
+.fl-media-side{display:grid;grid-template-rows:repeat(3,1fr);gap:8px}
+.fl-media-side .fl-ph{aspect-ratio:226/168;border-radius:12px}
+
+/* card 2: SCORM */
+.fl-scorm{display:flex;justify-content:center;margin-top:28px}
+.fl-scorm .fl-ph{width:100%;max-width:400px;aspect-ratio:400/280;border-radius:18px}
+
+/* quiz */
+.fl-quiz{margin-top:18px;border:1px solid #eee;border-radius:22px;padding:16px;box-shadow:0 8px 22px rgba(0,0,0,.07)}
+.fl-pill{display:inline-block;background:#c24a4a;color:#fff;font-weight:700;font-size:11px;padding:6px 14px;border-radius:999px}
+.fl-bar{height:6px;border-radius:99px;background:#e6e6e6;margin:16px 0 24px;overflow:hidden}
+.fl-bar i{display:block;width:33%;height:100%;background:var(--primary-color);border-radius:99px}
+.fl-q{display:flex;align-items:center;gap:14px}
+.fl-q-ico{flex:none;width:45px;height:45px;border-radius:50%;background:var(--primary-color);display:flex;align-items:center;justify-content:center}
+.fl-q p{margin:0;font-weight:600;font-size:15px;line-height:1.4}
+.fl-opts{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.fl-opt{display:flex;align-items:center;gap:16px;width:100%;font:inherit;font-size:14px;font-weight:500;color:var(--ink);text-align:left;background:#fff;border:1.5px solid var(--primary-color);border-radius:999px;padding:7px 14px;cursor:pointer;transition:background .15s,color .15s}
+.fl-opt b{flex:none;width:24px;height:24px;border-radius:50%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;transition:background .15s,color .15s}
+.fl-opt:hover{background:var(--peach)}
+.fl-opt.is-selected{background:var(--primary-color);color:#fff}
+.fl-opt.is-selected b{background:#fff;color:var(--primary-color)}
+.fl-opt:focus-visible{outline:3px solid var(--primary-color);outline-offset:2px}
+
+/* tutor IA */
+.fl-tutor{margin-top:18px;border:1px solid #eee;border-radius:20px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.07)}
+.fl-tutor-top{background:linear-gradient(180deg,#d8402f 0%,#c0352b 100%);color:#fff;padding:16px 18px 18px;display:flex;gap:14px}
+.fl-tutor-av{flex:none;width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center}
+.fl-tutor-top h4{margin:0;font-weight:700;font-size:17px;display:flex;align-items:center;gap:8px}
+.fl-tutor-top h4 span{background:rgba(255,255,255,.28);font-size:9px;font-weight:800;padding:2px 7px;border-radius:99px}
+.fl-tutor-top p{margin:6px 0 0;font-size:12px;line-height:1.4;color:#ffe9e5}
+.fl-chips{display:flex;gap:6px;margin-top:12px}
+.fl-chips span{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);font-size:11px;padding:4px 12px;border-radius:99px}
+.fl-chat{height:300px;overflow-y:auto;padding:12px 14px;background:#fafafa;display:flex;flex-direction:column;gap:14px}
+.fl-msg{display:flex;align-items:flex-end;gap:10px;font-size:13px;line-height:1.45}
+.fl-msg.user{justify-content:flex-end}
+.fl-msg.user .fl-bubble{background:#d8402f;color:#fff;border-radius:16px 16px 4px 16px;padding:10px 14px;max-width:80%}
+.fl-msg.bot .fl-bubble{background:#fff;border:1px solid #e3e3e3;border-radius:16px 16px 16px 4px;padding:12px 14px;max-width:78%;margin-left:0;color:#333}
+.fl-dot{flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.fl-dot.u{background:#4a5568}
+.fl-dot.b{background:#d8402f}
+
+@media (max-width:900px){
+.fl{padding:56px 0 64px}
+.fl-title{font-size:32px;margin-bottom:32px}
+.fl-grid{grid-template-columns:1fr}
+.fl-media{grid-template-columns:1fr}
+.fl-media-main{aspect-ratio:368/470}
+.fl-media-side{grid-template-rows:none;grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:520px){
+.fl-title{font-size:26px}
+.fl-media-side{grid-template-columns:1fr}
+.fl-media-side .fl-ph{aspect-ratio:16/10}
+}
+</style>
+</head>
+<body>
+
+<!-- Botón flotante de WhatsApp que sigue la navegación -->
+<a href="https://wa.me/5493512590001?text=Hola%21+Quiero+consultar+sobre+los+cursos." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Consultar por WhatsApp">
+  <svg width="36" height="36" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<div class="ticker"><span>Cursos a Distancia y Cursos Online con Certificación</span><span>Cursos a Distancia y Cursos Online con Certificación</span><span>Cursos a Distancia y Cursos Online con Certificación</span></div>
+
+<header>
+<div class="wrap nav">
+<a href="#" aria-label="FUDE by Educativo"><img src="fude-black.webp"></a>
+<nav>
+<a href="#">Cursos <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+<a href="#">Carreras Cortas <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+<a href="#">Empresas</a>
+<a href="#">Blog</a>
+<button class="moon" aria-label="Activar modo noche"><svg width="22" height="22" viewBox="0 0 24 24" fill="#161616" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg></button>
+<a href="#" class="pill">Acceso Alumnos</a>
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<div class="wrap">
+<div class="hero-grid">
+<div>
+<span class="tag">FORMACIÓN PROFESIONAL</span>
+<h1>Cursos online con <em>Certificación Universitaria</em></h1>
+<p>Más de 300 cursos a distancia en 16 áreas temáticas. Aprendé a tu ritmo con acompañamiento docente real y tu propio tutor de inteligencia artificial disponible las 24 hs.</p>
+<a href="#" class="btn">Inscribirme Ahora</a>
+</div>
+<div class="promo">
+  <a href="#" class="promo-img-link">
+    <img src="promo-1.webp" alt="Por tiempo limitado 2x1 en cursos online">
+  </a>
+  <div class="cuotas">+ 12 Cuotas Fijas</div>
+</div>
+</div>
+
+<div class="stats">
+<div class="stat"><b>+85k</b><span>Alumnos Formados</span></div>
+<div class="stat"><b>16</b><span>Áreas temáticas</span></div>
+<div class="stat"><b>15</b><span>Años de Experiencia</span></div>
+<div class="stat"><b>24/7</b><span>Tutor de IA disponible</span></div>
+<div class="stat"><b>98%</b><span>Índice de satisfacción</span></div>
+</div>
+</div>
+<div class="hero-space"></div>
+</section>
+
+<section class="search">
+<div class="wrap">
+<span class="eyebrow">ELEGÍ TU PRÓXIMO PASO</span>
+<h2>¿Qué querés <span class="hl"><span>aprender?</span></span></h2>
+<div class="box">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+<label for="q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Buscar cursos</label>
+<input id="q" type="text" autocomplete="off" placeholder="Escribí un curso, tema o carrera…">
+<button type="button" class="q-clear" id="qClear" aria-label="Borrar búsqueda"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+<button type="button" id="qGo">Buscar <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+</div>
+
+<!-- Resultados en vivo: cerrado hasta que se escribe algo -->
+<div class="sr" id="sr" aria-live="polite"><div class="sr-in">
+<div class="sr-head"><p id="srCount" style="margin:0"></p><button type="button" class="sr-reset" id="srReset">Limpiar búsqueda</button></div>
+<div class="sr-grid" id="srGrid"></div>
+<div class="sr-more" id="srMore"></div>
+</div></div>
+
+<div class="ask">
+<p>¿Preferís que te asesoremos?</p>
+<a class="wa" href="https://wa.me/5493425676592?text=Hola%21+Quiero+que+me+asesoren+para+elegir+un+curso." target="_blank" rel="noopener">Necesito asesoramiento por WhatsApp →</a>
+</div>
+</div>
+<script>
+(function(){
+/* [título, área, rating, reseñas, duración, cert (U=UAI / F=FUDE), precio cuota, más vendido] */
+var C=[
+["Asistente en Hotelería y Turismo","Hotelería y Turismo",4.9,74,"4 meses","F",24800,1],
+["Asistente en Emergencias Médicas","Salud",4.8,103,"4 meses","F",24800],
+["Asistente en Educación Especial","Educación",4.8,313,"5 meses","F",27900],
+["Auxiliar de Enfermería","Salud",4.9,64,"5 meses","F",27900,1],
+["Diseño de Indumentaria","Diseño",4.9,54,"5 meses","U",27900,1],
+["Liderazgo y Trabajo en Equipo","Administración",4.9,59,"2 meses","U",14467,1],
+["Auxiliar en Higiene y Seguridad en el Trabajo","Iniciación Profesional",4.8,73,"3 meses","U",23056],
+["Auxiliar de Laboratorio Bioquímico","Salud",4.8,83,"5 meses","F",27900],
+["Auxiliar Docente","Educación",4.7,397,"3 meses","F",23056],
+["Auxiliar de Farmacia","Salud",4.6,51,"5 meses","F",27900],
+["Auxiliar en Hemodiálisis","Salud",4.6,331,"3 meses","F",23056],
+["Asistente Jurídico","Sin área",4.7,62,"5 meses","F",27900],
+["Asistente en Marketing","Administración",4.7,77,"4 meses","F",24800],
+["Asistente Dental","Salud",4.7,82,"4 meses","F",24800]
+];
+var MAX=6,$=function(i){return document.getElementById(i)};
+var sec=document.querySelector('.search'),q=$('q'),sr=$('sr'),grid=$('srGrid'),cnt=$('srCount'),more=$('srMore');
+var norm=function(t){return t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()};
+var esc=function(t){return t.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+function hl(title,toks){
+  return title.replace(/[A-Za-zÀ-ÿ0-9]+/g,function(w){
+    var n=norm(w),t=toks.filter(function(k){return n.indexOf(k)===0})[0];
+    return t?'<mark>'+w.slice(0,t.length)+'</mark>'+w.slice(t.length):w;
+  });
+}
+function card(c,i,toks){
+  var u=c[5]==='U';
+  return '<article class="sc" style="--i:'+i+'"><div class="sc-top"><span class="sc-area">'+c[1]+'</span>'+(c[7]?'<span class="sc-best">Más vendido</span>':'')+'</div>'+
+  '<div class="sc-rate"><svg width="16" height="16" viewBox="0 0 24 24" fill="#f5b301" aria-hidden="true"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.7 5.7 21.4l1.5-7.1L1.8 9.4l7.2-.8z"/></svg>'+c[2].toFixed(1).replace('.',',')+' <i>('+c[3]+')</i></div>'+
+  '<h3>'+hl(c[0],toks)+'</h3><div class="sc-meta"><span>'+c[4]+'</span><span>Inicio inmediato</span></div>'+
+  '<div class="sc-tags"><span class="sc-ia">Tutor IA</span><span class="sc-cert '+(u?'u':'f')+'"><span>'+(u?'UAI':'F')+'</span>'+(u?'Certificado por UAI':'Certificado FUDE')+'</span></div>'+
+  '<div class="sc-price">12 cuotas de $ '+c[6].toLocaleString('es-AR')+'</div><a class="sc-btn" href="#">Ver curso</a></article>';
+}
+function run(){
+  var raw=q.value.trim(),toks=norm(raw).split(/\s+/).filter(Boolean);
+  sec.classList.toggle('is-searching',!!raw);
+  if(!raw){sr.classList.remove('open');return}
+  var res=C.map(function(c,i){
+    var w=norm(c[0]+' '+c[1]).split(/[^a-z0-9]+/);
+    var ok=toks.every(function(t){return w.some(function(x){return x.indexOf(t)===0})});
+    return ok?{c:c,s:norm(c[0]).indexOf(norm(raw))===0?0:1,i:i}:null;
+  }).filter(Boolean).sort(function(a,b){return a.s-b.s||a.i-b.i});
+  if(!res.length){
+    cnt.innerHTML='';
+    grid.innerHTML='<div class="sr-empty" style="grid-column:1/-1"><b>No encontramos “'+esc(raw)+'”</b><p>Probá con otra palabra, por ejemplo el área (salud, educación) o el inicio del nombre del curso. También podés pedir asesoramiento abajo.</p></div>';
+    more.innerHTML='';
+  }else{
+    cnt.innerHTML='<b>'+res.length+'</b> '+(res.length>1?'cursos':'curso')+' para “'+esc(raw)+'”';
+    grid.innerHTML=res.slice(0,MAX).map(function(r,i){return card(r.c,i,toks)}).join('');
+    more.innerHTML=res.length>MAX?'<a href="#">Ver los '+res.length+' resultados</a>':'';
+  }
+  sr.classList.add('open');
+}
+function clear(){q.value='';run();q.focus()}
+q.addEventListener('input',run);
+q.addEventListener('keydown',function(e){if(e.key==='Escape')clear()});
+$('qClear').addEventListener('click',clear);
+$('srReset').addEventListener('click',clear);
+$('qGo').addEventListener('click',function(){q.value.trim()?sr.scrollIntoView({behavior:'smooth',block:'nearest'}):q.focus()});
+})();
+</script>
+
+</section>
+
+<!-- ===== SECCIÓN: Banner de curso destacado ===== -->
+<section class="cb" id="curso-destacado">
+<div class="wrap">
+<div class="cb-grid">
+<div class="cb-body">
+<h2>Asistente Dental</h2>
+<p>ofrece una completa formación en cuanto a las principales nociones y conceptos que definen la actividad del asistente dental. El curso de Asistente Dental a distancia te permitirá aprender respecto a materiales dentales, bioseguridad y esterilización, operatoria dental y radiología….</p>
+<div class="cb-meta">
+<span class="cb-badge">APRENDE ONLINE <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 20h20"/></svg></span>
+<div class="cb-stats">
+<span><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><circle cx="12" cy="7" r="5"/><path d="M3 22c0-5 4-8 9-8s9 3 9 8z"/></svg>1200</span>
+<span><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2l3 6.6 7.2.8-5.4 4.9 1.5 7.1L12 17.7 5.7 21.4l1.5-7.1L1.8 9.4l7.2-.8z"/></svg>98% (82)</span>
+</div>
+</div>
+<a href="#" class="cb-buy"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M1 2h4l.6 3H22l-2.500 9.500H7.800L8.200 16H20v2H6.500L3.400 4H1z"/><circle cx="9" cy="21" r="1.800"/><circle cx="18" cy="21" r="1.800"/></svg><b>Comprar</b> <b>12 cuotas de $ 24.800</b></a>
+</div>
+<!-- IMAGEN DEL CURSO — reemplazá el texto por: <img src="asistente-dental.webp" alt="Curso de Asistente Dental"> -->
+<img src="32.jpg" alt="Curso de Asistente Dental">
+</div>
+</div>
+</section>
+
+<!-- ===== SECCIÓN: Formación flexible, práctica y con apoyo inteligente ===== -->
+<section class="fl" id="formacion">
+<div class="wrap">
+<h2 class="fl-title">Formación flexible, <em>práctica y con apoyo inteligente</em></h2>
+
+<div class="fl-grid">
+
+<!-- COLUMNA IZQUIERDA -->
+<div class="fl-col">
+
+<article class="fl-card">
+<div class="fl-head">
+<svg width="30" height="24" viewBox="0 0 30 24" fill="#c24a4a" aria-hidden="true"><rect x="0" y="3" width="21" height="18" rx="4"/><path d="M23 9l7-4v14l-7-4z"/></svg>
+<h3>Acceso a tus clases 24/7</h3>
+</div>
+<p>Estudia a tu ritmo, en cualquier momento y desde cualquier lugar, con contenido disponible de forma permanente. Disfruta de acceso ilimitado a clases grabadas, disponibles las 24 horas, desde cualquier dispositivo.</p>
+
+<div class="fl-media">
+<!-- IMAGEN GRANDE (captura del aula virtual) — reemplazá el texto por: <img src="tu-imagen.webp" alt="Aula virtual de FUDE"> -->
+<div class="fl-ph fl-media-main">Captura del aula virtual<br>(ej. 368 × 470)</div>
+<div class="fl-media-side">
+<!-- 3 IMÁGENES CHICAS (docentes / alumnos) — mismo reemplazo con <img> -->
+<div class="fl-ph">Imagen 1<br>(226 × 168)</div>
+<div class="fl-ph">Imagen 2<br>(226 × 168)</div>
+<div class="fl-ph">Imagen 3<br>(226 × 168)</div>
+</div>
+</div>
+</article>
+
+<article class="fl-card">
+<div class="fl-head">
+<svg width="26" height="24" viewBox="0 0 26 24" fill="none" stroke="#c24a4a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="2" width="20" height="14" rx="2"/><path d="M1 21h24M10 7l-2.5 2.5L10 12M16 7l2.5 2.5L16 12"/></svg>
+<h3>Experiencia interactiva SCORM</h3>
+</div>
+<p>Estudiá a tu ritmo y elegí la modalidad que mejor se adapte a vos: accedé a clases grabadas disponibles las 24 horas o aprendé mediante contenido interactivo en formato SCORM, con actividades diseñadas para una experiencia más práctica y flexible.</p>
+<div class="fl-scorm">
+<!-- IMAGEN SCORM (tablet con el contenido interactivo) -->
+<div class="fl-ph">Imagen SCORM<br>(ej. 400 × 280)</div>
+</div>
+</article>
+
+</div>
+
+<!-- COLUMNA DERECHA -->
+<div class="fl-col">
+
+<article class="fl-card">
+<div class="fl-head">
+<svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="11" stroke="#c0352b" stroke-width="2.4"/></svg>
+<h3>Aprendizaje en cada paso.</h3>
+</div>
+<p>Contarás con distintas actividades prácticas en cada unidad para hacer tu experiencia más dinámica y entretenida.</p>
+
+<div class="fl-quiz" role="group" aria-label="Pregunta de práctica">
+<span class="fl-pill">Pregunta 1 de 3</span>
+<div class="fl-bar" aria-hidden="true"><i></i></div>
+<div class="fl-q">
+<span class="fl-q-ico"><svg width="18" height="22" viewBox="0 0 18 22" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><rect x="2" y="1" width="14" height="20" rx="3"/><path d="M8 17h2" stroke-linecap="round"/></svg></span>
+<p>¿Cuáles son los dos tipos principales de telemarketing según el texto?</p>
+</div>
+<div class="fl-opts">
+<button type="button" class="fl-opt"><b>A</b>Emisor y Receptor</button>
+<button type="button" class="fl-opt"><b>B</b>Proactivo y Reactivo</button>
+<button type="button" class="fl-opt"><b>C</b>Interno y Externo</button>
+<button type="button" class="fl-opt"><b>D</b>Frío y Caliente</button>
+</div>
+</div>
+</article>
+
+<article class="fl-card">
+<div class="fl-head">
+<svg width="28" height="24" viewBox="0 0 28 24" fill="#c24a4a" aria-hidden="true"><rect x="4" y="6" width="20" height="14" rx="4"/><rect x="12.5" y="1" width="3" height="5"/><circle cx="14" cy="1.5" r="1.8"/><rect x="0" y="11" width="3" height="5" rx="1.5"/><rect x="25" y="11" width="3" height="5" rx="1.5"/><circle cx="10" cy="13" r="2" fill="#fff"/><circle cx="18" cy="13" r="2" fill="#fff"/></svg>
+<h3>Tutor IA 24/7</h3>
+</div>
+<p>Un asistente inteligente que resuelve tus dudas al instante, revisa tus proyectos y te guía paso a paso en tu aprendizaje.</p>
+
+<div class="fl-tutor">
+<div class="fl-tutor-top">
+<span class="fl-tutor-av"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="7" width="14" height="12" rx="4"/><path d="M12 7V3M9 13h.01M15 13h.01" stroke-linecap="round"/></svg></span>
+<div>
+<h4>Tutor FUDE <span>IA</span></h4>
+<p>Responde dudas, corrige entregas y acompaña en cada paso. Feedback instantáneo y recomendaciones.</p>
+<div class="fl-chips"><span>Feedback</span><span>Ayuda</span></div>
+</div>
+</div>
+<div class="fl-chat" tabindex="0" aria-label="Ejemplo de conversación con el Tutor FUDE">
+<div class="fl-msg user"><div class="fl-bubble">No entendí… ¿Qué es un Objetivo SMART?</div><span class="fl-dot u"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span></div>
+<div class="fl-msg bot"><span class="fl-dot b"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><rect x="5" y="7" width="14" height="12" rx="4"/><path d="M12 7V3" stroke-linecap="round"/></svg></span><div class="fl-bubble">Un Objetivo SMART es un objetivo que cumple 5 condiciones clave: es Específico (sabe exactamente qué lograr), Medible (tiene métricas claras), Alcanzable (es realista), Relevante (importa para tu estrategia) y con Tiempo definido (tiene fecha límite). ¿Querés que practiquemos juntos construyendo uno? 😊</div></div>
+<div class="fl-msg user"><div class="fl-bubble">Me ayudarías con el tema sobre las entregas, ¿cómo funcionan?</div><span class="fl-dot u"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span></div>
+</div>
+</div>
+</article>
+
+</div>
+</div>
+</div>
+
+<script>
+document.querySelectorAll('.fl-opts').forEach(function(g){
+  g.addEventListener('click',function(e){
+    var b=e.target.closest('.fl-opt'); if(!b) return;
+    g.querySelectorAll('.fl-opt').forEach(function(o){o.classList.remove('is-selected')});
+    b.classList.add('is-selected');
+  });
+});
+</script>
+</section>
+
+<div class="rest">Resto de la página sin cambios: Cursos destacados · Herramientas · Metodología · Certificación · Áreas · Testimonios</div>
+
+<footer>
+<div class="wrap">
+<div class="fgrid">
+<div>
+<h4>FUDE by Educativo</h4>
+<div class="links"><a href="#">Preguntas Frecuentes</a><a href="#">Quienes Somos</a><a href="#">Terminos y Condiciones</a></div>
+<h4 style="margin-top:30px">Contacto</h4>
+<div class="links"><a href="#">info@educativo.net</a></div>
+</div>
+<div>
+<h4>Comunidad</h4>
+<div class="links"><a href="#">Blog</a><a href="#">Profesores</a><a href="#">Bolsa de trabajo</a><a href="#">Cursos gratis</a></div>
+</div>
+<div>
+<h4>Estudiá con nosotros</h4>
+<div class="links"><a href="#">Salud</a><a href="#">Administración</a><a href="#">Estética</a><a href="#">Educación</a><a href="#">Deportes</a><a href="#">Oficios</a></div>
+</div>
+<div>
+</div>
+<div>
+<h4>¡Seguinos!</h4>
+<div class="soc">
+<a href="#" aria-label="Facebook">f</a>
+<a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#161616" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+<a href="#" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="#161616" aria-hidden="true"><path d="M3 7a3 3 0 013-3h12a3 3 0 013 3v10a3 3 0 01-3 3H6a3 3 0 01-3-3zm7 2v6l5-3z"/></svg></a>
+</div>
+<h4 style="margin-top:30px">Medios de Pago</h4>
+<div class="pay">[Imagen de medios de pago]</div>
+</div>
+</div>
+<div class="copy">© FUDE by Educativo</div>
+</div>
+</footer>
+
+</body>
+</html>
