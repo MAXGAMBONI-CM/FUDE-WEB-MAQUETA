@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FUDE · Seguimiento básico</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F5F7;--brand:#800020;--navy:#1B2A4A;--ink:#1E1E1E;--mut:#4B5563;--line:#767E8C;--soft:#E3E6EB;--r:18px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Poppins,system-ui,sans-serif}
+h1,h2{color:var(--navy);margin:0;line-height:1.2}
+h1{font-size:1.75rem;font-weight:600}h2{font-size:1.1rem;font-weight:600}
+:focus-visible{outline:3px solid var(--navy);outline-offset:2px;border-radius:6px}
+button{font:inherit}
+/* layout */
+.side{position:fixed;inset:0 auto 0 0;width:264px;background:#fff;padding:24px 16px;display:flex;flex-direction:column;gap:8px;z-index:20;box-shadow:1px 0 0 var(--soft);transition:transform .25s}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--navy);font-size:1.3rem}
+.logo b{background:var(--brand);color:#fff;border-radius:12px;padding:4px 10px;letter-spacing:.5px}
+.emp{margin:4px 0 20px;padding:12px 14px;border-radius:14px;background:var(--bg);font-size:.9rem;color:var(--mut)}
+.emp strong{display:block;color:var(--navy);font-size:1rem}
+.side a{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:12px;color:#fff;background:var(--brand);text-decoration:none;font-weight:500;min-height:46px}
+.side a span{width:20px;text-align:center}
+.plan{margin-top:auto;font-size:.8rem;color:var(--mut);padding:12px 14px;border-top:1px solid var(--soft)}
+main{margin-left:264px;padding:40px clamp(16px,4vw,48px) 64px;max-width:1100px}
+.top{display:none;position:sticky;top:0;z-index:10;background:#fff;padding:10px 16px;align-items:center;gap:12px;box-shadow:0 1px 0 var(--soft)}
+.burger{background:none;border:2px solid var(--navy);color:var(--navy);border-radius:10px;width:44px;height:44px;font-size:1.3rem;cursor:pointer}
+@media(max-width:900px){.side{transform:translateX(-100%)}.side.open{transform:none;box-shadow:0 0 0 100vmax rgba(27,42,74,.45)}main{margin:0;padding-top:24px}.top{display:flex}}
+/* ui */
+.head{margin-bottom:28px}
+.head p{margin:4px 0 0;color:var(--mut)}
+.card{background:#fff;border-radius:var(--r);padding:28px;box-shadow:0 1px 2px rgba(27,42,74,.06),0 8px 24px rgba(27,42,74,.04)}
+.top3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;margin-bottom:24px}
+.kpi small{color:var(--mut);display:block;font-weight:500}
+.kpi strong{display:block;font-size:2.6rem;font-weight:700;color:var(--navy);line-height:1.1;margin-top:6px}
+.kpi span{color:var(--mut);font-size:.9rem}
+.bar{height:14px;background:var(--soft);border-radius:99px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
+.bar i{display:block;height:100%;background:var(--navy);border-radius:99px}
+.pill{display:inline-flex;gap:6px;align-items:center;padding:3px 12px;border-radius:99px;font-size:.85rem;font-weight:600;white-space:nowrap}
+.pill.g{background:#ECEEF1;color:#4B5563}.pill.b{background:#E4E9F5;color:#1B2A4A}.pill.v{background:#E3F4EA;color:#146C43}
+.tw{overflow-x:auto;margin-top:12px}
+table{width:100%;border-collapse:collapse;min-width:680px}
+th{text-align:left;font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);padding:10px 12px;border-bottom:2px solid var(--soft)}
+td{padding:12px;border-bottom:1px solid var(--soft)}
+.mini{display:flex;align-items:center;gap:10px;min-width:130px}.mini .bar{flex:1;height:10px}
+.note{color:var(--mut);font-size:.85rem;margin:16px 0 0}
+</style>
+</head>
+<body>
+<div class="top"><button class="burger" id="bg" aria-label="Abrir menú" aria-expanded="false" aria-controls="sd">☰</button><div class="logo"><b>FUDE</b></div></div>
+<nav class="side" id="sd" aria-label="Principal">
+  <div class="logo"><b>FUDE</b> <small style="font-weight:400;font-size:.7rem">by Educativo</small></div>
+  <div class="emp"><strong>Grupo Andina S.A.</strong>Admin de RRHH</div>
+  <a href="#" aria-current="page"><span aria-hidden="true">👥</span>Seguimiento</a>
+  <div class="plan">Panel básico · solo lectura<br>Datos de Moodle</div>
+</nav>
+
+<main id="m" tabindex="-1">
+  <div class="head"><h1>Seguimiento de capacitación</h1><p>¿Tu gente está cursando? Así viene Grupo Andina.</p></div>
+  <section class="top3" id="kp" aria-label="Totales"></section>
+  <section class="card" aria-labelledby="tt">
+    <h2 id="tt">Personas y avance</h2>
+    <div class="tw"><table><thead><tr><th>Nombre</th><th>Curso</th><th>Avance</th><th>Estado</th><th>Última conexión</th></tr></thead><tbody id="tb"></tbody></table></div>
+    <p class="note">Datos de solo lectura tomados de Moodle.</p>
+  </section>
+</main>
+
+<script>
+const $=s=>document.querySelector(s);
+// [nombre, correo, curso, %, última conexión (días, null = nunca)]
+const P=[
+['Lucía Fernández','lucia.f@andina.com','Negociación efectiva',100,2],
+['Martín Gómez','martin.g@andina.com','Ventas consultivas',64,3],
+['Sofía Ramírez','sofia.r@andina.com','Liderar equipos',38,22],
+['Diego Acosta','diego.a@andina.com','Seguridad en planta',0,null],
+['Camila Ortiz','camila.o@andina.com','Excel para gestión',82,1],
+['Julián Pereyra','julian.p@andina.com','Seguridad en planta',45,9],
+['Valentina Sosa','vale.s@andina.com','IA para oficina',100,4],
+['Nicolás Bravo','nico.b@andina.com','Ventas consultivas',12,35],
+['Agustina Ledesma','agus.l@andina.com','Gestión del talento',71,2],
+['Franco Molina','franco.m@andina.com','Primeros auxilios',0,null],
+['Paula Herrera','paula.h@andina.com','IA para oficina',55,5],
+['Tomás Benítez','tomas.b@andina.com','Negociación efectiva',90,1]];
+const CUPOS=25;
+const ST={sin:['○','Sin iniciar','g'],cur:['▶','En curso','b'],fin:['✓','Terminó','v']};
+const est=p=>p[3]==100?'fin':p[3]==0?'sin':'cur';
+const pill=p=>{const s=ST[est(p)];return `<span class="pill ${s[2]}"><span aria-hidden="true">${s[0]}</span>${s[1]}</span>`};
+const bar=(v,l)=>`<div class="bar" role="img" aria-label="${l||v+'%'}"><i style="width:${v}%"></i></div>`;
+const last=d=>d===null?'Nunca ingresó':d==0?'Hoy':d==1?'Hace 1 día':`Hace ${d} días`;
+
+const n=P.length,fin=P.filter(p=>est(p)=='fin').length,sin=P.filter(p=>est(p)=='sin').length;
+$('#kp').innerHTML=`
+ <div class="card kpi"><small>Terminaron</small><strong>${fin}</strong><span>de ${n} personas</span></div>
+ <div class="card kpi"><small>Sin iniciar</small><strong>${sin}</strong><span>de ${n} personas</span></div>
+ <div class="card kpi"><small>Cupos usados</small><strong>${n} de ${CUPOS}</strong><div style="margin:10px 0 6px">${bar(Math.round(n*100/CUPOS),`${n} de ${CUPOS} cupos usados`)}</div><span>${CUPOS-n} lugares libres</span></div>`;
+$('#tb').innerHTML=P.map(p=>`<tr><td><strong>${p[0]}</strong><div style="color:var(--mut);font-size:.85rem">${p[1]}</div></td><td>${p[2]}</td><td><div class="mini">${bar(p[3])}<b>${p[3]}%</b></div></td><td>${pill(p)}</td><td>${last(p[4])}</td></tr>`).join('');
+
+$('#bg').onclick=()=>{const o=$('#sd').classList.toggle('open');$('#bg').setAttribute('aria-expanded',o)};
+addEventListener('keydown',e=>{if(e.key=='Escape'){$('#sd').classList.remove('open');$('#bg').setAttribute('aria-expanded','false')}});
+</script>
+</body>
+</html>
