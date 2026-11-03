@@ -906,6 +906,9 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
   @media (max-width:900px){
     .tm-dialog{ padding:32px 22px 24px; }
   }
+  .tm-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.tm-opt{ font-weight:500; color:var(--text-lgray); }
+@media (max-width:560px){ .tm-row{ grid-template-columns:1fr; gap:0; } }
   /* ===================================================== */
   /* CERTIFICADO FUDE (sin UAI) — sección oscura           */
   /* ===================================================== */
@@ -1669,19 +1672,16 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
   </div>
 </footer>
 
-<!-- ======================================================= -->
-<!-- MODAL: DESCARGAR TEMARIO                                 -->
 <!--
   NOTA PARA EL PROGRAMADOR
-  - Se abre con el botón #openTemario ("Descargar temario"). Ya no es un link directo al PDF.
-  - Campos: nombre, email, telefono (todos obligatorios). Más 2 ocultos: curso y origen.
-  - Al enviar: (1) guardar el contacto en la base de datos, (2) mandar el temario por correo
-    al email ingresado, (3) iniciar la descarga del PDF en el navegador.
-  - En esta maqueta el envío está simulado (ver el comentario TODO en el script del modal);
-    ahí va el POST real al backend. Si falla, mostrar un error y NO descargar.
+  - Se abre con el botón #openTemario ("Descargar temario").
+  - El temario NO se envía por correo: se descarga directamente desde la página.
+  - Campos: nombre, apellido, email (obligatorios) y teléfono (opcional). Más 2 ocultos: curso y origen.
+  - Al enviar: (1) guardar el contacto en la base de datos, (2) iniciar la descarga del PDF.
+  - En esta maqueta el guardado está simulado (ver TODO en el script del modal).
+    Si el POST falla, mostrar un error y NO descargar.
   - El PDF se define en data-pdf / data-filename del botón #openTemario.
 -->
-<!-- ======================================================= -->
 <div class="tm-modal" id="temarioModal" hidden>
   <div class="tm-dialog" role="dialog" aria-modal="true" aria-labelledby="tmTitle">
     <button type="button" class="tm-close" id="tmClose" aria-label="Cerrar">&times;</button>
@@ -1693,10 +1693,17 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
         <input type="hidden" name="curso" value="auxiliar-de-farmacia">
         <input type="hidden" name="origen" value="boton-descargar-temario">
 
-        <div class="tm-field">
-          <label for="tmNombre">Nombre</label>
-          <input type="text" id="tmNombre" name="nombre" autocomplete="name" placeholder="Tu nombre y apellido" required>
-          <div class="tm-error">Ingresá tu nombre.</div>
+        <div class="tm-row">
+          <div class="tm-field">
+            <label for="tmNombre">Nombre</label>
+            <input type="text" id="tmNombre" name="nombre" autocomplete="given-name" placeholder="Tu nombre" required>
+            <div class="tm-error">Ingresá tu nombre.</div>
+          </div>
+          <div class="tm-field">
+            <label for="tmApellido">Apellido</label>
+            <input type="text" id="tmApellido" name="apellido" autocomplete="family-name" placeholder="Tu apellido" required>
+            <div class="tm-error">Ingresá tu apellido.</div>
+          </div>
         </div>
         <div class="tm-field">
           <label for="tmEmail">Correo electrónico</label>
@@ -1704,13 +1711,12 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
           <div class="tm-error">Ingresá un correo válido.</div>
         </div>
         <div class="tm-field">
-          <label for="tmTel">Teléfono</label>
-          <input type="tel" id="tmTel" name="telefono" autocomplete="tel" inputmode="tel" placeholder="Ej: 342 1234567" required>
+          <label for="tmTel">Teléfono <span class="tm-opt">(opcional)</span></label>
+          <input type="tel" id="tmTel" name="telefono" autocomplete="tel" inputmode="tel" placeholder="Ej: 342 1234567">
           <div class="tm-error">Ingresá un teléfono válido, con código de área.</div>
         </div>
 
-        <button type="submit" class="tm-submit" id="tmSubmit">Enviar y descargar</button>
-        
+        <button type="submit" class="tm-submit" id="tmSubmit">Descargar</button>
       </form>
     </div>
 
@@ -1719,9 +1725,9 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
       </div>
       <h2>¡Listo, <span id="tmOkName"></span>!</h2>
-      <p>Se está descargando el temario y te lo mandamos a <b id="tmOkMail"></b>.</p>
-      <p>¿No se descargó? <a class="tm-retry" id="tmRetry" href="#">Descargalo acá</a>.</p>
-      <button type="button" class="tm-submit" id="tmDone">Cerrar</button>
+      <p>Tu descarga del temario ya comenzó.</p>
+      <p>Si no se descargó, tocá el botón para intentar de nuevo.</p>
+      <button type="button" class="tm-submit" id="tmDone">Descargar</button>
     </div>
   </div>
 </div>
@@ -1868,7 +1874,7 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
 </script>
 
 <script>
-  // Modal "Descargar temario": pide nombre, correo y teléfono y recién ahí descarga el PDF
+  // Modal "Descargar temario": pide nombre, apellido, correo y teléfono (opcional) y descarga el PDF
   (function(){
     const openBtn = document.getElementById('openTemario');
     const modal   = document.getElementById('temarioModal');
@@ -1877,7 +1883,6 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
     const formView = document.getElementById('tmFormView');
     const okView = document.getElementById('tmOkView');
     const submitBtn = document.getElementById('tmSubmit');
-    const retry = document.getElementById('tmRetry');
     let lastFocus = null;
 
     function openModal(){
@@ -1895,7 +1900,7 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
         form.reset();
         form.querySelectorAll('input').forEach(i => i.removeAttribute('aria-invalid'));
         formView.hidden = false; okView.hidden = true;
-        submitBtn.disabled = false; submitBtn.textContent = 'Enviar y descargar';
+        submitBtn.disabled = false; submitBtn.textContent = 'Descargar';
       }, 200);
       if(lastFocus) lastFocus.focus();
     }
@@ -1908,13 +1913,16 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
     }
 
     function validate(){
-      const nombre = form.nombre.value.trim();
-      const email  = form.email.value.trim();
-      const tel    = form.telefono.value.replace(/\D/g, '');
+      const nombre   = form.nombre.value.trim();
+      const apellido = form.apellido.value.trim();
+      const email    = form.email.value.trim();
+      const tel      = form.telefono.value.replace(/\D/g, '');
       const checks = [
         [form.nombre,   nombre.length >= 2],
+        [form.apellido, apellido.length >= 2],
         [form.email,    /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)],
-        [form.telefono, tel.length >= 8 && tel.length <= 15]
+        // teléfono opcional: solo se valida si lo completan
+        [form.telefono, tel.length === 0 || (tel.length >= 8 && tel.length <= 15)]
       ];
       let first = null;
       checks.forEach(([input, ok]) => {
@@ -1929,27 +1937,26 @@ nav{display:flex;align-items:center;gap:2px;flex:1}
     form.addEventListener('submit', async e => {
       e.preventDefault();
       if(!validate()) return;
-      submitBtn.disabled = true; submitBtn.textContent = 'Enviando…';
+      submitBtn.disabled = true; submitBtn.textContent = 'Descargando…';
       const data = Object.fromEntries(new FormData(form));
 
-      // TODO programador: acá va el POST real al backend, que debe (1) guardar el contacto,
-      // (2) mandar el temario por correo. Si responde con error, mostrar el mensaje y NO descargar.
+      // TODO programador: acá va el POST real al backend para GUARDAR el contacto
+      // (nombre, apellido, email, telefono opcional, curso, origen). No se envía correo.
+      // Si responde con error, mostrar el mensaje y NO descargar.
       //   const res = await fetch('/api/temario', { method:'POST',
       //     headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) });
-      //   if(!res.ok){ ...mostrar error...; submitBtn.disabled=false; return; }
-      await new Promise(r => setTimeout(r, 700)); // simulación para la maqueta
+      //   if(!res.ok){ ...mostrar error...; submitBtn.disabled=false; submitBtn.textContent='Descargar'; return; }
+      await new Promise(r => setTimeout(r, 500)); // simulación para la maqueta
 
       document.getElementById('tmOkName').textContent = data.nombre.trim().split(/\s+/)[0];
-      document.getElementById('tmOkMail').textContent = data.email.trim();
-      retry.href = openBtn.dataset.pdf;
       formView.hidden = true; okView.hidden = false;
       startDownload();
     });
 
-    retry.addEventListener('click', e => { e.preventDefault(); startDownload(); });
+    // El botón de la pantalla final vuelve a descargar (ya no dice "Cerrar")
+    document.getElementById('tmDone').addEventListener('click', startDownload);
     openBtn.addEventListener('click', openModal);
     document.getElementById('tmClose').addEventListener('click', closeModal);
-    document.getElementById('tmDone').addEventListener('click', closeModal);
     modal.addEventListener('mousedown', e => { if(e.target === modal) closeModal(); });
     document.addEventListener('keydown', e => {
       if(modal.hidden) return;
